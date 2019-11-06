@@ -1,4 +1,4 @@
-package Module;
+package Model;
 
 import java.util.Date;
 
@@ -33,11 +33,9 @@ public class CinemaMan {
 
     @Override
     public String toString() {
-        return "CinemaMan{" +
-                "cinemaManId=" + cinemaManId +
+        return "id=" + cinemaManId +
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
-                ", bornDate=" + bornDate +
-                '}';
+                ", bornDate=" + bornDate;
     }
 }

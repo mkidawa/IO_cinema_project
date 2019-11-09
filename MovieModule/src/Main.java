@@ -1,27 +1,24 @@
 import Model.*;
-import sun.awt.image.ImageWatched;
-import sun.java2d.windows.GDIRenderer;
+import DBO.*;
 
-import java.time.Duration;
-import java.util.Date;
-import java.util.LinkedList;
-import java.util.List;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class Main {
 
-    public static void main(String[] args) {
-        Director director = new Director(1, "Mateusz", "Walczak", new Date());
-        Actor actor = new Actor(2, "Konrad", "Kajszczak", new Date());
+    public static void main(String[] args) throws SQLException {
 
-        List<Actor> actors = new LinkedList<Actor>();
-        actors.add(actor);
+        BaseDB.setHost("localhost");
+        BaseDB.setDbname("cinema");
+        BaseDB.setUsername("sa");
+        BaseDB.setPassword("12345");
 
-        List<Director> directors= new LinkedList<Director>();
-        directors.add(director);
+        System.out.println("test connection answer: "  + BaseDB.testConnection());
 
-        Movie movie = new Movie(1, "Cool", "Super Cool",
-                MovieState.isPlaying, Duration.ofMinutes(90),
-                true, true, false, directors, actors);
-        System.out.println(movie);
+        ResultSet result = BaseDB.execStoredProcedure("Select *from Movie where Id > 2");
+        while (result.next()) {
+            String title = result.getString("Title");
+            System.out.println(title);
+        }
     }
 }

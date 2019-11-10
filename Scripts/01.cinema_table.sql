@@ -994,3 +994,44 @@ go
 --END;
 --GO
 --- finish DICTReservationStatus
+
+--------------------------------------------------------------------------------------------
+--- TABLE DEFINITION
+--- TimeTable  - Table contains info about timetable
+--- CREATED BY: PZajac
+--- drop table TimeTable
+--------------------------------------------------------------------------------------------
+
+IF db_name()<>'master' and
+   not exists (	select * from INFORMATION_SCHEMA.TABLES
+		where table_name='TimeTable' and table_type='BASE TABLE')
+BEGIN
+	Print 'Creating table TimeTable';
+
+	CREATE TABLE [dbo].TimeTable(
+	Id		BIGINT IDENTITY(1,1) NOT FOR REPLICATION NOT NULL,	-- Primary Key
+	-- Status-like fields
+
+	-- Fields that will be joined with other tables
+	PerformanceId	bigint				not null default 0,
+	-- Fields to be edited
+	PerformanceDate	datetime2(3)		not null default '1900-01-01'
+	-- Other fiels
+	
+	-- Fields to be calculated only by triggers
+	-- This kind of fields must begin with '_'
+	
+	-- This line should be removed if the table does not have primary key
+	CONSTRAINT TimeTable_Id PRIMARY KEY CLUSTERED (Id)
+  	);
+
+END;
+go
+-- This line should be removed if the table has primary key
+--if not exists (select * from sysindexes where name like 'TimeTable_Id')
+--BEGIN
+--	Print 'Crating index  TimeTable_Id';
+--	CREATE UNIQUE INDEX TimeTable_Id 	 ON TimeTable(Id);
+--END;
+--GO
+--- finish TimeTable

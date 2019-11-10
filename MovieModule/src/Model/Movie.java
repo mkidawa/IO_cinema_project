@@ -18,6 +18,33 @@ public class Movie {
     private List<Director> directors;
     private List<Actor> actors;
 
+    // Empty constructor
+    public Movie () {
+        this.id = 0;
+        this.title = "empty";
+        this.description = "empty";
+    }
+
+    // Movie is not in base constructor
+    public Movie(String title, String description, MovieState state,
+                 Duration movieTime, boolean flg2D, boolean flg3D, boolean flgVR,
+                 List<Director> directors, List<Actor> actors) {
+        //id = 0 means "I am not from data base"
+        this.id = 0;
+
+        this.title = title;
+        this.description = description;
+        this.state = state;
+        this.movieTime = movieTime;
+        this.flg2D = flg2D;
+        this.flg3D = flg3D;
+        this.flgVR = flgVR;
+        this.directors = directors;
+        this.actors = actors;
+
+    }
+
+    //Movie is in base constructor
     public Movie(long id, String title, String description, MovieState state,
                  Duration movieTime, boolean flg2D, boolean flg3D, boolean flgVR,
                  List<Director> directors, List<Actor> actors) {
@@ -31,7 +58,6 @@ public class Movie {
         this.flgVR = flgVR;
         this.directors = directors;
         this.actors = actors;
-
     }
 
     public long getId() {
@@ -76,7 +102,7 @@ public class Movie {
 
     @Override
     public String toString() {
-        return "Movie {" +
+        return '\n' + "Movie {" +
                 "id=" + id +
                 ", title='" + title + '\'' +
                 ", description='" + description + '\'' +

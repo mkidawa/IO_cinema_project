@@ -64,4 +64,16 @@ public class BaseDB {
         }
         return null;
     }
+
+    public static Connection returnConnection() {
+        try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            String connection_string = String.format("jdbc:sqlserver://%s;databaseName=%s", host, dbname);
+            Connection conn = DriverManager.getConnection(connection_string, username, password);
+            return conn;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

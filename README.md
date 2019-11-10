@@ -17,3 +17,10 @@ Controller - Logic of application
 DBO - Access to database
 Tools - Non logic tools
 ```
+
+
+# Plugins
+
+```
+Lombok - [link](https://projectlombok.org/setup/intellij)
+```

@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!--
+  ~ Hibernate, Relational Persistence for Idiomatic Java
+  ~
+  ~ License: GNU Lesser General Public License (LGPL), version 2.1 or later.
+  ~ See the lgpl.txt file in the root directory or <http://www.gnu.org/licenses/lgpl-2.1.html>.
+  -->
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+    <session-factory>
+        <property name="hibernate.dialect">
+            org.hibernate.dialect.SQLServerDialect
+        </property>
+        <property name="hibernate.connection.driver_class">
+            com.microsoft.sqlserver.jdbc.SQLServerDriver
+        </property>
+        <property name="hibernate.connection.url">
+            jdbc:sqlserver://192.168.0.109:1433;databaseName=IO
+        </property>
+        <property name="hibernate.default_schema">dbo</property>
+        <property name="hibernate.connection.username">
+            sa
+        </property>
+        <property name="hibernate.connection.password">
+            S*#rrQl*mA
+        </property>
+        <!-- DICT -->
+        <mapping class="Model.DICT.MovieType"/>
+        <mapping class="Model.DICT.MovieState"/>
+        <mapping class="Model.DICT.ReservationStatus"/>
+        <mapping class="Model.DICT.ScheduleStatus"/>
+        <mapping class="Model.DICT.PersonType"/>
+        <mapping class="Model.DICT.Permissions"/>
+
+        <!-- Classes -->
+        <mapping class="Model.Movie"/>
+        <mapping class="Model.Hall"/>
+        <mapping class="Model.SETTINGS"/>
+        <mapping class="Model.Person"/>
+        <mapping class="Model.Task"/>
+        <mapping class="Model.TnAData"/>
+        <mapping class="Model.User"/>
+        <mapping class="Model.Schedule"/>
+        <mapping class="Model.Product"/>
+        <mapping class="Model.PackPO"/>
+        <mapping class="Model.Pack"/>
+        <mapping class="Model.SalePO"/>
+        <mapping class="Model.Sale"/>
+        <mapping class="Model.TimeTable"/>
+        <mapping class="Model.Reservation"/>
+        <mapping class="Model.Performance"/>
+        <mapping class="Model.PersonJob"/>
+    </session-factory>
+
+</hibernate-configuration>

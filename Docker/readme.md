@@ -9,5 +9,5 @@ docker build -t mssqlcinema .
 ```
 ## How to run
 ```bash
-docker run --name mssqlcinema -d mssqlcinema
+docker run --name mssqlcinema -p 1433:1433 -d mssqlcinema
 ```

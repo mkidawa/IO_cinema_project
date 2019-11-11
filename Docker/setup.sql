@@ -1,6 +1,7 @@
---- Edited for quicksetup on Docker 
---- Changed <> to = 
---- Builds on master database
+create database IO;
+go
+
+use IO;
 --------------------------------------------------------------------------------------------
 --- TABLE DEFINITION
 --- SETTINGS  - Table contains settings of system
@@ -8,7 +9,7 @@
 --- drop table SETTINGS
 --------------------------------------------------------------------------------------------
 
-IF db_name()='master' and
+IF db_name()<>'master' and
    not exists (	select * from INFORMATION_SCHEMA.TABLES
 		where table_name='SETTINGS' and table_type='BASE TABLE')
 BEGIN
@@ -19,17 +20,17 @@ BEGIN
 	-- Status-like fields
 
 	-- Fields that will be joined with other tables
-
+	
 	-- Fields to be edited
 
 	Symbol			nvarchar(100)		collate Polish_CS_AS	not null default '',
 	Value			nvarchar(250)		collate Polish_CS_AS	not null default '',
 
 	-- Other fiels
-
+	
 	-- Fields to be calculated only by triggers
 	-- This kind of fields must begin with '_'
-
+	
 	-- This line should be removed if the table does not have primary key
 	CONSTRAINT SETTINGS_Id PRIMARY KEY CLUSTERED (Id)
   	);
@@ -52,7 +53,7 @@ go
 --- drop table Product
 --------------------------------------------------------------------------------------------
 
-IF db_name()='master' and
+IF db_name()<>'master' and
    not exists (	select * from INFORMATION_SCHEMA.TABLES
 		where table_name='Product' and table_type='BASE TABLE')
 BEGIN
@@ -61,18 +62,18 @@ BEGIN
 	CREATE TABLE [dbo].Product(
 	Id				BIGINT IDENTITY(1,1) NOT FOR REPLICATION NOT NULL,	-- Primary Key
 	-- Status-like fields
-
+	
 	-- Fields that will be joined with other tables
-
+	
 	-- Fields to be edited
 	Name			nvarchar(100)		collate Polish_CS_AS	not null default '',
 	Price			decimal(9,2)		not null default 0,
 
 	-- Other fiels
-
+	
 	-- Fields to be calculated only by triggers
 	-- This kind of fields must begin with '_'
-
+	
 	-- This line should be removed if the table does not have primary key
 	CONSTRAINT Product_Id PRIMARY KEY CLUSTERED (Id)
   	);
@@ -96,7 +97,7 @@ go
 --- drop table PackPO
 --------------------------------------------------------------------------------------------
 
-IF db_name()='master' and
+IF db_name()<>'master' and
    not exists (	select * from INFORMATION_SCHEMA.TABLES
 		where table_name='PackPO' and table_type='BASE TABLE')
 BEGIN
@@ -114,7 +115,7 @@ BEGIN
 	Amount			decimal(9,2)		not null default 0,
 
 	-- Other fiels
-
+	
 	-- Fields to be calculated only by triggers
 	-- This kind of fields must begin with '_'
 	_Price			decimal(9,2)		not null default 0,
@@ -141,7 +142,7 @@ go
 --- drop table PackH
 --------------------------------------------------------------------------------------------
 
-IF db_name()='master' and
+IF db_name()<>'master' and
    not exists (	select * from INFORMATION_SCHEMA.TABLES
 		where table_name='PackH' and table_type='BASE TABLE')
 BEGIN
@@ -152,12 +153,12 @@ BEGIN
 	-- Status-like fields
 
 	-- Fields that will be joined with other tables
-
+	
 	-- Fields to be edited
 	Name			nvarchar(100)		collate Polish_CS_AS	not null default '',
 
 	-- Other fiels
-
+	
 	-- Fields to be calculated only by triggers
 	-- This kind of fields must begin with '_'
 	_Price			decimal(9,2)		not null default 0,
@@ -184,7 +185,7 @@ go
 --- drop table SalePO
 --------------------------------------------------------------------------------------------
 
-IF db_name()='master' and
+IF db_name()<>'master' and
    not exists (	select * from INFORMATION_SCHEMA.TABLES
 		where table_name='SalePO' and table_type='BASE TABLE')
 BEGIN
@@ -197,12 +198,12 @@ BEGIN
 	-- Fields that will be joined with other tables
 	PackHId			bigint				not null default 0,
 	SaleHId			bigint				not null default 0,
-
+	
 	-- Fields to be edited
 	Amount			decimal(9,2)		not null default 0,
 
 	-- Other fiels
-
+	
 	-- Fields to be calculated only by triggers
 	-- This kind of fields must begin with '_'
 	_Price			decimal(9,2)		not null default 0,
@@ -229,7 +230,7 @@ go
 --- drop table SaleH
 --------------------------------------------------------------------------------------------
 
-IF db_name()='master' and
+IF db_name()<>'master' and
    not exists (	select * from INFORMATION_SCHEMA.TABLES
 		where table_name='SaleH' and table_type='BASE TABLE')
 BEGIN
@@ -273,7 +274,7 @@ go
 --- drop table Users
 --------------------------------------------------------------------------------------------
 
-IF db_name()='master' and
+IF db_name()<>'master' and
    not exists (	select * from INFORMATION_SCHEMA.TABLES
 		where table_name='Users' and table_type='BASE TABLE')
 BEGIN
@@ -284,7 +285,7 @@ BEGIN
 	-- Status-like fields
 
 	-- Fields that will be joined with other tables
-
+	
 	-- Fields to be edited
 	FirstName		nvarchar(100)		collate Polish_CS_AS	not null default '',
 	LastName		nvarchar(100)		collate Polish_CS_AS	not null default '',
@@ -294,10 +295,10 @@ BEGIN
 	BaseSalary		decimal(9,2)		not null default 0,
 	HourlyRate		decimal(9,2)		not null default 0,
 	-- Other fiels
-
+	
 	-- Fields to be calculated only by triggers
 	-- This kind of fields must begin with '_'
-
+	
 	-- This line should be removed if the table does not have primary key
 	CONSTRAINT Users_Id PRIMARY KEY CLUSTERED (Id)
   	);
@@ -320,7 +321,7 @@ go
 --- drop table UsersPermission
 --------------------------------------------------------------------------------------------
 
-IF db_name()='master' and
+IF db_name()<>'master' and
    not exists (	select * from INFORMATION_SCHEMA.TABLES
 		where table_name='UsersPermission' and table_type='BASE TABLE')
 BEGIN
@@ -336,10 +337,10 @@ BEGIN
 	-- Fields to be edited
 
 	-- Other fiels
-
+	
 	-- Fields to be calculated only by triggers
 	-- This kind of fields must begin with '_'
-
+	
 	-- This line should be removed if the table does not have primary key
 	CONSTRAINT UsersPermission_Id PRIMARY KEY CLUSTERED (Id)
   	);
@@ -362,7 +363,7 @@ go
 --- drop table DICTPermission
 --------------------------------------------------------------------------------------------
 
-IF db_name()='master' and
+IF db_name()<>'master' and
    not exists (	select * from INFORMATION_SCHEMA.TABLES
 		where table_name='DICTPermission' and table_type='BASE TABLE')
 BEGIN
@@ -373,15 +374,15 @@ BEGIN
 	-- Status-like fields
 
 	-- Fields that will be joined with other tables
-
+	
 	-- Fields to be edited
 	Name			nvarchar(200)		not null default '',
 	Code			int					not null default 0,
 	-- Other fiels
-
+	
 	-- Fields to be calculated only by triggers
 	-- This kind of fields must begin with '_'
-
+	
 	-- This line should be removed if the table does not have primary key
 	CONSTRAINT DICTPermission_Id PRIMARY KEY CLUSTERED (Id)
   	);
@@ -404,7 +405,7 @@ go
 --- drop table TnAData
 --------------------------------------------------------------------------------------------
 
-IF db_name()='master' and
+IF db_name()<>'master' and
    not exists (	select * from INFORMATION_SCHEMA.TABLES
 		where table_name='TnAData' and table_type='BASE TABLE')
 BEGIN
@@ -421,10 +422,10 @@ BEGIN
 	TimeFrom		datetime2(3)		not null default '1900-01-01',
 	TimeTo			datetime2(3)		not null default '1900-01-01',
 	-- Other fiels
-
+	
 	-- Fields to be calculated only by triggers
 	-- This kind of fields must begin with '_'
-
+	
 	-- This line should be removed if the table does not have primary key
 	CONSTRAINT TnAData_Id PRIMARY KEY CLUSTERED (Id)
   	);
@@ -447,7 +448,7 @@ go
 --- drop table Task
 --------------------------------------------------------------------------------------------
 
-IF db_name()='master' and
+IF db_name()<>'master' and
    not exists (	select * from INFORMATION_SCHEMA.TABLES
 		where table_name='Task' and table_type='BASE TABLE')
 BEGIN
@@ -458,15 +459,15 @@ BEGIN
 	-- Status-like fields
 
 	-- Fields that will be joined with other tables
-
+	
 	-- Fields to be edited
 	Name			nvarchar(100)		collate Polish_CS_AS	not null default '',
 	Description		nvarchar(1000)		collate Polish_CS_AS	not null default '',
 	-- Other fiels
-
+	
 	-- Fields to be calculated only by triggers
 	-- This kind of fields must begin with '_'
-
+	
 	-- This line should be removed if the table does not have primary key
 	CONSTRAINT Task_Id PRIMARY KEY CLUSTERED (Id)
   	);
@@ -489,7 +490,7 @@ go
 --- drop table Schedule
 --------------------------------------------------------------------------------------------
 
-IF db_name()='master' and
+IF db_name()<>'master' and
    not exists (	select * from INFORMATION_SCHEMA.TABLES
 		where table_name='Schedule' and table_type='BASE TABLE')
 BEGIN
@@ -507,10 +508,10 @@ BEGIN
 	DateFrom		datetime2(3)		not null default '1900-01-01',
 	DateTo			datetime2(3)		not null default '1900-01-01',
 	-- Other fiels
-
+	
 	-- Fields to be calculated only by triggers
 	-- This kind of fields must begin with '_'
-
+	
 	-- This line should be removed if the table does not have primary key
 	CONSTRAINT Schedule_Id PRIMARY KEY CLUSTERED (Id)
   	);
@@ -533,7 +534,7 @@ go
 --- drop table DICTScheduleStatus
 --------------------------------------------------------------------------------------------
 
-IF db_name()='master' and
+IF db_name()<>'master' and
    not exists (	select * from INFORMATION_SCHEMA.TABLES
 		where table_name='DICTScheduleStatus' and table_type='BASE TABLE')
 BEGIN
@@ -544,14 +545,14 @@ BEGIN
 	-- Status-like fields
 
 	-- Fields that will be joined with other tables
-
+	
 	-- Fields to be edited
 	Name			nvarchar(100)		collate Polish_CS_AS	not null default '',
 	-- Other fiels
-
+	
 	-- Fields to be calculated only by triggers
 	-- This kind of fields must begin with '_'
-
+	
 	-- This line should be removed if the table does not have primary key
 	CONSTRAINT DICTScheduleStatus_Id PRIMARY KEY CLUSTERED (Id)
   	);
@@ -574,7 +575,7 @@ go
 --- drop table Movie
 --------------------------------------------------------------------------------------------
 
-IF db_name()='master' and
+IF db_name()<>'master' and
    not exists (	select * from INFORMATION_SCHEMA.TABLES
 		where table_name='Movie' and table_type='BASE TABLE')
 BEGIN
@@ -595,10 +596,10 @@ BEGIN
 	Description		nvarchar(1000)		collate Polish_CS_AS	not null default '',
 	MovieTime		time(3)				default '00:00:00',
 	-- Other fiels
-
+	
 	-- Fields to be calculated only by triggers
 	-- This kind of fields must begin with '_'
-
+	
 	-- This line should be removed if the table does not have primary key
 	CONSTRAINT Movie_Id PRIMARY KEY CLUSTERED (Id)
   	);
@@ -621,7 +622,7 @@ go
 --- drop table DICTMovieType
 --------------------------------------------------------------------------------------------
 
-IF db_name()='master' and
+IF db_name()<>'master' and
    not exists (	select * from INFORMATION_SCHEMA.TABLES
 		where table_name='DICTMovieType' and table_type='BASE TABLE')
 BEGIN
@@ -632,14 +633,14 @@ BEGIN
 	-- Status-like fields
 
 	-- Fields that will be joined with other tables
-
+	
 	-- Fields to be edited
 	Name			nvarchar(100)		collate Polish_CS_AS	not null default '',
 	-- Other fiels
-
+	
 	-- Fields to be calculated only by triggers
 	-- This kind of fields must begin with '_'
-
+	
 	-- This line should be removed if the table does not have primary key
 	CONSTRAINT DICTMovieType_Id PRIMARY KEY CLUSTERED (Id)
   	);
@@ -662,7 +663,7 @@ go
 --- drop table DICTMovieState
 --------------------------------------------------------------------------------------------
 
-IF db_name()='master' and
+IF db_name()<>'master' and
    not exists (	select * from INFORMATION_SCHEMA.TABLES
 		where table_name='DICTMovieState' and table_type='BASE TABLE')
 BEGIN
@@ -673,14 +674,14 @@ BEGIN
 	-- Status-like fields
 
 	-- Fields that will be joined with other tables
-
+	
 	-- Fields to be edited
 	Name			nvarchar(100)		collate Polish_CS_AS	not null default '',
 	-- Other fiels
-
+	
 	-- Fields to be calculated only by triggers
 	-- This kind of fields must begin with '_'
-
+	
 	-- This line should be removed if the table does not have primary key
 	CONSTRAINT DICTMovieState_Id PRIMARY KEY CLUSTERED (Id)
   	);
@@ -703,7 +704,7 @@ go
 --- drop table Hall
 --------------------------------------------------------------------------------------------
 
-IF db_name()='master' and
+IF db_name()<>'master' and
    not exists (	select * from INFORMATION_SCHEMA.TABLES
 		where table_name='Hall' and table_type='BASE TABLE')
 BEGIN
@@ -718,16 +719,16 @@ BEGIN
 	flgX			int					not null default 0,
 	flgY			int					not null default 0,
 	-- Fields that will be joined with other tables
-
+	
 	-- Fields to be edited
 	Name			nvarchar(100)		collate Polish_CS_AS	not null default '',
 	Description		nvarchar(1000)		collate Polish_CS_AS	not null default '',
 
 	-- Other fiels
-
+	
 	-- Fields to be calculated only by triggers
 	-- This kind of fields must begin with '_'
-
+	
 	-- This line should be removed if the table does not have primary key
 	CONSTRAINT Hall_Id PRIMARY KEY CLUSTERED (Id)
   	);
@@ -750,7 +751,7 @@ go
 --- drop table DICTPersonType
 --------------------------------------------------------------------------------------------
 
-IF db_name()='master' and
+IF db_name()<>'master' and
    not exists (	select * from INFORMATION_SCHEMA.TABLES
 		where table_name='DICTPersonType' and table_type='BASE TABLE')
 BEGIN
@@ -761,14 +762,14 @@ BEGIN
 	-- Status-like fields
 
 	-- Fields that will be joined with other tables
-
+	
 	-- Fields to be edited
 	Name			nvarchar(100)		collate Polish_CS_AS	not null default '',
 	-- Other fiels
-
+	
 	-- Fields to be calculated only by triggers
 	-- This kind of fields must begin with '_'
-
+	
 	-- This line should be removed if the table does not have primary key
 	CONSTRAINT DICTPersonType_Id PRIMARY KEY CLUSTERED (Id)
   	);
@@ -791,7 +792,7 @@ go
 --- drop table Person
 --------------------------------------------------------------------------------------------
 
-IF db_name()='master' and
+IF db_name()<>'master' and
    not exists (	select * from INFORMATION_SCHEMA.TABLES
 		where table_name='Person' and table_type='BASE TABLE')
 BEGIN
@@ -802,16 +803,16 @@ BEGIN
 	-- Status-like fields
 
 	-- Fields that will be joined with other tables
-
+	
 	-- Fields to be edited
 	FirstName		nvarchar(100)		collate Polish_CS_AS	not null default '',
 	LastName		nvarchar(100)		collate Polish_CS_AS	not null default '',
 	DateBorn		datetime2(3)		not null default '1900-01-01',
 	-- Other fiels
-
+	
 	-- Fields to be calculated only by triggers
 	-- This kind of fields must begin with '_'
-
+	
 	-- This line should be removed if the table does not have primary key
 	CONSTRAINT Person_Id PRIMARY KEY CLUSTERED (Id)
   	);
@@ -834,7 +835,7 @@ go
 --- drop table MoviePersonPersonType
 --------------------------------------------------------------------------------------------
 
-IF db_name()='master' and
+IF db_name()<>'master' and
    not exists (	select * from INFORMATION_SCHEMA.TABLES
 		where table_name='MoviePersonPersonType' and table_type='BASE TABLE')
 BEGIN
@@ -851,10 +852,10 @@ BEGIN
 	-- Fields to be edited
 
 	-- Other fiels
-
+	
 	-- Fields to be calculated only by triggers
 	-- This kind of fields must begin with '_'
-
+	
 	-- This line should be removed if the table does not have primary key
 	CONSTRAINT MoviePersonPersonType_Id PRIMARY KEY CLUSTERED (Id)
   	);
@@ -877,7 +878,7 @@ go
 --- drop table Performance
 --------------------------------------------------------------------------------------------
 
-IF db_name()='master' and
+IF db_name()<>'master' and
    not exists (	select * from INFORMATION_SCHEMA.TABLES
 		where table_name='Performance' and table_type='BASE TABLE')
 BEGIN
@@ -893,10 +894,10 @@ BEGIN
 	-- Fields to be edited
 	AddTime			time(3)				not null default '00:00:00',
 	-- Other fiels
-
+	
 	-- Fields to be calculated only by triggers
 	-- This kind of fields must begin with '_'
-
+	
 	-- This line should be removed if the table does not have primary key
 	CONSTRAINT Performance_Id PRIMARY KEY CLUSTERED (Id)
   	);
@@ -919,7 +920,7 @@ go
 --- drop table Reservation
 --------------------------------------------------------------------------------------------
 
-IF db_name()='master' and
+IF db_name()<>'master' and
    not exists (	select * from INFORMATION_SCHEMA.TABLES
 		where table_name='Reservation' and table_type='BASE TABLE')
 BEGIN
@@ -938,10 +939,10 @@ BEGIN
 	-- Fields to be edited
 
 	-- Other fiels
-
+	
 	-- Fields to be calculated only by triggers
 	-- This kind of fields must begin with '_'
-
+	
 	-- This line should be removed if the table does not have primary key
 	CONSTRAINT Reservation_Id PRIMARY KEY CLUSTERED (Id)
   	);
@@ -964,7 +965,7 @@ go
 --- drop table DICTReservationStatus
 --------------------------------------------------------------------------------------------
 
-IF db_name()='master' and
+IF db_name()<>'master' and
    not exists (	select * from INFORMATION_SCHEMA.TABLES
 		where table_name='DICTReservationStatus' and table_type='BASE TABLE')
 BEGIN
@@ -975,14 +976,14 @@ BEGIN
 	-- Status-like fields
 
 	-- Fields that will be joined with other tables
-
+	
 	-- Fields to be edited
 	Name			nvarchar(100)		collate Polish_CS_AS	not null default '',
 	-- Other fiels
-
+	
 	-- Fields to be calculated only by triggers
 	-- This kind of fields must begin with '_'
-
+	
 	-- This line should be removed if the table does not have primary key
 	CONSTRAINT DICTReservationStatus_Id PRIMARY KEY CLUSTERED (Id)
   	);
@@ -1005,7 +1006,7 @@ go
 --- drop table TimeTable
 --------------------------------------------------------------------------------------------
 
-IF db_name()='master' and
+IF db_name()<>'master' and
    not exists (	select * from INFORMATION_SCHEMA.TABLES
 		where table_name='TimeTable' and table_type='BASE TABLE')
 BEGIN
@@ -1020,10 +1021,10 @@ BEGIN
 	-- Fields to be edited
 	PerformanceDate	datetime2(3)		not null default '1900-01-01'
 	-- Other fiels
-
+	
 	-- Fields to be calculated only by triggers
 	-- This kind of fields must begin with '_'
-
+	
 	-- This line should be removed if the table does not have primary key
 	CONSTRAINT TimeTable_Id PRIMARY KEY CLUSTERED (Id)
   	);

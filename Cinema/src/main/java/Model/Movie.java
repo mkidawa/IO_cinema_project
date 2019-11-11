@@ -95,4 +95,20 @@ public class Movie {
         this.movieTime = movieTime;
         this.peoples = peoples;
     }
+
+    @Override
+    public String toString() {
+        return "Movie" + '\n' + "{" +
+                "Id=" + Id +
+                ", flg2D=" + flg2D +
+                ", flg3D=" + flg3D +
+                ", flgVR=" + flgVR +
+                ", movieType=" + movieType +
+                ", movieState=" + movieState +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", movieTime=" + movieTime +
+                ", peoples=" + peoples +
+                '}';
+    }
 }

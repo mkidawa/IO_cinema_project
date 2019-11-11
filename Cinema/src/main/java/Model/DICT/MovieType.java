@@ -26,4 +26,12 @@ public class MovieType {
     public MovieType(String name) {
         this.name = name;
     }
+
+    @Override
+    public String toString() {
+        return "MovieType{" +
+                "Id=" + Id +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }

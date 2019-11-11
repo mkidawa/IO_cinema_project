@@ -26,4 +26,12 @@ public class MovieState {
     public MovieState(String name) {
         this.name = name;
     }
+
+    @Override
+    public String toString() {
+        return "MovieState{" +
+                "Id=" + Id +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }

@@ -21,6 +21,4 @@ Tools - Non logic tools
 
 # Plugins
 
-```
 Lombok - [link](https://projectlombok.org/setup/intellij)
-```

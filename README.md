@@ -5,11 +5,12 @@ Software engineering classes project
 ```
 Scripts - SQL/T-SQL scripts
 Cinema - Thick client source code
+Docker - Setup for MSSQL Docker database
 Docs - Documentation and extra files
 Front - PHP project of frontend application
 ```
 
-# Packaga structure
+# Package structure
 ```
 Model - Model of data
 View - GUI

@@ -27,8 +27,7 @@ public class Sale {
     private long userId;
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "SalePO",
-            joinColumns = @JoinColumn(name = "SaleHId", referencedColumnName = "Id"))
+    @JoinColumn(name = "SaleHId", referencedColumnName = "Id")
     @Getter
     @Setter
     private List<SalePO> positions;
@@ -49,6 +48,7 @@ public class Sale {
             temp = temp.add(item.getPrice());
         }
         price = temp.setScale(2, RoundingMode.HALF_UP);
+        obj.setSale(this);
     }
 
     public Sale() {

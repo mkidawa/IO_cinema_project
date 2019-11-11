@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.sql.Time;
+import java.util.LinkedList;
 import java.util.List;
 
 @Entity
@@ -58,11 +59,15 @@ public class Movie {
     private Time movieTime;
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "MoviePersonPersonType",
-            inverseJoinColumns = @JoinColumn(name = "MovieId", referencedColumnName = "Id"))
+    @JoinColumn(name = "MovieId", referencedColumnName = "Id")
     @Getter
     @Setter
     private List<PersonJob> peoples;
+
+    public void addPerson(PersonJob person) {
+        peoples.add(person);
+        person.setMovie(this);
+    }
 
     public Movie() {
     }
@@ -76,5 +81,18 @@ public class Movie {
         this.title = title;
         this.description = description;
         this.movieTime = movieTime;
+        this.peoples = new LinkedList<>();
+    }
+
+    public Movie(short flg2D, short flg3D, short flgVR, MovieType movieType, MovieState movieState, String title, String description, Time movieTime, List<PersonJob> peoples) {
+        this.flg2D = flg2D;
+        this.flg3D = flg3D;
+        this.flgVR = flgVR;
+        this.movieType = movieType;
+        this.movieState = movieState;
+        this.title = title;
+        this.description = description;
+        this.movieTime = movieTime;
+        this.peoples = peoples;
     }
 }

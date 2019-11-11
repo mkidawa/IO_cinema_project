@@ -27,6 +27,13 @@ public class PersonJob {
     @Setter
     private PersonType personType;
 
+    @ManyToOne(cascade = {CascadeType.ALL})
+    @JoinColumn(name = "MovieId")
+    @Getter
+    @Setter
+    private Movie movie;
+
+
     public PersonJob() {
     }
 

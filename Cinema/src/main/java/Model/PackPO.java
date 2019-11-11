@@ -1,7 +1,9 @@
 package Model;
 
+import com.sun.istack.NotNull;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.NotFound;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -16,6 +18,13 @@ public class PackPO {
     @Getter
     @Setter
     private long Id;
+
+    @ManyToOne(cascade = {CascadeType.ALL})
+    @JoinColumn(name = "PackHId")
+    @Getter
+    @Setter
+    private Pack pack;
+
 
     @ManyToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "ProductId")

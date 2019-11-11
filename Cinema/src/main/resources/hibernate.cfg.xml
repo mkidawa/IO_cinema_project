@@ -18,14 +18,17 @@
             com.microsoft.sqlserver.jdbc.SQLServerDriver
         </property>
         <property name="hibernate.connection.url">
-            jdbc:sqlserver://192.168.0.109:1433;databaseName=IO
+            jdbc:sqlserver://(IP):(PORT);databaseName=(DBNAME)
         </property>
         <property name="hibernate.default_schema">dbo</property>
         <property name="hibernate.connection.username">
-            sa
+            USERNAME (sa)
         </property>
         <property name="hibernate.connection.password">
-            S*#rrQl*mA
+            HASŁO
+        </property>
+        <property name="show_sql">
+            true
         </property>
         <!-- DICT -->
         <mapping class="Model.DICT.MovieType"/>

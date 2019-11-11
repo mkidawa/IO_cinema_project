@@ -18,6 +18,12 @@ public class SalePO {
     private long Id;
 
     @ManyToOne(cascade = {CascadeType.ALL})
+    @JoinColumn(name = "SaleHId")
+    @Getter
+    @Setter
+    private Sale sale;
+
+    @ManyToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "PackHId")
     @Getter
     @Setter
@@ -29,6 +35,7 @@ public class SalePO {
     private BigDecimal amount;
 
     @Column(name = "_Price", columnDefinition = "Decimal(9,2)", precision = 9, scale = 2)
+    @Getter
     private BigDecimal price;
 
     public SalePO() {

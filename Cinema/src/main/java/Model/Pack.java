@@ -20,9 +20,8 @@ public class Pack {
     @Setter
     private long Id;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "PackPO",
-            joinColumns = @JoinColumn(name = "PackHId", referencedColumnName = "Id"))
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "PackHId", referencedColumnName = "Id")
     @Getter
     @Setter
     private List<PackPO> positions;
@@ -43,6 +42,7 @@ public class Pack {
             temp = temp.add(item.getPrice());
         }
         price = temp.setScale(2, RoundingMode.HALF_UP);
+        obj.setPack(this);
     }
 
     public Pack() {

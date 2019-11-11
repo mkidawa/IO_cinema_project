@@ -41,4 +41,13 @@ public class Person {
         this.bornDate = bornDate;
     }
 
+    @Override
+    public String toString() {
+        return "\nPerson" + "{" +
+                "Id=" + Id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", bornDate=" + bornDate +
+                '}';
+    }
 }

@@ -41,4 +41,13 @@ public class PersonJob {
         this.person = person;
         this.personType = personType;
     }
+
+    @Override
+    public String toString() {
+        return "PersonJob{" +
+                "Id=" + Id +
+                ", person=" + person +
+                ", personType=" + personType +
+                '}';
+    }
 }

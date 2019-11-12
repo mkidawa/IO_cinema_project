@@ -1,0 +1,22 @@
+package Controller;
+
+import DBO.MovieDAO;
+import Model.DICT.MovieState;
+import Model.DICT.MovieType;
+import Model.Movie;
+import Model.PersonJob;
+
+import java.sql.Time;
+import java.util.List;
+
+public class MovieManager {
+    public static void createMovie(short flg2D, short flg3D, short flgVR, MovieType type,
+                                   MovieState state, String title, String description,
+                                   Time duration, List<PersonJob> persons) {
+
+        Movie movie = new Movie(flg2D, flg3D, flgVR, type, state, title, description, duration);
+        for (int i=0; i<persons.size(); i++)
+            movie.addPerson(persons.get(i));
+        MovieDAO.insertUpdate(movie);
+    }
+}

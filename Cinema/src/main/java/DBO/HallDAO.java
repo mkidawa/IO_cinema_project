@@ -33,7 +33,7 @@ public class HallDAO {
             int count = 0;
             sql.append("where ");
             for (var item : filter.getFilters().entrySet()) {
-                sql.append(item.getKey()).append(" = ").append(item.getValue().toString());
+                sql.append(item.getKey()).append(" = \'").append(item.getValue().toString()).append("\'");
                 count++;
                 if (count < size) {
                     sql.append(" and ");

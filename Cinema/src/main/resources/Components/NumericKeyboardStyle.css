@@ -1,0 +1,12 @@
+.keyboardBody {
+    -fx-background-color: #0148ff;
+}
+
+.keyboardButton {
+    -fx-background-color: dodgerblue;
+    -fx-font-size: 24px;
+}
+
+.keyboardText {
+    -fx-font-size: 24px;
+}

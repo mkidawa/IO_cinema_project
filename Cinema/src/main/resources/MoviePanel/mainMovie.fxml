@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="810.0" prefWidth="1440.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="View.MovieView.MoviePanel">
+  <children>
+    <GridPane fx:id="pane" alignment="CENTER" prefHeight="700.0" prefWidth="900.0" AnchorPane.bottomAnchor="650.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <children>
+        <Label disable="false" focusTraversable="false" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="210.0" text="Movies Table" textAlignment="CENTER" wrapText="false" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="0" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
+          <font>
+            <Font name="Bookman Old Style Pogrubiony" size="30.0" />
+          </font>
+        </Label>
+        <TableView fx:id="table" editable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="675.0" prefWidth="1200.0" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
+          <columns>
+            <TableColumn prefWidth="75.0" text="Id" fx:id="id" />
+            <TableColumn prefWidth="200.0" text="Title" fx:id="title" />
+            <TableColumn prefWidth="500.0" text="Description" fx:id="description" />
+          </columns>
+        </TableView>
+      </children>
+      <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="306.0" minWidth="10.0" prefWidth="301.0" />
+      </columnConstraints>
+      <rowConstraints>
+        <RowConstraints maxHeight="59.0" minHeight="10.0" prefHeight="27.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="59.0" minHeight="10.0" prefHeight="27.0" vgrow="SOMETIMES" />
+      </rowConstraints>
+    </GridPane>
+  </children>
+</AnchorPane>

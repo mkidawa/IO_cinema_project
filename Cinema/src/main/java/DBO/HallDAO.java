@@ -56,9 +56,9 @@ public class HallDAO {
     public static void delete(Hall object) {
         var so = BaseDB.openConnection();
         so.beginTransaction();
-        so.delete(object);
-        so.getTransaction()
-                .commit();
+        String hql = "delete Hall where Id = :id";
+        var q = so.createQuery(hql).setParameter("id", object.getId());
+        q.executeUpdate();
         so.close();
     }
 

@@ -19,7 +19,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class AddMoviePanel implements Initializable {
+public class displayMoviePanel implements Initializable {
     @FXML private Movie movie;
 
     @FXML private Label id;

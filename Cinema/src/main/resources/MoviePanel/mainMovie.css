@@ -1,5 +1,11 @@
 .table-column {
     -fx-alignment: center;
+    -fx-background-color: rgba(30,144,255,0.3);
+
+}
+
+AnchorPane {
+    -fx-background-color: rgba(30,144,255,0.2);
 }
 
 #table {
@@ -15,4 +21,10 @@
     -fx-text-fill: -fx-text-inner-color;
     -fx-font-family: Verdana;
     -fx-font-size: 12pt;
+}
+
+Button {
+    -fx-font-family : "Verdana Bold";
+    -fx-background-color: dodgerblue;
+    -fx-font-size: 24px;
 }

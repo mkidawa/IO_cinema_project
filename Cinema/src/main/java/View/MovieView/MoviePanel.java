@@ -79,8 +79,18 @@ public class MoviePanel implements Initializable {
     public void onClickRow(Movie clickedMovie) throws IOException {
         MovieManager.workingMovie = clickedMovie;
         Parent fxmlLoader = FXMLLoader.load(getClass().getResource("/DisplayMoviePanel/displayMoviePanel.fxml"));
+
         Stage stage = new Stage();
         Scene scene = new Scene(fxmlLoader);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public void onClickButton() throws IOException {
+        Parent fxmlLoader = FXMLLoader.load(getClass().getResource("/addMoviePanel/addMovie.fxml"));
+        Stage stage = new Stage();
+        Scene scene = new Scene(fxmlLoader);
+        scene.getStylesheets().add(getClass().getResource("/addMoviePanel/addMovie.css").toExternalForm());
         stage.setScene(scene);
         stage.show();
     }

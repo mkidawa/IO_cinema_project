@@ -1,5 +1,6 @@
 package View.MovieView;
 
+import Controller.MovieManager;
 import DBO.MovieDAO;
 import DBO.MovieStateDAO;
 import DBO.MovieTypeDAO;
@@ -15,6 +16,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
@@ -23,6 +25,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.var;
@@ -64,7 +67,11 @@ public class MoviePanel implements Initializable {
 
                     SimpleMovie clickedMovie = row.getItem();
                     List<Movie> movies = MovieDAO.getAllById(clickedMovie.getId());
-                    onClickRow(movies.get(0));
+                    try {
+                        onClickRow(movies.get(0));
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
             });
             return row ;
@@ -81,8 +88,13 @@ public class MoviePanel implements Initializable {
         return list;
     }
 
-    public void onClickRow(Movie clickedMovie) {
-        System.out.println(clickedMovie);
+    public void onClickRow(Movie clickedMovie) throws IOException {
+        MovieManager.workingMovie = clickedMovie;
+        Parent fxmlLoader = FXMLLoader.load(getClass().getResource("/AddMoviePanel/addMovie.fxml"));
+        Stage stage = new Stage();
+        Scene scene = new Scene(fxmlLoader);
+        stage.setScene(scene);
+        stage.show();
     }
 
     public class SimpleMovie {

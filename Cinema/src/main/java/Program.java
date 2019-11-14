@@ -11,6 +11,7 @@ import java.awt.*;
 
 
 public class Program extends Application {
+
     public static void main(String[] args) {
        launch(args);
     }
@@ -18,7 +19,6 @@ public class Program extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         Parent fxmlLoader = FXMLLoader.load(getClass().getResource("/MoviePanel/mainMovie.fxml"));
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         Scene scene = new Scene(fxmlLoader);
         scene.getStylesheets().add(getClass().getResource("/MoviePanel/mainMovie.css").toExternalForm());
         primaryStage.setTitle("Main Movie Panel");

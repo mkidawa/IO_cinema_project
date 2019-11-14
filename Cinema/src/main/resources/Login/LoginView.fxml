@@ -8,9 +8,9 @@
            xmlns:fx="http://javafx.com/fxml"
            prefWidth="1024.0" prefHeight="786.0" stylesheets="@../Style.css">
     <children>
-        <VBox>
+        <VBox alignment="BOTTOM_LEFT">
             <Button text="Zamknij aplikację" fx:id="btnClose" prefHeight="110.0" prefWidth="110.0"
-                    styleClass="darkButton" onAction="#closeApplication" alignment="BOTTOM_LEFT">
+                    styleClass="darkButton" onAction="#closeApplication" >
 
             </Button>
         </VBox>

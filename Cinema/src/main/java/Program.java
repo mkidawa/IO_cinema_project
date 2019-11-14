@@ -1,23 +1,14 @@
-import DBO.MovieDAO;
-import DBO.PersonDAO;
-import Model.Movie;
-import Model.Person;
-import View.MovieView.MoviePanel;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import lombok.var;
-
-import java.util.List;
 
 
 public class Program extends Application {
 
     public static void main(String[] args) {
-       launch(args);
+        launch(args);
     }
 
     @Override

@@ -55,9 +55,9 @@ public class MovieDAO {
     public static void delete(Movie object) {
         var so = BaseDB.openConnection();
         so.beginTransaction();
-        so.delete(object);
-        so.getTransaction()
-                .commit();
+        String hql = "delete Movie where Id = :id";
+        var q = so.createQuery(hql).setParameter("id", object.getId());
+        q.executeUpdate();
         so.close();
     }
 

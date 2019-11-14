@@ -45,7 +45,6 @@ public class MoviePanel implements Initializable {
         id.setCellValueFactory(new PropertyValueFactory<SimpleMovie, Long>("id"));
         title.setCellValueFactory(new PropertyValueFactory<SimpleMovie, String>("title"));
         description.setCellValueFactory(new PropertyValueFactory<SimpleMovie, String>("description"));
-
         table.setItems(list);
     }
 

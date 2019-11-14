@@ -1,6 +1,7 @@
 package View.MovieView;
 
 import Controller.MovieManager;
+import DBO.MovieDAO;
 import DBO.PersonTypeDAO;
 import Model.Movie;
 import Model.Person;
@@ -9,9 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.DialogPane;
-import javafx.scene.control.Label;
-import javafx.scene.control.RadioButton;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -29,16 +28,15 @@ public class displayMoviePanel implements Initializable {
     @FXML private Label state;
     @FXML private Label duration;
 
-    @FXML private RadioButton true2D;
-    @FXML private RadioButton false2D;
-    @FXML private RadioButton true3D;
-    @FXML private RadioButton false3D;
-    @FXML private RadioButton trueVR;
-    @FXML private RadioButton falseVR;
+    @FXML private CheckBox flg2D;
+    @FXML private CheckBox flg3D;
+    @FXML private CheckBox flgVR;
 
     @FXML private Label peopleName;
     @FXML private Label peopleSurname;
     @FXML private Label peopleType;
+
+    @FXML private Button delete;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -52,27 +50,21 @@ public class displayMoviePanel implements Initializable {
         duration.setText(movie.getMovieTime().toString());
 
         if(movie.getFlg2D() > 0) {
-            true2D.setSelected(true);
-            false2D.setSelected(false);
+            flg2D.setSelected(true);
         } else {
-            true2D.setSelected(false);
-            false2D.setSelected(true);
+            flg2D.setSelected(false);
         }
 
         if(movie.getFlg3D() > 0) {
-            true3D.setSelected(true);
-            false3D.setSelected(false);
+            flg3D.setSelected(true);
         } else {
-            true3D.setSelected(false);
-            false3D.setSelected(true);
+            flg3D.setSelected(false);
         }
 
         if(movie.getFlgVR() > 0) {
-            trueVR.setSelected(true);
-            falseVR.setSelected(false);
+            flgVR.setSelected(true);
         } else {
-            trueVR.setSelected(false);
-            falseVR.setSelected(true);
+            flgVR.setSelected(false);
         }
 
         for(int i=0; i<movie.getPeoples().size(); i++){
@@ -80,5 +72,13 @@ public class displayMoviePanel implements Initializable {
             peopleSurname.setText(peopleSurname.getText() + movie.getPeoples().get(i).getPerson().getLastName() + '\n');
             peopleType.setText(peopleType.getText() + movie.getPeoples().get(i).getPersonType().getName() + '\n');
         }
+    }
+
+    public void onClickDelete() {
+        //MovieDAO.delete(movie);
+        //MovieManager.workingMovie = null;
+
+        Stage stage = (Stage) delete.getScene().getWindow();
+        stage.close();
     }
 }

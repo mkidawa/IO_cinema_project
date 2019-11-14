@@ -1,3 +1,7 @@
+import DBO.MovieDAO;
+import DBO.PersonDAO;
+import Model.Movie;
+import Model.Person;
 import View.MovieView.MoviePanel;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -7,7 +11,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import lombok.var;
 
-import java.awt.*;
+import java.util.List;
 
 
 public class Program extends Application {
@@ -24,5 +28,10 @@ public class Program extends Application {
         primaryStage.setTitle("Main Movie Panel");
         primaryStage.setScene(scene);
         primaryStage.show();
+
+//        List<Movie> movies = MovieDAO.getAll();
+//        MovieDAO.delete(movies.get(10));
+//        List<Person> persons = PersonDAO.getAll();
+//        PersonDAO.delete(persons.get(10));
     }
 }

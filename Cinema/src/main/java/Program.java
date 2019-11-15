@@ -1,8 +1,12 @@
+import DBO.MovieDAO;
+import Model.Movie;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+
+import java.util.List;
 
 
 public class Program extends Application {
@@ -20,8 +24,8 @@ public class Program extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
 
-//        List<Movie> movies = MovieDAO.getAll();
-//        MovieDAO.delete(movies.get(10));
+        //List<Movie> movies = MovieDAO.getAll();
+        //MovieDAO.delete(movies.get(0));
 //        List<Person> persons = PersonDAO.getAll();
 //        PersonDAO.delete(persons.get(10));
     }

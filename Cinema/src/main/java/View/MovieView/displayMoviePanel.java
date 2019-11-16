@@ -1,17 +1,15 @@
 package View.MovieView;
 
 import Controller.MovieManager;
+import Controller.StageManager;
 import DBO.MovieDAO;
-import DBO.PersonTypeDAO;
 import Model.Movie;
-import Model.Person;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -75,10 +73,29 @@ public class displayMoviePanel implements Initializable {
     }
 
     public void onClickDelete() {
-        //MovieDAO.delete(movie);
-        //MovieManager.workingMovie = null;
+        MovieDAO.delete(movie);
+        MovieManager.workingMovie = null;
 
-        Stage stage = (Stage) delete.getScene().getWindow();
-        stage.close();
+        closeAllStagesAndLoadNewMainStage();
+    }
+
+    public void closeAllStagesAndLoadNewMainStage() {
+        try {
+            Stage stage = (Stage) delete.getScene().getWindow();
+            stage.close();
+
+            Parent fxmlLoader = FXMLLoader.load(getClass().getResource("/MovieModule/MoviePanel/mainMovie.fxml"));
+            Stage mainStage = new Stage();
+            Scene scene = new Scene(fxmlLoader);
+            scene.getStylesheets().add(getClass().getResource("/MovieModule/MoviePanel/mainMovie.css").toExternalForm());
+            mainStage.setScene(scene);
+            mainStage.show();
+
+            StageManager.mainStage.close();
+            StageManager.mainStage = mainStage;
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

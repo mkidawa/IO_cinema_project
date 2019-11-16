@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="854.0" prefWidth="1440.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="View.MovieView.MoviePanel">
+  <children>
+    <GridPane fx:id="pane" alignment="CENTER" prefHeight="700.0" prefWidth="900.0" AnchorPane.bottomAnchor="650.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <children>
+        <Label alignment="CENTER" disable="false" focusTraversable="false" minHeight="-Infinity" minWidth="-Infinity" prefHeight="41.0" prefWidth="229.0" text="Movies Table" textAlignment="CENTER" wrapText="false" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="0" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
+          <font>
+            <Font name="Book Antiqua Pogrubiony" size="30.0" />
+          </font>
+        </Label>
+        <TableView fx:id="table" editable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1329.0" tableMenuButtonVisible="false" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
+          <columns>
+            <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="64.0" text="Id" fx:id="id" />
+            <TableColumn prefWidth="200.0" text="Title" fx:id="title" />
+            <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="591.0" text="Description" fx:id="description" />
+            <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="191.0" text="State" fx:id="state" />
+            <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="281.0" text="Genre" fx:id="genre" />
+            <TableColumn />
+          </columns>
+        </TableView>
+      </children>
+      <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="306.0" minWidth="10.0" prefWidth="301.0" />
+      </columnConstraints>
+      <rowConstraints>
+        <RowConstraints maxHeight="59.0" minHeight="10.0" prefHeight="27.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="59.0" minHeight="10.0" prefHeight="27.0" vgrow="SOMETIMES" />
+      </rowConstraints>
+    </GridPane>
+    <Button layoutX="514.0" layoutY="771.0" mnemonicParsing="false" onMouseClicked="#onClickButton" prefHeight="60.0" prefWidth="413.0" text="Add Movie">
+      <font>
+        <Font name="Book Antiqua Pogrubiony" size="25.0" />
+      </font>
+    </Button>
+  </children>
+</AnchorPane>

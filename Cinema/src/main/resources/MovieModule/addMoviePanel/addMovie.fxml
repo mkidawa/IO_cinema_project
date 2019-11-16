@@ -10,12 +10,12 @@
          <children>
             <TextField fx:id="Title" layoutX="14.0" layoutY="48.0" prefHeight="18.0" prefWidth="747.0" promptText="Title">
                <font>
-                  <Font name="Verdana" size="15.0" />
+                  <Font name="Book Antiqua" size="15.0" />
                </font>
             </TextField>
             <Label layoutX="14.0" layoutY="14.0" prefHeight="8.0" prefWidth="130.0" text="Movie Title">
                <font>
-                  <Font name="Verdana" size="20.0" />
+                  <Font name="Book Antiqua" size="20.0" />
                </font>
             </Label>
          </children>
@@ -24,12 +24,12 @@
          <children>
             <TextField fx:id="Description" layoutX="14.0" layoutY="48.0" prefHeight="18.0" prefWidth="747.0" promptText="Description">
                <font>
-                  <Font name="Verdana" size="15.0" />
+                  <Font name="Book Antiqua" size="15.0" />
                </font>
             </TextField>
             <Label layoutX="14.0" layoutY="14.0" prefHeight="25.0" prefWidth="198.0" text="Movie Description">
                <font>
-                  <Font name="Verdana" size="20.0" />
+                  <Font name="Book Antiqua" size="20.0" />
                </font>
             </Label>
          </children>
@@ -38,7 +38,7 @@
          <children>
             <Label layoutX="14.0" layoutY="14.0" prefHeight="25.0" prefWidth="151.0" text="Movie Genre">
                <font>
-                  <Font name="Verdana" size="20.0" />
+                  <Font name="Book Antiqua" size="20.0" />
                </font>
             </Label>
             <ComboBox fx:id="Genre" layoutX="14.0" layoutY="40.0" prefHeight="25.0" prefWidth="747.0" promptText="Genre" />
@@ -48,7 +48,7 @@
          <children>
             <Label layoutX="14.0" layoutY="14.0" prefHeight="25.0" prefWidth="151.0" text="Movie State">
                <font>
-                  <Font name="Verdana" size="20.0" />
+                  <Font name="Book Antiqua" size="20.0" />
                </font>
             </Label>
             <ComboBox fx:id="MovieState" layoutX="14.0" layoutY="40.0" prefHeight="25.0" prefWidth="747.0" promptText="State" />
@@ -58,7 +58,7 @@
          <children>
             <Label layoutX="14.0" layoutY="14.0" prefHeight="25.0" prefWidth="182.0" text="Movie Duration">
                <font>
-                  <Font name="Verdana" size="20.0" />
+                  <Font name="Book Antiqua" size="20.0" />
                </font>
             </Label>
             <Spinner layoutY="29.0" prefHeight="0.0" prefWidth="149.0" />
@@ -68,41 +68,41 @@
          <children>
             <Label layoutY="27.0" prefHeight="26.0" prefWidth="52.0" text="2D">
                <font>
-                  <Font name="Verdana" size="20.0" />
+                  <Font name="Book Antiqua" size="20.0" />
                </font>
             </Label>
             <RadioButton layoutX="52.0" layoutY="26.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="151.0" text="True">
                <font>
-                  <Font name="Verdana" size="15.0" />
+                  <Font name="Book Antiqua" size="15.0" />
                </font>
             </RadioButton>
             <RadioButton layoutX="133.0" layoutY="26.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="151.0" text="False">
                <font>
-                  <Font name="Verdana" size="15.0" />
+                  <Font name="Book Antiqua" size="15.0" />
                </font>
             </RadioButton>
          </children>
       </Pane>
       <Label layoutX="14.0" layoutY="400.0" prefHeight="26.0" prefWidth="182.0" text="Movie Modes">
          <font>
-            <Font name="Verdana" size="20.0" />
+            <Font name="Book Antiqua" size="20.0" />
          </font>
       </Label>
       <Pane layoutX="14.0" layoutY="482.0" prefHeight="66.0" prefWidth="222.0">
          <children>
             <Label layoutY="27.0" prefHeight="26.0" prefWidth="52.0" text="3D">
                <font>
-                  <Font name="Verdana" size="20.0" />
+                  <Font name="Book Antiqua" size="20.0" />
                </font>
             </Label>
             <RadioButton layoutX="52.0" layoutY="26.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="151.0" text="True">
                <font>
-                  <Font name="Verdana" size="15.0" />
+                  <Font name="Book Antiqua" size="15.0" />
                </font>
             </RadioButton>
             <RadioButton layoutX="133.0" layoutY="26.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="151.0" text="False">
                <font>
-                  <Font name="Verdana" size="15.0" />
+                  <Font name="Book Antiqua" size="15.0" />
                </font>
             </RadioButton>
          </children>
@@ -111,17 +111,17 @@
          <children>
             <Label layoutY="27.0" prefHeight="26.0" prefWidth="52.0" text="VR">
                <font>
-                  <Font name="Verdana" size="20.0" />
+                  <Font name="Book Antiqua" size="20.0" />
                </font>
             </Label>
             <RadioButton layoutX="52.0" layoutY="26.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="151.0" text="True">
                <font>
-                  <Font name="Verdana" size="15.0" />
+                  <Font name="Book Antiqua" size="15.0" />
                </font>
             </RadioButton>
             <RadioButton layoutX="133.0" layoutY="26.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="151.0" text="False">
                <font>
-                  <Font name="Verdana" size="15.0" />
+                  <Font name="Book Antiqua" size="15.0" />
                </font>
             </RadioButton>
          </children>

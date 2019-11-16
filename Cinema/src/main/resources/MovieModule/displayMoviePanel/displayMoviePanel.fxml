@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="598.0" prefWidth="800.0" style="-fx-background-color: rgba(30,144,255,0.2);" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="View.MovieView.displayMoviePanel">
+  <children>
+    <Label alignment="CENTER" layoutX="295.0" layoutY="20.0" prefHeight="37.0" prefWidth="211.0" text="Movie details">
+      <font>
+        <Font name="Book Antiqua Pogrubiony" size="25.0" fx:id="x2" />
+      </font>
+    </Label>
+    <AnchorPane layoutX="28.0" layoutY="349.0" minWidth="360.0" prefHeight="141.0" prefWidth="360.0" style="-fx-background-color: rgba(30,144,255,0.2);&#10;-fx-border-width: 1px;&#10;-fx-border-color: #518afc;">
+      <children>
+        <Label disable="false" layoutX="61.0" layoutY="65.0" prefHeight="32.0" prefWidth="42.999900000002526" text="2D">
+          <font>
+            <Font name="Book Antiqua" size="15.0" fx:id="x1" />
+          </font>
+        </Label>
+        <Label font="$x1" layoutX="145.0" layoutY="65.0" prefHeight="32.0" prefWidth="42.999900000002526" text="3D" />
+        <Label font="$x1" layoutX="233.0" layoutY="65.0" prefHeight="32.0" prefWidth="29.0" text="VR" />
+        <Label alignment="CENTER" disable="false" font="$x1" layoutX="121.0" layoutY="9.0" prefHeight="32.0" prefWidth="118.0" text="Movie modes" />
+        <CheckBox fx:id="flg2D" disable="true" font="$x1" layoutX="97.0" layoutY="71.0" mnemonicParsing="false" text="" />
+        <CheckBox fx:id="flg3D" disable="true" font="$x1" layoutX="180.0" layoutY="71.0" mnemonicParsing="false" text="" />
+        <CheckBox fx:id="flgVR" disable="true" font="$x1" layoutX="269.0" layoutY="71.0" mnemonicParsing="false" text="" />
+      </children>
+    </AnchorPane>
+    <AnchorPane layoutX="413.0" layoutY="350.0" minWidth="360.0" prefHeight="140.0" prefWidth="360.0" style="-fx-background-color: rgba(30,144,255,0.2);&#10;-fx-border-width: 1px;&#10;-fx-border-color: #518afc;">
+      <children>
+        <Label alignment="CENTER" font="$x1" layoutX="106.0" layoutY="6.0" prefHeight="32.0" prefWidth="148.0" text="Description" />
+        <Label fx:id="description" alignment="TOP_LEFT" font="$x1" layoutX="12.0" layoutY="45.0" prefHeight="82.0" prefWidth="334.0" text="" textAlignment="LEFT" textOverrun="WORD_ELLIPSIS" wrapText="true" />
+      </children>
+    </AnchorPane>
+    <AnchorPane layoutX="28.0" layoutY="77.0" minWidth="360.0" prefHeight="259.0" prefWidth="360.0" style="-fx-background-color: rgba(30,144,255,0.2);&#10;-fx-border-width: 1px;&#10;-fx-border-color: #518afc;">
+      <children>
+        <Label font="$x1" layoutX="24.0" layoutY="90.0" prefHeight="32.0" prefWidth="69.0" text="Title" />
+        <Label font="$x1" layoutX="24.0" layoutY="131.0" prefHeight="32.0" prefWidth="148.0" text="Genre" />
+        <Label font="$x1" layoutX="24.0" layoutY="175.0" prefHeight="32.0" prefWidth="148.0" text="State" />
+        <Label font="$x1" layoutX="24.0" layoutY="50.0" prefHeight="32.0" prefWidth="148.0" text="Id" />
+        <Label font="$x1" layoutX="24.0" layoutY="213.0" prefHeight="32.0" prefWidth="148.0" text="Duartion" />
+        <Label fx:id="id" alignment="CENTER_RIGHT" font="$x1" layoutX="226.0" layoutY="50.0" prefHeight="32.0" prefWidth="106.0" text="IdEnter" textAlignment="RIGHT" textOverrun="WORD_ELLIPSIS" wrapText="false" />
+        <Label fx:id="title" alignment="CENTER_RIGHT" font="$x1" layoutX="121.0" layoutY="90.0" prefHeight="32.0" prefWidth="211.0" text="TitleEnter" textAlignment="RIGHT" textOverrun="WORD_ELLIPSIS" wrapText="false" />
+        <Label fx:id="genre" alignment="CENTER_RIGHT" font="$x1" layoutX="157.0" layoutY="131.0" prefHeight="32.0" prefWidth="175.0" text="GenreEnter" textAlignment="RIGHT" textOverrun="WORD_ELLIPSIS" wrapText="false" />
+        <Label fx:id="state" alignment="CENTER_RIGHT" font="$x1" layoutX="233.0" layoutY="175.0" prefHeight="32.0" prefWidth="99.0" text="StateEnter" textAlignment="RIGHT" textOverrun="WORD_ELLIPSIS" wrapText="false" />
+        <Label fx:id="duration" alignment="CENTER_RIGHT" font="$x1" layoutX="211.0" layoutY="213.0" prefHeight="32.0" prefWidth="124.0" text="DurationEnter" textAlignment="RIGHT" textOverrun="WORD_ELLIPSIS" wrapText="false" />
+        <Label alignment="CENTER" font="$x1" layoutX="79.0" layoutY="14.0" prefHeight="32.0" prefWidth="203.0" text="Main information" />
+      </children>
+    </AnchorPane>
+    <AnchorPane layoutX="413.0" layoutY="77.0" minWidth="360.0" prefHeight="259.0" prefWidth="360.0" style="-fx-background-color: rgba(30,144,255,0.2);&#10;-fx-border-width: 1px;&#10;-fx-border-color: #518afc;">
+      <children>
+        <Label alignment="CENTER" font="$x1" layoutX="79.0" layoutY="14.0" prefHeight="32.0" prefWidth="203.0" text="Directors &amp; Actors" />
+        <Label id="description" fx:id="peopleName" alignment="TOP_CENTER" font="$x1" layoutX="14.0" layoutY="82.0" prefHeight="163.0" prefWidth="106.0" text="" textAlignment="CENTER" textOverrun="WORD_ELLIPSIS" wrapText="true" />
+        <Label id="description" fx:id="peopleSurname" alignment="TOP_CENTER" font="$x1" layoutX="129.0" layoutY="82.0" prefHeight="163.0" prefWidth="106.0" text="" textAlignment="CENTER" textOverrun="WORD_ELLIPSIS" wrapText="true" />
+        <Label id="description" fx:id="peopleType" alignment="TOP_CENTER" font="$x1" layoutX="240.0" layoutY="82.0" prefHeight="163.0" prefWidth="106.0" text="" textAlignment="CENTER" textOverrun="WORD_ELLIPSIS" wrapText="true" />
+        <Label id="description" alignment="CENTER" font="$x1" layoutX="240.0" layoutY="52.0" prefHeight="20.0" prefWidth="106.0" text="Role" textAlignment="CENTER" textOverrun="WORD_ELLIPSIS" wrapText="true" />
+        <Label id="description" alignment="CENTER" font="$x1" layoutX="127.0" layoutY="52.0" prefHeight="20.0" prefWidth="106.0" text="Surname" textAlignment="CENTER" textOverrun="WORD_ELLIPSIS" wrapText="true" />
+        <Label id="description" alignment="CENTER" font="$x1" layoutX="12.0" layoutY="52.0" prefHeight="20.0" prefWidth="106.0" text="Name" textAlignment="CENTER" textOverrun="WORD_ELLIPSIS" wrapText="true" />
+      </children>
+    </AnchorPane>
+    <Button font="$x2" layoutX="28.0" layoutY="506.0" mnemonicParsing="false" prefHeight="68.0" prefWidth="360.0" style="-fx-background-color: #14b353;" text="Edit" />
+    <Button fx:id="delete" font="$x2" layoutX="413.0" layoutY="506.0" mnemonicParsing="false" onMouseClicked="#onClickDelete" prefHeight="68.0" prefWidth="360.0" style="-fx-background-color: #f01f45;" text="Delete" />
+  </children>
+</AnchorPane>

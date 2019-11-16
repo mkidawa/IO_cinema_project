@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
@@ -9,7 +8,7 @@
    <children>
       <Pane prefHeight="80.0" prefWidth="782.0">
          <children>
-            <TextField layoutX="14.0" layoutY="48.0" prefHeight="18.0" prefWidth="747.0" promptText="Title">
+            <TextField fx:id="Title" layoutX="14.0" layoutY="48.0" prefHeight="18.0" prefWidth="747.0" promptText="Title">
                <font>
                   <Font name="Verdana" size="15.0" />
                </font>
@@ -23,7 +22,7 @@
       </Pane>
       <Pane layoutY="80.0" prefHeight="80.0" prefWidth="782.0">
          <children>
-            <TextField layoutX="14.0" layoutY="48.0" prefHeight="18.0" prefWidth="747.0" promptText="Description">
+            <TextField fx:id="Description" layoutX="14.0" layoutY="48.0" prefHeight="18.0" prefWidth="747.0" promptText="Description">
                <font>
                   <Font name="Verdana" size="15.0" />
                </font>
@@ -42,7 +41,7 @@
                   <Font name="Verdana" size="20.0" />
                </font>
             </Label>
-            <ComboBox layoutX="14.0" layoutY="40.0" prefHeight="25.0" prefWidth="747.0" promptText="Genre" />
+            <ComboBox fx:id="Genre" layoutX="14.0" layoutY="40.0" prefHeight="25.0" prefWidth="747.0" promptText="Genre" />
          </children>
       </Pane>
       <Pane layoutY="240.0" prefHeight="80.0" prefWidth="782.0">
@@ -52,7 +51,7 @@
                   <Font name="Verdana" size="20.0" />
                </font>
             </Label>
-            <ComboBox layoutX="14.0" layoutY="40.0" prefHeight="25.0" prefWidth="747.0" promptText="Genre" />
+            <ComboBox fx:id="MovieState" layoutX="14.0" layoutY="40.0" prefHeight="25.0" prefWidth="747.0" promptText="State" />
          </children>
       </Pane>
       <Pane layoutY="320.0" prefHeight="80.0" prefWidth="782.0">
@@ -62,7 +61,7 @@
                   <Font name="Verdana" size="20.0" />
                </font>
             </Label>
-            <ComboBox accessibleText="kjjj" layoutX="14.0" layoutY="39.0" prefHeight="25.0" prefWidth="747.0" promptText="Genre" />
+            <Spinner layoutY="29.0" prefHeight="0.0" prefWidth="149.0" />
          </children>
       </Pane>
       <Pane layoutX="14.0" layoutY="427.0" prefHeight="66.0" prefWidth="222.0">
@@ -127,10 +126,5 @@
             </RadioButton>
          </children>
       </Pane>
-      <Spinner layoutX="380.0" layoutY="470.0">
-         <opaqueInsets>
-            <Insets right="5.0" />
-         </opaqueInsets>
-      </Spinner>
    </children>
 </AnchorPane>

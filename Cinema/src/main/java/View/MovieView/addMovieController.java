@@ -28,7 +28,7 @@ import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-
+//todo exceptions for empty fields, adding people to movie using list of people in the db, adding people to movie using input fields
 public class addMovieController implements Initializable {
     @FXML
     private TextField Title;

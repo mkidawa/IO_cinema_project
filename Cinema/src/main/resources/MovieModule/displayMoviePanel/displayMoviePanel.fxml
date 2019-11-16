@@ -43,7 +43,7 @@
         <Label font="$x1" layoutX="24.0" layoutY="131.0" prefHeight="32.0" prefWidth="148.0" text="Genre" />
         <Label font="$x1" layoutX="24.0" layoutY="175.0" prefHeight="32.0" prefWidth="148.0" text="State" />
         <Label font="$x1" layoutX="24.0" layoutY="50.0" prefHeight="32.0" prefWidth="148.0" text="Id" />
-        <Label font="$x1" layoutX="24.0" layoutY="213.0" prefHeight="32.0" prefWidth="148.0" text="Duartion" />
+        <Label font="$x1" layoutX="24.0" layoutY="213.0" prefHeight="32.0" prefWidth="148.0" text="Duration" />
         <Label fx:id="id" alignment="CENTER_RIGHT" font="$x1" layoutX="226.0" layoutY="50.0" prefHeight="32.0" prefWidth="106.0" text="IdEnter" textAlignment="RIGHT" textOverrun="WORD_ELLIPSIS" wrapText="false" />
         <Label fx:id="title" alignment="CENTER_RIGHT" font="$x1" layoutX="121.0" layoutY="90.0" prefHeight="32.0" prefWidth="211.0" text="TitleEnter" textAlignment="RIGHT" textOverrun="WORD_ELLIPSIS" wrapText="false" />
         <Label fx:id="genre" alignment="CENTER_RIGHT" font="$x1" layoutX="157.0" layoutY="131.0" prefHeight="32.0" prefWidth="175.0" text="GenreEnter" textAlignment="RIGHT" textOverrun="WORD_ELLIPSIS" wrapText="false" />

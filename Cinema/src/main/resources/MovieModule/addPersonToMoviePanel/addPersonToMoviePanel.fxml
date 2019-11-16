@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="414.0" prefWidth="388.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.MovieView.addPersonToMovieController">
+   <children>
+      <ListView fx:id="peopleOfCinema" layoutX="32.0" layoutY="25.0" prefHeight="315.0" prefWidth="324.0" />
+      <Button layoutX="134.0" layoutY="353.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="119.0" text="Add" />
+   </children>
+</AnchorPane>

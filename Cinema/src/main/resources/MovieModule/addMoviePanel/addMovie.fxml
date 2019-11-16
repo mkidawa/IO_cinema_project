@@ -4,11 +4,11 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="660.0" prefWidth="746.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.MovieView.addMovieController">
+<AnchorPane prefHeight="646.0" prefWidth="623.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.MovieView.addMovieController">
    <children>
-      <Pane prefHeight="80.0" prefWidth="782.0">
+      <Pane prefHeight="80.0" prefWidth="614.0">
          <children>
-            <TextField fx:id="Title" layoutX="14.0" layoutY="48.0" prefHeight="18.0" prefWidth="747.0" promptText="Title">
+            <TextField fx:id="Title" layoutX="14.0" layoutY="48.0" prefHeight="29.0" prefWidth="600.0" promptText="Title">
                <font>
                   <Font name="Book Antiqua" size="15.0" />
                </font>
@@ -20,9 +20,9 @@
             </Label>
          </children>
       </Pane>
-      <Pane layoutY="80.0" prefHeight="80.0" prefWidth="782.0">
+      <Pane layoutY="80.0" prefHeight="80.0" prefWidth="614.0">
          <children>
-            <TextField fx:id="Description" layoutX="14.0" layoutY="48.0" prefHeight="18.0" prefWidth="747.0" promptText="Description">
+            <TextField fx:id="Description" layoutX="14.0" layoutY="48.0" prefHeight="29.0" prefWidth="600.0" promptText="Description">
                <font>
                   <Font name="Book Antiqua" size="15.0" />
                </font>
@@ -34,34 +34,34 @@
             </Label>
          </children>
       </Pane>
-      <Pane layoutY="160.0" prefHeight="80.0" prefWidth="782.0">
+      <Pane layoutY="160.0" prefHeight="80.0" prefWidth="614.0">
          <children>
             <Label layoutX="14.0" layoutY="14.0" prefHeight="25.0" prefWidth="151.0" text="Movie Genre">
                <font>
                   <Font name="Book Antiqua" size="20.0" />
                </font>
             </Label>
-            <ComboBox fx:id="Genre" layoutX="14.0" layoutY="40.0" prefHeight="25.0" prefWidth="747.0" promptText="Genre" />
+            <ComboBox fx:id="Genre" layoutX="14.0" layoutY="40.0" prefHeight="25.0" prefWidth="600.0" promptText="Genre" />
          </children>
       </Pane>
-      <Pane layoutY="240.0" prefHeight="80.0" prefWidth="782.0">
+      <Pane layoutY="240.0" prefHeight="80.0" prefWidth="614.0">
          <children>
             <Label layoutX="14.0" layoutY="14.0" prefHeight="25.0" prefWidth="151.0" text="Movie State">
                <font>
                   <Font name="Book Antiqua" size="20.0" />
                </font>
             </Label>
-            <ComboBox fx:id="MovieState" layoutX="14.0" layoutY="40.0" prefHeight="25.0" prefWidth="747.0" promptText="State" />
+            <ComboBox fx:id="MovieState" layoutX="14.0" layoutY="40.0" prefHeight="25.0" prefWidth="600.0" promptText="State" />
          </children>
       </Pane>
-      <Pane layoutY="320.0" prefHeight="80.0" prefWidth="782.0">
+      <Pane layoutY="320.0" prefHeight="80.0" prefWidth="614.0">
          <children>
-            <Label layoutX="14.0" layoutY="14.0" prefHeight="25.0" prefWidth="182.0" text="Movie Duration">
+            <Label layoutX="14.0" layoutY="14.0" prefHeight="26.0" prefWidth="241.0" text="Movie Duration (minutes)">
                <font>
                   <Font name="Book Antiqua" size="20.0" />
                </font>
             </Label>
-            <Spinner fx:id="Duration" layoutX="14.0" layoutY="40.0" prefHeight="25.0" prefWidth="505.0" />
+            <Spinner fx:id="Duration" layoutX="14.0" layoutY="40.0" prefHeight="25.0" prefWidth="143.0" />
          </children>
       </Pane>
       <Pane layoutX="14.0" layoutY="427.0" prefHeight="66.0" prefWidth="222.0">
@@ -111,25 +111,26 @@
             </RadioButton>
          </children>
       </Pane>
-      <Pane layoutX="396.0" layoutY="400.0" prefHeight="80.0" prefWidth="262.0">
-         <children>
-            <Pane layoutY="-14.0" prefHeight="80.0" prefWidth="245.0">
-               <children>
-                  <TextField fx:id="Description1" layoutX="11.0" layoutY="48.0" prefHeight="29.0" prefWidth="198.0" promptText="Director">
-                     <font>
-                        <Font name="Book Antiqua" size="15.0" />
-                     </font>
-                  </TextField>
-                  <Label layoutX="14.0" layoutY="14.0" prefHeight="25.0" prefWidth="198.0" text="Director">
-                     <font>
-                        <Font name="Book Antiqua" size="20.0" />
-                     </font>
-                  </Label>
-               </children>
-            </Pane>
-         </children>
-      </Pane>
-      <ChoiceBox layoutX="413.0" layoutY="493.0" prefWidth="150.0" />
-      <Button fx:id="addMovieButton" layoutX="344.0" layoutY="601.0" mnemonicParsing="false" onMouseClicked="#onClickAddMovie" text="AddMovie" />
+      <Button fx:id="addMovieButton" layoutX="220.0" layoutY="601.0" mnemonicParsing="false" onMouseClicked="#onClickAddMovie" prefHeight="44.0" prefWidth="182.0" text="AddMovie">
+         <font>
+            <Font name="Book Antiqua" size="18.0" />
+         </font></Button>
+      <GridPane>
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+      </GridPane>
+      <ListView fx:id="peopleInvolved" layoutX="264.0" layoutY="335.0" prefHeight="254.0" prefWidth="345.0" />
+      <Button fx:id="addMovieButton1" layoutX="465.0" layoutY="601.0" mnemonicParsing="false" onMouseClicked="#onClickAddPerson" prefHeight="35.0" prefWidth="143.0" text="AddPerson">
+         <font>
+            <Font name="Book Antiqua" size="18.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

@@ -32,11 +32,18 @@ Button:hover {
     -fx-background-color: rgba(30,144,255,0.6);
 }
 
+.table-row-cell:hover {
+    -fx-border-color: black;
+    -fx-table-cell-border-color: black;
+    -fx-background-color: #a8cbff;
+}
+
 .table-row-cell:selected {
     -fx-border-color: black;
     -fx-table-cell-border-color: black;
-    -fx-background-color: grey;
+    -fx-background-color: #488bf0;
 }
+
 
 .scroll-bar:horizontal .track,
 .scroll-bar:vertical .track{

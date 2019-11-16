@@ -89,6 +89,8 @@ public class displayMoviePanel implements Initializable {
             Scene scene = new Scene(fxmlLoader);
             scene.getStylesheets().add(getClass().getResource("/MovieModule/MoviePanel/mainMovie.css").toExternalForm());
             mainStage.setScene(scene);
+            mainStage.setTitle("Main Movie Panel");
+            mainStage.setResizable(false);
             mainStage.show();
 
             StageManager.mainStage.close();

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="390.0" prefWidth="1078.58003398437" style="-fx-background-color: rgba(30,144,255,0.2);" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="View.MovieView.HelpPanel">
+  <children>
+    <Label alignment="CENTER" layoutX="480.0" layoutY="14.0" prefHeight="38.0" prefWidth="118.0" text="Help">
+      <font>
+        <Font name="Book Antiqua Pogrubiony" size="30.0" />
+      </font>
+    </Label>
+    <Label alignment="TOP_LEFT" layoutX="14.0" layoutY="68.0" prefHeight="25.0" prefWidth="893.0" text="1. In order to get movie details just double click on table row with movie you are searching for:" wrapText="true">
+      <font>
+        <Font name="Book Antiqua" size="15.0" fx:id="x1" />
+      </font>
+    </Label>
+    <ImageView fitHeight="66.9401945332021" fitWidth="1056.993896484375" layoutX="14.0" layoutY="93.0" pickOnBounds="true" preserveRatio="true" style="&#10;">
+      <image>
+        <Image url="@../../../../../../../../../../../../OneDrive/Obrazy/clickonrow.PNG" />
+      </image>
+    </ImageView>
+    <Label alignment="TOP_LEFT" font="$x1" layoutX="14.0" layoutY="179.0" prefHeight="25.0" prefWidth="1036.0" text="2. Then you can either close the window, delete the movie or edit it. Choose correct button by clicking on it." wrapText="true" />
+    <Label alignment="TOP_LEFT" font="$x1" layoutX="14.0" layoutY="204.0" prefHeight="25.0" prefWidth="1036.0" text="3. If you want to add a new movie to our system just choose &quot;add movie&quot; button and fill all fields." wrapText="true" />
+    <Label alignment="TOP_LEFT" font="$x1" layoutX="14.0" layoutY="229.0" prefHeight="25.0" prefWidth="1036.0" text="4. Do not leave empty fields - you will get an exception." wrapText="true" />
+    <Label alignment="TOP_LEFT" font="$x1" layoutX="14.0" layoutY="254.0" prefHeight="25.0" prefWidth="1036.0" text="5. If you want to add persons (actors, directors, screenwriters etc.) to your movie you can do it in two different ways:" wrapText="true" />
+    <Label alignment="TOP_LEFT" font="$x1" layoutX="39.0" layoutY="279.0" prefHeight="25.0" prefWidth="1011.0" text="a. add new person to our database." wrapText="true" />
+    <Label alignment="TOP_LEFT" font="$x1" layoutX="39.0" layoutY="304.0" prefHeight="25.0" prefWidth="1011.0" text="b. choose persons that are already there." wrapText="true" />
+    <Label alignment="TOP_LEFT" font="$x1" layoutX="14.0" layoutY="329.0" prefHeight="25.0" prefWidth="1011.0" text="6. Have a nice time with Movie Module!" wrapText="true" />
+    <Label alignment="TOP_RIGHT" font="$x1" layoutX="723.0" layoutY="355.0" prefHeight="25.0" prefWidth="342.0" text="Authors: Mateusz Walczak &amp; Konrad Kajszczak." wrapText="true" />
+  </children>
+</AnchorPane>

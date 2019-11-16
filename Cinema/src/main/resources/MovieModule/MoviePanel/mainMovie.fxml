@@ -43,6 +43,6 @@
         </Label>
       </children>
     </AnchorPane>
-    <Button font="$x2" layoutX="1159.0" layoutY="12.0" minHeight="30.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="267.0" style="" text="Help" />
+    <Button font="$x2" layoutX="1159.0" layoutY="12.0" minHeight="30.0" mnemonicParsing="false" onMouseClicked="#onClickHelp" prefHeight="80.0" prefWidth="267.0" style="" text="Help" />
   </children>
 </AnchorPane>

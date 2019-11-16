@@ -83,6 +83,19 @@ public class MoviePanel implements Initializable {
         Scene scene = new Scene(fxmlLoader);
         scene.getStylesheets().add(getClass().getResource("/MovieModule/displayMoviePanel/displayMoviePanel.css").toExternalForm());
         stage.setScene(scene);
+        stage.setTitle("Movie details panel");
+        stage.setResizable(false);
+        stage.show();
+    }
+
+    public void onClickHelp() throws IOException {
+        Parent fxmlLoader = FXMLLoader.load(getClass().getResource("/MovieModule/HelpPanel/helpPanel.fxml"));
+        Stage stage = new Stage();
+        Scene scene = new Scene(fxmlLoader);
+        scene.getStylesheets().add(getClass().getResource("/MovieModule/HelpPanel/helpPanel.css").toExternalForm());
+        stage.setScene(scene);
+        stage.setTitle("Help panel");
+        stage.setResizable(false);
         stage.show();
     }
 
@@ -92,6 +105,8 @@ public class MoviePanel implements Initializable {
         Scene scene = new Scene(fxmlLoader);
         scene.getStylesheets().add(getClass().getResource("/MovieModule/addMoviePanel/addMovie.css").toExternalForm());
         stage.setScene(scene);
+        stage.setTitle("Add movie panel");
+        stage.setResizable(false);
         stage.show();
     }
 

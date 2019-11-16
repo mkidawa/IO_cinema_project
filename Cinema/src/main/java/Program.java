@@ -23,10 +23,6 @@ public class Program extends Application {
         primaryStage.setTitle("Main Movie Panel");
         primaryStage.setScene(scene);
         primaryStage.show();
-
-        //List<Movie> movies = MovieDAO.getAll();
-        //MovieDAO.delete(movies.get(0));
-//        List<Person> persons = PersonDAO.getAll();
-//        PersonDAO.delete(persons.get(10));
+        primaryStage.setResizable(false);
     }
 }

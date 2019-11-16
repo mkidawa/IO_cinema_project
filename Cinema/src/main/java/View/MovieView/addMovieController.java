@@ -6,6 +6,9 @@ import DBO.MovieStateDAO;
 import DBO.MovieTypeDAO;
 import Model.DICT.MovieState;
 import Model.DICT.MovieType;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -18,6 +21,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Time;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -54,15 +58,59 @@ public class addMovieController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        Genre.getItems().addAll(MovieTypeDAO.getAll());
-        MovieState.getItems().addAll(MovieStateDAO.getAll());
+        //adding genres
+        ObservableList<SimpleMovieGenre> movieTypes = FXCollections.observableArrayList();
+        List<MovieType> types = MovieTypeDAO.getAll();
+        for (int i=0; i<types.size(); i++) {
+            movieTypes.add(new SimpleMovieGenre(types.get(i).getName()));
+        }
+        List typeList = new ArrayList();
+        for(int i=0; i<movieTypes.size();i++){
+            typeList.add(movieTypes.get(i).getGenre());
+        }
+        Genre.getItems().addAll(typeList);
+
+        //adding states
+        ObservableList<SimpleMovieState> movieStates = FXCollections.observableArrayList();
+        List<MovieState> states = MovieStateDAO.getAll();
+        for (int i=0; i<states.size(); i++) {
+            movieStates.add(new SimpleMovieState(states.get(i).getName()));
+        }
+        List stateList = new ArrayList();
+        for(int i=0; i<movieStates.size();i++){
+            stateList.add(movieStates.get(i).getState());
+        }
+        MovieState.getItems().addAll(stateList);
+
         SpinnerValueFactory minutes = new SpinnerValueFactory.IntegerSpinnerValueFactory(60, 200, 90, 2);
         Duration.setValueFactory(minutes);
     }
 
+    public class SimpleMovieGenre {
+        private final SimpleStringProperty genre;
+
+        public SimpleMovieGenre(String genre) {
+            this.genre = new SimpleStringProperty(genre);
+        }
+        public String getGenre() {
+            return genre.get();
+        }
+    }
+
+    public class SimpleMovieState {
+        private final SimpleStringProperty state;
+
+        public SimpleMovieState(String state) {
+            this.state = new SimpleStringProperty(state);
+        }
+        public String getState() {
+            return state.get();
+        }
+    }
+
     public void onClickAddMovie() {
-        selectedGenre = (MovieType) Genre.getValue();
-        selectedState = (Model.DICT.MovieState) MovieState.getValue();
+        selectedGenre = new MovieType((String) Genre.getValue());
+        selectedState = new MovieState((String) MovieState.getValue());
 
         if (flg2D.isSelected())
             flag2d = 1;

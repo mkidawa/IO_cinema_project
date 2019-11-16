@@ -1,17 +1,21 @@
 package View.MovieView;
 
 import Controller.MovieManager;
+import Controller.StageManager;
 import DBO.MovieStateDAO;
 import DBO.MovieTypeDAO;
-import DBO.PersonDAO;
-import DBO.PersonTypeDAO;
 import Model.DICT.MovieState;
 import Model.DICT.MovieType;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Time;
 import java.util.List;
@@ -34,6 +38,11 @@ public class addMovieController implements Initializable {
     private RadioButton flg3D;
     @FXML
     private RadioButton flgVR;
+    @FXML
+    private Button addMovieButton;
+
+
+
     private short flag2d;
     private short flag3d;
     private short flagVR;
@@ -49,9 +58,6 @@ public class addMovieController implements Initializable {
         MovieState.getItems().addAll(MovieStateDAO.getAll());
         SpinnerValueFactory minutes = new SpinnerValueFactory.IntegerSpinnerValueFactory(60, 200, 90, 2);
         Duration.setValueFactory(minutes);
-
-
-        people = PersonTypeDAO.getAll();
     }
 
     public void onClickAddMovie() {
@@ -86,7 +92,6 @@ public class addMovieController implements Initializable {
         sb.append(":");
         sb.append("00");
         String timeString = sb.toString();
-
         d = Time.valueOf(timeString);
 
         System.out.println("flag2d " + flag2d);
@@ -99,7 +104,28 @@ public class addMovieController implements Initializable {
         System.out.println("duration " + d);
 
 
-        MovieManager.createMovie(flag2d, flag3d, flagVR, selectedGenre, selectedState, Title.getText(), Description.getText(), d, people);
+        MovieManager.createMovieWithoutPeople(flag2d, flag3d, flagVR, selectedGenre, selectedState, Title.getText(), Description.getText(), d);
+
+        closeAllStagesAndLoadNewMainStage();
     }
 
+    public void closeAllStagesAndLoadNewMainStage() {
+        try {
+            Stage stage = (Stage) addMovieButton.getScene().getWindow();
+            stage.close();
+
+            Parent fxmlLoader = FXMLLoader.load(getClass().getResource("/MovieModule/MoviePanel/mainMovie.fxml"));
+            Stage mainStage = new Stage();
+            Scene scene = new Scene(fxmlLoader);
+            scene.getStylesheets().add(getClass().getResource("/MovieModule/MoviePanel/mainMovie.css").toExternalForm());
+            mainStage.setScene(scene);
+            mainStage.show();
+
+            StageManager.mainStage.close();
+            StageManager.mainStage = mainStage;
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

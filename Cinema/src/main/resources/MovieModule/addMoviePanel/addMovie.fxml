@@ -130,6 +130,6 @@
          </children>
       </Pane>
       <ChoiceBox layoutX="413.0" layoutY="493.0" prefWidth="150.0" />
-      <Button layoutX="344.0" layoutY="601.0" mnemonicParsing="false" onMouseClicked="#onClickAddMovie" text="AddMovie" />
+      <Button fx:id="addMovieButton" layoutX="344.0" layoutY="601.0" mnemonicParsing="false" onMouseClicked="#onClickAddMovie" text="AddMovie" />
    </children>
 </AnchorPane>

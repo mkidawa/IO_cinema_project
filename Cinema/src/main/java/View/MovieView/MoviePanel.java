@@ -78,19 +78,19 @@ public class MoviePanel implements Initializable {
 
     public void onClickRow(Movie clickedMovie) throws IOException {
         MovieManager.workingMovie = clickedMovie;
-        Parent fxmlLoader = FXMLLoader.load(getClass().getResource("/MovieModule/MoviePanel/displayMoviePanel/displayMoviePanel.fxml"));
+        Parent fxmlLoader = FXMLLoader.load(getClass().getResource("/MovieModule/displayMoviePanel/displayMoviePanel.fxml"));
         Stage stage = new Stage();
         Scene scene = new Scene(fxmlLoader);
-        scene.getStylesheets().add(getClass().getResource("/MovieModule/MoviePanel/displayMoviePanel/displayMoviePanel.css").toExternalForm());
+        scene.getStylesheets().add(getClass().getResource("/MovieModule/displayMoviePanel/displayMoviePanel.css").toExternalForm());
         stage.setScene(scene);
         stage.show();
     }
 
     public void onClickButton() throws IOException {
-        Parent fxmlLoader = FXMLLoader.load(getClass().getResource("/MovieModule/MoviePanel/addMoviePanel/addMovie.fxml"));
+        Parent fxmlLoader = FXMLLoader.load(getClass().getResource("/MovieModule/addMoviePanel/addMovie.fxml"));
         Stage stage = new Stage();
         Scene scene = new Scene(fxmlLoader);
-        scene.getStylesheets().add(getClass().getResource("/MovieModule/MoviePanel/addMoviePanel/addMovie.css").toExternalForm());
+        scene.getStylesheets().add(getClass().getResource("/MovieModule/addMoviePanel/addMovie.css").toExternalForm());
         stage.setScene(scene);
         stage.show();
     }

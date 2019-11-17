@@ -111,6 +111,7 @@ public class addMovieController implements Initializable {
         public String getName() {
             StringBuilder s = new StringBuilder();
             s.append(name.get());
+            s.append(" ");
             s.append(lastname.get());
             return s.toString();
         }

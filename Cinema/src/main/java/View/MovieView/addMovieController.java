@@ -4,12 +4,9 @@ import Controller.MovieManager;
 import Controller.StageManager;
 import DBO.MovieStateDAO;
 import DBO.MovieTypeDAO;
-import DBO.PersonDAO;
-import DBO.PersonTypeDAO;
 import Model.DICT.MovieState;
 import Model.DICT.MovieType;
-import Model.DICT.PersonType;
-import Model.Person;
+import javafx.beans.property.SimpleLongProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -28,7 +25,7 @@ import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-//todo exceptions for empty fields, adding people to movie using list of people in the db, adding people to movie using input fields
+//todo exceptions for empty fields, passing selected person to peopleInvolved list
 public class addMovieController implements Initializable {
     @FXML
     private TextField Title;
@@ -49,7 +46,7 @@ public class addMovieController implements Initializable {
     @FXML
     private Button addMovieButton;
     @FXML
-    private ListView peopleInvolved;
+    private static ListView peopleInvolved;
 
     private short flag2d;
     private short flag3d;
@@ -87,34 +84,25 @@ public class addMovieController implements Initializable {
         SpinnerValueFactory minutes = new SpinnerValueFactory.IntegerSpinnerValueFactory(60, 200, 90, 2);
         Duration.setValueFactory(minutes);
 
-        //listing people
-        List<Person> people = PersonDAO.getAll();
-        List<PersonType> professions = PersonTypeDAO.getAll();
-        ObservableList<SimplePeople> involved = FXCollections.observableArrayList();
-        for(int i=0;i<people.size();i++){
-            involved.add(new SimplePeople(people.get(i).getFirstName(), people.get(i).getLastName()));
-        }
-        ObservableList<String> peopleInv = FXCollections.observableArrayList();
-        for(int i=0;i<involved.size();i++) {
-            peopleInv.add(involved.get(i).getName());
-        }
-        peopleInvolved.setItems(peopleInv);
-    }
-    public class SimplePeople {
-        private final SimpleStringProperty name;
-        private final SimpleStringProperty lastname;
 
-        public SimplePeople(String name, String lastname){
-            this.name = new SimpleStringProperty(name);
-            this.lastname = new SimpleStringProperty(lastname);
+        if(!(MovieManager.workingPersons ==null)) {
+            ObservableList<addPersonToMovieController.SimplePeople> displayPeople = FXCollections.observableArrayList();
+            for (int i = 0; i < MovieManager.workingPersons.size(); i++) {
+                displayPeople.add(new addPersonToMovieController.SimplePeople(MovieManager.workingPersons.get(i).getId(), MovieManager.workingPersons.get(i).getFirstName(),
+                        MovieManager.workingPersons.get(i).getLastName()));
+            }
+            peopleInvolved.setItems(displayPeople);
         }
-        public String getName() {
-            StringBuilder s = new StringBuilder();
-            s.append(name.get());
-            s.append(" ");
-            s.append(lastname.get());
-            return s.toString();
+    }
+
+    public static void setPeopleInvolved(){
+        ObservableList<addPersonToMovieController.SimplePeople> displayPeople = FXCollections.observableArrayList();
+        for(int i=0;i<MovieManager.workingPersons.size();i++)
+        {
+            displayPeople.add(new addPersonToMovieController.SimplePeople(MovieManager.workingPersons.get(i).getId(), MovieManager.workingPersons.get(i).getFirstName(),
+                    MovieManager.workingPersons.get(i).getLastName()));
         }
+        peopleInvolved.setItems(displayPeople);
     }
 
     public class SimpleMovieGenre {

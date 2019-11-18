@@ -3,7 +3,9 @@ package Controller;
 import DBO.MovieDAO;
 import Model.DICT.MovieState;
 import Model.DICT.MovieType;
+import Model.DICT.PersonType;
 import Model.Movie;
+import Model.Person;
 import Model.PersonJob;
 
 import java.sql.Time;
@@ -12,6 +14,8 @@ import java.util.List;
 public class MovieManager {
 
     public static Movie workingMovie;
+    public static List<Person> workingPersons;
+    public static PersonType workingPersonType;
     public static void createMovie(short flg2D, short flg3D, short flgVR, MovieType type,
                                    MovieState state, String title, String description,
                                    Time duration, List<PersonJob> persons) {

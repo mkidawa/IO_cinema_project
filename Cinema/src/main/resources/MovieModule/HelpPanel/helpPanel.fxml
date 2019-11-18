@@ -22,7 +22,7 @@
     </Label>
     <ImageView fitHeight="66.9401945332021" fitWidth="1056.993896484375" layoutX="14.0" layoutY="93.0" pickOnBounds="true" preserveRatio="true" style="&#10;">
       <image>
-        <Image url="@../../../../../../../../../../../../OneDrive/Obrazy/clickonrow.PNG" />
+        <Image url="@img/clickonrow.PNG" />
       </image>
     </ImageView>
     <Label alignment="TOP_LEFT" font="$x1" layoutX="14.0" layoutY="179.0" prefHeight="25.0" prefWidth="1036.0" text="2. Then you can either close the window, delete the movie or edit it. Choose correct button by clicking on it." wrapText="true" />

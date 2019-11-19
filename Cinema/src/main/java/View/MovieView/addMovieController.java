@@ -6,7 +6,6 @@ import DBO.MovieStateDAO;
 import DBO.MovieTypeDAO;
 import Model.DICT.MovieState;
 import Model.DICT.MovieType;
-import javafx.beans.property.SimpleLongProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -17,6 +16,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -45,8 +45,10 @@ public class addMovieController implements Initializable {
     private RadioButton flgVR;
     @FXML
     private Button addMovieButton;
-    @FXML
-    private static ListView peopleInvolved;
+    @FXML private TableView<addPersonToMovieController.SimplePerson> peopleInvolved;
+    @FXML private TableColumn<addPersonToMovieController.SimplePerson, Long> ID;
+    @FXML private TableColumn<addPersonToMovieController.SimplePerson, String> Name;
+    @FXML private TableColumn<addPersonToMovieController.SimplePerson, String> Lastname;
 
     private short flag2d;
     private short flag3d;
@@ -58,6 +60,10 @@ public class addMovieController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        ID.setCellValueFactory(new PropertyValueFactory<>("ID"));
+        Name.setCellValueFactory(new PropertyValueFactory<>("Name"));
+        Lastname.setCellValueFactory(new PropertyValueFactory<>("Lastname"));
+
         //adding genres
         ObservableList<SimpleMovieGenre> movieTypes = FXCollections.observableArrayList();
         List<MovieType> types = MovieTypeDAO.getAll();
@@ -83,28 +89,20 @@ public class addMovieController implements Initializable {
         MovieState.getItems().addAll(stateList);
         SpinnerValueFactory minutes = new SpinnerValueFactory.IntegerSpinnerValueFactory(60, 200, 90, 2);
         Duration.setValueFactory(minutes);
-
-
-        if(!(MovieManager.workingPersons ==null)) {
-            ObservableList<addPersonToMovieController.SimplePeople> displayPeople = FXCollections.observableArrayList();
-            for (int i = 0; i < MovieManager.workingPersons.size(); i++) {
-                displayPeople.add(new addPersonToMovieController.SimplePeople(MovieManager.workingPersons.get(i).getId(), MovieManager.workingPersons.get(i).getFirstName(),
-                        MovieManager.workingPersons.get(i).getLastName()));
-            }
-            peopleInvolved.setItems(displayPeople);
-        }
     }
-
-    public static void setPeopleInvolved(){
-        ObservableList<addPersonToMovieController.SimplePeople> displayPeople = FXCollections.observableArrayList();
-        for(int i=0;i<MovieManager.workingPersons.size();i++)
-        {
-            displayPeople.add(new addPersonToMovieController.SimplePeople(MovieManager.workingPersons.get(i).getId(), MovieManager.workingPersons.get(i).getFirstName(),
+    public static ObservableList<addPersonToMovieController.SimplePerson> getList() {
+        ObservableList<addPersonToMovieController.SimplePerson> list = FXCollections.observableArrayList();
+        for (int i = 0; i < MovieManager.workingPersons.size(); i++) {
+            list.add(new addPersonToMovieController.SimplePerson(MovieManager.workingPersons.get(i).getId(), MovieManager.workingPersons.get(i).getFirstName(),
                     MovieManager.workingPersons.get(i).getLastName()));
         }
-        peopleInvolved.setItems(displayPeople);
+        return list;
     }
-
+    public void updateList (){
+            if(!(MovieManager.workingPersons == null)) {
+                peopleInvolved.setItems(getList());
+            }
+    }
     public class SimpleMovieGenre {
         private final SimpleStringProperty genre;
 
@@ -185,8 +183,8 @@ public class addMovieController implements Initializable {
         }
     }
 
-
     public void onClickAddPerson() throws IOException {
+        updateList();
         Parent fxmlLoader = FXMLLoader.load(getClass().getResource("/MovieModule/addPersonToMoviePanel/addPersonToMoviePanel.fxml"));
         Stage stage = new Stage();
         Scene scene = new Scene(fxmlLoader);

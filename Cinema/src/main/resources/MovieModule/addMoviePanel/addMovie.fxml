@@ -126,11 +126,20 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
       </GridPane>
-      <ListView fx:id="peopleInvolved" layoutX="264.0" layoutY="335.0" prefHeight="254.0" prefWidth="345.0" />
       <Button fx:id="addMovieButton1" layoutX="465.0" layoutY="601.0" mnemonicParsing="false" onMouseClicked="#onClickAddPerson" prefHeight="35.0" prefWidth="143.0" text="AddPerson">
          <font>
             <Font name="Book Antiqua" size="18.0" />
          </font>
       </Button>
+      <TableView fx:id="peopleInvolved" layoutX="286.0" layoutY="335.0" prefHeight="244.0" prefWidth="324.0">
+        <columns>
+          <TableColumn fx:id="ID" prefWidth="75.0" text="ID" />
+          <TableColumn fx:id="Name" prefWidth="75.0" text="Name" />
+          <TableColumn fx:id="Lastname" prefWidth="75.0" text="Lastname" />
+        </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
+      </TableView>
    </children>
 </AnchorPane>

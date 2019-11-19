@@ -16,5 +16,6 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
+      <ComboBox fx:id="Role" layoutX="63.0" layoutY="315.0" prefHeight="26.0" prefWidth="263.0" promptText="Role" />
    </children>
 </AnchorPane>

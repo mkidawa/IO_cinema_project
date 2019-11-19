@@ -9,12 +9,14 @@ import Model.Person;
 import Model.PersonJob;
 
 import java.sql.Time;
+import java.util.ArrayList;
 import java.util.List;
 
 public class MovieManager {
 
     public static Movie workingMovie;
-    public static List<Person> workingPersons;
+    public static List<Person> workingPersons = new ArrayList<>();
+    public static PersonType WorkingPersonType;
     public static PersonType workingPersonType;
     public static void createMovie(short flg2D, short flg3D, short flgVR, MovieType type,
                                    MovieState state, String title, String description,

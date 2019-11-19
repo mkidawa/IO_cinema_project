@@ -1,9 +1,9 @@
 package View.MovieView;
 
 import Controller.MovieManager;
-import DBO.MovieDAO;
 import DBO.PersonDAO;
-import Model.Movie;
+import DBO.PersonTypeDAO;
+import Model.DICT.PersonType;
 import Model.Person;
 import javafx.beans.property.SimpleLongProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -12,37 +12,41 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
 public class addPersonToMovieController implements Initializable {
-    @FXML private TableView<SimplePeople> table;
-    @FXML private TableColumn<SimplePeople, Long> ID;
-    @FXML private TableColumn<SimplePeople, String> Name;
-    @FXML private TableColumn<SimplePeople, String> Lastname;
+    @FXML private TableView<SimplePerson> table;
+    @FXML private TableColumn<SimplePerson, Long> ID;
+    @FXML private TableColumn<SimplePerson, String> Name;
+    @FXML private TableColumn<SimplePerson, String> Lastname;
+    @FXML private ComboBox Role;
     @FXML private Button addPersonButton;
-    private ObservableList<SimplePeople> list = FXCollections.observableArrayList();
+    private ObservableList<SimplePerson> list = FXCollections.observableArrayList();
 
 
-    public ObservableList<SimplePeople> getList() {
-        ObservableList<SimplePeople> list = FXCollections.observableArrayList();
+    public ObservableList<SimplePerson> getList() {
+        ObservableList<SimplePerson> list = FXCollections.observableArrayList();
         List<Person> persons = PersonDAO.getAll();
         for (int i=0; i<persons.size(); i++) {
-            list.add(new SimplePeople(persons.get(i).getId(), persons.get(i).getFirstName(), persons.get(i).getLastName()));
+            list.add(new SimplePerson(persons.get(i).getId(), persons.get(i).getFirstName(), persons.get(i).getLastName()));
         }
         return list;
     }
-    public static class SimplePeople {
+    public static class SimplePerson {
         private final SimpleLongProperty ID;
         private final SimpleStringProperty Name;
         private final SimpleStringProperty Lastname;
 
-        public SimplePeople(Long ID, String Name, String Lastname){
+        public SimplePerson(Long ID, String Name, String Lastname){
             this.ID = new SimpleLongProperty(ID);
             this.Name = new SimpleStringProperty(Name);
             this.Lastname = new SimpleStringProperty(Lastname);
@@ -57,20 +61,56 @@ public class addPersonToMovieController implements Initializable {
             return ID.get();
         }
     }
+
+    public static class SimplePersonType {
+        private final SimpleLongProperty ID;
+        private final SimpleStringProperty type;
+
+        public SimplePersonType(Long ID, String type) {
+            this.ID = new SimpleLongProperty(ID);
+            this.type = new SimpleStringProperty(type);
+        }
+        public String getType() {
+            return type.get();
+        }
+        public Long getID() {return  ID.get();}
+        public String toString() {
+            return "MovieType" +
+                    "Id=" + ID +
+                    ", type='" + type;
+        }
+
+    }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         list = getList();
-        ID.setCellValueFactory(new PropertyValueFactory<SimplePeople, Long>("ID"));
-        Name.setCellValueFactory(new PropertyValueFactory<SimplePeople, String>("Name"));
-        Lastname.setCellValueFactory(new PropertyValueFactory<SimplePeople, String>("Lastname"));
+        ID.setCellValueFactory(new PropertyValueFactory<SimplePerson, Long>("ID"));
+        Name.setCellValueFactory(new PropertyValueFactory<SimplePerson, String>("Name"));
+        Lastname.setCellValueFactory(new PropertyValueFactory<SimplePerson, String>("Lastname"));
         table.setItems(list);
+
+        ObservableList<SimplePersonType> personTypes = FXCollections.observableArrayList();
+        List<PersonType> types = PersonTypeDAO.getAll();
+        for (int i=0; i<types.size(); i++) {
+            personTypes.add(new SimplePersonType(types.get(i).getId(), types.get(i).getName()));
+        }
+        List typeList = new ArrayList();
+        for(int i=0; i<personTypes.size();i++){
+            typeList.add(personTypes.get(i));
+        }
+        Role.getItems().addAll(typeList);
     }
 
     public void onClickAddPerson() {
-        SimplePeople p = table.getSelectionModel().getSelectedItem();
+        SimplePerson p = table.getSelectionModel().getSelectedItem();
+        System.out.println("ppppp "+p);
         List<Person> persons = PersonDAO.getAllById(p.getID());
         MovieManager.workingPersons.add(persons.get(0));
-        System.out.println(MovieManager.workingPersons);
-        //addMovieController.setPeopleInvolved();
+        closeCurrent();
     }
+    public void closeCurrent() {
+            Stage stage = (Stage) addPersonButton.getScene().getWindow();
+            stage.close();
+    }
+
 }

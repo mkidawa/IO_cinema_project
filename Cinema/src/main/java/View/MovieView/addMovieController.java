@@ -1,10 +1,8 @@
 package View.MovieView;
-
 import Controller.MovieManager;
 import Controller.StageManager;
 import DBO.MovieStateDAO;
 import DBO.MovieTypeDAO;
-import DBO.PersonDAO;
 import Model.DICT.MovieState;
 import Model.DICT.MovieType;
 import Model.DICT.PersonType;
@@ -23,14 +21,13 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-//todo exceptions for empty fields, passing selected person to peopleInvolved list
+//todo exceptions for empty fields, adding person from text input
 public class addMovieController implements Initializable {
     @FXML
     private TextField Title;
@@ -71,7 +68,6 @@ public class addMovieController implements Initializable {
         Lastname.setCellValueFactory(new PropertyValueFactory<>("Lastname"));
         Type.setCellValueFactory(new PropertyValueFactory<>("Type"));
 
-
         //adding genres
         ObservableList<SimpleMovieGenre> movieTypes = FXCollections.observableArrayList();
         List<MovieType> types = MovieTypeDAO.getAll();
@@ -83,7 +79,6 @@ public class addMovieController implements Initializable {
             typeList.add(movieTypes.get(i).getGenre());
         }
         Genre.getItems().addAll(typeList);
-
         //adding states
         ObservableList<SimpleMovieState> movieStates = FXCollections.observableArrayList();
         List<MovieState> states = MovieStateDAO.getAll();
@@ -99,29 +94,6 @@ public class addMovieController implements Initializable {
         Duration.setValueFactory(minutes);
     }
 
-    public static class SimplePersonwType {
-        private final SimpleLongProperty ID;
-        private final SimpleStringProperty Name;
-        private final SimpleStringProperty Lastname;
-        private SimpleStringProperty Type;
-
-        public SimplePersonwType(Long ID, String Name, String Lastname, String Type){
-            this.ID = new SimpleLongProperty(ID);
-            this.Name = new SimpleStringProperty(Name);
-            this.Lastname = new SimpleStringProperty(Lastname);
-            this.Type = new SimpleStringProperty(Type);
-        }
-        public String getName(){
-            return Name.get();
-        }
-        public String getLastname(){
-            return Lastname.get();
-        }
-        public long getID() {
-            return ID.get();
-        }
-        public String getType() { return Type.get();}
-    }
     public static ObservableList<SimplePersonwType> getList() {
         ObservableList<SimplePersonwType> list = FXCollections.observableArrayList();
         for (int i = 0; i < MovieManager.workingPersons.size(); i++) {
@@ -133,9 +105,9 @@ public class addMovieController implements Initializable {
     }
 
     public void updateList (){
-            if(!(MovieManager.workingPersons == null)) {
-                peopleInvolved.setItems(getList());
-            }
+        if(!(MovieManager.workingPersons.isEmpty())) {
+            peopleInvolved.setItems(getList());
+        }
     }
     public class SimpleMovieGenre {
         private final SimpleStringProperty genre;
@@ -160,9 +132,11 @@ public class addMovieController implements Initializable {
     }
 
     public void onClickAddMovie() {
+        //getting genre and state from selection
         selectedGenre = new MovieType((String) Genre.getValue());
         selectedState = new MovieState((String) MovieState.getValue());
 
+        //getting 2d/3d/vr flags from selection
         if (flg2D.isSelected())
             flag2d = 1;
         else
@@ -178,12 +152,12 @@ public class addMovieController implements Initializable {
         else
             flagVR = 0;
 
+        //displaying and getting duration
         dur = (int) Duration.getValue();
         int h = dur/60;
         int m = dur - (h*60);
         String hstring = String.valueOf(h);
         String mstring = String.valueOf(m);
-
         StringBuilder sb = new StringBuilder();
         sb.append(hstring);
         sb.append(":");
@@ -193,6 +167,7 @@ public class addMovieController implements Initializable {
         String timeString = sb.toString();
         d = Time.valueOf(timeString);
 
+        //creating a list of personJob objects using Person and Type from addPerson window
         List<PersonJob> involved = new ArrayList<>();
         for(int i=0; i<MovieManager.workingPersons.size(); i++) {
             Person person = MovieManager.workingPersons.get(i).getPerson();
@@ -200,9 +175,20 @@ public class addMovieController implements Initializable {
             PersonJob newPerson = new PersonJob(person, type);
             involved.add(newPerson);
         }
-
+        //creating a new Movie
         MovieManager.createMovie(flag2d, flag3d, flagVR, selectedGenre, selectedState, Title.getText(), Description.getText(), d, involved);
         closeAllStagesAndLoadNewMainStage();
+    }
+    public void onClickAddPerson() throws IOException {
+        updateList();
+        Parent fxmlLoader = FXMLLoader.load(getClass().getResource("/MovieModule/addPersonToMoviePanel/addPersonToMoviePanel.fxml"));
+        Stage stage = new Stage();
+        Scene scene = new Scene(fxmlLoader);
+        scene.getStylesheets().add(getClass().getResource("/MovieModule/addPersonToMoviePanel/addPersonToMoviePanel.css").toExternalForm());
+        stage.setScene(scene);
+        stage.setTitle("Add person panel");
+        stage.setResizable(false);
+        stage.show();
     }
 
     public void closeAllStagesAndLoadNewMainStage() {
@@ -224,16 +210,27 @@ public class addMovieController implements Initializable {
             e.printStackTrace();
         }
     }
+    public static class SimplePersonwType {
+        private final SimpleLongProperty ID;
+        private final SimpleStringProperty Name;
+        private final SimpleStringProperty Lastname;
+        private SimpleStringProperty Type;
 
-    public void onClickAddPerson() throws IOException {
-        updateList();
-        Parent fxmlLoader = FXMLLoader.load(getClass().getResource("/MovieModule/addPersonToMoviePanel/addPersonToMoviePanel.fxml"));
-        Stage stage = new Stage();
-        Scene scene = new Scene(fxmlLoader);
-        scene.getStylesheets().add(getClass().getResource("/MovieModule/addPersonToMoviePanel/addPersonToMoviePanel.css").toExternalForm());
-        stage.setScene(scene);
-        stage.setTitle("Add person panel");
-        stage.setResizable(false);
-        stage.show();
+        public SimplePersonwType(Long ID, String Name, String Lastname, String Type){
+            this.ID = new SimpleLongProperty(ID);
+            this.Name = new SimpleStringProperty(Name);
+            this.Lastname = new SimpleStringProperty(Lastname);
+            this.Type = new SimpleStringProperty(Type);
+        }
+        public String getName(){
+            return Name.get();
+        }
+        public String getLastname(){
+            return Lastname.get();
+        }
+        public long getID() {
+            return ID.get();
+        }
+        public String getType() { return Type.get();}
     }
 }

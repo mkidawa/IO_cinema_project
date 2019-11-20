@@ -31,6 +31,9 @@ public class addPersonToMovieController implements Initializable {
     @FXML private Button addPersonButton;
     private ObservableList<SimplePerson> list = FXCollections.observableArrayList();
     private PersonType selectedPersonType = new PersonType();
+    private addMovieController controller;
+    private ObservableList<SimplePersonType> personTypes = FXCollections.observableArrayList();
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -41,7 +44,6 @@ public class addPersonToMovieController implements Initializable {
         table.setItems(list);
 
         //Listing personTypes in ComboBox
-        ObservableList<SimplePersonType> personTypes = FXCollections.observableArrayList();
         List<PersonType> types = PersonTypeDAO.getAll();
         for (int i=0; i<types.size(); i++) {
             personTypes.add(new SimplePersonType(types.get(i).getId(), types.get(i).getName()));
@@ -60,16 +62,29 @@ public class addPersonToMovieController implements Initializable {
         }
         return list;
     }
+
+    public void setController(addMovieController c){
+        this.controller = c;
+    }
+
     public void createPersonJob(){
         SimplePerson p = table.getSelectionModel().getSelectedItem(); //person
         List<Person> persons = PersonDAO.getAllById(p.getID());
-        selectedPersonType = new PersonType((String) Role.getValue()); //persontype
+        Long typeID;
+        for(int i=0; i<personTypes.size();i++){
+            if (personTypes.get(i).getType().equals((String) Role.getValue())) {
+                typeID = personTypes.get(i).getID();
+                List<PersonType> PT = PersonTypeDAO.getAllById(typeID);
+                selectedPersonType = PT.get(0);
+            }
+        }
 
         PersonJob temp = new PersonJob(persons.get(0), selectedPersonType);
         MovieManager.workingPersons.add(temp);
     }
     public void onClickAddPerson() {
         createPersonJob();
+        controller.updateList();
         closeCurrent();
     }
     public void closeCurrent() {

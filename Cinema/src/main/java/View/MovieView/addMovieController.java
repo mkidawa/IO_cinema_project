@@ -60,6 +60,8 @@ public class addMovieController implements Initializable {
     private MovieState selectedState = new MovieState();
     private Time d;
     private int dur;
+    ObservableList<SimpleMovieGenre> movieTypes = FXCollections.observableArrayList();
+    ObservableList<SimpleMovieState> movieStates = FXCollections.observableArrayList();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -69,10 +71,9 @@ public class addMovieController implements Initializable {
         Type.setCellValueFactory(new PropertyValueFactory<>("Type"));
 
         //adding genres
-        ObservableList<SimpleMovieGenre> movieTypes = FXCollections.observableArrayList();
         List<MovieType> types = MovieTypeDAO.getAll();
         for (int i=0; i<types.size(); i++) {
-            movieTypes.add(new SimpleMovieGenre(types.get(i).getName()));
+            movieTypes.add(new SimpleMovieGenre(types.get(i).getId(), types.get(i).getName()));
         }
         List typeList = new ArrayList();
         for(int i=0; i<movieTypes.size();i++){
@@ -80,16 +81,16 @@ public class addMovieController implements Initializable {
         }
         Genre.getItems().addAll(typeList);
         //adding states
-        ObservableList<SimpleMovieState> movieStates = FXCollections.observableArrayList();
         List<MovieState> states = MovieStateDAO.getAll();
         for (int i=0; i<states.size(); i++) {
-            movieStates.add(new SimpleMovieState(states.get(i).getName()));
+            movieStates.add(new SimpleMovieState(states.get(i).getId(), states.get(i).getName()));
         }
         List stateList = new ArrayList();
         for(int i=0; i<movieStates.size();i++){
             stateList.add(movieStates.get(i).getState());
         }
         MovieState.getItems().addAll(stateList);
+
         SpinnerValueFactory minutes = new SpinnerValueFactory.IntegerSpinnerValueFactory(60, 200, 90, 2);
         Duration.setValueFactory(minutes);
     }
@@ -105,37 +106,56 @@ public class addMovieController implements Initializable {
     }
 
     public void updateList (){
+        System.out.println("funkcja Update List");
         if(!(MovieManager.workingPersons.isEmpty())) {
             peopleInvolved.setItems(getList());
         }
     }
     public class SimpleMovieGenre {
+        private final SimpleLongProperty ID;
         private final SimpleStringProperty genre;
-
-        public SimpleMovieGenre(String genre) {
+        public SimpleMovieGenre(Long ID, String genre) {
+            this.ID = new SimpleLongProperty(ID);
             this.genre = new SimpleStringProperty(genre);
         }
         public String getGenre() {
             return genre.get();
         }
+        public Long getID() { return ID.get(); }
     }
 
     public class SimpleMovieState {
+        private final SimpleLongProperty ID;
         private final SimpleStringProperty state;
 
-        public SimpleMovieState(String state) {
+        public SimpleMovieState(Long ID, String state) {
+            this.ID = new SimpleLongProperty(ID);
             this.state = new SimpleStringProperty(state);
         }
         public String getState() {
             return state.get();
         }
+        public Long getID() { return ID.get(); }
     }
 
     public void onClickAddMovie() {
         //getting genre and state from selection
-        selectedGenre = new MovieType((String) Genre.getValue());
-        selectedState = new MovieState((String) MovieState.getValue());
-
+        Long genreID;
+        for(int i=0; i<movieTypes.size();i++){
+            if (movieTypes.get(i).getGenre().equals((String) Genre.getValue())) {
+                genreID = movieTypes.get(i).getID();
+                List<MovieType> sG = MovieTypeDAO.getAllById(genreID);
+                selectedGenre = sG.get(0);
+            }
+        }
+        Long stateID;
+        for(int i=0; i<movieStates.size();i++){
+            if (movieStates.get(i).getState().equals((String) MovieState.getValue())) {
+                stateID = movieStates.get(i).getID();
+                List<MovieState> sS = MovieStateDAO.getAllById(stateID);
+                selectedState = sS.get(0);
+            }
+        }
         //getting 2d/3d/vr flags from selection
         if (flg2D.isSelected())
             flag2d = 1;
@@ -154,7 +174,7 @@ public class addMovieController implements Initializable {
 
         //displaying and getting duration
         dur = (int) Duration.getValue();
-        int h = dur/60;
+        int h =                                          dur/60;
         int m = dur - (h*60);
         String hstring = String.valueOf(h);
         String mstring = String.valueOf(m);
@@ -180,10 +200,13 @@ public class addMovieController implements Initializable {
         closeAllStagesAndLoadNewMainStage();
     }
     public void onClickAddPerson() throws IOException {
-        updateList();
-        Parent fxmlLoader = FXMLLoader.load(getClass().getResource("/MovieModule/addPersonToMoviePanel/addPersonToMoviePanel.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/MovieModule/addPersonToMoviePanel/addPersonToMoviePanel.fxml"));
+        Parent root = (Parent) loader.load();
+        addPersonToMovieController ctrl = loader.getController();
+        ctrl.setController(this);
+
         Stage stage = new Stage();
-        Scene scene = new Scene(fxmlLoader);
+        Scene scene = new Scene(root);
         scene.getStylesheets().add(getClass().getResource("/MovieModule/addPersonToMoviePanel/addPersonToMoviePanel.css").toExternalForm());
         stage.setScene(scene);
         stage.setTitle("Add person panel");

@@ -5,6 +5,7 @@ import DBO.PersonDAO;
 import DBO.PersonTypeDAO;
 import Model.DICT.PersonType;
 import Model.Person;
+import Model.PersonJob;
 import javafx.beans.property.SimpleLongProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -31,6 +32,7 @@ public class addPersonToMovieController implements Initializable {
     @FXML private ComboBox Role;
     @FXML private Button addPersonButton;
     private ObservableList<SimplePerson> list = FXCollections.observableArrayList();
+    private PersonType selectedPersonType = new PersonType();
 
 
     public ObservableList<SimplePerson> getList() {
@@ -45,6 +47,14 @@ public class addPersonToMovieController implements Initializable {
         private final SimpleLongProperty ID;
         private final SimpleStringProperty Name;
         private final SimpleStringProperty Lastname;
+        private SimpleStringProperty Type = null;
+
+        public SimplePerson(Long ID, String Name, String Lastname, String Type){
+            this.ID = new SimpleLongProperty(ID);
+            this.Name = new SimpleStringProperty(Name);
+            this.Lastname = new SimpleStringProperty(Lastname);
+            this.Type = new SimpleStringProperty(Type);
+        }
 
         public SimplePerson(Long ID, String Name, String Lastname){
             this.ID = new SimpleLongProperty(ID);
@@ -60,6 +70,7 @@ public class addPersonToMovieController implements Initializable {
         public long getID() {
             return ID.get();
         }
+        public String getType() { return Type.get();}
     }
 
     public static class SimplePersonType {
@@ -74,12 +85,6 @@ public class addPersonToMovieController implements Initializable {
             return type.get();
         }
         public Long getID() {return  ID.get();}
-        public String toString() {
-            return "MovieType" +
-                    "Id=" + ID +
-                    ", type='" + type;
-        }
-
     }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -96,16 +101,23 @@ public class addPersonToMovieController implements Initializable {
         }
         List typeList = new ArrayList();
         for(int i=0; i<personTypes.size();i++){
-            typeList.add(personTypes.get(i));
+            typeList.add(personTypes.get(i).getType());
         }
         Role.getItems().addAll(typeList);
     }
 
-    public void onClickAddPerson() {
-        SimplePerson p = table.getSelectionModel().getSelectedItem();
-        System.out.println("ppppp "+p);
+    public void createPersonJob(){
+        SimplePerson p = table.getSelectionModel().getSelectedItem(); //person
         List<Person> persons = PersonDAO.getAllById(p.getID());
-        MovieManager.workingPersons.add(persons.get(0));
+        selectedPersonType = new PersonType((String) Role.getValue()); //persontype
+
+        PersonJob temp = new PersonJob(persons.get(0), selectedPersonType);
+        MovieManager.workingPersons.add(temp);
+    }
+
+    public void onClickAddPerson() {
+        createPersonJob();
+        System.out.println(MovieManager.workingPersons.get(0));
         closeCurrent();
     }
     public void closeCurrent() {

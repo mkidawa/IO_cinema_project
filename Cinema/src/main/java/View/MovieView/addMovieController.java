@@ -4,8 +4,13 @@ import Controller.MovieManager;
 import Controller.StageManager;
 import DBO.MovieStateDAO;
 import DBO.MovieTypeDAO;
+import DBO.PersonDAO;
 import Model.DICT.MovieState;
 import Model.DICT.MovieType;
+import Model.DICT.PersonType;
+import Model.Person;
+import Model.PersonJob;
+import javafx.beans.property.SimpleLongProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -45,10 +50,11 @@ public class addMovieController implements Initializable {
     private RadioButton flgVR;
     @FXML
     private Button addMovieButton;
-    @FXML private TableView<addPersonToMovieController.SimplePerson> peopleInvolved;
+    @FXML private TableView<SimplePersonwType> peopleInvolved;
     @FXML private TableColumn<addPersonToMovieController.SimplePerson, Long> ID;
     @FXML private TableColumn<addPersonToMovieController.SimplePerson, String> Name;
     @FXML private TableColumn<addPersonToMovieController.SimplePerson, String> Lastname;
+    @FXML private TableColumn<addPersonToMovieController.SimplePerson, String> Type;
 
     private short flag2d;
     private short flag3d;
@@ -63,6 +69,8 @@ public class addMovieController implements Initializable {
         ID.setCellValueFactory(new PropertyValueFactory<>("ID"));
         Name.setCellValueFactory(new PropertyValueFactory<>("Name"));
         Lastname.setCellValueFactory(new PropertyValueFactory<>("Lastname"));
+        Type.setCellValueFactory(new PropertyValueFactory<>("Type"));
+
 
         //adding genres
         ObservableList<SimpleMovieGenre> movieTypes = FXCollections.observableArrayList();
@@ -90,14 +98,40 @@ public class addMovieController implements Initializable {
         SpinnerValueFactory minutes = new SpinnerValueFactory.IntegerSpinnerValueFactory(60, 200, 90, 2);
         Duration.setValueFactory(minutes);
     }
-    public static ObservableList<addPersonToMovieController.SimplePerson> getList() {
-        ObservableList<addPersonToMovieController.SimplePerson> list = FXCollections.observableArrayList();
+
+    public static class SimplePersonwType {
+        private final SimpleLongProperty ID;
+        private final SimpleStringProperty Name;
+        private final SimpleStringProperty Lastname;
+        private SimpleStringProperty Type;
+
+        public SimplePersonwType(Long ID, String Name, String Lastname, String Type){
+            this.ID = new SimpleLongProperty(ID);
+            this.Name = new SimpleStringProperty(Name);
+            this.Lastname = new SimpleStringProperty(Lastname);
+            this.Type = new SimpleStringProperty(Type);
+        }
+        public String getName(){
+            return Name.get();
+        }
+        public String getLastname(){
+            return Lastname.get();
+        }
+        public long getID() {
+            return ID.get();
+        }
+        public String getType() { return Type.get();}
+    }
+    public static ObservableList<SimplePersonwType> getList() {
+        ObservableList<SimplePersonwType> list = FXCollections.observableArrayList();
         for (int i = 0; i < MovieManager.workingPersons.size(); i++) {
-            list.add(new addPersonToMovieController.SimplePerson(MovieManager.workingPersons.get(i).getId(), MovieManager.workingPersons.get(i).getFirstName(),
-                    MovieManager.workingPersons.get(i).getLastName()));
+            Person person = MovieManager.workingPersons.get(i).getPerson();
+            PersonType type = MovieManager.workingPersons.get(i).getPersonType();
+            list.add(new SimplePersonwType(person.getId(), person.getFirstName(), person.getLastName(), type.getName()));
         }
         return list;
     }
+
     public void updateList (){
             if(!(MovieManager.workingPersons == null)) {
                 peopleInvolved.setItems(getList());
@@ -159,7 +193,15 @@ public class addMovieController implements Initializable {
         String timeString = sb.toString();
         d = Time.valueOf(timeString);
 
-        MovieManager.createMovieWithoutPeople(flag2d, flag3d, flagVR, selectedGenre, selectedState, Title.getText(), Description.getText(), d);
+        List<PersonJob> involved = new ArrayList<>();
+        for(int i=0; i<MovieManager.workingPersons.size(); i++) {
+            Person person = MovieManager.workingPersons.get(i).getPerson();
+            PersonType type = MovieManager.workingPersons.get(i).getPersonType();
+            PersonJob newPerson = new PersonJob(person, type);
+            involved.add(newPerson);
+        }
+
+        MovieManager.createMovie(flag2d, flag3d, flagVR, selectedGenre, selectedState, Title.getText(), Description.getText(), d, involved);
         closeAllStagesAndLoadNewMainStage();
     }
 

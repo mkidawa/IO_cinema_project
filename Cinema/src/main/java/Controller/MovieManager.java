@@ -15,9 +15,8 @@ import java.util.List;
 public class MovieManager {
 
     public static Movie workingMovie;
-    public static List<Person> workingPersons = new ArrayList<>();
-    public static PersonType WorkingPersonType;
-    public static PersonType workingPersonType;
+    public static List<PersonJob> workingPersons = new ArrayList<>();
+    //public static List<PersonJob> createPersonJobList = new ArrayList<>();
     public static void createMovie(short flg2D, short flg3D, short flgVR, MovieType type,
                                    MovieState state, String title, String description,
                                    Time duration, List<PersonJob> persons) {

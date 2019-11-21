@@ -8,6 +8,12 @@ import Tools.Filter;
 import java.util.Collections;
 import java.util.List;
 
+
+/*
+TODO Szyfrowanie hasel ?
+TODO GUI
+*/
+
 /**
  * Kontroler odpowiedzialny za autoryzacje uzytkownika
  * Uzywac tylko przez PermissionChecker

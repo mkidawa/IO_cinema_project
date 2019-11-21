@@ -1,0 +1,10 @@
+use IO;
+insert into Users values ('Robin', 'Hawdon', 'rh1','rh1','1','1','1')
+insert into Users values ('Elżbieta', 'Woźniak','ew1','ew1','1','1','1')
+insert into Users values ('Marcin', 'Sławiński','ms1','ms1','1','1','1')
+insert into Users values ('Andrzej', 'Nejman','an1','an1','1','1','1')
+insert into Users values ('Wojciech', 'Stefaniak','ws1','ws1','1','1','1')
+insert into Users values ('Viola', 'Piekut','vp1','vp1','1','1','1')
+insert into Users values ('Maciej', 'Chojnacki','mc1','mc1','1','1','1')
+insert into Users values ('Małgorzata', 'Nejman','mn1','mn1','1','1','1')
+insert into Users values ('Anna', 'Cieślak','ac1','ac1','1','1','1')

@@ -2,21 +2,11 @@ package Controller;
 
 import DBO.PermissionsDAO;
 import DBO.UserDAO;
-import Model.DICT.Permissions;
 
 //import DBO.MovieDAO;
-import Model.DICT.MovieState;
-import Model.DICT.MovieType;
-import Model.DICT.PersonType;
-import Model.Movie;
-import Model.Person;
-import Model.PersonJob;
 import Model.User;
 import Tools.Filter;
-import org.hibernate.Hibernate;
 
-import java.sql.Time;
-import java.util.ArrayList;
 import java.util.List;
 
 public class LPermissionController {
@@ -38,7 +28,7 @@ public class LPermissionController {
     {
         System.out.println(PermissionsDAO.getAll().toString());
     }
-    public boolean checkLogin(String login) {
+    private boolean checkLogin(String login) {
         Filter fl = new Filter();
         fl.addField("Login",login);
 //        System.out.println(UserDAO.getAllByFilter(fl));
@@ -65,20 +55,26 @@ public class LPermissionController {
         if (checkLogin(login)) {
             if (checkPassword(login, password)) {
                 password = "";
-                setAccessType();
+//                setAccessType();
             }
         }
         return false;
     }
 
     private boolean checkPassword(String login, String password) {
-        String sql = "SELECT U.login, U.passwordHash from User U WHERE U.login='" + login +
+        String sql = "from User U WHERE U.login='" + login +
                 "'";
-        String username;
-        String passwordFromDataBase;
+        User result = (User) UserDAO.execSQL(sql).get(0);
+        if(result.getPasswordHash().equals(password))
+        {
+            currentUser = result;
+            System.out.println("Prawidlowe Haslo");
+            return true;
+        }
+        System.out.println("Haslo nie prawidlowe");
+        return false;
     }
 
-    private void setAccessType() {
-    }
+
 
 }

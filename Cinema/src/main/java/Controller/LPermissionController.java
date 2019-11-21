@@ -1,8 +1,6 @@
 package Controller;
 
-import DBO.PermissionsDAO;
 import DBO.UserDAO;
-
 import Model.DICT.Permissions;
 import Model.User;
 import Tools.Filter;

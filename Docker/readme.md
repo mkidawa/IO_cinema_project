@@ -11,3 +11,17 @@ docker build -t mssqlcinema .
 ```bash
 docker run --name mssqlcinema -p 1433:1433 -d mssqlcinema
 ```
+
+## Configure hibernate
+
+Copy hibernate.cfg.xml to src\main\resources or run in root of project
+
+Windows
+```cmd
+copy Docker\hibernate.cfg.xml Cinema\src\main\resources
+```
+
+Linux
+```bash
+cp Docker/hibernate.cfg.xml Cinema/src/main/resources
+```

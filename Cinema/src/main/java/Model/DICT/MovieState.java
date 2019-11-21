@@ -26,4 +26,5 @@ public class MovieState {
     public MovieState(String name) {
         this.name = name;
     }
+
 }

@@ -25,7 +25,8 @@ public class Program extends Application {
 //        launch(args);
 //        BaseDB.openConnection();
         System.out.println("Wystartowałem");
-        LPermissionController.getInstance().getAllPermissions();
+//        LPermissionController.getInstance().getAllPermissions();
+        LPermissionController.getInstance().checkLogin("rh1");
         exit(0);
     }
 

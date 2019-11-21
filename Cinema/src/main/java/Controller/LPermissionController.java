@@ -8,6 +8,11 @@ import Tools.Filter;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * Kontroler odpowiedzialny za autoryzacje uzytkownika
+ * Uzywac tylko przez PermissionChecker
+ * @see Tools.PermissionChecker
+ */
 public class LPermissionController {
     private User currentUser;
     private static LPermissionController ourInstance;
@@ -40,6 +45,12 @@ public class LPermissionController {
         return false;
     }
 
+    /**
+     * Autoryzacja uzytkownika w systemie
+     * @param login Login uzytkownika
+     * @param password Haslo Uzytkownika
+     * @return true jezeli autoryzacja przebiegla pomyslnie , inaczej false
+     */
     public boolean login(String login, String password) {
         if (checkLogin(login)) {
             if (checkPassword(login, password)) {
@@ -63,6 +74,10 @@ public class LPermissionController {
         return false;
     }
 
+    /**
+     * Lista permitow dla aktualnego uzytkownika
+     * @return Zwraca liste wszystkich zezwolen jakie ma uzytkownik
+     */
     public List getPermissionsList() {
         if (checkIfLogged()) {
             return Collections.emptyList();
@@ -71,6 +86,11 @@ public class LPermissionController {
         return currentUser.getPermissionsList();
     }
 
+    /**
+     * Sprawdza czy uzytkownik posiada permita z pomoca inta
+     * @param PermissionCode kod zezwolenia jako int
+     * @return Zwraca true jezeli uzytkownik ma przypisane zezwolenie o kodzie PermissionCode
+     */
     public boolean checkPermission(int PermissionCode) {
         if (checkIfLogged()) {
             return false;
@@ -84,6 +104,11 @@ public class LPermissionController {
         return false;
     }
 
+    /**
+     * Sprawdza czy uzytkownik posiada permita z pomoca stringa
+     * @param PermissionName nazwa zezwolenia jako string
+     * @return Zwraca true jezeli uzytkownik ma przypisane zezwolenie o nazwie PermissionName
+     */
     public boolean checkPermission(String PermissionName) {
         if (checkIfLogged()) {
             return false;

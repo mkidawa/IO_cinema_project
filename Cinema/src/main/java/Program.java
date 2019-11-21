@@ -1,5 +1,6 @@
 import Controller.LPermissionController;
 import Tools.BaseDB;
+import Tools.PermissionChecker;
 import View.Login.LoginView;
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -24,9 +25,8 @@ public class Program extends Application {
         //TODO Main program file. System starts here
 //        launch(args);
 //        BaseDB.openConnection();
-        System.out.println("Wystartowałem");
-//        LPermissionController.getInstance().getAllPermissions();
-        LPermissionController.getInstance().login("rh1","haslorh1");
+
+
 //        System.out.println(LPermissionController.getInstance().getPermissionsList());
         exit(0);
     }

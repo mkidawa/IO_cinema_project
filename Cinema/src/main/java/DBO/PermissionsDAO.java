@@ -12,7 +12,7 @@ public class PermissionsDAO {
     public static List getAll() {
         var so = BaseDB.openConnection();
         so.beginTransaction();
-        List result = so.createQuery("from DICTPermission").list();
+        List result = so.createQuery("from Permissions").list();
         so.getTransaction().commit();
         so.close();
         return result;
@@ -21,14 +21,14 @@ public class PermissionsDAO {
     public static List getAllById(long Id) {
         var so = BaseDB.openConnection();
         so.beginTransaction();
-        List result = so.createQuery("from DICTPermission where Id = " + String.valueOf(Id)).list();
+        List result = so.createQuery("from Permissions where Id = " + String.valueOf(Id)).list();
         so.getTransaction().commit();
         so.close();
         return result;
     }
 
     public static List getAllByFilter(Filter filter) {
-        StringBuilder sql = new StringBuilder("from DICTPermission ");
+        StringBuilder sql = new StringBuilder("from Permissions ");
         int size = filter.getFilters().size();
         if (size > 0) {
             int count = 0;
@@ -41,26 +41,7 @@ public class PermissionsDAO {
                 }
             }
         }
-        //System.out.println(sql);
         return execSQL(sql.toString());
-    }
-
-    public static void insertUpdate(Permissions object) {
-        var so = BaseDB.openConnection();
-        so.beginTransaction();
-        so.saveOrUpdate(object);
-        so.getTransaction()
-                .commit();
-        so.close();
-    }
-
-    public static void delete(Permissions object) {
-        var so = BaseDB.openConnection();
-        so.beginTransaction();
-        String hql = "delete DICTPermission where Id = :id";
-        var q = so.createQuery(hql).setParameter("id", object.getId());
-        q.executeUpdate();
-        so.close();
     }
 
     public static List execSQL(String sql) {

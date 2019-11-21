@@ -53,7 +53,8 @@ public class User {
     @Setter
     private BigDecimal hourlyRate;
 
-    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "UsersPermission",
             inverseJoinColumns = @JoinColumn(name = "PermissionId", referencedColumnName = "Id"),
             joinColumns = @JoinColumn(name = "UserId", referencedColumnName = "Id"))

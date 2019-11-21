@@ -27,6 +27,7 @@ public class Program extends Application {
         System.out.println("Wystartowałem");
 //        LPermissionController.getInstance().getAllPermissions();
         LPermissionController.getInstance().login("rh1","haslorh1");
+//        System.out.println(LPermissionController.getInstance().getPermissionsList());
         exit(0);
     }
 

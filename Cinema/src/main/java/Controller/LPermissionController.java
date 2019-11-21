@@ -74,6 +74,12 @@ public class LPermissionController {
         System.out.println("Haslo nie prawidlowe");
         return false;
     }
+    public List getPermissionsList() {
+        return currentUser.getPermissionsList();
+    }
+    public boolean checkPermission(int PermissionID){
+
+    }
 
 
 

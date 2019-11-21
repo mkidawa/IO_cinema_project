@@ -1,13 +1,16 @@
 import Controller.LPermissionController;
+import Tools.BaseDB;
 import View.Login.LoginView;
 import javafx.application.Application;
 import javafx.stage.Stage;
+
+import static java.lang.System.exit;
 
 public class Program extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         primaryStage.setTitle("Cinema Management System");
-        //var myLoader = new FXMLLoader(getClass().getResource("login/LoginView.fxml"));
+//        var myLoader = new FXMLLoader(getClass().getResource("login/LoginView.fxml"));
         //Pane myPane = myLoader.load();
 
         //var myScene = new Scene();
@@ -20,7 +23,10 @@ public class Program extends Application {
     public static void main(String[] args) {
         //TODO Main program file. System starts here
 //        launch(args);
+//        BaseDB.openConnection();
+        System.out.println("Wystartowałem");
         LPermissionController.getInstance().getAllPermissions();
+        exit(0);
     }
 
 }

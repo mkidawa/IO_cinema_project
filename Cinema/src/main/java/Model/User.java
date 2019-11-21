@@ -64,5 +64,18 @@ public class User {
     public User() {
     }
 
-
+    @Override
+    public String toString() {
+        return "User{" +
+                "Id=" + Id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", login='" + login + '\'' +
+                ", passwordHash='" + passwordHash + '\'' +
+                ", codeHash='" + codeHash + '\'' +
+                ", baseSalary=" + baseSalary +
+                ", hourlyRate=" + hourlyRate +
+                ", permissionsList=" + permissionsList +
+                '}';
+    }
 }

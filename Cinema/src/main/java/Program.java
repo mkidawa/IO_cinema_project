@@ -1,3 +1,4 @@
+import Controller.LPermissionController;
 import View.Login.LoginView;
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -18,7 +19,8 @@ public class Program extends Application {
 
     public static void main(String[] args) {
         //TODO Main program file. System starts here
-        launch(args);
+//        launch(args);
+        LPermissionController.getInstance().getAllPermissions();
     }
 
 }

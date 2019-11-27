@@ -26,4 +26,12 @@ public class PersonType {
     public PersonType(String name) {
         this.name = name;
     }
+
+    @Override
+    public String toString() {
+        return "PersonType{" +
+                "Id=" + Id +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }

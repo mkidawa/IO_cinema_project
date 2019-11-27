@@ -57,8 +57,9 @@ public class Movie {
     @Getter
     @Setter
     private Time movieTime;
+  
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 
-    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "MovieId", referencedColumnName = "Id")
     @Getter
     @Setter
@@ -94,5 +95,21 @@ public class Movie {
         this.description = description;
         this.movieTime = movieTime;
         this.peoples = peoples;
+    }
+
+    @Override
+    public String toString() {
+        return "Movie" + '\n' + "{" +
+                "Id=" + Id +
+                ", flg2D=" + flg2D +
+                ", flg3D=" + flg3D +
+                ", flgVR=" + flgVR +
+                ", movieType=" + movieType +
+                ", movieState=" + movieState +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", movieTime=" + movieTime +
+                ", peoples=" + peoples +
+                '}';
     }
 }

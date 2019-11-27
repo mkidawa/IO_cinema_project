@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="414.0" prefWidth="388.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.MovieView.addPersonToMovieController">
+   <children>
+      <Button fx:id="addPersonButton" layoutX="134.0" layoutY="353.0" mnemonicParsing="false" onMouseClicked="#onClickAddPerson" prefHeight="46.0" prefWidth="119.0" text="Add" />
+      <TableView fx:id="table" layoutY="45.0" prefHeight="270.0" prefWidth="390.0">
+        <columns>
+          <TableColumn fx:id="ID" prefWidth="75.0" text="ID" />
+          <TableColumn fx:id="Name" prefWidth="75.0" text="Name" />
+          <TableColumn fx:id="Lastname" prefWidth="75.0" text="Lastname" />
+        </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
+      </TableView>
+      <ComboBox fx:id="Role" layoutX="63.0" layoutY="315.0" prefHeight="26.0" prefWidth="263.0" promptText="Role" />
+   </children>
+</AnchorPane>

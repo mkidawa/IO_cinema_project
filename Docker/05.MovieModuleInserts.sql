@@ -1,15 +1,15 @@
-create database cinemaMainDB;
-use cinemaMainDB;
+-- create database cinemaMainDB;
+-- use cinemaMainDB;
 
-select *from Movie;
-select *from DICTMovieType;
-select *from DICTMovieState;
-select *from DICTPersonType;
-select *from Person;
-select *from MoviePersonPersonType;
+-- select *from Movie;
+-- select *from DICTMovieType;
+-- select *from DICTMovieState;
+-- select *from DICTPersonType;
+-- select *from Person;
+-- select *from MoviePersonPersonType;
 
 --------------------------------------------------- dictonary inserts ------------------------------------------------------
-
+use IO
 -- 1) Movie Type inserts --
 
 insert into DICTMovieType values ('Action')

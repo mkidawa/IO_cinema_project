@@ -23,3 +23,8 @@ Tools - Non logic tools
 # Plugins
 
 Lombok - [link](https://projectlombok.org/setup/intellij)
+
+
+# Creditance
+
+Icons made by Freepik from www.flaticon.com

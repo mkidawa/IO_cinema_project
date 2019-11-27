@@ -57,8 +57,9 @@ public class Movie {
     @Getter
     @Setter
     private Time movieTime;
-
+  
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+
     @JoinColumn(name = "MovieId", referencedColumnName = "Id")
     @Getter
     @Setter

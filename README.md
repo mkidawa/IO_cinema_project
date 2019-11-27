@@ -41,15 +41,17 @@ W pakiecie Cinema kliknij PPM na `build.gradle` i wybierz `Import as Gradle Proj
 
 ![](Docs/2.png)
 
-Nalezy zmienic  
+Nalezy SKOPIOWAĆ czyli wcisnąć hibernate.cfg.xml.example potem `CTRL+C` i `CTRL+V` 
 ```
-Cinema/src/main/resources/hibernate.cfg.xml.example 
+Cinema/src/main/resources/hibernate.cfg.xml.example
 ```
-na
+i nazwać tak jak niżej 
 ```
 Cinema/src/main/resources/hibernate.cfg.xml 
 ```
-![](Docs/3.png)
+nie próbujcie robić rename bo spotka was merge HELL
+
+![](Docs/5.png)
 
 Nalezy ustawić swoje połączenie do bazy danych albo skorzystać z plików w module `DOCKER` 
 Rzeczy do zmiany są oznaczone w `()`

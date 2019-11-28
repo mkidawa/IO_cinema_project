@@ -71,3 +71,5 @@ fabric.properties
 hibernate.cfg.xml
 
 Cinema/gradle/
+Cinema/build/
+

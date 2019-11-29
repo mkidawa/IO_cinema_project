@@ -4,31 +4,27 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="643.0" prefWidth="535.0" xmlns="http://javafx.com/javafx/10.0.2-internal"
-            xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="View.TimetableModule.SystemParamsPanel">
+<AnchorPane prefHeight="643.0" prefWidth="535.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.TimetableModule.SystemParamsPanel">
     <children>
-        <Spinner fx:id="spinnerAdsDuration" editable="true" layoutX="135.0" layoutY="114.0"
-                 prefHeight="106.0" prefWidth="266.0"/>
-        <Label layoutX="113.0" layoutY="65.0" prefHeight="26.0" prefWidth="311.0"
-               text="Advertisement Duration (minutes)">
+        <Label layoutX="97.0" layoutY="64.0" prefHeight="32.0" prefWidth="342.0" text="Advertisement Duration (minutes)">
             <font>
-                <Font name="Book Antiqua" size="20.0"/>
+                <Font name="Book Antiqua" size="22.0" />
             </font>
         </Label>
-        <Separator layoutX="45.0" layoutY="280.0" prefHeight="3.0" prefWidth="446.0"/>
-        <Spinner fx:id="spinnerGapDuration" editable="true" layoutX="135.0" layoutY="363.0"
-                 prefHeight="106.0" prefWidth="266.0"/>
-        <Label layoutX="52.0" layoutY="318.0" prefHeight="26.0" prefWidth="433.0"
-               text="Minimum Gap Between Performances (minutes)">
+        <Spinner fx:id="spinnerAdsDuration" editable="true" layoutX="135.0" layoutY="114.0" prefHeight="106.0" prefWidth="266.0" styleClass="font-size-50" />
+
+        <Separator layoutX="45.0" layoutY="280.0" prefHeight="3.0" prefWidth="446.0" />
+
+        <Label layoutX="31.0" layoutY="315.0" prefHeight="32.0" prefWidth="474.0" text="Minimum Gap Between Performances (minutes)">
             <font>
-                <Font name="Book Antiqua" size="20.0"/>
+                <Font name="Book Antiqua" size="22.0" />
             </font>
         </Label>
-        <Button fx:id="confirmButton" layoutX="189.0" layoutY="531.0" mnemonicParsing="false"
-                onAction="#onClickConfirmButton" prefHeight="78.0" prefWidth="160.0" text="Confirm">
+        <Spinner fx:id="spinnerGapDuration" editable="true" layoutX="135.0" layoutY="363.0" prefHeight="106.0" prefWidth="266.0" styleClass="font-size-50" />
+
+        <Button fx:id="confirmButton" layoutX="189.0" layoutY="531.0" mnemonicParsing="false" onAction="#onClickConfirmButton" prefHeight="78.0" prefWidth="160.0" text="Confirm">
             <font>
-                <Font name="Book Antiqua" size="20.0"/>
+                <Font name="Book Antiqua" size="20.0" />
             </font>
         </Button>
 

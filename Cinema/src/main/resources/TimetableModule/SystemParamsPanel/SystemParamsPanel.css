@@ -12,3 +12,7 @@ Button {
 Button:hover {
     -fx-background-color: rgba(30, 144, 255, 0.6);
 }
+
+.font-size-50 {
+    -fx-font-size: 50px;
+}

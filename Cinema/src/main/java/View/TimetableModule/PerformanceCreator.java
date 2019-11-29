@@ -5,7 +5,7 @@ import javafx.fxml.Initializable;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class PerformancePanel implements Initializable {
+public class PerformanceCreator implements Initializable {
 
     /*------------------------ FIELDS REGION ------------------------*/
 

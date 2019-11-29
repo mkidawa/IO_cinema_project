@@ -6,7 +6,6 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -18,24 +17,14 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import static View.TimetableModule.Util.Constants.PERFORMANCE_CREATOR_PATH;
+import static View.TimetableModule.Util.Constants.PERFORMANCE_CREATOR_STYLE_PATH;
+import static View.TimetableModule.Util.Constants.SYSTEM_PARAMS_PATH;
+import static View.TimetableModule.Util.Constants.SYSTEM_PARAMS_STYLE_PATH;
+
 public class TimetablePanel implements Initializable {
 
     /*------------------------ FIELDS REGION ------------------------*/
-    public static final String PERFORMANCE_CREATOR_PATH =
-            "/TimetableModule/MovieCreator/PerformanceCreator.fxml";
-    public static final String PERFORMANCE_CREATOR_STYLE_PATH =
-            "/TimetableModule/MovieCreator/PerformanceCreator.css";
-
-    public static final String PERFORMANCE_PANEL_PATH =
-            "/TimetableModule/PerformancePanel/PerformancePanel.fxml";
-    public static final String PERFORMANCE_PANEL_STYLE_PATH =
-            "/TimetableModule/PerformancePanel/PerformancePanel.css";
-
-    public static final String SYSTEM_PARAMS_PATH =
-            "/TimetableModule/SystemParamsPanel/SystemParamsPanel.fxml";
-    public static final String SYSTEM_PARAMS_STYLE_PATH =
-            "/TimetableModule/SystemParamsPanel/SystemParamsPanel.css";
-
     @FXML
     private GridPane pane;
 
@@ -65,20 +54,25 @@ public class TimetablePanel implements Initializable {
 
     }
 
-    @FXML
-    private void onClickAddPerformance(MouseEvent mouseEvent) throws IOException {
-        Scene scene = new Scene(FXMLLoader.load(getClass().getResource(PERFORMANCE_CREATOR_PATH)));
-        scene.getStylesheets().add(getClass().getResource(PERFORMANCE_CREATOR_STYLE_PATH).toExternalForm());
+    private void loadFxmlStage(String fxmlPath, String fxmlStylePath, String title) throws IOException {
+        Scene scene = new Scene(FXMLLoader.load(getClass().getResource(fxmlPath)));
+        scene.getStylesheets().add(getClass().getResource(fxmlStylePath).toExternalForm());
 
         Stage stage = new Stage();
         stage.setScene(scene);
-        stage.setTitle("Performance Creator");
+        stage.setTitle(title);
         stage.setResizable(false);
         stage.show();
     }
 
     @FXML
-    private void onClickHelp(MouseEvent mouseEvent) {
+    private void onClickAddPerformance(MouseEvent mouseEvent) throws IOException {
+        loadFxmlStage(PERFORMANCE_CREATOR_PATH,
+                PERFORMANCE_CREATOR_STYLE_PATH, "Performance Creator");
+    }
 
+    @FXML
+    private void onClickParameters(MouseEvent mouseEvent) throws IOException {
+        loadFxmlStage(SYSTEM_PARAMS_PATH, SYSTEM_PARAMS_STYLE_PATH, "System Parameters");
     }
 }

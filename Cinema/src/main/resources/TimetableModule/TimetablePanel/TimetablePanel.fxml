@@ -59,8 +59,8 @@
                 text="Add Performance"/>
 
         <Button layoutX="1170.0" layoutY="18.0" minHeight="30.0" mnemonicParsing="false"
-                onMouseClicked="#onClickHelp" prefHeight="74.0" prefWidth="256.0" style=""
-                text="Help">
+                onMouseClicked="#onClickParameters" prefHeight="74.0" prefWidth="256.0" style=""
+                text="Parameters">
             <font>
                 <Font size="36.0"/>
             </font>

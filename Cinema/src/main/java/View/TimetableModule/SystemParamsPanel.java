@@ -43,15 +43,6 @@ public class SystemParamsPanel implements Initializable {
     private PopOutWindow popOutWindow = new PopOutWindow();
 
     /*------------------------ METHODS REGION ------------------------*/
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        spinnerAdsDuration.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(
-                MIN_ADS_VALUE, MAX_ADS_VALUE, INITIAL_ADS_VALUE, SPINNER_STEP));
-        spinnerGapDuration.setValueFactory(new SpinnerValueFactory
-                .IntegerSpinnerValueFactory(MIN_PERFORMANCE_GAP_VALUE,
-                MAX_PERFORMANCE_GAP_VALUE, INITIAL_PERFORMANCE_GAP_VALUE, SPINNER_STEP));
-    }
-
     private Stage loadFxmlStage(String fxmlPath, String fxmlStylePath, String title) throws IOException {
         Scene scene = new Scene(FXMLLoader.load(getClass().getResource(fxmlPath)));
         scene.getStylesheets().add(getClass().getResource(fxmlStylePath).toExternalForm());
@@ -63,6 +54,15 @@ public class SystemParamsPanel implements Initializable {
         stage.show();
 
         return stage;
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        spinnerAdsDuration.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(
+                MIN_ADS_VALUE, MAX_ADS_VALUE, INITIAL_ADS_VALUE, SPINNER_STEP));
+        spinnerGapDuration.setValueFactory(new SpinnerValueFactory
+                .IntegerSpinnerValueFactory(MIN_PERFORMANCE_GAP_VALUE,
+                MAX_PERFORMANCE_GAP_VALUE, INITIAL_PERFORMANCE_GAP_VALUE, SPINNER_STEP));
     }
 
     @FXML

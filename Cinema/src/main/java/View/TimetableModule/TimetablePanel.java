@@ -1,5 +1,7 @@
 package View.TimetableModule;
 
+import Controller.PerformanceManager;
+import Model.Performance;
 import View.MovieView.MoviePanel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -19,6 +21,9 @@ import java.util.ResourceBundle;
 
 import static View.TimetableModule.Util.Constants.PERFORMANCE_CREATOR_PATH;
 import static View.TimetableModule.Util.Constants.PERFORMANCE_CREATOR_STYLE_PATH;
+import static View.TimetableModule.Util.Constants.PERFORMANCE_PANEL;
+import static View.TimetableModule.Util.Constants.PERFORMANCE_PANEL_PATH;
+import static View.TimetableModule.Util.Constants.PERFORMANCE_PANEL_STYLE_PATH;
 import static View.TimetableModule.Util.Constants.SYSTEM_PARAMS_PATH;
 import static View.TimetableModule.Util.Constants.SYSTEM_PARAMS_STYLE_PATH;
 
@@ -49,12 +54,7 @@ public class TimetablePanel implements Initializable {
     private ObservableList<MoviePanel.SimpleMovie> list = FXCollections.observableArrayList();
 
     /*------------------------ METHODS REGION ------------------------*/
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-
-    }
-
-    private void loadFxmlStage(String fxmlPath, String fxmlStylePath, String title) throws IOException {
+    private Stage loadFxmlStage(String fxmlPath, String fxmlStylePath, String title) throws IOException {
         Scene scene = new Scene(FXMLLoader.load(getClass().getResource(fxmlPath)));
         scene.getStylesheets().add(getClass().getResource(fxmlStylePath).toExternalForm());
 
@@ -63,6 +63,54 @@ public class TimetablePanel implements Initializable {
         stage.setTitle(title);
         stage.setResizable(false);
         stage.show();
+
+        return stage;
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+//        list = getList();
+//        id.setCellValueFactory(
+//                new PropertyValueFactory<MoviePanel.SimpleMovie, Long>("id"));
+//        title.setCellValueFactory(
+//                new PropertyValueFactory<MoviePanel.SimpleMovie, String>("title"));
+//        description.setCellValueFactory(
+//                new PropertyValueFactory<MoviePanel.SimpleMovie, String>("description"));
+//        state.setCellValueFactory(
+//                new PropertyValueFactory<MoviePanel.SimpleMovie, String>("state"));
+//        genre.setCellValueFactory(
+//                new PropertyValueFactory<MoviePanel.SimpleMovie, String>("genre"));
+//        table.setItems(list);
+//
+//        table.setRowFactory(tv -> {
+//            TableRow<MoviePanel.SimpleMovie> row = new TableRow<>();
+//            row.setOnMouseClicked(event -> {
+//                if (!row.isEmpty() && event.getButton() == MouseButton.PRIMARY
+//                        && event.getClickCount() == 2) {
+//
+//                    MoviePanel.SimpleMovie clickedMovie = row.getItem();
+//                    List<Movie> movies = MovieDAO.getAllById(clickedMovie.getId());
+//                    try {
+//                        onClickRow(movies.get(0));
+//                    } catch (IOException e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//            });
+//
+//            return row;
+//        });
+
+    }
+
+//    public ObservableList<MoviePanel.SimpleMovie> getList() {
+//        return null;
+//    }
+
+    @FXML
+    private void onClickRow(Performance performance) throws IOException {
+        PerformanceManager.setCurrentPerformance(performance);
+        loadFxmlStage(PERFORMANCE_PANEL_PATH, PERFORMANCE_PANEL_STYLE_PATH, PERFORMANCE_PANEL);
     }
 
     @FXML
@@ -75,4 +123,10 @@ public class TimetablePanel implements Initializable {
     private void onClickParameters(MouseEvent mouseEvent) throws IOException {
         loadFxmlStage(SYSTEM_PARAMS_PATH, SYSTEM_PARAMS_STYLE_PATH, "System Parameters");
     }
+
+//    class SimplePerformance {
+//        private SimpleLongProperty movieId;
+//        private SimpleLongProperty movieId;
+//        private SimpleStringProperty
+//    }
 }

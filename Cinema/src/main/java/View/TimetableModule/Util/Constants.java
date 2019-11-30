@@ -6,6 +6,7 @@ public class Constants {
     public static final String PERFORMANCE_CREATOR = "Performance Creator";
     public static final String SYSTEM_PARAMETER = "System Parameters";
     public static final String TIMETABLE_PANEL = "Timetable Panel";
+    public static final String PERFORMANCE_PANEL = "Performance Panel";
 
     public static final Integer MIN_ADS_VALUE = 5;
     public static final Integer MAX_ADS_VALUE = 100;

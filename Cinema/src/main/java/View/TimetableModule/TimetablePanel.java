@@ -2,7 +2,8 @@ package View.TimetableModule;
 
 import Controller.PerformanceManager;
 import Model.Performance;
-import View.MovieView.MoviePanel;
+import javafx.beans.property.SimpleLongProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -11,6 +12,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
@@ -34,24 +36,24 @@ public class TimetablePanel implements Initializable {
     private GridPane pane;
 
     @FXML
-    private TableView<MoviePanel.SimpleMovie> table;
+    private TableView<SimplePerformance> table;
 
     @FXML
-    private TableColumn<MoviePanel.SimpleMovie, Long> id;
+    private TableColumn<SimplePerformance, Long> id;
 
     @FXML
-    private TableColumn<MoviePanel.SimpleMovie, String> title;
+    private TableColumn<SimplePerformance, String> title;
 
     @FXML
-    private TableColumn<MoviePanel.SimpleMovie, String> description;
+    private TableColumn<SimplePerformance, String> description;
 
     @FXML
-    private TableColumn<MoviePanel.SimpleMovie, String> state;
+    private TableColumn<SimplePerformance, String> state;
 
     @FXML
-    private TableColumn<MoviePanel.SimpleMovie, String> genre;
+    private TableColumn<SimplePerformance, String> genre;
 
-    private ObservableList<MoviePanel.SimpleMovie> list = FXCollections.observableArrayList();
+    private ObservableList<SimplePerformance> list = FXCollections.observableArrayList();
 
     /*------------------------ METHODS REGION ------------------------*/
     private Stage loadFxmlStage(String fxmlPath, String fxmlStylePath, String title) throws IOException {
@@ -70,25 +72,26 @@ public class TimetablePanel implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 //        list = getList();
-//        id.setCellValueFactory(
-//                new PropertyValueFactory<MoviePanel.SimpleMovie, Long>("id"));
-//        title.setCellValueFactory(
-//                new PropertyValueFactory<MoviePanel.SimpleMovie, String>("title"));
+        list.add(new SimplePerformance(1L, 1L, 1L, "cbduyvbuvjf"));
+        id.setCellValueFactory(
+                new PropertyValueFactory<SimplePerformance, Long>("id"));
+        title.setCellValueFactory(
+                new PropertyValueFactory<SimplePerformance, String>("title"));
 //        description.setCellValueFactory(
-//                new PropertyValueFactory<MoviePanel.SimpleMovie, String>("description"));
+//                new PropertyValueFactory<SimplePerformance, String>("description"));
 //        state.setCellValueFactory(
-//                new PropertyValueFactory<MoviePanel.SimpleMovie, String>("state"));
+//                new PropertyValueFactory<SimplePerformance, String>("state"));
 //        genre.setCellValueFactory(
-//                new PropertyValueFactory<MoviePanel.SimpleMovie, String>("genre"));
-//        table.setItems(list);
+//                new PropertyValueFactory<SimplePerformance, String>("genre"));
+        table.setItems(list);
 //
 //        table.setRowFactory(tv -> {
-//            TableRow<MoviePanel.SimpleMovie> row = new TableRow<>();
+//            TableRow<SimplePerformance> row = new TableRow<>();
 //            row.setOnMouseClicked(event -> {
 //                if (!row.isEmpty() && event.getButton() == MouseButton.PRIMARY
 //                        && event.getClickCount() == 2) {
 //
-//                    MoviePanel.SimpleMovie clickedMovie = row.getItem();
+//                    SimplePerformance clickedMovie = row.getItem();
 //                    List<Movie> movies = MovieDAO.getAllById(clickedMovie.getId());
 //                    try {
 //                        onClickRow(movies.get(0));
@@ -103,9 +106,40 @@ public class TimetablePanel implements Initializable {
 
     }
 
-//    public ObservableList<MoviePanel.SimpleMovie> getList() {
+//    public ObservableList<SimplePerformance> getDataFromDb() {
 //        return null;
 //    }
+
+    public class SimplePerformance {
+
+        private SimpleLongProperty id;
+        private SimpleLongProperty movieId;
+        private SimpleLongProperty hallId;
+        private SimpleStringProperty title;
+
+        public SimplePerformance(Long id, Long movieId, Long hallId, String title) {
+            this.id = new SimpleLongProperty(id);
+            this.movieId = new SimpleLongProperty(movieId);
+            this.hallId = new SimpleLongProperty(hallId);
+            this.title = new SimpleStringProperty(title);
+        }
+
+        public long getId() {
+            return id.get();
+        }
+
+        public long getMovieId() {
+            return movieId.get();
+        }
+
+        public long getHallId() {
+            return hallId.get();
+        }
+
+        public String getTitle() {
+            return title.get();
+        }
+    }
 
     @FXML
     private void onClickRow(Performance performance) throws IOException {
@@ -123,10 +157,4 @@ public class TimetablePanel implements Initializable {
     private void onClickParameters(MouseEvent mouseEvent) throws IOException {
         loadFxmlStage(SYSTEM_PARAMS_PATH, SYSTEM_PARAMS_STYLE_PATH, "System Parameters");
     }
-
-//    class SimplePerformance {
-//        private SimpleLongProperty movieId;
-//        private SimpleLongProperty movieId;
-//        private SimpleStringProperty
-//    }
 }

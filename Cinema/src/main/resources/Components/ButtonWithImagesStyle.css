@@ -1,0 +1,7 @@
+.darkButton {
+    -fx-background-color: darkgray;
+}
+
+.buttonLabel {
+    -fx-font-size: 14px;
+}

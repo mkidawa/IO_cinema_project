@@ -2,11 +2,12 @@ package View.Login;
 
 
 import Controller.LoginController;
+import View.Components.ButtonWithImage;
 import View.Components.NumericKeyboard;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.input.MouseButton;
 import javafx.scene.layout.Pane;
 import lombok.Getter;
 import lombok.Setter;
@@ -21,7 +22,10 @@ public class LoginView {
     private Scene scene;
 
     @FXML
-    NumericKeyboard keyboard;
+    private NumericKeyboard keyboard;
+
+    @FXML
+    private ButtonWithImage closeBtn;
 
     public LoginView() throws IOException {
         var fxmlLoader = new FXMLLoader(getClass().getResource("/Login/LoginView.fxml"));
@@ -30,9 +34,16 @@ public class LoginView {
         Pane pane = fxmlLoader.load();
         scene = new Scene(pane, screenSize.getWidth(), screenSize.getHeight());
         scene.setFill(null);
+        closeBtn.setText("Zamknij aplikację");
+        closeBtn.setOnMousePressed(event -> {
+            if (event.getClickCount() == 1 && event.getButton() == MouseButton.PRIMARY) {
+                closeApplication();
+            }
+        });
+
     }
 
-    public void closeApplication(ActionEvent actionEvent) {
+    public void closeApplication() {
         LoginController.closeApplication();
     }
 

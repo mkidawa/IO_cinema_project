@@ -67,6 +67,9 @@ public class SystemParamsPanel implements Initializable {
 
     @FXML
     private void onClickConfirmButton(ActionEvent actionEvent) {
+//        TODO SAVING TO DB
+        Integer ads = (Integer) spinnerAdsDuration.getValue();
+        Integer gap = (Integer) spinnerGapDuration.getValue();
 
         try {
             Stage currentStage = (Stage) confirmButton.getScene().getWindow();

@@ -2,3 +2,13 @@
     -fx-background-color: darkgray;
     -fx-font-size: 18px;
 }
+
+.bodyClass {
+    -fx-background-image: url("Images/logo.png");
+    -fx-background-repeat: stretch;
+    -fx-background-position: center center;
+}
+
+.loginButtons {
+    -fx-padding: 5px;
+}

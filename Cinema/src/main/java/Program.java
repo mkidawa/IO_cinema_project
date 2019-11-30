@@ -23,12 +23,12 @@ public class Program extends Application {
 
     public static void main(String[] args) {
         //TODO Main program file. System starts here
-//        launch(args);
+        launch(args);
 //        BaseDB.openConnection();
 
 
 //        System.out.println(LPermissionController.getInstance().getPermissionsList());
-        exit(0);
+        //exit(0);
     }
 
 }

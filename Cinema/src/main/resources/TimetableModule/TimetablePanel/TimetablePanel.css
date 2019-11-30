@@ -7,7 +7,7 @@ AnchorPane {
     -fx-background-color: rgba(179, 213, 255, 0.4);
 }
 
-#table {
+#performanceTable {
     -fx-alignment: center;
     -fx-row-valignment: CENTER-RIGHT;
 

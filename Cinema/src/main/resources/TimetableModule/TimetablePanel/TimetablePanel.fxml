@@ -22,7 +22,7 @@
                         <Font name="Book Antiqua Pogrubiony" size="40.0" fx:id="x2"/>
                     </font>
                 </Label>
-                <TableView fx:id="table" editable="false" maxHeight="-Infinity" maxWidth="-Infinity"
+                <TableView fx:id="performanceTable" editable="false" maxHeight="-Infinity" maxWidth="-Infinity"
                            minHeight="-Infinity" minWidth="-Infinity" prefHeight="632.0"
                            prefWidth="1329.0" tableMenuButtonVisible="false"
                            GridPane.columnIndex="0" GridPane.halignment="CENTER"
@@ -30,13 +30,13 @@
                            GridPane.vgrow="ALWAYS">
                     <columns>
                         <TableColumn fx:id="id" maxWidth="5000.0" minWidth="10.0" prefWidth="64.0"
-                                     text="Id"/>
-                        <TableColumn fx:id="title" maxWidth="5000.0" minWidth="10.0"
-                                     prefWidth="324.0" text="Title"/>
-                        <TableColumn fx:id="description" maxWidth="5000.0" minWidth="10.0"
-                                     prefWidth="550.0" text="Description"/>
-                        <TableColumn fx:id="state" maxWidth="5000.0" minWidth="10.0"
-                                     prefWidth="168.0" text="State"/>
+                                     text="ID"/>
+                        <TableColumn fx:id="movieId" maxWidth="5000.0" minWidth="10.0"
+                                     prefWidth="324.0" text="Movie ID"/>
+                        <TableColumn fx:id="hallId" maxWidth="5000.0" minWidth="10.0"
+                                     prefWidth="550.0" text="Hall ID"/>
+                        <TableColumn fx:id="movieTitle" maxWidth="5000.0" minWidth="10.0"
+                                     prefWidth="168.0" text="Title"/>
                         <TableColumn fx:id="genre" maxWidth="5000.0" minWidth="10.0"
                                      prefWidth="215.0" text="Genre"/>
                         <TableColumn/>

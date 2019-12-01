@@ -101,7 +101,7 @@ public class PerformanceCreator implements Initializable {
         return false;
     }
 
-    private boolean areComboBoxesFilled(ComboBox... comboBoxes) {
+    private boolean isComboBoxesFilled(ComboBox... comboBoxes) {
         for (ComboBox it : comboBoxes) {
             if (it.getValue() == null) {
                 return false;
@@ -143,7 +143,7 @@ public class PerformanceCreator implements Initializable {
 //                        "nrinvnvklfdvklfdkvfkvkfn"), new Time(25)));
 
         if (isOneRadioButtonSelected(flg2D, flg3D, flgVR)
-                && areComboBoxesFilled(comboBoxTitle, comboBoxHallNumber)) {
+                && isComboBoxesFilled(comboBoxTitle, comboBoxHallNumber)) {
             getValueFromInputs();
 
 //        TODO HERE CREATE PERFORMANCE OBJECT BASED ON FIELDS IN THIS CLASS AND SAVE TO DB

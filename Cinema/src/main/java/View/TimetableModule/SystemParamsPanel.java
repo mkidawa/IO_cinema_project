@@ -67,6 +67,16 @@ public class SystemParamsPanel implements Initializable {
         }
     }
 
+    private boolean isSpinnersFilled(Spinner... spinners) {
+        for (Spinner it : spinners) {
+            if (it.getValue() == null) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         spinnerAdsDuration.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(
@@ -78,11 +88,14 @@ public class SystemParamsPanel implements Initializable {
 
     @FXML
     private void onClickConfirmButton(ActionEvent actionEvent) {
-//        TODO SAVING TO DB
-        Integer ads = (Integer) spinnerAdsDuration.getValue();
-        Integer gap = (Integer) spinnerGapDuration.getValue();
+        if (isSpinnersFilled(spinnerAdsDuration, spinnerGapDuration)) {
+//          TODO SAVING TO DB
 
-        reloadStage(confirmButton, TIMETABLE_PANEL_PATH,
-                TIMETABLE_PANEL_STYLE_PATH, TIMETABLE_PANEL);
+            Integer ads = (Integer) spinnerAdsDuration.getValue();
+            Integer gap = (Integer) spinnerGapDuration.getValue();
+
+            reloadStage(confirmButton, TIMETABLE_PANEL_PATH,
+                    TIMETABLE_PANEL_STYLE_PATH, TIMETABLE_PANEL);
+        }
     }
 }

@@ -1,6 +1,8 @@
 package View.TimetableModule;
 
 import Controller.StageManager;
+import DBO.HallDAO;
+import DBO.MovieDAO;
 import DBO.PerformanceDAO;
 import Model.DICT.MovieState;
 import Model.DICT.MovieType;
@@ -22,6 +24,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Time;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import static View.TimetableModule.Util.Constants.TIMETABLE_PANEL;
@@ -32,9 +35,9 @@ public class PerformanceCreator implements Initializable {
 
     /*------------------------ FIELDS REGION ------------------------*/
     @FXML
-    private ComboBox title;
+    private ComboBox comboBoxTitle;
     @FXML
-    private ComboBox hallNumber;
+    private ComboBox comboBoxHallNumber;
     @FXML
     private RadioButton flg2D;
     @FXML
@@ -73,9 +76,17 @@ public class PerformanceCreator implements Initializable {
         }
     }
 
+    private void fillComboBoxes() {
+        List<Movie> movies = MovieDAO.getAll();
+        movies.forEach((it) -> comboBoxTitle.getItems().add(it.getTitle()));
+
+        List<Hall> halls = HallDAO.getAll();
+        halls.forEach((it) -> comboBoxHallNumber.getItems().add(it.getId()));
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        fillComboBoxes();
     }
 
     @FXML

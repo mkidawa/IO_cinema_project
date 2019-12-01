@@ -3,10 +3,10 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="414.0" prefWidth="388.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.MovieView.addPersonToMovieController">
+<AnchorPane prefHeight="519.0" prefWidth="362.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.MovieView.addPersonToMovieController">
    <children>
-      <Button fx:id="addPersonButton" layoutX="134.0" layoutY="353.0" mnemonicParsing="false" onMouseClicked="#onClickAddPerson" prefHeight="46.0" prefWidth="119.0" text="Add" />
-      <TableView fx:id="table" layoutY="45.0" prefHeight="270.0" prefWidth="390.0">
+      <Button fx:id="addPersonButton" layoutX="148.0" layoutY="465.0" mnemonicParsing="false" onMouseClicked="#onClickAddPerson" prefHeight="46.0" prefWidth="119.0" text="Add" />
+      <TableView fx:id="table" layoutX="12.0" layoutY="150.0" prefHeight="270.0" prefWidth="390.0">
         <columns>
           <TableColumn fx:id="ID" prefWidth="75.0" text="ID" />
           <TableColumn fx:id="Name" prefWidth="75.0" text="Name" />
@@ -16,6 +16,20 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
-      <ComboBox fx:id="Role" layoutX="63.0" layoutY="315.0" prefHeight="26.0" prefWidth="263.0" promptText="Role" />
+      <ComboBox fx:id="Role" layoutX="76.0" layoutY="432.0" prefHeight="26.0" prefWidth="263.0" promptText="Role" />
+      <Pane layoutX="5.0" layoutY="14.0" prefHeight="72.0" prefWidth="404.0">
+         <children>
+            <TextField fx:id="TextName" alignment="CENTER" layoutX="28.0" layoutY="36.0" promptText="Name" />
+            <Label layoutX="73.0" layoutY="14.0" text="First Name" textAlignment="CENTER" />
+            <TextField fx:id="TextLastname" alignment="CENTER" layoutX="213.0" layoutY="36.0" promptText="Last Name" />
+            <Label layoutX="259.0" layoutY="14.0" text="Last Name" textAlignment="CENTER" />
+         </children>
+      </Pane>
+      <Pane layoutX="12.0" layoutY="78.0" prefHeight="72.0" prefWidth="390.0">
+         <children>
+            <TextField fx:id="BirthDate" alignment="CENTER" layoutX="121.0" layoutY="36.0" promptText="Birth date" />
+            <Label alignment="CENTER" layoutX="64.0" layoutY="14.0" prefHeight="17.0" prefWidth="263.0" text="Birth Date yyyy-MM-dd" textAlignment="CENTER" />
+         </children>
+      </Pane>
    </children>
 </AnchorPane>

@@ -1,6 +1,7 @@
 package Controller;
 
 import DBO.MovieDAO;
+import DBO.PersonDAO;
 import Model.DICT.MovieState;
 import Model.DICT.MovieType;
 import Model.DICT.PersonType;
@@ -9,6 +10,7 @@ import Model.Person;
 import Model.PersonJob;
 
 import java.sql.Time;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,13 +29,10 @@ public class MovieManager {
             movie.addPerson(persons.get(i));
         MovieDAO.insertUpdate(movie);
     }
-    public static void createMovieWithoutPeople(short flg2D, short flg3D, short flgVR, MovieType type,
-                                   MovieState state, String title, String description,
-                                   Time duration) {
-
-
-        Movie movie = new Movie(flg2D, flg3D, flgVR, type, state, title, description, duration);
-        MovieDAO.insertUpdate(movie);
+    public static Person createPerson(String name, String lastname, Timestamp date){
+        Person person = new Person(name,lastname,date);
+        PersonDAO.insertUpdate(person);
+        return person;
     }
 
 

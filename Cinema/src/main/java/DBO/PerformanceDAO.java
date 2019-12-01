@@ -12,20 +12,20 @@ public class PerformanceDAO {
     /*------------------------ FIELDS REGION ------------------------*/
 
     /*------------------------ METHODS REGION ------------------------*/
-    public static List getAll() {
+    public static List<Performance> getAll() {
         var so = BaseDB.openConnection();
         so.beginTransaction();
-        List result = so.createQuery("from Performance").list();
+        List<Performance> result = so.createQuery("from Performance").list();
         so.getTransaction().commit();
         so.close();
 
         return result;
     }
 
-    public static List getAllById(long Id) {
+    public static List<Performance> getAllById(long Id) {
         var so = BaseDB.openConnection();
         so.beginTransaction();
-        List result = so
+        List<Performance> result = so
                 .createQuery("from Performance where Id = " + String.valueOf(Id)).list();
         so.getTransaction().commit();
         so.close();

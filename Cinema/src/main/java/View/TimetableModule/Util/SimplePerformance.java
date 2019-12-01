@@ -10,13 +10,18 @@ public class SimplePerformance {
     private SimpleLongProperty movieId;
     private SimpleLongProperty hallId;
     private SimpleStringProperty title;
+    private SimpleStringProperty date;
+    private SimpleStringProperty startTime;
 
     /*------------------------ METHODS REGION ------------------------*/
-    public SimplePerformance(Long id, Long movieId, Long hallId, String title) {
+    public SimplePerformance(Long id, Long movieId, Long hallId, String title,
+                             String date, String startTime) {
         this.id = new SimpleLongProperty(id);
         this.movieId = new SimpleLongProperty(movieId);
         this.hallId = new SimpleLongProperty(hallId);
         this.title = new SimpleStringProperty(title);
+        this.date = new SimpleStringProperty(date);
+        this.startTime = new SimpleStringProperty(startTime);
     }
 
     public long getId() {
@@ -33,5 +38,13 @@ public class SimplePerformance {
 
     public String getTitle() {
         return title.get();
+    }
+
+    public String getDate() {
+        return date.get();
+    }
+
+    public String getStartTime() {
+        return startTime.get();
     }
 }

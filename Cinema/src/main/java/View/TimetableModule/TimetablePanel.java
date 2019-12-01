@@ -2,6 +2,10 @@ package View.TimetableModule;
 
 import Controller.PerformanceManager;
 import DBO.PerformanceDAO;
+import Model.DICT.MovieState;
+import Model.DICT.MovieType;
+import Model.Hall;
+import Model.Movie;
 import Model.Performance;
 import View.TimetableModule.Util.PopOutWindow;
 import View.TimetableModule.Util.SimplePerformance;
@@ -23,6 +27,8 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Time;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 import static View.TimetableModule.Util.Constants.PERFORMANCE_CREATOR_PATH;
@@ -55,20 +61,17 @@ public class TimetablePanel implements Initializable {
     private TableColumn<SimplePerformance, String> movieTitle;
 
     @FXML
-    private TableColumn<SimplePerformance, String> genre;
+    private TableColumn<SimplePerformance, String> date;
+
+    @FXML
+    private TableColumn<SimplePerformance, String> startTime;
 
     private ObservableList<SimplePerformance>
-            PerformanceObservableList = FXCollections.observableArrayList();
+            performanceObservableList = FXCollections.observableArrayList();
 
     private PopOutWindow popOutWindow = new PopOutWindow();
 
     /*------------------------ METHODS REGION ------------------------*/
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        prepareTable();
-        prepareOnClickRowAction();
-    }
-
     private Stage loadFxmlStage(String fxmlPath, String fxmlStylePath, String title) throws IOException {
         Scene scene = new Scene(FXMLLoader.load(getClass().getResource(fxmlPath)));
         scene.getStylesheets().add(getClass().getResource(fxmlStylePath).toExternalForm());
@@ -84,7 +87,17 @@ public class TimetablePanel implements Initializable {
 
     //    TODO ADD IMPL
     private ObservableList<SimplePerformance> getDataFromDb() {
-        return null;
+        ObservableList<SimplePerformance> list = FXCollections.observableArrayList();
+
+        for (Performance it : PerformanceDAO.getAll()) {
+            list.add(new SimplePerformance(it.getId(), it.getMovie().getId(),
+                    it.getHall().getId(), it.getMovie().getTitle(),
+
+                    //TODO REMOVE THIS AND INSERT REAL DATA
+                    new Date().toString(), new Date().toString()));
+        }
+
+        return list;
     }
 
     private void prepareTable() {
@@ -96,17 +109,13 @@ public class TimetablePanel implements Initializable {
                 new PropertyValueFactory<SimplePerformance, Long>("hallId"));
         movieTitle.setCellValueFactory(
                 new PropertyValueFactory<SimplePerformance, String>("title"));
-//        genre.setCellValueFactory(
-//                new PropertyValueFactory<SimplePerformance, String>("genre"));
+        date.setCellValueFactory(
+                new PropertyValueFactory<SimplePerformance, String>("date"));
+        startTime.setCellValueFactory(
+                new PropertyValueFactory<SimplePerformance, String>("startTime"));
 
-//        TODO TEMP IMPL - REMOVE WHEN WILL WE LOADED FROM DB
-        PerformanceObservableList.addAll(new SimplePerformance(1L, 1L, 1L, "cbduyvbuvjf"),
-                new SimplePerformance(1L, 1L, 1L, "cbduyvbuvjf"),
-                new SimplePerformance(1L, 1L, 1L, "cbduyvbuvjf"),
-                new SimplePerformance(1L, 1L, 1L, "cbduyvbuvjf"));
-
-//      list = getList();
-        performanceTable.setItems(PerformanceObservableList);
+        performanceObservableList = getDataFromDb();
+        performanceTable.setItems(performanceObservableList);
     }
 
     private void prepareOnClickRowAction() {
@@ -134,6 +143,12 @@ public class TimetablePanel implements Initializable {
         });
     }
 
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        prepareTable();
+        prepareOnClickRowAction();
+    }
+
     @FXML
     private void onClickRow(Performance performance) throws IOException {
         PerformanceManager.setCurrentPerformance(performance);
@@ -142,6 +157,14 @@ public class TimetablePanel implements Initializable {
 
     @FXML
     private void onClickAddPerformance(MouseEvent mouseEvent) throws IOException {
+
+        // TODO REMOVE THIS
+        PerformanceDAO.insertUpdate(new Performance(new Movie((short) 1, (short) 1, (short) 1,
+                new MovieType("Comedy"), new MovieState("vfvfvf"), "WEEIA vs FTIMS",
+                "Only one true win(n)er", new Time(15)),
+                new Hall((short) 1, (short) 0, (short) 0, 5, 7, "acdcd",
+                        "nrinvnvklfdvklfdkvfkvkfn"), new Time(25)));
+
         loadFxmlStage(PERFORMANCE_CREATOR_PATH,
                 PERFORMANCE_CREATOR_STYLE_PATH, "Performance Creator");
     }

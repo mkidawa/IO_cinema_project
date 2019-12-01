@@ -35,6 +35,11 @@ public class PerformancePanel implements Initializable {
     }
 
     @FXML
+    private void onClickEditButton(MouseEvent mouseEvent) {
+
+    }
+
+    @FXML
     private void onClickDeleteButton(MouseEvent mouseEvent) {
 
     }

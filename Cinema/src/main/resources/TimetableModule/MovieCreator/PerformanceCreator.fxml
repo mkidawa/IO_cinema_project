@@ -1,14 +1,101 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="View.TimetableModule.PerformanceCreator"
-            prefHeight="400.0" prefWidth="600.0">
+<AnchorPane prefHeight="646.0" prefWidth="623.0" xmlns="http://javafx.com/javafx/10.0.2-internal"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="View.TimetableModule.PerformanceCreator">
+    <children>
 
+        <Pane layoutX="4.0" layoutY="25.0" prefHeight="93.0" prefWidth="614.0">
+            <children>
+                <Label layoutX="255.0" layoutY="14.0" prefHeight="26.0" prefWidth="105.0"
+                       text="Movie Title">
+                    <font>
+                        <Font name="Book Antiqua" size="20.0"/>
+                    </font>
+                </Label>
+                <ComboBox fx:id="title" layoutX="14.0" layoutY="47.0" prefHeight="44.0"
+                          prefWidth="600.0" promptText="Titles"/>
+            </children>
+        </Pane>
+
+        <Pane layoutX="4.0" layoutY="179.0" prefHeight="93.0" prefWidth="614.0">
+            <children>
+                <Label layoutX="245.0" layoutY="14.0" prefHeight="26.0" prefWidth="124.0"
+                       text="Hall Number">
+                    <font>
+                        <Font name="Book Antiqua" size="20.0"/>
+                    </font>
+                </Label>
+                <ComboBox fx:id="hallNumber" layoutX="14.0" layoutY="40.0" prefHeight="44.0"
+                          prefWidth="600.0" promptText="Halls"/>
+            </children>
+        </Pane>
+
+        <Pane layoutX="128.0" layoutY="368.0" prefHeight="66.0" prefWidth="84.0">
+            <children>
+                <Label layoutX="9.0" layoutY="28.0" prefHeight="26.0" prefWidth="43.0" text="2D">
+                    <font>
+                        <Font name="Book Antiqua" size="20.0"/>
+                    </font>
+                </Label>
+                <RadioButton fx:id="flg2D" layoutX="49.0" layoutY="26.0" mnemonicParsing="false"
+                             prefHeight="29.0" prefWidth="34.0">
+                    <font>
+                        <Font name="Book Antiqua" size="15.0"/>
+                    </font>
+                </RadioButton>
+            </children>
+        </Pane>
+
+        <Label layoutX="250.0" layoutY="323.0" prefHeight="26.0" prefWidth="124.0"
+               text="Movie Modes">
+            <font>
+                <Font name="Book Antiqua" size="20.0"/>
+            </font>
+        </Label>
+
+        <Pane layoutX="269.0" layoutY="368.0" prefHeight="66.0" prefWidth="84.0">
+            <children>
+                <Label layoutY="27.0" prefHeight="26.0" prefWidth="43.0" text="3D">
+                    <font>
+                        <Font name="Book Antiqua" size="20.0"/>
+                    </font>
+                </Label>
+                <RadioButton fx:id="flg3D" layoutX="52.0" layoutY="26.0" mnemonicParsing="false"
+                             prefHeight="29.0" prefWidth="34.0">
+                    <font>
+                        <Font name="Book Antiqua" size="15.0"/>
+                    </font>
+                </RadioButton>
+            </children>
+        </Pane>
+
+        <Pane layoutX="410.0" layoutY="368.0" prefHeight="66.0" prefWidth="84.0">
+            <children>
+                <Label layoutY="27.0" prefHeight="26.0" prefWidth="43.0" text="VR">
+                    <font>
+                        <Font name="Book Antiqua" size="20.0"/>
+                    </font>
+                </Label>
+                <RadioButton fx:id="flgVR" layoutX="52.0" layoutY="26.0" mnemonicParsing="false"
+                             prefHeight="29.0" prefWidth="34.0">
+                    <font>
+                        <Font name="Book Antiqua" size="15.0"/>
+                    </font>
+                </RadioButton>
+            </children>
+        </Pane>
+
+        <Button fx:id="confirmButton" layoutX="212.0" layoutY="539.0" mnemonicParsing="false"
+                onMouseClicked="#onClickConfirm" prefHeight="73.0" prefWidth="198.0" text="Confirm">
+            <font>
+                <Font name="Book Antiqua" size="18.0"/>
+            </font>
+        </Button>
+
+    </children>
 </AnchorPane>

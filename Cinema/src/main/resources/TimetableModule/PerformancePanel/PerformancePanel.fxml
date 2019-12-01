@@ -119,7 +119,8 @@
             </children>
         </AnchorPane>
         <Button id="edit" font="$x2" layoutX="28.0" layoutY="506.0" mnemonicParsing="false"
-                prefHeight="68.0" prefWidth="360.0" text="Edit"/>
+                prefHeight="68.0" prefWidth="360.0" onMouseClicked="#onClickEditButton"
+                text="Edit"/>
         <Button id="delete" fx:id="delete" font="$x2" layoutX="413.0" layoutY="506.0"
                 mnemonicParsing="false" onMouseClicked="#onClickDeleteButton" prefHeight="68.0"
                 prefWidth="360.0" text="Delete"/>

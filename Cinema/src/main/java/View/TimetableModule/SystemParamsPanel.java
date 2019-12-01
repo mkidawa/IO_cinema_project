@@ -33,10 +33,8 @@ public class SystemParamsPanel implements Initializable {
     /*------------------------ FIELDS REGION ------------------------*/
     @FXML
     private Spinner spinnerAdsDuration;
-
     @FXML
     private Spinner spinnerGapDuration;
-
     @FXML
     private Button confirmButton;
 
@@ -56,6 +54,19 @@ public class SystemParamsPanel implements Initializable {
         return stage;
     }
 
+    private void reloadStage(Button button, String fxmlPath, String fxmlStylePath, String title) {
+        try {
+            Stage currentStage = (Stage) button.getScene().getWindow();
+            currentStage.close();
+            Stage mainStage = loadFxmlStage(fxmlPath, fxmlStylePath, title);
+            StageManager.mainStage.close();
+            StageManager.mainStage = mainStage;
+        } catch (IOException e) {
+            popOutWindow.messageBox("Stage Loading Error",
+                    "Cannot Properly Load Main Stage", Alert.AlertType.ERROR);
+        }
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         spinnerAdsDuration.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(
@@ -71,16 +82,7 @@ public class SystemParamsPanel implements Initializable {
         Integer ads = (Integer) spinnerAdsDuration.getValue();
         Integer gap = (Integer) spinnerGapDuration.getValue();
 
-        try {
-            Stage currentStage = (Stage) confirmButton.getScene().getWindow();
-            currentStage.close();
-            Stage mainStage = loadFxmlStage(TIMETABLE_PANEL_PATH,
-                    TIMETABLE_PANEL_STYLE_PATH, TIMETABLE_PANEL);
-            StageManager.mainStage.close();
-            StageManager.mainStage = mainStage;
-        } catch (IOException e) {
-            popOutWindow.messageBox("Stage Loading Error",
-                    "Cannot Properly Load Main Stage", Alert.AlertType.ERROR);
-        }
+        reloadStage(confirmButton, TIMETABLE_PANEL_PATH,
+                TIMETABLE_PANEL_STYLE_PATH, TIMETABLE_PANEL);
     }
 }

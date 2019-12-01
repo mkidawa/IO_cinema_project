@@ -44,31 +44,23 @@ public class TimetablePanel implements Initializable {
     /*------------------------ FIELDS REGION ------------------------*/
     @FXML
     private GridPane pane;
-
     @FXML
     private TableView<SimplePerformance> performanceTable;
-
     @FXML
     private TableColumn<SimplePerformance, Long> id;
-
     @FXML
     private TableColumn<SimplePerformance, Long> movieId;
-
     @FXML
     private TableColumn<SimplePerformance, Long> hallId;
-
     @FXML
     private TableColumn<SimplePerformance, String> movieTitle;
-
     @FXML
     private TableColumn<SimplePerformance, String> date;
-
     @FXML
     private TableColumn<SimplePerformance, String> startTime;
 
     private ObservableList<SimplePerformance>
             performanceObservableList = FXCollections.observableArrayList();
-
     private PopOutWindow popOutWindow = new PopOutWindow();
 
     /*------------------------ METHODS REGION ------------------------*/
@@ -157,14 +149,6 @@ public class TimetablePanel implements Initializable {
 
     @FXML
     private void onClickAddPerformance(MouseEvent mouseEvent) throws IOException {
-
-        // TODO REMOVE THIS
-        PerformanceDAO.insertUpdate(new Performance(new Movie((short) 1, (short) 1, (short) 1,
-                new MovieType("Comedy"), new MovieState("vfvfvf"), "WEEIA vs FTIMS",
-                "Only one true win(n)er", new Time(15)),
-                new Hall((short) 1, (short) 0, (short) 0, 5, 7, "acdcd",
-                        "nrinvnvklfdvklfdkvfkvkfn"), new Time(25)));
-
         loadFxmlStage(PERFORMANCE_CREATOR_PATH,
                 PERFORMANCE_CREATOR_STYLE_PATH, "Performance Creator");
     }

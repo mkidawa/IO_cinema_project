@@ -109,6 +109,7 @@ public class addPersonToMovieController implements Initializable {
     }
 
     public void onClickAddPerson() {
+<<<<<<< HEAD
         if(!checkAllFieldsSelectedPerson()) {
             return;
         }
@@ -126,6 +127,19 @@ public class addPersonToMovieController implements Initializable {
         closeCurrent();
     }
 
+=======
+        if(TextName.getText().trim().isEmpty() && TextLastname.getText().trim().isEmpty()){
+            createPersonJob();
+            controller.updateList();
+            closeCurrent();
+        }else {
+            createNewPerson();
+            controller.updateList();
+            closeCurrent();
+        }
+    }
+
+>>>>>>> adding new people to the base
     public void closeCurrent() {
         Stage stage = (Stage) addPersonButton.getScene().getWindow();
         stage.close();

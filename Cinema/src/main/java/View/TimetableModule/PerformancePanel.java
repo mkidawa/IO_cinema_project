@@ -2,7 +2,6 @@ package View.TimetableModule;
 
 import Controller.PerformanceManager;
 import Controller.StageManager;
-import DBO.PerformanceDAO;
 import Model.TimeTable;
 import View.TimetableModule.Util.PopOutWindow;
 import javafx.fxml.FXML;

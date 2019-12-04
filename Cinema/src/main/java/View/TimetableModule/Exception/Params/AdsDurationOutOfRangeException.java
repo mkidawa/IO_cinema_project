@@ -1,4 +1,4 @@
-package View.TimetableModule.Exception;
+package View.TimetableModule.Exception.Params;
 
 public class AdsDurationOutOfRangeException extends SystemParamsException {
 

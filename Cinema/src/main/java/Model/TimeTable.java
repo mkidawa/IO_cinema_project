@@ -1,14 +1,24 @@
 package Model;
 
-import Controller.PerformanceManager;
 import DBO.PerformanceDAO;
 import Tools.Filter;
-import View.TimetableModule.Exception.AdsDurationOutOfRangeException;
-import View.TimetableModule.Exception.MinTimeIntervalOutOfRangeException;
+import View.TimetableModule.Exception.Params.AdsDurationOutOfRangeException;
+import View.TimetableModule.Exception.Params.MinTimeIntervalOutOfRangeException;
+import View.TimetableModule.Exception.Performance.HallNotAvailableException;
+import View.TimetableModule.Exception.Performance.MovieNotAvailableException;
+import View.TimetableModule.Exception.Performance.WrongHallTypeException;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -40,17 +50,94 @@ public class TimeTable {
     public TimeTable() {
     }
 
-//    public TimeTable(Performance performance, Timestamp performanceDate) {
+    //    public TimeTable(Performance performance, Timestamp performanceDate) {
 //        this.performance = performance;
 //        this.performanceDate = performanceDate;
 //    }
 
-    public void addPerformance(Performance performance) {
-//        if () {
-//
-//        } else {
-//
-//        }
+    /**
+     * CHECK IF SELECTED HALL WAS PREVIOUSLY CHOSEN TO ANOTHER PERFORMANCE IN DATABASE
+     *
+     * @param performance
+     * @return
+     */
+    private boolean isFreeHall(Performance performance) {
+        for (Performance it : PerformanceDAO.getAll()) {
+            if (it.getHall().getId() == performance.getHall().getId()) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * CHECK IF SELECTED HOUR
+     *
+     * @param performance
+     * @return
+     */
+    private boolean isCorrectHour(Performance performance) {
+        for (Performance it : PerformanceDAO.getAll()) {
+//            TODO NOT SURE IF addTime means start date of performance
+            if (it.getAddTime().equals(performance.getAddTime())) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * CHECK IF MOVIETYPE EQUALS TO "Current" - types from dictionary
+     *
+     * @param performance
+     * @return
+     */
+    private boolean isMovieAvailable(Performance performance) {
+        if (performance.getMovie().getMovieType().getName().equals("Current")) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * CHECK IF TYPE OF HALL IS CORRECT - 2D, 3D, VR FLAGS IN HALL AND MOVIE
+     *
+     * @param performance
+     * @return
+     */
+    private boolean isCorrectHallType(Performance performance) {
+        if (performance.getHall().getFlg2D() == performance.getMovie().getFlg2D()
+                && performance.getHall().getFlg2D() == performance.getMovie().getFlg2D()
+                && performance.getHall().getFlg2D() == performance.getMovie().getFlg2D()) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * ADD PERFORMANCE AFTER CHECKING CONDITIONS
+     *
+     * @param performance
+     * @throws HallNotAvailableException  - WHEN THERE IS NO FREE HALL IN CHOSEN TIME
+     * @throws MovieNotAvailableException - WHEN MOVIE IS MARKED AS NOT AVAILABLE
+     * @throws WrongHallTypeException     - WHEN TYPE OF DISPLAYING MOVIE AND TYPE OF HALL
+     *                                    DOES NOT MATCH - 2D MOVIE WITH 2D HALL
+     */
+    public void addPerformance(Performance performance)
+            throws HallNotAvailableException, MovieNotAvailableException, WrongHallTypeException {
+        if (!(isFreeHall(performance) && isCorrectHour(performance))) {
+            throw new HallNotAvailableException();
+        } else if (!isMovieAvailable(performance)) {
+            throw new MovieNotAvailableException();
+        } else if (!isCorrectHallType(performance)) {
+            throw new WrongHallTypeException();
+        } else {
+            PerformanceDAO.insertUpdate(performance);
+        }
     }
 
     public void removePerformance(Performance performance) {
@@ -59,6 +146,16 @@ public class TimeTable {
 //        } else {
 //
 //        }
+    }
+
+    /**
+     * Method compute performance length by adding movie time in minutes and adsDuration param
+     *
+     * @param performance
+     * @return
+     */
+    public Integer computePerformanceLengthMinutes(Performance performance) {
+        return performance.getMovie().getMovieTime().getMinutes() + PerformanceDAO.getAdsDuration();
     }
 
     public List<Performance> getPerformanceList() {

@@ -1,6 +1,6 @@
-package View.TimetableModule.Exception;
+package View.TimetableModule.Exception.Params;
 
-public class SystemParamsException extends Exception {
+public abstract class SystemParamsException extends Exception {
 
     /*------------------------ FIELDS REGION ------------------------*/
 

@@ -2,8 +2,8 @@ package View.TimetableModule;
 
 import Controller.StageManager;
 import Model.TimeTable;
-import View.TimetableModule.Exception.AdsDurationOutOfRangeException;
-import View.TimetableModule.Exception.MinTimeIntervalOutOfRangeException;
+import View.TimetableModule.Exception.Params.AdsDurationOutOfRangeException;
+import View.TimetableModule.Exception.Params.MinTimeIntervalOutOfRangeException;
 import View.TimetableModule.Util.PopOutWindow;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

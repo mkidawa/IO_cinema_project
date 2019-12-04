@@ -198,6 +198,7 @@ public class addMovieController implements Initializable {
         //creating a new Movie
         MovieManager.createMovie(flag2d, flag3d, flagVR, selectedGenre, selectedState, Title.getText(), Description.getText(), d, involved);
         closeAllStagesAndLoadNewMainStage();
+        MovieManager.workingPersons.clear();
     }
     public void onClickAddPerson() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/MovieModule/addPersonToMoviePanel/addPersonToMoviePanel.fxml"));

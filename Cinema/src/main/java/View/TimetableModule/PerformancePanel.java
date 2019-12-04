@@ -3,6 +3,7 @@ package View.TimetableModule;
 import Controller.PerformanceManager;
 import Controller.StageManager;
 import DBO.PerformanceDAO;
+import Model.TimeTable;
 import View.TimetableModule.Util.PopOutWindow;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -29,6 +30,7 @@ public class PerformancePanel implements Initializable {
     @FXML
     public Button deleteButton;
 
+    private TimeTable timeTable = new TimeTable();
     private PopOutWindow popOutWindow = new PopOutWindow();
 
     /*------------------------ METHODS REGION ------------------------*/
@@ -70,7 +72,7 @@ public class PerformancePanel implements Initializable {
 
     @FXML
     private void onClickDeleteButton(MouseEvent mouseEvent) {
-        PerformanceDAO.delete(PerformanceManager.getCurrentPerformance());
+        timeTable.removePerformance(PerformanceManager.getCurrentPerformance());
 
         reloadStage(deleteButton, TIMETABLE_PANEL_PATH,
                 TIMETABLE_PANEL_STYLE_PATH, TIMETABLE_PANEL);

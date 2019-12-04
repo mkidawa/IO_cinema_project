@@ -1,12 +1,8 @@
 package View.TimetableModule;
 
 import Controller.PerformanceManager;
-import DBO.PerformanceDAO;
-import Model.DICT.MovieState;
-import Model.DICT.MovieType;
-import Model.Hall;
-import Model.Movie;
 import Model.Performance;
+import Model.TimeTable;
 import View.TimetableModule.Util.PopOutWindow;
 import View.TimetableModule.Util.SimplePerformance;
 import javafx.collections.FXCollections;
@@ -27,7 +23,6 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Time;
 import java.util.Date;
 import java.util.ResourceBundle;
 
@@ -61,6 +56,7 @@ public class TimetablePanel implements Initializable {
 
     private ObservableList<SimplePerformance>
             performanceObservableList = FXCollections.observableArrayList();
+    private TimeTable timeTable = new TimeTable();
     private PopOutWindow popOutWindow = new PopOutWindow();
 
     /*------------------------ METHODS REGION ------------------------*/
@@ -78,10 +74,10 @@ public class TimetablePanel implements Initializable {
     }
 
     //    TODO ADD IMPL
-    private ObservableList<SimplePerformance> getDataFromDb() {
+    private ObservableList<SimplePerformance> prepareSimplePerformanceList() {
         ObservableList<SimplePerformance> list = FXCollections.observableArrayList();
 
-        for (Performance it : PerformanceDAO.getAll()) {
+        for (Performance it : timeTable.getPerformanceList()) {
             list.add(new SimplePerformance(it.getId(), it.getMovie().getId(),
                     it.getHall().getId(), it.getMovie().getTitle(),
 
@@ -106,7 +102,7 @@ public class TimetablePanel implements Initializable {
         startTime.setCellValueFactory(
                 new PropertyValueFactory<SimplePerformance, String>("startTime"));
 
-        performanceObservableList = getDataFromDb();
+        performanceObservableList = prepareSimplePerformanceList();
         performanceTable.setItems(performanceObservableList);
     }
 
@@ -118,8 +114,7 @@ public class TimetablePanel implements Initializable {
                 if (!tableRow.isEmpty()
                         && event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 2) {
                     try {
-                        onClickRow((Performance) PerformanceDAO
-                                .getAllById(tableRow.getItem().getId()).get(0));
+                        onClickRow(timeTable.getPerformanceListById(tableRow.getItem().getId()).get(0));
                     } catch (IndexOutOfBoundsException e) {
                         popOutWindow.messageBox("Database is empty",
                                 "Database is empty, check if everything works properly",

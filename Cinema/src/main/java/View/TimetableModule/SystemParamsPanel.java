@@ -1,6 +1,9 @@
 package View.TimetableModule;
 
 import Controller.StageManager;
+import Model.TimeTable;
+import View.TimetableModule.Exception.AdsDurationOutOfRangeException;
+import View.TimetableModule.Exception.MinTimeIntervalOutOfRangeException;
 import View.TimetableModule.Util.PopOutWindow;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -34,10 +37,11 @@ public class SystemParamsPanel implements Initializable {
     @FXML
     private Spinner spinnerAdsDuration;
     @FXML
-    private Spinner spinnerGapDuration;
+    private Spinner spinnerMinTimeInterval;
     @FXML
     private Button confirmButton;
 
+    private TimeTable timeTable = new TimeTable();
     private PopOutWindow popOutWindow = new PopOutWindow();
 
     /*------------------------ METHODS REGION ------------------------*/
@@ -81,18 +85,27 @@ public class SystemParamsPanel implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         spinnerAdsDuration.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(
                 MIN_ADS_VALUE, MAX_ADS_VALUE, INITIAL_ADS_VALUE, SPINNER_STEP));
-        spinnerGapDuration.setValueFactory(new SpinnerValueFactory
+        spinnerMinTimeInterval.setValueFactory(new SpinnerValueFactory
                 .IntegerSpinnerValueFactory(MIN_PERFORMANCE_GAP_VALUE,
                 MAX_PERFORMANCE_GAP_VALUE, INITIAL_PERFORMANCE_GAP_VALUE, SPINNER_STEP));
     }
 
     @FXML
     private void onClickConfirmButton(ActionEvent actionEvent) {
-        if (isSpinnersFilled(spinnerAdsDuration, spinnerGapDuration)) {
-//          TODO SAVING TO DB
+        if (isSpinnersFilled(spinnerAdsDuration, spinnerMinTimeInterval)) {
+            try {
+                timeTable.setAdsDuration((Integer) spinnerAdsDuration.getValue());
+            } catch (AdsDurationOutOfRangeException e) {
+                popOutWindow.messageBox("Invalid Ads Duration",
+                        "Ads duration is not valid", Alert.AlertType.WARNING);
+            }
 
-            Integer ads = (Integer) spinnerAdsDuration.getValue();
-            Integer gap = (Integer) spinnerGapDuration.getValue();
+            try {
+                timeTable.setMinTimeInterval((Integer) spinnerMinTimeInterval.getValue());
+            } catch (MinTimeIntervalOutOfRangeException e) {
+                popOutWindow.messageBox("Invalid Minimal Time Interval",
+                        "Minimal time interval is not valid ", Alert.AlertType.WARNING);
+            }
 
             reloadStage(confirmButton, TIMETABLE_PANEL_PATH,
                     TIMETABLE_PANEL_STYLE_PATH, TIMETABLE_PANEL);

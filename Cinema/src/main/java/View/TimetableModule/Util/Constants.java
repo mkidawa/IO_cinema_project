@@ -11,7 +11,7 @@ public class Constants {
     public static final Integer MIN_ADS_VALUE = 5;
     public static final Integer MAX_ADS_VALUE = 100;
     public static final Integer INITIAL_ADS_VALUE = 15;
-    public static final Integer MIN_PERFORMANCE_GAP_VALUE = 5;
+    public static final Integer MIN_PERFORMANCE_GAP_VALUE = 10;
     public static final Integer MAX_PERFORMANCE_GAP_VALUE = 100;
     public static final Integer INITIAL_PERFORMANCE_GAP_VALUE = 20;
     public static final Integer SPINNER_STEP = 1;

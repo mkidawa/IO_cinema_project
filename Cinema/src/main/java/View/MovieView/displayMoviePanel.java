@@ -39,6 +39,7 @@ public class displayMoviePanel implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         this.movie = MovieManager.workingMovie;
+        MovieManager.isEdit = false;
 
         id.setText(movie.getId() + "");
         title.setText(movie.getTitle());
@@ -77,6 +78,24 @@ public class displayMoviePanel implements Initializable {
         MovieManager.workingMovie = null;
 
         closeAllStagesAndLoadNewMainStage();
+    }
+
+    public void onClickEdit() {
+        MovieManager.isEdit = true;
+        closeAllStagesAndLoadNewMainStage();
+        Parent fxmlLoader = null;
+        try {
+            fxmlLoader = FXMLLoader.load(getClass().getResource("/MovieModule/addMoviePanel/addMovie.fxml"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Stage stage = new Stage();
+        Scene scene = new Scene(fxmlLoader);
+        scene.getStylesheets().add(getClass().getResource("/MovieModule/addMoviePanel/addMovie.css").toExternalForm());
+        stage.setScene(scene);
+        stage.setTitle("Add movie panel");
+        stage.setResizable(false);
+        stage.show();
     }
 
     public void closeAllStagesAndLoadNewMainStage() {

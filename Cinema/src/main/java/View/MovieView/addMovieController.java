@@ -6,8 +6,10 @@ import DBO.MovieTypeDAO;
 import Model.DICT.MovieState;
 import Model.DICT.MovieType;
 import Model.DICT.PersonType;
+import Model.Movie;
 import Model.Person;
 import Model.PersonJob;
+import Tools.Filter;
 import javafx.beans.property.SimpleLongProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -27,6 +29,8 @@ import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.concurrent.TimeUnit;
+
 //todo exceptions for empty fields, adding person from text input
 public class addMovieController implements Initializable {
     @FXML
@@ -93,6 +97,13 @@ public class addMovieController implements Initializable {
 
         SpinnerValueFactory minutes = new SpinnerValueFactory.IntegerSpinnerValueFactory(60, 200, 90, 2);
         Duration.setValueFactory(minutes);
+
+        MovieManager.workingPersons.clear();
+        if(MovieManager.isEdit) {
+            this.fillAllForms();
+            this.updateList();
+            MovieManager.isEdit = false;
+        }
     }
 
     public static ObservableList<SimplePersonwType> getList() {
@@ -106,9 +117,18 @@ public class addMovieController implements Initializable {
     }
 
     public void updateList (){
-        System.out.println("funkcja Update List");
         if(!(MovieManager.workingPersons.isEmpty())) {
             peopleInvolved.setItems(getList());
+        }
+        if (MovieManager.isEdit) {
+            ObservableList<SimplePersonwType> list = FXCollections.observableArrayList();
+            for (int i = 0; i < MovieManager.workingMovie.getPeoples().size(); i++) {
+                Person person = MovieManager.workingMovie.getPeoples().get(i).getPerson();
+                PersonType type = MovieManager.workingMovie.getPeoples().get(i).getPersonType();
+                list.add(new SimplePersonwType(person.getId(), person.getFirstName(), person.getLastName(), type.getName()));
+            }
+            peopleInvolved.setItems(list);
+            MovieManager.workingPersons = MovieManager.workingMovie.getPeoples();
         }
     }
     public class SimpleMovieGenre {
@@ -234,6 +254,48 @@ public class addMovieController implements Initializable {
             e.printStackTrace();
         }
     }
+
+    public void fillAllForms() {
+        Movie movie = MovieManager.workingMovie;
+
+        Title.setText(movie.getTitle());
+        Description.setText(movie.getDescription());
+
+        Filter filter = new Filter();
+        filter.addField("Name", movie.getMovieType().getName());
+        List<MovieType> types = MovieTypeDAO.getAllByFilter(filter);
+        Genre.getSelectionModel().select(types.get(0).getName());
+
+        Filter filterState = new Filter();
+        filterState.addField("Name", movie.getMovieState().getName());
+        List<MovieState> states = MovieStateDAO.getAllByFilter(filterState);
+        MovieState.getSelectionModel().select(states.get(0).getName());
+
+        int minutes = toMins(movie.getMovieTime().toString());
+
+        SpinnerValueFactory mins = new SpinnerValueFactory.IntegerSpinnerValueFactory(60, 200, minutes, 2);
+        Duration.setValueFactory(mins);
+
+        if(movie.getFlg2D() > 0){
+            flg2D.setSelected(true);
+        }
+        if(movie.getFlg3D() > 0){
+            flg3D.setSelected(true);
+        }
+        if(movie.getFlgVR() > 0){
+            flgVR.setSelected(true);
+        }
+
+    }
+
+    private static int toMins(String s) {
+        String[] hourMin = s.split(":");
+        int hour = Integer.parseInt(hourMin[0]);
+        int mins = Integer.parseInt(hourMin[1]);
+        int hoursInMins = hour * 60;
+        return hoursInMins + mins;
+    }
+
     public static class SimplePersonwType {
         private final SimpleLongProperty ID;
         private final SimpleStringProperty Name;

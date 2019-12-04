@@ -16,7 +16,7 @@ import java.util.List;
 
 public class MovieManager {
 
-    public static Movie workingMovie;
+    public static Movie currentMovie;
     public static List<PersonJob> workingPersons = new ArrayList<>();
     public static boolean isEdit = false;
     //public static List<PersonJob> createPersonJobList = new ArrayList<>();
@@ -28,7 +28,6 @@ public class MovieManager {
         Movie movie = new Movie(flg2D, flg3D, flgVR, type, state, title, description, duration);
         for (int i=0; i<persons.size(); i++)
             movie.addPerson(persons.get(i));
-        System.out.println(movie.getPeoples());
         MovieDAO.insertUpdate(movie);
     }
     public static Person createPerson(String name, String lastname, Timestamp date){

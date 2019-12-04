@@ -38,7 +38,7 @@ public class displayMoviePanel implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        this.movie = MovieManager.workingMovie;
+        this.movie = MovieManager.currentMovie;
         MovieManager.isEdit = false;
 
         id.setText(movie.getId() + "");
@@ -75,7 +75,7 @@ public class displayMoviePanel implements Initializable {
 
     public void onClickDelete() {
         MovieDAO.delete(movie);
-        MovieManager.workingMovie = null;
+        MovieManager.currentMovie = null;
 
         closeAllStagesAndLoadNewMainStage();
     }

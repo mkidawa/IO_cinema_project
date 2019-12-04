@@ -1,6 +1,7 @@
 package View.MovieView;
 import Controller.MovieManager;
 import Controller.StageManager;
+import DBO.MovieDAO;
 import DBO.MovieStateDAO;
 import DBO.MovieTypeDAO;
 import Model.DICT.MovieState;
@@ -29,7 +30,6 @@ import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.concurrent.TimeUnit;
 
 //todo exceptions for empty fields, adding person from text input
 public class addMovieController implements Initializable {
@@ -64,6 +64,7 @@ public class addMovieController implements Initializable {
     private MovieState selectedState = new MovieState();
     private Time d;
     private int dur;
+    private boolean updating;
     ObservableList<SimpleMovieGenre> movieTypes = FXCollections.observableArrayList();
     ObservableList<SimpleMovieState> movieStates = FXCollections.observableArrayList();
 
@@ -99,10 +100,14 @@ public class addMovieController implements Initializable {
         Duration.setValueFactory(minutes);
 
         MovieManager.workingPersons.clear();
+        updating = false;
+
         if(MovieManager.isEdit) {
-            this.fillAllForms();
-            this.updateList();
+            fillAllForms();
+            updateList();
             MovieManager.isEdit = false;
+            addMovieButton.setText("Update Movie");
+            updating = true;
         }
     }
 
@@ -122,14 +127,15 @@ public class addMovieController implements Initializable {
         }
         if (MovieManager.isEdit) {
             ObservableList<SimplePersonwType> list = FXCollections.observableArrayList();
-            for (int i = 0; i < MovieManager.workingMovie.getPeoples().size(); i++) {
-                Person person = MovieManager.workingMovie.getPeoples().get(i).getPerson();
-                PersonType type = MovieManager.workingMovie.getPeoples().get(i).getPersonType();
+            for (int i = 0; i < MovieManager.currentMovie.getPeoples().size(); i++) {
+                Person person = MovieManager.currentMovie.getPeoples().get(i).getPerson();
+                PersonType type = MovieManager.currentMovie.getPeoples().get(i).getPersonType();
                 list.add(new SimplePersonwType(person.getId(), person.getFirstName(), person.getLastName(), type.getName()));
             }
             peopleInvolved.setItems(list);
-            MovieManager.workingPersons = MovieManager.workingMovie.getPeoples();
+            MovieManager.workingPersons = MovieManager.currentMovie.getPeoples();
         }
+        System.out.println(MovieManager.currentMovie);
     }
     public class SimpleMovieGenre {
         private final SimpleLongProperty ID;
@@ -216,9 +222,34 @@ public class addMovieController implements Initializable {
             involved.add(newPerson);
         }
         //creating a new Movie
-        MovieManager.createMovie(flag2d, flag3d, flagVR, selectedGenre, selectedState, Title.getText(), Description.getText(), d, involved);
-        closeAllStagesAndLoadNewMainStage();
-        MovieManager.workingPersons.clear();
+        if (!updating) {
+            MovieManager.createMovie(flag2d, flag3d, flagVR, selectedGenre, selectedState, Title.getText(), Description.getText(), d, involved);
+            closeAllStagesAndLoadNewMainStage();
+            MovieManager.workingPersons.clear();
+        }
+        //updating a movie
+        else {
+            Movie movie = MovieManager.currentMovie;
+
+            movie.setTitle(Title.getText());
+            movie.setDescription(Description.getText());
+            movie.setMovieState(selectedState);
+            movie.setMovieType(selectedGenre);
+            movie.setFlg2D(flag2d);
+            movie.setFlg3D(flag3d);
+            movie.setFlgVR(flagVR);
+            int size = movie.getPeoples().size();
+            System.out.println("trap");
+            if(movie.getPeoples().size() < involved.size()) {
+                for (int i = movie.getPeoples().size(); i < involved.size(); i++) {
+                    movie.addPerson(involved.get(i));
+                }
+            }
+            MovieDAO.insertUpdate(movie);
+            closeAllStagesAndLoadNewMainStage();
+            MovieManager.workingPersons.clear();
+            MovieManager.currentMovie = null;
+        }
     }
     public void onClickAddPerson() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/MovieModule/addPersonToMoviePanel/addPersonToMoviePanel.fxml"));
@@ -256,7 +287,7 @@ public class addMovieController implements Initializable {
     }
 
     public void fillAllForms() {
-        Movie movie = MovieManager.workingMovie;
+        Movie movie = MovieManager.currentMovie;
 
         Title.setText(movie.getTitle());
         Description.setText(movie.getDescription());

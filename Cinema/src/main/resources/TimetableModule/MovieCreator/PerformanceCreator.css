@@ -2,3 +2,7 @@ AnchorPane {
     -fx-background-color: rgba(30, 144, 255, 0.2);
     -fx-font-family: "Book Antiqua";
 }
+
+.font-size-20 {
+    -fx-font-size: 20px;
+}

@@ -18,15 +18,28 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.Spinner;
+import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import static View.TimetableModule.Util.Constants.INITIAL_HOUR_VALUE;
+import static View.TimetableModule.Util.Constants.INITIAL_MINUTE_VALUE;
+import static View.TimetableModule.Util.Constants.MAX_HOUR_VALUE;
+import static View.TimetableModule.Util.Constants.MAX_MINUTE_VALUE;
+import static View.TimetableModule.Util.Constants.MIN_HOUR_VALUE;
+import static View.TimetableModule.Util.Constants.MIN_MINUTE_VALUE;
+import static View.TimetableModule.Util.Constants.SPINNER_STEP;
 import static View.TimetableModule.Util.Constants.TIMETABLE_PANEL;
 import static View.TimetableModule.Util.Constants.TIMETABLE_PANEL_PATH;
 import static View.TimetableModule.Util.Constants.TIMETABLE_PANEL_STYLE_PATH;
@@ -45,6 +58,12 @@ public class PerformanceCreator implements Initializable {
     @FXML
     private RadioButton flgVR;
     @FXML
+    private Spinner spinnerHour;
+    @FXML
+    private Spinner spinnerMinute;
+    @FXML
+    private DatePicker performanceDatePicker;
+    @FXML
     private Button confirmButton;
 
     private short flag2dValue;
@@ -52,6 +71,7 @@ public class PerformanceCreator implements Initializable {
     private short flagVRValue;
     private long hallIdValue;
     private String titleValue;
+    private LocalDateTime performanceDate;
 
     private TimeTable timeTable = new TimeTable();
     private PopOutWindow popOutWindow = new PopOutWindow();
@@ -151,6 +171,22 @@ public class PerformanceCreator implements Initializable {
     }
 
     /**
+     * METHOD CHECKS IF SPINNERS ARE FILLED IF SO RETURN TRUE, IF NOT RETURN FALSE
+     *
+     * @param spinners
+     * @return
+     */
+    private boolean isSpinnersFilled(Spinner... spinners) {
+        for (Spinner it : spinners) {
+            if (it.getValue() == null) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
      * METHOD SET FLAG VALUE, IF SELECTED SET VALUE TO ONE, IF NOT TO 0
      *
      * @param radioButton
@@ -174,11 +210,19 @@ public class PerformanceCreator implements Initializable {
 
         titleValue = (String) comboBoxTitle.getValue();
         hallIdValue = (Long) comboBoxHallNumber.getValue();
+        LocalDate tmpDate = performanceDatePicker.getValue();
+        performanceDate = LocalDateTime.of(tmpDate.getYear(), tmpDate.getMonth(),
+                tmpDate.getDayOfMonth(), (int) spinnerHour.getValue(),
+                (int) spinnerMinute.getValue());
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         fillComboBoxes();
+        spinnerHour.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(
+                MIN_HOUR_VALUE, MAX_HOUR_VALUE, INITIAL_HOUR_VALUE, SPINNER_STEP));
+        spinnerMinute.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(
+                MIN_MINUTE_VALUE, MAX_MINUTE_VALUE, INITIAL_MINUTE_VALUE, SPINNER_STEP));
     }
 
     /**
@@ -197,7 +241,9 @@ public class PerformanceCreator implements Initializable {
 //                        "nrinvnvklfdvklfdkvfkvkfn"), new Time(25)));
 
         if (isOneRadioButtonSelected(flg2D, flg3D, flgVR)
-                && isComboBoxesFilled(comboBoxTitle, comboBoxHallNumber)) {
+                && isComboBoxesFilled(comboBoxTitle, comboBoxHallNumber)
+                && isSpinnersFilled(spinnerHour, spinnerMinute)
+                && performanceDatePicker.getValue() != null) {
             getValueFromInputs();
 
             try {

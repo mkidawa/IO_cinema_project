@@ -11,9 +11,19 @@ public class Constants {
     public static final Integer MIN_ADS_VALUE = 5;
     public static final Integer MAX_ADS_VALUE = 100;
     public static final Integer INITIAL_ADS_VALUE = 15;
+
     public static final Integer MIN_PERFORMANCE_GAP_VALUE = 10;
     public static final Integer MAX_PERFORMANCE_GAP_VALUE = 100;
     public static final Integer INITIAL_PERFORMANCE_GAP_VALUE = 20;
+
+    public static final Integer MIN_HOUR_VALUE = 0;
+    public static final Integer MAX_HOUR_VALUE = 23;
+    public static final Integer INITIAL_HOUR_VALUE = 21;
+
+    public static final Integer MIN_MINUTE_VALUE = 0;
+    public static final Integer MAX_MINUTE_VALUE = 59;
+    public static final Integer INITIAL_MINUTE_VALUE = 37;
+
     public static final Integer SPINNER_STEP = 1;
 
     public static final String

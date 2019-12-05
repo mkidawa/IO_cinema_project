@@ -105,9 +105,7 @@ public class addPersonToMovieController implements Initializable {
         }
 
         PersonJob temp = new PersonJob(persons.get(0), selectedPersonType);
-        System.out.println(MovieManager.currentMovie);
         MovieManager.workingPersons.add(temp);
-        System.out.println(MovieManager.currentMovie);
     }
 
     public void onClickAddPerson() {

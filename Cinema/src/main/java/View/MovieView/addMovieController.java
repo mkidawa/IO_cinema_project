@@ -133,10 +133,10 @@ public class addMovieController implements Initializable {
                 list.add(new SimplePersonwType(person.getId(), person.getFirstName(), person.getLastName(), type.getName()));
             }
             peopleInvolved.setItems(list);
-            MovieManager.workingPersons = MovieManager.currentMovie.getPeoples();
+            MovieManager.workingPersons = new ArrayList<PersonJob>(MovieManager.currentMovie.getPeoples());
         }
-        System.out.println(MovieManager.currentMovie);
     }
+
     public class SimpleMovieGenre {
         private final SimpleLongProperty ID;
         private final SimpleStringProperty genre;
@@ -238,6 +238,7 @@ public class addMovieController implements Initializable {
             movie.setFlg2D(flag2d);
             movie.setFlg3D(flag3d);
             movie.setFlgVR(flagVR);
+            movie.setMovieTime(d);
             int size = movie.getPeoples().size();
             System.out.println("trap");
             if(movie.getPeoples().size() < involved.size()) {
@@ -251,6 +252,7 @@ public class addMovieController implements Initializable {
             MovieManager.currentMovie = null;
         }
     }
+
     public void onClickAddPerson() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/MovieModule/addPersonToMoviePanel/addPersonToMoviePanel.fxml"));
         Parent root = (Parent) loader.load();

@@ -26,8 +26,9 @@ public class MovieManager {
 
 
         Movie movie = new Movie(flg2D, flg3D, flgVR, type, state, title, description, duration);
-        for (int i=0; i<persons.size(); i++)
+        for (int i=0; i<persons.size(); i++) {
             movie.addPerson(persons.get(i));
+        }
         MovieDAO.insertUpdate(movie);
     }
     public static Person createPerson(String name, String lastname, Timestamp date){

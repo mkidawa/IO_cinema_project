@@ -45,6 +45,16 @@ public class SystemParamsPanel implements Initializable {
     private PopOutWindow popOutWindow = new PopOutWindow();
 
     /*------------------------ METHODS REGION ------------------------*/
+
+    /**
+     * LOAD SELECTED STAGE AND ITS CSS STYLING
+     *
+     * @param fxmlPath
+     * @param fxmlStylePath
+     * @param title
+     * @return
+     * @throws IOException
+     */
     private Stage loadFxmlStage(String fxmlPath, String fxmlStylePath, String title) throws IOException {
         Scene scene = new Scene(FXMLLoader.load(getClass().getResource(fxmlPath)));
         scene.getStylesheets().add(getClass().getResource(fxmlStylePath).toExternalForm());
@@ -58,6 +68,14 @@ public class SystemParamsPanel implements Initializable {
         return stage;
     }
 
+    /**
+     * CLOSE CURRENT STAGE AND RELOAD SELECTED STAGE
+     *
+     * @param button
+     * @param fxmlPath
+     * @param fxmlStylePath
+     * @param title
+     */
     private void reloadStage(Button button, String fxmlPath, String fxmlStylePath, String title) {
         try {
             Stage currentStage = (Stage) button.getScene().getWindow();
@@ -71,6 +89,12 @@ public class SystemParamsPanel implements Initializable {
         }
     }
 
+    /**
+     * METHOD CHECKS IF SPINNERS ARE FILLED IF SO RETURN TRUE, IF NOT RETURN FALSE
+     *
+     * @param spinners
+     * @return
+     */
     private boolean isSpinnersFilled(Spinner... spinners) {
         for (Spinner it : spinners) {
             if (it.getValue() == null) {

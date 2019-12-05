@@ -33,6 +33,16 @@ public class PerformancePanel implements Initializable {
     private PopOutWindow popOutWindow = new PopOutWindow();
 
     /*------------------------ METHODS REGION ------------------------*/
+
+    /**
+     * LOAD SELECTED STAGE AND ITS CSS STYLING
+     *
+     * @param fxmlPath
+     * @param fxmlStylePath
+     * @param title
+     * @return
+     * @throws IOException
+     */
     private Stage loadFxmlStage(String fxmlPath, String fxmlStylePath, String title) throws IOException {
         Scene scene = new Scene(FXMLLoader.load(getClass().getResource(fxmlPath)));
         scene.getStylesheets().add(getClass().getResource(fxmlStylePath).toExternalForm());
@@ -46,6 +56,14 @@ public class PerformancePanel implements Initializable {
         return stage;
     }
 
+    /**
+     * CLOSE CURRENT STAGE AND RELOAD SELECTED STAGE
+     *
+     * @param button
+     * @param fxmlPath
+     * @param fxmlStylePath
+     * @param title
+     */
     private void reloadStage(Button button, String fxmlPath, String fxmlStylePath, String title) {
         try {
             Stage currentStage = (Stage) button.getScene().getWindow();
@@ -69,6 +87,11 @@ public class PerformancePanel implements Initializable {
 
     }
 
+    /**
+     * METHOD DELETES CHOSEN PERFORMANCE AND RELOAD TIMETABLE STAGE
+     *
+     * @param mouseEvent
+     */
     @FXML
     private void onClickDeleteButton(MouseEvent mouseEvent) {
         timeTable.removePerformance(PerformanceManager.getCurrentPerformance());

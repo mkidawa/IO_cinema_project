@@ -60,6 +60,16 @@ public class TimetablePanel implements Initializable {
     private PopOutWindow popOutWindow = new PopOutWindow();
 
     /*------------------------ METHODS REGION ------------------------*/
+
+    /**
+     * LOAD SELECTED STAGE AND ITS CSS STYLING
+     *
+     * @param fxmlPath
+     * @param fxmlStylePath
+     * @param title
+     * @return
+     * @throws IOException
+     */
     private Stage loadFxmlStage(String fxmlPath, String fxmlStylePath, String title) throws IOException {
         Scene scene = new Scene(FXMLLoader.load(getClass().getResource(fxmlPath)));
         scene.getStylesheets().add(getClass().getResource(fxmlStylePath).toExternalForm());
@@ -73,6 +83,12 @@ public class TimetablePanel implements Initializable {
         return stage;
     }
 
+    /**
+     * METHOD PREPARES LIST OF SIMPLEPERFORMANCE BASED ON DATA FROM LIST OF PERFORMANCE AND
+     * RETURN IT
+     *
+     * @return
+     */
     //    TODO ADD IMPL
     private ObservableList<SimplePerformance> prepareSimplePerformanceList() {
         ObservableList<SimplePerformance> list = FXCollections.observableArrayList();
@@ -88,6 +104,9 @@ public class TimetablePanel implements Initializable {
         return list;
     }
 
+    /**
+     * METHOD PREPARES CELLS IN TABLE AND LOAD DATA TO TABLE
+     */
     private void prepareTable() {
         id.setCellValueFactory(
                 new PropertyValueFactory<SimplePerformance, Long>("id"));
@@ -106,6 +125,9 @@ public class TimetablePanel implements Initializable {
         performanceTable.setItems(performanceObservableList);
     }
 
+    /**
+     * METHOD PREPARES ON CLICK ACTION ON ROWS IN TABLE
+     */
     private void prepareOnClickRowAction() {
         performanceTable.setRowFactory(it -> {
             TableRow<SimplePerformance> tableRow = new TableRow<>();

@@ -72,7 +72,7 @@ public class TimeTable {
     }
 
     /**
-     * CHECK IF SELECTED HOUR
+     * CHECK IF SELECTED HOUR IS EQUAL TO AVAILABLE PERFORMANCES HOURS
      *
      * @param performance
      * @return

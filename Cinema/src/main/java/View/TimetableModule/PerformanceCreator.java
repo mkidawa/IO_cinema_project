@@ -51,6 +51,16 @@ public class PerformanceCreator implements Initializable {
     private PopOutWindow popOutWindow = new PopOutWindow();
 
     /*------------------------ METHODS REGION ------------------------*/
+
+    /**
+     * LOAD SELECTED STAGE AND ITS CSS STYLING
+     *
+     * @param fxmlPath
+     * @param fxmlStylePath
+     * @param title
+     * @return
+     * @throws IOException
+     */
     private Stage loadFxmlStage(String fxmlPath, String fxmlStylePath, String title) throws IOException {
         Scene scene = new Scene(FXMLLoader.load(getClass().getResource(fxmlPath)));
         scene.getStylesheets().add(getClass().getResource(fxmlStylePath).toExternalForm());
@@ -64,6 +74,14 @@ public class PerformanceCreator implements Initializable {
         return stage;
     }
 
+    /**
+     * CLOSE CURRENT STAGE AND RELOAD SELECTED STAGE
+     *
+     * @param button
+     * @param fxmlPath
+     * @param fxmlStylePath
+     * @param title
+     */
     private void reloadStage(Button button, String fxmlPath, String fxmlStylePath, String title) {
         try {
             Stage currentStage = (Stage) button.getScene().getWindow();
@@ -77,6 +95,9 @@ public class PerformanceCreator implements Initializable {
         }
     }
 
+    /**
+     * METHOD FILL COMBOBOXES WITH SELECTED MOVIE DATA
+     */
     private void fillComboBoxes() {
         List<Movie> movies = MovieDAO.getAll();
         movies.forEach((it) -> comboBoxTitle.getItems().add(it.getTitle()));
@@ -85,6 +106,12 @@ public class PerformanceCreator implements Initializable {
         halls.forEach((it) -> comboBoxHallNumber.getItems().add(it.getId()));
     }
 
+    /**
+     * CHECK IF EXACTLY ONE RADIO BUTTON IS SELECTED
+     *
+     * @param radioButtons
+     * @return - IF ONE RETURN TRUE, ELSE RETURN FALSE
+     */
     private boolean isOneRadioButtonSelected(RadioButton... radioButtons) {
         int numberOfSelectedRadioButtons = 0;
 
@@ -101,6 +128,12 @@ public class PerformanceCreator implements Initializable {
         return false;
     }
 
+    /**
+     * CHECKS IF COMBOBOXES ARE FILLED
+     *
+     * @param comboBoxes
+     * @return
+     */
     private boolean isComboBoxesFilled(ComboBox... comboBoxes) {
         for (ComboBox it : comboBoxes) {
             if (it.getValue() == null) {
@@ -111,14 +144,26 @@ public class PerformanceCreator implements Initializable {
         return true;
     }
 
+    /**
+     * METHOD SET FLAG VALUE, IF SELECTED SET VALUE TO ONE, IF NOT TO 0
+     *
+     * @param radioButton
+     * @param value
+     * @return
+     */
     private short setFlagValue(RadioButton radioButton, short value) {
         if (radioButton.isSelected()) {
             value = 1;
+        } else {
+            value = 0;
         }
 
         return value;
     }
 
+    /**
+     * METHOD GET VALUE FROM INPUT AND SAVE THEM TO CLASS FIELDS
+     */
     private void getValueFromInputs() {
         flag2dValue = setFlagValue(flg2D, flag2dValue);
         flag3dValue = setFlagValue(flg3D, flag3dValue);
@@ -133,6 +178,12 @@ public class PerformanceCreator implements Initializable {
         fillComboBoxes();
     }
 
+    /**
+     * METHOD CHECKS IF ALL REQUIRED INPUTS ARE FILLED THEN SAVE TO DB AND RELOAD
+     * TIMETABLE STAGE, IF NOT SHOW POP OUT MESSAGE
+     *
+     * @param mouseEvent
+     */
     @FXML
     private void onClickConfirm(MouseEvent mouseEvent) {
         // TODO REMOVE THIS

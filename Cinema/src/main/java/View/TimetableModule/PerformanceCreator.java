@@ -5,6 +5,11 @@ import DBO.HallDAO;
 import DBO.MovieDAO;
 import Model.Hall;
 import Model.Movie;
+import Model.Performance;
+import Model.TimeTable;
+import View.TimetableModule.Exception.Performance.HallNotAvailableException;
+import View.TimetableModule.Exception.Performance.MovieNotAvailableException;
+import View.TimetableModule.Exception.Performance.WrongHallTypeException;
 import View.TimetableModule.Util.PopOutWindow;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -48,6 +53,7 @@ public class PerformanceCreator implements Initializable {
     private long hallIdValue;
     private String titleValue;
 
+    private TimeTable timeTable = new TimeTable();
     private PopOutWindow popOutWindow = new PopOutWindow();
 
     /*------------------------ METHODS REGION ------------------------*/
@@ -148,26 +154,23 @@ public class PerformanceCreator implements Initializable {
      * METHOD SET FLAG VALUE, IF SELECTED SET VALUE TO ONE, IF NOT TO 0
      *
      * @param radioButton
-     * @param value
      * @return
      */
-    private short setFlagValue(RadioButton radioButton, short value) {
+    private short setFlagValue(RadioButton radioButton) {
         if (radioButton.isSelected()) {
-            value = 1;
+            return 1;
         } else {
-            value = 0;
+            return 0;
         }
-
-        return value;
     }
 
     /**
      * METHOD GET VALUE FROM INPUT AND SAVE THEM TO CLASS FIELDS
      */
     private void getValueFromInputs() {
-        flag2dValue = setFlagValue(flg2D, flag2dValue);
-        flag3dValue = setFlagValue(flg3D, flag3dValue);
-        flagVRValue = setFlagValue(flgVR, flagVRValue);
+        flag2dValue = setFlagValue(flg2D);
+        flag3dValue = setFlagValue(flg3D);
+        flagVRValue = setFlagValue(flgVR);
 
         titleValue = (String) comboBoxTitle.getValue();
         hallIdValue = (Long) comboBoxHallNumber.getValue();
@@ -197,10 +200,26 @@ public class PerformanceCreator implements Initializable {
                 && isComboBoxesFilled(comboBoxTitle, comboBoxHallNumber)) {
             getValueFromInputs();
 
-//        TODO HERE CREATE PERFORMANCE OBJECT BASED ON FIELDS IN THIS CLASS AND SAVE TO DB
+            try {
+                // TODO ADD VALUE TO PERFORMANCE CONSTRUCTOR
+                timeTable.addPerformance(new Performance());
 
-            reloadStage(confirmButton, TIMETABLE_PANEL_PATH,
-                    TIMETABLE_PANEL_STYLE_PATH, TIMETABLE_PANEL);
+                reloadStage(confirmButton, TIMETABLE_PANEL_PATH,
+                        TIMETABLE_PANEL_STYLE_PATH, TIMETABLE_PANEL);
+            } catch (HallNotAvailableException e) {
+                popOutWindow.messageBox("Hall not available",
+                        "Hall is not available in selected time",
+                        Alert.AlertType.WARNING);
+            } catch (MovieNotAvailableException e) {
+                popOutWindow.messageBox("Movie not available",
+                        "Movie is currently not available",
+                        Alert.AlertType.WARNING);
+            } catch (WrongHallTypeException e) {
+                popOutWindow.messageBox("Wrong hall type",
+                        "Selected hall and type of movie don't match",
+                        Alert.AlertType.WARNING);
+            }
+
         } else {
             popOutWindow.messageBox("Empty Input Warning",
                     "Every input must be selected and exactly one movie type must be selected",

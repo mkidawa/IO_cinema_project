@@ -1,5 +1,6 @@
 package View.TimetableModule;
 
+import Controller.PerformanceManager;
 import DBO.HallDAO;
 import DBO.MovieDAO;
 import Model.Hall;
@@ -183,13 +184,13 @@ public class PerformanceCreator implements Initializable {
         setSpinnersValue();
         fillComboBoxes();
 
-//        if (PerformanceManager.getIsEditable()) {
-//            Performance currentPerformance = PerformanceManager.getCurrentPerformance();
-//            comboBoxTitle.getSelectionModel().select(currentPerformance.getMovie().getTitle());
-//            comboBoxHallNumber.getSelectionModel().select(currentPerformance.getHall().getId());
-//
-//            PerformanceManager.setIsEditable(false);
-//        }
+        if (PerformanceManager.getIsEditable()) {
+            Performance currentPerformance = PerformanceManager.getCurrentPerformance();
+            comboBoxTitle.getSelectionModel().select(currentPerformance.getMovie().getTitle());
+            comboBoxHallNumber.getSelectionModel().select(currentPerformance.getHall().getId());
+
+            PerformanceManager.setIsEditable(false);
+        }
     }
 
     /**

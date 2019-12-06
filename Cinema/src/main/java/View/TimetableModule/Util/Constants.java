@@ -26,26 +26,25 @@ public class Constants {
 
     public static final Integer SPINNER_STEP = 1;
 
-    public static final String
-            PERFORMANCE_CREATOR_PATH = "/TimetableModule/PerformanceCreator/PerformanceCreator" +
-            ".fxml";
+    public static final String PERFORMANCE_CREATOR_PATH
+            = "/TimetableModule/PerformanceCreator/PerformanceCreator.fxml";
     public static final String PERFORMANCE_CREATOR_STYLE_PATH
             = "/TimetableModule/PerformanceCreator/PerformanceCreator.css";
 
-    public static final String
-            PERFORMANCE_PANEL_PATH = "/TimetableModule/PerformancePanel/PerformancePanel.fxml";
-    public static final String
-            PERFORMANCE_PANEL_STYLE_PATH = "/TimetableModule/PerformancePanel/PerformancePanel.css";
+    public static final String PERFORMANCE_PANEL_PATH
+            = "/TimetableModule/PerformancePanel/PerformancePanel.fxml";
+    public static final String PERFORMANCE_PANEL_STYLE_PATH
+            = "/TimetableModule/PerformancePanel/PerformancePanel.css";
 
-    public static final String
-            SYSTEM_PARAMS_PATH = "/TimetableModule/SystemParamsPanel/SystemParamsPanel.fxml";
-    public static final String
-            SYSTEM_PARAMS_STYLE_PATH = "/TimetableModule/SystemParamsPanel/SystemParamsPanel.css";
+    public static final String SYSTEM_PARAMS_PATH
+            = "/TimetableModule/SystemParamsPanel/SystemParamsPanel.fxml";
+    public static final String SYSTEM_PARAMS_STYLE_PATH
+            = "/TimetableModule/SystemParamsPanel/SystemParamsPanel.css";
 
-    public static final String
-            TIMETABLE_PANEL_PATH = "/TimetableModule/TimetablePanel/TimetablePanel.fxml";
-    public static final String
-            TIMETABLE_PANEL_STYLE_PATH = "/TimetableModule/TimetablePanel/TimetablePanel.css";
+    public static final String TIMETABLE_PANEL_PATH
+            = "/TimetableModule/TimetablePanel/TimetablePanel.fxml";
+    public static final String TIMETABLE_PANEL_STYLE_PATH
+            = "/TimetableModule/TimetablePanel/TimetablePanel.css";
 
     /*------------------------ METHODS REGION ------------------------*/
 

@@ -6,7 +6,7 @@ public class PerformanceManager {
 
     /*------------------------ FIELDS REGION ------------------------*/
     private static Performance currentPerformance;
-    private static Boolean isEditable;
+    private static Boolean isEditable = false;
 
     /*------------------------ METHODS REGION ------------------------*/
     public static Performance getCurrentPerformance() {

@@ -1,22 +1,18 @@
 package View.TimetableModule;
 
-import Controller.StageManager;
 import Model.TimeTable;
 import View.TimetableModule.Exception.Params.AdsDurationOutOfRangeException;
 import View.TimetableModule.Exception.Params.MinTimeIntervalOutOfRangeException;
+import View.TimetableModule.Util.FxmlStageSetup;
 import View.TimetableModule.Util.PopOutWindow;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
-import javafx.stage.Stage;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -45,60 +41,6 @@ public class SystemParamsPanel implements Initializable {
     private PopOutWindow popOutWindow = new PopOutWindow();
 
     /*------------------------ METHODS REGION ------------------------*/
-
-    /**
-     * LOAD SELECTED STAGE AND ITS CSS STYLING
-     *
-     * @param fxmlPath
-     * @param fxmlStylePath
-     * @param title
-     * @return
-     * @throws IOException
-     */
-    private Stage loadFxmlStage(String fxmlPath, String fxmlStylePath, String title) {
-        try {
-            Scene scene = new Scene(FXMLLoader.load(getClass().getResource(fxmlPath)));
-            scene.getStylesheets().add(getClass().getResource(fxmlStylePath).toExternalForm());
-
-            Stage stage = new Stage();
-            stage.setScene(scene);
-            stage.setTitle(title);
-            stage.setResizable(false);
-            stage.show();
-
-            return stage;
-        } catch (IOException e) {
-            popOutWindow.messageBox("Stage Loading Error",
-                    "Cannot Properly Load Main Stage", Alert.AlertType.ERROR);
-        }
-
-        return null;
-    }
-
-    /**
-     * CLOSE CURRENT STAGE BASED ON SCENE GET FROM BUTTON
-     *
-     * @param button
-     */
-    private void closeStage(Button button) {
-        Stage currentStage = (Stage) button.getScene().getWindow();
-        currentStage.close();
-    }
-
-    /**
-     * CLOSE CURRENT STAGE AND RELOAD SELECTED STAGE
-     *
-     * @param button
-     * @param fxmlPath
-     * @param fxmlStylePath
-     * @param title
-     */
-    private void reloadStage(Button button, String fxmlPath, String fxmlStylePath, String title) {
-        closeStage(button);
-        Stage mainStage = loadFxmlStage(fxmlPath, fxmlStylePath, title);
-        StageManager.mainStage.close();
-        StageManager.mainStage = mainStage;
-    }
 
     /**
      * METHOD CHECKS IF SPINNERS ARE FILLED IF SO RETURN TRUE, IF NOT RETURN FALSE
@@ -142,7 +84,7 @@ public class SystemParamsPanel implements Initializable {
                         "Minimal time interval is not valid ", Alert.AlertType.WARNING);
             }
 
-            reloadStage(confirmButton, TIMETABLE_PANEL_PATH,
+            FxmlStageSetup.reloadStage(confirmButton, TIMETABLE_PANEL_PATH,
                     TIMETABLE_PANEL_STYLE_PATH, TIMETABLE_PANEL);
         }
     }

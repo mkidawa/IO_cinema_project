@@ -3,14 +3,13 @@ package View.TimetableModule;
 import Controller.PerformanceManager;
 import Model.Performance;
 import Model.TimeTable;
+import View.TimetableModule.Util.FxmlStageSetup;
 import View.TimetableModule.Util.PopOutWindow;
 import View.TimetableModule.Util.SimplePerformance;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
@@ -19,18 +18,18 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
-import javafx.stage.Stage;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.Date;
 import java.util.ResourceBundle;
 
+import static View.TimetableModule.Util.Constants.PERFORMANCE_CREATOR;
 import static View.TimetableModule.Util.Constants.PERFORMANCE_CREATOR_PATH;
 import static View.TimetableModule.Util.Constants.PERFORMANCE_CREATOR_STYLE_PATH;
 import static View.TimetableModule.Util.Constants.PERFORMANCE_PANEL;
 import static View.TimetableModule.Util.Constants.PERFORMANCE_PANEL_PATH;
 import static View.TimetableModule.Util.Constants.PERFORMANCE_PANEL_STYLE_PATH;
+import static View.TimetableModule.Util.Constants.SYSTEM_PARAMS;
 import static View.TimetableModule.Util.Constants.SYSTEM_PARAMS_PATH;
 import static View.TimetableModule.Util.Constants.SYSTEM_PARAMS_STYLE_PATH;
 
@@ -60,35 +59,6 @@ public class TimetablePanel implements Initializable {
     private PopOutWindow popOutWindow = new PopOutWindow();
 
     /*------------------------ METHODS REGION ------------------------*/
-
-    /**
-     * LOAD SELECTED STAGE AND ITS CSS STYLING
-     *
-     * @param fxmlPath
-     * @param fxmlStylePath
-     * @param title
-     * @return
-     * @throws IOException
-     */
-    private Stage loadFxmlStage(String fxmlPath, String fxmlStylePath, String title) {
-        try {
-            Scene scene = new Scene(FXMLLoader.load(getClass().getResource(fxmlPath)));
-            scene.getStylesheets().add(getClass().getResource(fxmlStylePath).toExternalForm());
-
-            Stage stage = new Stage();
-            stage.setScene(scene);
-            stage.setTitle(title);
-            stage.setResizable(false);
-            stage.show();
-
-            return stage;
-        } catch (IOException e) {
-            popOutWindow.messageBox("Stage Loading Error",
-                    "Cannot Properly Load Main Stage", Alert.AlertType.ERROR);
-        }
-
-        return null;
-    }
 
     /**
      * METHOD PREPARES LIST OF SIMPLEPERFORMANCE BASED ON DATA FROM LIST OF PERFORMANCE AND
@@ -164,17 +134,18 @@ public class TimetablePanel implements Initializable {
     @FXML
     private void onClickRow(Performance performance) {
         PerformanceManager.setCurrentPerformance(performance);
-        loadFxmlStage(PERFORMANCE_PANEL_PATH, PERFORMANCE_PANEL_STYLE_PATH, PERFORMANCE_PANEL);
+        FxmlStageSetup.loadFxmlStage(PERFORMANCE_PANEL_PATH, PERFORMANCE_PANEL_STYLE_PATH,
+                PERFORMANCE_PANEL);
     }
 
     @FXML
     private void onClickAddPerformance(MouseEvent mouseEvent) {
-        loadFxmlStage(PERFORMANCE_CREATOR_PATH,
-                PERFORMANCE_CREATOR_STYLE_PATH, "Performance Creator");
+        FxmlStageSetup.loadFxmlStage(PERFORMANCE_CREATOR_PATH,
+                PERFORMANCE_CREATOR_STYLE_PATH, PERFORMANCE_CREATOR);
     }
 
     @FXML
     private void onClickParameters(MouseEvent mouseEvent) {
-        loadFxmlStage(SYSTEM_PARAMS_PATH, SYSTEM_PARAMS_STYLE_PATH, "System Parameters");
+        FxmlStageSetup.loadFxmlStage(SYSTEM_PARAMS_PATH, SYSTEM_PARAMS_STYLE_PATH, SYSTEM_PARAMS);
     }
 }

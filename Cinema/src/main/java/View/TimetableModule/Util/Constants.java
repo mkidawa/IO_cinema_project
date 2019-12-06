@@ -4,7 +4,7 @@ public class Constants {
 
     /*------------------------ FIELDS REGION ------------------------*/
     public static final String PERFORMANCE_CREATOR = "Performance Creator";
-    public static final String SYSTEM_PARAMETER = "System Parameters";
+    public static final String SYSTEM_PARAMS = "System Parameters";
     public static final String TIMETABLE_PANEL = "Timetable Panel";
     public static final String PERFORMANCE_PANEL = "Performance Panel";
 
@@ -27,9 +27,10 @@ public class Constants {
     public static final Integer SPINNER_STEP = 1;
 
     public static final String
-            PERFORMANCE_CREATOR_PATH = "/TimetableModule/MovieCreator/PerformanceCreator.fxml";
-    public static final String
-            PERFORMANCE_CREATOR_STYLE_PATH = "/TimetableModule/MovieCreator/PerformanceCreator.css";
+            PERFORMANCE_CREATOR_PATH = "/TimetableModule/PerformanceCreator/PerformanceCreator" +
+            ".fxml";
+    public static final String PERFORMANCE_CREATOR_STYLE_PATH
+            = "/TimetableModule/PerformanceCreator/PerformanceCreator.css";
 
     public static final String
             PERFORMANCE_PANEL_PATH = "/TimetableModule/PerformancePanel/PerformancePanel.fxml";

@@ -1,6 +1,5 @@
 package View.TimetableModule;
 
-import Controller.StageManager;
 import DBO.HallDAO;
 import DBO.MovieDAO;
 import Model.Hall;
@@ -10,11 +9,10 @@ import Model.TimeTable;
 import View.TimetableModule.Exception.Performance.HallNotAvailableException;
 import View.TimetableModule.Exception.Performance.MovieNotAvailableException;
 import View.TimetableModule.Exception.Performance.WrongHallTypeException;
+import View.TimetableModule.Util.FxmlStageSetup;
 import View.TimetableModule.Util.PopOutWindow;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -23,9 +21,7 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.input.MouseEvent;
-import javafx.stage.Stage;
 
-import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -76,71 +72,6 @@ public class PerformanceCreator implements Initializable {
     private PopOutWindow popOutWindow = new PopOutWindow();
 
     /*------------------------ METHODS REGION ------------------------*/
-
-    /**
-     * LOAD SELECTED STAGE AND ITS CSS STYLING
-     *
-     * @param fxmlPath
-     * @param fxmlStylePath
-     * @param title
-     * @return
-     * @throws IOException
-     */
-    private Stage loadFxmlStage(String fxmlPath, String fxmlStylePath, String title) {
-        try {
-            Scene scene = new Scene(FXMLLoader.load(getClass().getResource(fxmlPath)));
-            scene.getStylesheets().add(getClass().getResource(fxmlStylePath).toExternalForm());
-
-            Stage stage = new Stage();
-            stage.setScene(scene);
-            stage.setTitle(title);
-            stage.setResizable(false);
-            stage.show();
-
-            return stage;
-        } catch (IOException e) {
-            popOutWindow.messageBox("Stage Loading Error",
-                    "Cannot Properly Load Main Stage", Alert.AlertType.ERROR);
-        }
-
-        return null;
-    }
-
-    /**
-     * CLOSE CURRENT STAGE BASED ON SCENE GET FROM BUTTON
-     *
-     * @param button
-     */
-    private void closeStage(Button button) {
-        Stage currentStage = (Stage) button.getScene().getWindow();
-        currentStage.close();
-    }
-
-    /**
-     * CLOSE CURRENT STAGE AND RELOAD SELECTED STAGE
-     *
-     * @param button
-     * @param fxmlPath
-     * @param fxmlStylePath
-     * @param title
-     */
-    private void reloadStage(Button button, String fxmlPath, String fxmlStylePath, String title) {
-        closeStage(button);
-        Stage mainStage = loadFxmlStage(fxmlPath, fxmlStylePath, title);
-        StageManager.mainStage.close();
-        StageManager.mainStage = mainStage;
-    }
-
-    /**
-     * METHOD FILL COMBOBOXES WITH SELECTED MOVIE DATA
-     */
-    private void fillComboBoxes() {
-        List<Movie> movies = MovieDAO.getAll();
-        movies.forEach((it) -> comboBoxTitle.getItems().add(it.getTitle()));
-
-        List<Hall> halls = HallDAO.getAll();
-        halls.forEach((it) -> comboBoxHallNumber.getItems().add(it.getId()));
-    }
 
     /**
      * CHECK IF EXACTLY ONE RADIO BUTTON IS SELECTED
@@ -211,6 +142,27 @@ public class PerformanceCreator implements Initializable {
     }
 
     /**
+     * METHOD SET MIN, MAX AND INITIAL VALUE OF SPINNERS
+     */
+    private void setSpinnersValue() {
+        spinnerHour.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(
+                MIN_HOUR_VALUE, MAX_HOUR_VALUE, INITIAL_HOUR_VALUE, SPINNER_STEP));
+        spinnerMinute.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(
+                MIN_MINUTE_VALUE, MAX_MINUTE_VALUE, INITIAL_MINUTE_VALUE, SPINNER_STEP));
+    }
+
+    /**
+     * METHOD FILL COMBOBOXES WITH SELECTED MOVIE DATA
+     */
+    private void fillComboBoxes() {
+        List<Movie> movies = MovieDAO.getAll();
+        movies.forEach((it) -> comboBoxTitle.getItems().add(it.getTitle()));
+
+        List<Hall> halls = HallDAO.getAll();
+        halls.forEach((it) -> comboBoxHallNumber.getItems().add(it.getId()));
+    }
+
+    /**
      * METHOD GET VALUE FROM INPUT AND SAVE THEM TO CLASS FIELDS
      */
     private void getValueFromInputs() {
@@ -228,11 +180,16 @@ public class PerformanceCreator implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        setSpinnersValue();
         fillComboBoxes();
-        spinnerHour.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(
-                MIN_HOUR_VALUE, MAX_HOUR_VALUE, INITIAL_HOUR_VALUE, SPINNER_STEP));
-        spinnerMinute.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(
-                MIN_MINUTE_VALUE, MAX_MINUTE_VALUE, INITIAL_MINUTE_VALUE, SPINNER_STEP));
+
+//        if (PerformanceManager.getIsEditable()) {
+//            Performance currentPerformance = PerformanceManager.getCurrentPerformance();
+//            comboBoxTitle.getSelectionModel().select(currentPerformance.getMovie().getTitle());
+//            comboBoxHallNumber.getSelectionModel().select(currentPerformance.getHall().getId());
+//
+//            PerformanceManager.setIsEditable(false);
+//        }
     }
 
     /**
@@ -260,7 +217,7 @@ public class PerformanceCreator implements Initializable {
                 // TODO ADD VALUE TO PERFORMANCE CONSTRUCTOR
                 timeTable.addPerformance(new Performance());
 
-                reloadStage(confirmButton, TIMETABLE_PANEL_PATH,
+                FxmlStageSetup.reloadStage(confirmButton, TIMETABLE_PANEL_PATH,
                         TIMETABLE_PANEL_STYLE_PATH, TIMETABLE_PANEL);
             } catch (HallNotAvailableException e) {
                 popOutWindow.messageBox("Hall not available",

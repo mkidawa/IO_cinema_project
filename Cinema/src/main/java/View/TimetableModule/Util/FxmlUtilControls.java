@@ -6,7 +6,7 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
 
-public class FxmlUtilControlls {
+public class FxmlUtilControls {
 
     /*------------------------ FIELDS REGION ------------------------*/
 
@@ -107,5 +107,29 @@ public class FxmlUtilControlls {
         } else {
             checkBox.setSelected(false);
         }
+    }
+
+    /**
+     * METHOD SET CHECKBOX DEPENDING ON THE VALUE OF FIRST PARAMETER - short flag
+     *
+     * @param flag
+     * @param radioButton
+     */
+    public void setRadioButton(short flag, RadioButton radioButton) {
+        if (flag > 0) {
+            radioButton.setSelected(true);
+        } else {
+            radioButton.setSelected(false);
+        }
+    }
+
+    /**
+     * METHOD SET VALUE OF SPINNER
+     *
+     * @param spinner
+     * @param value
+     */
+    public void setSpinnerValue(Spinner spinner, Integer value) {
+        spinner.getValueFactory().setValue(value);
     }
 }

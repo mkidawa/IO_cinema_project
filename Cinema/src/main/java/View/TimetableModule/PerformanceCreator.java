@@ -11,7 +11,7 @@ import View.TimetableModule.Exception.Performance.HallNotAvailableException;
 import View.TimetableModule.Exception.Performance.MovieNotAvailableException;
 import View.TimetableModule.Exception.Performance.WrongHallTypeException;
 import View.TimetableModule.Util.FxmlStageSetup;
-import View.TimetableModule.Util.FxmlUtilControlls;
+import View.TimetableModule.Util.FxmlUtilControls;
 import View.TimetableModule.Util.PopOutWindow;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -21,7 +21,6 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.Spinner;
-import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.input.MouseEvent;
 
 import java.net.URL;
@@ -55,11 +54,11 @@ public class PerformanceCreator implements Initializable {
     @FXML
     private RadioButton flgVR;
     @FXML
+    private DatePicker performanceDatePicker;
+    @FXML
     private Spinner spinnerHour;
     @FXML
     private Spinner spinnerMinute;
-    @FXML
-    private DatePicker performanceDatePicker;
     @FXML
     private Button confirmButton;
 
@@ -72,7 +71,7 @@ public class PerformanceCreator implements Initializable {
 
     private TimeTable timeTable = new TimeTable();
     private PopOutWindow popOutWindow = new PopOutWindow();
-    private FxmlUtilControlls fxmlUtilControlls = new FxmlUtilControlls();
+    private FxmlUtilControls fxmlUtilControls = new FxmlUtilControls();
 
     /*------------------------ METHODS REGION ------------------------*/
 
@@ -80,9 +79,9 @@ public class PerformanceCreator implements Initializable {
      * METHOD SET MIN, MAX AND INITIAL VALUE OF SPINNERS
      */
     private void setSpinnersValue() {
-        fxmlUtilControlls.setIntegerSpinner(spinnerHour, MIN_HOUR_VALUE, MAX_HOUR_VALUE,
+        fxmlUtilControls.setIntegerSpinner(spinnerHour, MIN_HOUR_VALUE, MAX_HOUR_VALUE,
                 INITIAL_HOUR_VALUE, SPINNER_STEP);
-        fxmlUtilControlls.setIntegerSpinner(spinnerMinute, MIN_MINUTE_VALUE, MAX_MINUTE_VALUE,
+        fxmlUtilControls.setIntegerSpinner(spinnerMinute, MIN_MINUTE_VALUE, MAX_MINUTE_VALUE,
                 INITIAL_MINUTE_VALUE, SPINNER_STEP);
     }
 
@@ -101,9 +100,9 @@ public class PerformanceCreator implements Initializable {
      * METHOD GET VALUE FROM INPUT AND SAVE THEM TO CLASS FIELDS
      */
     private void getValueFromInputs() {
-        flag2dValue = fxmlUtilControlls.setFlagValue(flg2D);
-        flag3dValue = fxmlUtilControlls.setFlagValue(flg3D);
-        flagVRValue = fxmlUtilControlls.setFlagValue(flgVR);
+        flag2dValue = fxmlUtilControls.setFlagValue(flg2D);
+        flag3dValue = fxmlUtilControls.setFlagValue(flg3D);
+        flagVRValue = fxmlUtilControls.setFlagValue(flgVR);
 
         titleValue = (String) comboBoxTitle.getValue();
         hallIdValue = (Long) comboBoxHallNumber.getValue();
@@ -120,8 +119,17 @@ public class PerformanceCreator implements Initializable {
 
         if (PerformanceManager.getIsEditable()) {
             Performance currentPerformance = PerformanceManager.getCurrentPerformance();
+
             comboBoxTitle.getSelectionModel().select(currentPerformance.getMovie().getTitle());
             comboBoxHallNumber.getSelectionModel().select(currentPerformance.getHall().getId());
+            fxmlUtilControls.setRadioButton(currentPerformance.getMovie().getFlg2D(), flg2D);
+            fxmlUtilControls.setRadioButton(currentPerformance.getMovie().getFlg3D(), flg3D);
+            fxmlUtilControls.setRadioButton(currentPerformance.getMovie().getFlgVR(), flgVR);
+
+            // TODO ADD REAL DATA TAKEN FROM DATABASE
+            performanceDatePicker.setValue(LocalDate.of(2019, 12, 06));
+            fxmlUtilControls.setSpinnerValue(spinnerHour, 12);
+            fxmlUtilControls.setSpinnerValue(spinnerMinute, 37);
 
             PerformanceManager.setIsEditable(false);
         }
@@ -142,9 +150,9 @@ public class PerformanceCreator implements Initializable {
 //                new Hall((short) 1, (short) 0, (short) 0, 5, 7, "acdcd",
 //                        "nrinvnvklfdvklfdkvfkvkfn"), new Time(25)));
 
-        if (fxmlUtilControlls.isOneRadioButtonSelected(flg2D, flg3D, flgVR)
-                && fxmlUtilControlls.isComboBoxesFilled(comboBoxTitle, comboBoxHallNumber)
-                && fxmlUtilControlls.isSpinnersFilled(spinnerHour, spinnerMinute)
+        if (fxmlUtilControls.isOneRadioButtonSelected(flg2D, flg3D, flgVR)
+                && fxmlUtilControls.isComboBoxesFilled(comboBoxTitle, comboBoxHallNumber)
+                && fxmlUtilControls.isSpinnersFilled(spinnerHour, spinnerMinute)
                 && performanceDatePicker.getValue() != null) {
             getValueFromInputs();
 

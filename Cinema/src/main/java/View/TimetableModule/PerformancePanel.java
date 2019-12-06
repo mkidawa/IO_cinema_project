@@ -52,7 +52,6 @@ public class PerformancePanel implements Initializable {
     public Button deleteButton;
 
     private TimeTable timeTable = new TimeTable();
-    private PopOutWindow popOutWindow = new PopOutWindow();
     private FxmlUtilControls fxmlUtilControls = new FxmlUtilControls();
 
     /*------------------------ METHODS REGION ------------------------*/

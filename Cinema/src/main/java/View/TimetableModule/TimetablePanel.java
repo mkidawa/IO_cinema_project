@@ -89,7 +89,6 @@ public class TimetablePanel implements Initializable {
      *
      * @return
      */
-    //    TODO ADD IMPL
     private ObservableList<SimplePerformance> prepareSimplePerformanceList() {
         ObservableList<SimplePerformance> list = FXCollections.observableArrayList();
 

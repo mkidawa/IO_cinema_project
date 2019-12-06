@@ -50,11 +50,6 @@ public class TimeTable {
     public TimeTable() {
     }
 
-    //    public TimeTable(Performance performance, Timestamp performanceDate) {
-//        this.performance = performance;
-//        this.performanceDate = performanceDate;
-//    }
-
     /**
      * CHECK IF SELECTED HALL WAS PREVIOUSLY CHOSEN TO ANOTHER PERFORMANCE IN DATABASE
      *
@@ -142,7 +137,7 @@ public class TimeTable {
 
     public void removePerformance(Performance performance) {
 //        if () {
-//            PerformanceDAO.delete(performance);
+        PerformanceDAO.delete(performance);
 //        } else {
 //
 //        }

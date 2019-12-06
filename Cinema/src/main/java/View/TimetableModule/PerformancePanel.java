@@ -2,6 +2,8 @@ package View.TimetableModule;
 
 import Controller.PerformanceManager;
 import Controller.StageManager;
+import Model.Movie;
+import Model.Performance;
 import Model.TimeTable;
 import View.TimetableModule.Util.PopOutWindow;
 import javafx.fxml.FXML;
@@ -10,11 +12,15 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Time;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 import static View.TimetableModule.Util.Constants.TIMETABLE_PANEL;
@@ -24,6 +30,24 @@ import static View.TimetableModule.Util.Constants.TIMETABLE_PANEL_STYLE_PATH;
 public class PerformancePanel implements Initializable {
 
     /*------------------------ FIELDS REGION ------------------------*/
+    @FXML
+    private Label labelPerformanceId;
+    @FXML
+    private Label labelMovieId;
+    @FXML
+    private Label labelMovieTitle;
+    @FXML
+    private Label labelHallId;
+    @FXML
+    private Label labelDate;
+    @FXML
+    private Label labelHour;
+    @FXML
+    private CheckBox flg2D;
+    @FXML
+    private CheckBox flg3D;
+    @FXML
+    private CheckBox flgVR;
     @FXML
     private Button editButton;
     @FXML
@@ -77,9 +101,39 @@ public class PerformancePanel implements Initializable {
         }
     }
 
+    private void setCheckBox(short flag, CheckBox checkBox) {
+        if (flag > 0) {
+            checkBox.setSelected(true);
+        } else {
+            checkBox.setSelected(false);
+        }
+    }
+
+    private void prepareDisplayMode() {
+        Movie movie = PerformanceManager.getCurrentPerformance().getMovie();
+
+        setCheckBox(movie.getFlg2D(), flg2D);
+        setCheckBox(movie.getFlg3D(), flg3D);
+        setCheckBox(movie.getFlgVR(), flgVR);
+    }
+
+    private void prepareBasicInformation() {
+        Performance currentPerformance = PerformanceManager.getCurrentPerformance();
+
+        labelPerformanceId.setText(Long.toString(currentPerformance.getId()));
+        labelMovieId.setText(Long.toString(currentPerformance.getMovie().getId()));
+        labelMovieTitle.setText(currentPerformance.getMovie().getTitle());
+        labelHallId.setText(Long.toString(currentPerformance.getHall().getId()));
+
+        //TODO REMOVE THIS AND INSERT REAL DATA
+        labelDate.setText(new Date().toString());
+        labelHour.setText(new Date().toString());
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        prepareDisplayMode();
+        prepareBasicInformation();
     }
 
     @FXML

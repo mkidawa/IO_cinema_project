@@ -4,6 +4,7 @@ import Model.TimeTable;
 import View.TimetableModule.Exception.Params.AdsDurationOutOfRangeException;
 import View.TimetableModule.Exception.Params.MinTimeIntervalOutOfRangeException;
 import View.TimetableModule.Util.FxmlStageSetup;
+import View.TimetableModule.Util.FxmlUtilControlls;
 import View.TimetableModule.Util.PopOutWindow;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -11,7 +12,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Spinner;
-import javafx.scene.control.SpinnerValueFactory;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -39,37 +39,20 @@ public class SystemParamsPanel implements Initializable {
 
     private TimeTable timeTable = new TimeTable();
     private PopOutWindow popOutWindow = new PopOutWindow();
+    private FxmlUtilControlls fxmlUtilControlls = new FxmlUtilControlls();
 
     /*------------------------ METHODS REGION ------------------------*/
-
-    /**
-     * METHOD CHECKS IF SPINNERS ARE FILLED IF SO RETURN TRUE, IF NOT RETURN FALSE
-     *
-     * @param spinners
-     * @return
-     */
-    private boolean isSpinnersFilled(Spinner... spinners) {
-        for (Spinner it : spinners) {
-            if (it.getValue() == null) {
-                return false;
-            }
-        }
-
-        return true;
-    }
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        spinnerAdsDuration.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(
-                MIN_ADS_VALUE, MAX_ADS_VALUE, INITIAL_ADS_VALUE, SPINNER_STEP));
-        spinnerMinTimeInterval.setValueFactory(new SpinnerValueFactory
-                .IntegerSpinnerValueFactory(MIN_PERFORMANCE_GAP_VALUE,
-                MAX_PERFORMANCE_GAP_VALUE, INITIAL_PERFORMANCE_GAP_VALUE, SPINNER_STEP));
+        fxmlUtilControlls.setIntegerSpinner(spinnerAdsDuration, MIN_ADS_VALUE, MAX_ADS_VALUE,
+                INITIAL_ADS_VALUE, SPINNER_STEP);
+        fxmlUtilControlls.setIntegerSpinner(spinnerMinTimeInterval, MIN_PERFORMANCE_GAP_VALUE,
+                MAX_PERFORMANCE_GAP_VALUE, INITIAL_PERFORMANCE_GAP_VALUE, SPINNER_STEP);
     }
 
     @FXML
     private void onClickConfirmButton(ActionEvent actionEvent) {
-        if (isSpinnersFilled(spinnerAdsDuration, spinnerMinTimeInterval)) {
+        if (fxmlUtilControlls.isSpinnersFilled(spinnerAdsDuration, spinnerMinTimeInterval)) {
             try {
                 timeTable.setAdsDuration((Integer) spinnerAdsDuration.getValue());
             } catch (AdsDurationOutOfRangeException e) {

@@ -5,6 +5,7 @@ import Model.Movie;
 import Model.Performance;
 import Model.TimeTable;
 import View.TimetableModule.Util.FxmlStageSetup;
+import View.TimetableModule.Util.FxmlUtilControlls;
 import View.TimetableModule.Util.PopOutWindow;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -52,22 +53,15 @@ public class PerformancePanel implements Initializable {
 
     private TimeTable timeTable = new TimeTable();
     private PopOutWindow popOutWindow = new PopOutWindow();
+    private FxmlUtilControlls fxmlUtilControlls = new FxmlUtilControlls();
 
     /*------------------------ METHODS REGION ------------------------*/
-    private void setCheckBox(short flag, CheckBox checkBox) {
-        if (flag > 0) {
-            checkBox.setSelected(true);
-        } else {
-            checkBox.setSelected(false);
-        }
-    }
-
     private void prepareDisplayMode() {
         Movie movie = PerformanceManager.getCurrentPerformance().getMovie();
 
-        setCheckBox(movie.getFlg2D(), flg2D);
-        setCheckBox(movie.getFlg3D(), flg3D);
-        setCheckBox(movie.getFlgVR(), flgVR);
+        fxmlUtilControlls.setCheckBox(movie.getFlg2D(), flg2D);
+        fxmlUtilControlls.setCheckBox(movie.getFlg3D(), flg3D);
+        fxmlUtilControlls.setCheckBox(movie.getFlgVR(), flgVR);
     }
 
     private void prepareBasicInformation() {

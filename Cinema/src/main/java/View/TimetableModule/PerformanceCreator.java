@@ -11,6 +11,7 @@ import View.TimetableModule.Exception.Performance.HallNotAvailableException;
 import View.TimetableModule.Exception.Performance.MovieNotAvailableException;
 import View.TimetableModule.Exception.Performance.WrongHallTypeException;
 import View.TimetableModule.Util.FxmlStageSetup;
+import View.TimetableModule.Util.FxmlUtilControlls;
 import View.TimetableModule.Util.PopOutWindow;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -71,85 +72,18 @@ public class PerformanceCreator implements Initializable {
 
     private TimeTable timeTable = new TimeTable();
     private PopOutWindow popOutWindow = new PopOutWindow();
+    private FxmlUtilControlls fxmlUtilControlls = new FxmlUtilControlls();
 
     /*------------------------ METHODS REGION ------------------------*/
-
-    /**
-     * CHECK IF EXACTLY ONE RADIO BUTTON IS SELECTED
-     *
-     * @param radioButtons
-     * @return - IF ONE RETURN TRUE, ELSE RETURN FALSE
-     */
-    private boolean isOneRadioButtonSelected(RadioButton... radioButtons) {
-        int numberOfSelectedRadioButtons = 0;
-
-        for (RadioButton it : radioButtons) {
-            if (it.isSelected()) {
-                numberOfSelectedRadioButtons++;
-            }
-        }
-
-        if (numberOfSelectedRadioButtons == 1) {
-            return true;
-        }
-
-        return false;
-    }
-
-    /**
-     * CHECKS IF COMBOBOXES ARE FILLED
-     *
-     * @param comboBoxes
-     * @return
-     */
-    private boolean isComboBoxesFilled(ComboBox... comboBoxes) {
-        for (ComboBox it : comboBoxes) {
-            if (it.getValue() == null) {
-                return false;
-            }
-        }
-
-        return true;
-    }
-
-    /**
-     * METHOD CHECKS IF SPINNERS ARE FILLED IF SO RETURN TRUE, IF NOT RETURN FALSE
-     *
-     * @param spinners
-     * @return
-     */
-    private boolean isSpinnersFilled(Spinner... spinners) {
-        for (Spinner it : spinners) {
-            if (it.getValue() == null) {
-                return false;
-            }
-        }
-
-        return true;
-    }
-
-    /**
-     * METHOD SET FLAG VALUE, IF SELECTED SET VALUE TO ONE, IF NOT TO 0
-     *
-     * @param radioButton
-     * @return
-     */
-    private short setFlagValue(RadioButton radioButton) {
-        if (radioButton.isSelected()) {
-            return 1;
-        } else {
-            return 0;
-        }
-    }
 
     /**
      * METHOD SET MIN, MAX AND INITIAL VALUE OF SPINNERS
      */
     private void setSpinnersValue() {
-        spinnerHour.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(
-                MIN_HOUR_VALUE, MAX_HOUR_VALUE, INITIAL_HOUR_VALUE, SPINNER_STEP));
-        spinnerMinute.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(
-                MIN_MINUTE_VALUE, MAX_MINUTE_VALUE, INITIAL_MINUTE_VALUE, SPINNER_STEP));
+        fxmlUtilControlls.setIntegerSpinner(spinnerHour, MIN_HOUR_VALUE, MAX_HOUR_VALUE,
+                INITIAL_HOUR_VALUE, SPINNER_STEP);
+        fxmlUtilControlls.setIntegerSpinner(spinnerMinute, MIN_MINUTE_VALUE, MAX_MINUTE_VALUE,
+                INITIAL_MINUTE_VALUE, SPINNER_STEP);
     }
 
     /**
@@ -167,9 +101,9 @@ public class PerformanceCreator implements Initializable {
      * METHOD GET VALUE FROM INPUT AND SAVE THEM TO CLASS FIELDS
      */
     private void getValueFromInputs() {
-        flag2dValue = setFlagValue(flg2D);
-        flag3dValue = setFlagValue(flg3D);
-        flagVRValue = setFlagValue(flgVR);
+        flag2dValue = fxmlUtilControlls.setFlagValue(flg2D);
+        flag3dValue = fxmlUtilControlls.setFlagValue(flg3D);
+        flagVRValue = fxmlUtilControlls.setFlagValue(flgVR);
 
         titleValue = (String) comboBoxTitle.getValue();
         hallIdValue = (Long) comboBoxHallNumber.getValue();
@@ -208,9 +142,9 @@ public class PerformanceCreator implements Initializable {
 //                new Hall((short) 1, (short) 0, (short) 0, 5, 7, "acdcd",
 //                        "nrinvnvklfdvklfdkvfkvkfn"), new Time(25)));
 
-        if (isOneRadioButtonSelected(flg2D, flg3D, flgVR)
-                && isComboBoxesFilled(comboBoxTitle, comboBoxHallNumber)
-                && isSpinnersFilled(spinnerHour, spinnerMinute)
+        if (fxmlUtilControlls.isOneRadioButtonSelected(flg2D, flg3D, flgVR)
+                && fxmlUtilControlls.isComboBoxesFilled(comboBoxTitle, comboBoxHallNumber)
+                && fxmlUtilControlls.isSpinnersFilled(spinnerHour, spinnerMinute)
                 && performanceDatePicker.getValue() != null) {
             getValueFromInputs();
 

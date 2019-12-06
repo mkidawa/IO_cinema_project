@@ -90,7 +90,7 @@
                 </Label>
             </children>
         </AnchorPane>
-        <Button id="editButton" font="$x2" layoutX="172.0" layoutY="512.0" mnemonicParsing="false"
+        <Button fx:id="editButton" font="$x2" layoutX="172.0" layoutY="512.0" mnemonicParsing="false"
                 onMouseClicked="#onClickEditButton" prefHeight="68.0" prefWidth="360.0"
                 text="Edit"/>
         <Button fx:id="deleteButton" font="$x2" layoutX="172.0" layoutY="591.0"

@@ -86,17 +86,34 @@ public class PerformanceCreator implements Initializable {
      * @return
      * @throws IOException
      */
-    private Stage loadFxmlStage(String fxmlPath, String fxmlStylePath, String title) throws IOException {
-        Scene scene = new Scene(FXMLLoader.load(getClass().getResource(fxmlPath)));
-        scene.getStylesheets().add(getClass().getResource(fxmlStylePath).toExternalForm());
+    private Stage loadFxmlStage(String fxmlPath, String fxmlStylePath, String title) {
+        try {
+            Scene scene = new Scene(FXMLLoader.load(getClass().getResource(fxmlPath)));
+            scene.getStylesheets().add(getClass().getResource(fxmlStylePath).toExternalForm());
 
-        Stage stage = new Stage();
-        stage.setScene(scene);
-        stage.setTitle(title);
-        stage.setResizable(false);
-        stage.show();
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.setTitle(title);
+            stage.setResizable(false);
+            stage.show();
 
-        return stage;
+            return stage;
+        } catch (IOException e) {
+            popOutWindow.messageBox("Stage Loading Error",
+                    "Cannot Properly Load Main Stage", Alert.AlertType.ERROR);
+        }
+
+        return null;
+    }
+
+    /**
+     * CLOSE CURRENT STAGE BASED ON SCENE GET FROM BUTTON
+     *
+     * @param button
+     */
+    private void closeStage(Button button) {
+        Stage currentStage = (Stage) button.getScene().getWindow();
+        currentStage.close();
     }
 
     /**
@@ -108,16 +125,10 @@ public class PerformanceCreator implements Initializable {
      * @param title
      */
     private void reloadStage(Button button, String fxmlPath, String fxmlStylePath, String title) {
-        try {
-            Stage currentStage = (Stage) button.getScene().getWindow();
-            currentStage.close();
-            Stage mainStage = loadFxmlStage(fxmlPath, fxmlStylePath, title);
-            StageManager.mainStage.close();
-            StageManager.mainStage = mainStage;
-        } catch (IOException e) {
-            popOutWindow.messageBox("Stage Loading Error",
-                    "Cannot Properly Load Main Stage", Alert.AlertType.ERROR);
-        }
+        closeStage(button);
+        Stage mainStage = loadFxmlStage(fxmlPath, fxmlStylePath, title);
+        StageManager.mainStage.close();
+        StageManager.mainStage = mainStage;
     }
 
     /**

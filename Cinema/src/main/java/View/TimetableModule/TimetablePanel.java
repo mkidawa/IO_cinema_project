@@ -70,17 +70,24 @@ public class TimetablePanel implements Initializable {
      * @return
      * @throws IOException
      */
-    private Stage loadFxmlStage(String fxmlPath, String fxmlStylePath, String title) throws IOException {
-        Scene scene = new Scene(FXMLLoader.load(getClass().getResource(fxmlPath)));
-        scene.getStylesheets().add(getClass().getResource(fxmlStylePath).toExternalForm());
+    private Stage loadFxmlStage(String fxmlPath, String fxmlStylePath, String title) {
+        try {
+            Scene scene = new Scene(FXMLLoader.load(getClass().getResource(fxmlPath)));
+            scene.getStylesheets().add(getClass().getResource(fxmlStylePath).toExternalForm());
 
-        Stage stage = new Stage();
-        stage.setScene(scene);
-        stage.setTitle(title);
-        stage.setResizable(false);
-        stage.show();
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.setTitle(title);
+            stage.setResizable(false);
+            stage.show();
 
-        return stage;
+            return stage;
+        } catch (IOException e) {
+            popOutWindow.messageBox("Stage Loading Error",
+                    "Cannot Properly Load Main Stage", Alert.AlertType.ERROR);
+        }
+
+        return null;
     }
 
     /**
@@ -140,9 +147,6 @@ public class TimetablePanel implements Initializable {
                         popOutWindow.messageBox("Database is empty",
                                 "Database is empty, check if everything works properly",
                                 Alert.AlertType.ERROR);
-                    } catch (IOException e) {
-                        popOutWindow.messageBox("Cannot Display Details",
-                                e.getMessage(), Alert.AlertType.ERROR);
                     }
                 }
             });
@@ -158,19 +162,19 @@ public class TimetablePanel implements Initializable {
     }
 
     @FXML
-    private void onClickRow(Performance performance) throws IOException {
+    private void onClickRow(Performance performance) {
         PerformanceManager.setCurrentPerformance(performance);
         loadFxmlStage(PERFORMANCE_PANEL_PATH, PERFORMANCE_PANEL_STYLE_PATH, PERFORMANCE_PANEL);
     }
 
     @FXML
-    private void onClickAddPerformance(MouseEvent mouseEvent) throws IOException {
+    private void onClickAddPerformance(MouseEvent mouseEvent) {
         loadFxmlStage(PERFORMANCE_CREATOR_PATH,
                 PERFORMANCE_CREATOR_STYLE_PATH, "Performance Creator");
     }
 
     @FXML
-    private void onClickParameters(MouseEvent mouseEvent) throws IOException {
+    private void onClickParameters(MouseEvent mouseEvent) {
         loadFxmlStage(SYSTEM_PARAMS_PATH, SYSTEM_PARAMS_STYLE_PATH, "System Parameters");
     }
 }

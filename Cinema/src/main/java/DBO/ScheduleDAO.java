@@ -1,22 +1,24 @@
 package DBO;
 
+import Model.DICT.ScheduleStatus;
+import Model.Schedule;
 import Model.Task;
 import Tools.BaseDB;
 import lombok.var;
 import java.util.List;
 
-public class TaskDAO {
+public class ScheduleDAO {
 
-    public static List<Task> getAll() {
+    public static List getStatusList() {
         var so = BaseDB.openConnection();
         so.beginTransaction();
-        List<Task> result = so.createQuery("from Task").list();
+        List<ScheduleStatus> result = so.createQuery("from ScheduleStatus").list();
         so.getTransaction().commit();
         so.close();
         return result;
     }
 
-    public static void insertUpdate(Task object) {
+    public static void insertUpdate(Schedule object) {
         var so = BaseDB.openConnection();
         so.beginTransaction();
         so.saveOrUpdate(object);
@@ -25,7 +27,7 @@ public class TaskDAO {
         so.close();
     }
 
-    public static void delete(Task object) {
+    public static void delete(Schedule object) {
         var so = BaseDB.openConnection();
         so.beginTransaction();
         so.delete(object);

@@ -26,11 +26,17 @@ public class Product {
     @Setter
     private BigDecimal price;
 
+    @Column(name = "Amount")
+    @Getter
+    @Setter
+    private int amount;
+
     public Product() {
     }
 
-    public Product(String name, BigDecimal price) {
+    public Product(String name, BigDecimal price, int amount) {
         this.name = name;
         this.price = price;
+        this.amount = amount;
     }
 }

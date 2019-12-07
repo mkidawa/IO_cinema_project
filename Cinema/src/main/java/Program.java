@@ -2,6 +2,7 @@ import Controller.LPermissionController;
 import Tools.BaseDB;
 import Tools.PermissionChecker;
 import View.Login.LoginView;
+import View.Sale.SaleView;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -15,7 +16,7 @@ public class Program extends Application {
         //Pane myPane = myLoader.load();
 
         //var myScene = new Scene();
-        primaryStage.setScene(new LoginView().getScene());
+        primaryStage.setScene(new SaleView().getScene());
         primaryStage.show();
         //primaryStage.setFullScreen(true);
 

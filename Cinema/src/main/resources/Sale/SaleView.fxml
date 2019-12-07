@@ -9,7 +9,7 @@
    <children>
       <AnchorPane prefHeight="803.0" prefWidth="1282.0">
          <children>
-            <TableView layoutX="102.0" layoutY="46.0" prefHeight="682.0" prefWidth="520.0">
+            <TableView layoutX="318.0" layoutY="48.0" prefHeight="682.0" prefWidth="520.0">
               <columns>
                 <TableColumn id="ProductName" prefWidth="75.0" text="Nazwa" />
                 <TableColumn id="ProductPrice" prefWidth="75.0" text="Cena" />

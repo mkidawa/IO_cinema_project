@@ -48,6 +48,9 @@ public class UserSchedulerController {
     @FXML
     public void initialize() {
 
+        List<User> users = userManager.getAllUsers();
+        List<Task> tasks = taskManager.getAllTasks();
+
         // Set datePicker to today
         LocalDate today = LocalDate.now();
         Timestamp todayTime = Timestamp.valueOf(today.atStartOfDay());
@@ -67,12 +70,10 @@ public class UserSchedulerController {
 
         // Setup User choice box
         userChoice.setConverter(new UserStringConverter());
-        List<User> users = userManager.getAllUsers();
         userChoice.getItems().addAll(users);
 
         // Setup Task choice box
         taskChoice.setConverter(new TaskStringConverter());
-        List<Task> tasks = taskManager.getAllTasks();
         taskChoice.getItems().addAll(tasks);
 
         // Fill layout

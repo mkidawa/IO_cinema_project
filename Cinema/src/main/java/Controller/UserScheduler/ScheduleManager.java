@@ -37,7 +37,7 @@ public class ScheduleManager {
 
     public void scheduleTask(User user, Task task, Timestamp date) {
         Schedule schedule = new Schedule();
-        schedule.setName("");
+        schedule.setUser(user);
         schedule.setTask(task);
         schedule.setScheduleStatus(this.getStatusById(1));
         schedule.setDateFrom(date);

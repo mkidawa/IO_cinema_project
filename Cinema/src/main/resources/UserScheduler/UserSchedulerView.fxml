@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.DatePicker?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1058.0" xmlns="http://javafx.com/javafx/8.0.202-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.UserScheduler.UserSchedulerController">
+
+<VBox xmlns="http://javafx.com/javafx/8.0.202-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.UserScheduler.UserSchedulerController">
    <children>
-      <DatePicker fx:id="datePicker" layoutX="14.0" layoutY="14.0" onAction="#updateDate" promptText="Wybierz dzień" />
-      <GridPane fx:id="scheduleTable" gridLinesVisible="true" layoutX="13.0" layoutY="50.0" prefHeight="694.0" prefWidth="1033.0">
+      <DatePicker fx:id="datePicker" onAction="#updateDate" />
+      <GridPane fx:id="scheduleTable">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -21,4 +22,4 @@
         </rowConstraints>
       </GridPane>
    </children>
-</AnchorPane>
+</VBox>

@@ -1,8 +1,8 @@
 package View.UserScheduler;
 
+import Model.Schedule;
 import Model.Task;
 import Model.User;
-import javafx.event.EventHandler;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
@@ -29,32 +29,32 @@ public class TaskBox extends VBox implements Initializable {
 
     private void setAddingView() {
         Label label = new Label("+");
-        label.setOnMouseClicked(new TaskBoxOnClick());
         this.getChildren().clear();
         this.getChildren().add(label);
         this.getStyleClass().clear();
         this.getStyleClass().add("unassigned");
+        this.setOnMouseClicked((MouseEvent event) -> {
+            parent.openAssignTaskDialog(user, time);
+        });
     }
 
-    public void setTaskView(Task task) {
+    public void setTaskView(Schedule schedule) {
+        Task task = schedule.getTask();
         Label name = new Label(task.getName());
         Label description = new Label(task.getDescription());
+        name.setPickOnBounds(false);
+        description.setPickOnBounds(false);
         this.getChildren().clear();
         this.getChildren().addAll(name, description);
         this.getStyleClass().clear();
         this.getStyleClass().add("assigned");
+        this.setOnMouseClicked((MouseEvent event) -> {
+            parent.openModifyTaskDialog(schedule);
+        });
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-    }
-
-    private class TaskBoxOnClick implements EventHandler<MouseEvent>
-    {
-        @Override
-        public void handle(MouseEvent event) {
-            parent.openAssignTaskDialog(user, time);
-        }
     }
 
 }

@@ -51,4 +51,12 @@ public class ScheduleManager {
         return schedule;
     }
 
+    public void updateSchedule(Schedule schedule) {
+        ScheduleDAO.insertUpdate(schedule);
+    }
+
+    public void deleteSchedule(Schedule schedule) {
+        ScheduleDAO.delete(schedule);
+    }
+
 }

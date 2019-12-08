@@ -17,19 +17,19 @@ public class Schedule {
     @Setter
     private long Id;
 
-    @ManyToOne(cascade = {CascadeType.ALL})
+    @ManyToOne
     @JoinColumn(name = "UsersId")
     @Getter
     @Setter
     private User user;
 
-    @ManyToOne(cascade = {CascadeType.ALL})
+    @ManyToOne
     @JoinColumn(name = "TaskId")
     @Getter
     @Setter
     private Task task;
 
-    @ManyToOne(cascade = {CascadeType.ALL})
+    @ManyToOne
     @JoinColumn(name = "SheduleStatusId")
     @Getter
     @Setter

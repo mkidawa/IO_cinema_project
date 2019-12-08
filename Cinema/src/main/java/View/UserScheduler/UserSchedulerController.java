@@ -78,14 +78,8 @@ public class UserSchedulerController {
                 scheduleTable.add(tb, y, x);
                 //Find matching schedule
                 for (Schedule sched : scheduleList) {
-//                    System.out.println("Compare: #"
-//                        + sched.getUser().getId() + " "
-//                        + sched.getDateFrom() + " to #"
-//                        + user.getId() + " "
-//                        + time
-//                    );
                     if (sched.getDateFrom().equals(time) && sched.getUser().getId() == user.getId()) {
-                        tb.setTaskView(sched.getTask());
+                        tb.setTaskView(sched);
                         break;
                     }
                 }
@@ -96,6 +90,10 @@ public class UserSchedulerController {
 
     public void openAssignTaskDialog(User user, Timestamp time) {
         AssignTaskDialog dialog = new AssignTaskDialog(this, user, time);
+    }
+
+    public void openModifyTaskDialog(Schedule schedule) {
+        ModifyTaskDialog dialog = new ModifyTaskDialog(this, schedule);
     }
 
     @FXML

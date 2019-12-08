@@ -109,20 +109,79 @@ public class addPersonToMovieController implements Initializable {
     }
 
     public void onClickAddPerson() {
-        if(TextName.getText().trim().isEmpty() && TextLastname.getText().trim().isEmpty()){
-            createPersonJob();
-            controller.updateList();
-            closeCurrent();
-        }else {
-            createNewPerson();
-            controller.updateList();
-            closeCurrent();
+        if(!checkAllFieldsSelectedPerson()) {
+            return;
         }
+        createPersonJob();
+        controller.updateList();
+        closeCurrent();
+    }
+
+    public void onClickAddNewPerson() {
+        if(!checkAllFieldsNewPerson()) {
+            return;
+        }
+        createNewPerson();
+        controller.updateList();
+        closeCurrent();
     }
 
     public void closeCurrent() {
         Stage stage = (Stage) addPersonButton.getScene().getWindow();
         stage.close();
+    }
+
+    public boolean checkAllFieldsNewPerson() {
+
+        if (TextName.getText().length() < 1) {
+            alertPopUp("First name cannot be empty!");
+            return false;
+        }
+
+        if (Lastname.getText().length() < 1) {
+            alertPopUp("Last name cannot be empty!");
+            return false;
+        }
+
+        StringBuilder sb = new StringBuilder();
+        sb.append(BirthDate.getText());
+        sb.append(" 00:00:00");
+        try {
+            Timestamp t = Timestamp.valueOf(String.valueOf(sb));
+        } catch (Exception ex) {
+            alertPopUp("Incorrect birth date format");
+            return false;
+        }
+
+        if (Role.getSelectionModel().isEmpty()) {
+            alertPopUp("Role must be selected!");
+            return false;
+        }
+
+        return true;
+    }
+
+    public boolean checkAllFieldsSelectedPerson() {
+
+        if (table.getSelectionModel().getSelectedItem() == null) {
+            alertPopUp("You have to select a person from the table above - just click on person you are interested in.");
+            return false;
+        }
+
+        if (Role.getSelectionModel().isEmpty()) {
+            alertPopUp("Role must be selected!");
+            return false;
+        }
+
+        return true;
+    }
+
+    public void alertPopUp(String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error message");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 
     public static class SimplePerson {

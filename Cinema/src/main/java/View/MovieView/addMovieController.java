@@ -24,6 +24,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import sun.security.krb5.internal.crypto.Des;
+
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Time;
@@ -164,7 +166,50 @@ public class addMovieController implements Initializable {
         public Long getID() { return ID.get(); }
     }
 
+    public boolean checkAllFilled() {
+
+        if (Title.getText().length() < 1) {
+            alertPopUp("Title cannot be empty");
+            return false;
+        }
+
+        if (Description.getText().length() < 1) {
+            alertPopUp("Description cannot be empty!");
+            return false;
+        }
+
+        if(Genre.getSelectionModel().isEmpty()) {
+            alertPopUp("Genre must be selected!");
+            return false;
+        }
+
+        if(MovieState.getSelectionModel().isEmpty()) {
+            alertPopUp("State must be selected!");
+            return false;
+        }
+
+        if(!flg2D.isSelected() && !flg3D.isSelected() && !flgVR.isSelected()) {
+            alertPopUp("At least one mode must be selected");
+            return false;
+        }
+
+        return true;
+    }
+
+    public void alertPopUp(String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error message");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
     public void onClickAddMovie() {
+        //checking if everything is filled
+        if(!checkAllFilled()) {
+            return;
+        }
+
         //getting genre and state from selection
         Long genreID;
         for(int i=0; i<movieTypes.size();i++){

@@ -1,22 +1,23 @@
 package DBO;
 
-import Model.Product;
+
+import Model.PackPO;
 import Tools.BaseDB;
 import lombok.var;
 
 import java.util.List;
 
-public class ProductDAO {
+public class PackPoDAO {
     public static List getAll() {
         var so = BaseDB.openConnection();
         so.beginTransaction();
-        List result = so.createQuery("from Product").list();
+        List result = so.createQuery("from PackPO").list();
         so.getTransaction().commit();
         so.close();
         return result;
     }
 
-    public static void insert(Product object) {
+    public static void insert(PackPO object) {
         var so = BaseDB.openConnection();
         so.beginTransaction();
         so.save(object);
@@ -25,12 +26,12 @@ public class ProductDAO {
         so.close();
     }
 
-    public static String getNameById(long Id) {
+    public static List getAllById(long Id) {
         var so = BaseDB.openConnection();
         so.beginTransaction();
-        List result = so.createSQLQuery("Select Name from Product where Id = " + String.valueOf(Id)).list();
+        List result = so.createQuery("from PackPO where PackHId = " + String.valueOf(Id)).list();
         so.getTransaction().commit();
         so.close();
-        return result.get(0).toString();
+        return result;
     }
 }

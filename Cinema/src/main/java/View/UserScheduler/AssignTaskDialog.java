@@ -35,6 +35,9 @@ public class AssignTaskDialog implements Initializable {
             fxmlLoader.setController(this);
             Scene scene = new Scene(fxmlLoader.load(), 600, 400);
             stage.setScene(scene);
+            stage.setWidth(300);
+            stage.setHeight(170);
+            stage.setResizable(false);
             stage.show();
         } catch (IOException e) {
             // Bob, do something

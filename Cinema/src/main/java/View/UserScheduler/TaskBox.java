@@ -20,6 +20,7 @@ public class TaskBox extends VBox implements Initializable {
 
     public TaskBox(UserSchedulerController parent, User user, Timestamp time) {
         super();
+        this.getStylesheets().add(getClass().getResource("/UserScheduler/TaskBox.css").toExternalForm());
         this.parent = parent;
         this.user = user;
         this.time = time;
@@ -31,6 +32,8 @@ public class TaskBox extends VBox implements Initializable {
         label.setOnMouseClicked(new TaskBoxOnClick());
         this.getChildren().clear();
         this.getChildren().add(label);
+        this.getStyleClass().clear();
+        this.getStyleClass().add("unassigned");
     }
 
     public void setTaskView(Task task) {
@@ -38,6 +41,8 @@ public class TaskBox extends VBox implements Initializable {
         Label description = new Label(task.getDescription());
         this.getChildren().clear();
         this.getChildren().addAll(name, description);
+        this.getStyleClass().clear();
+        this.getStyleClass().add("assigned");
     }
 
     @Override

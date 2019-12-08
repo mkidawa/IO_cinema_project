@@ -1,0 +1,14 @@
+.unassigned {
+    -fx-border-color: #c2c2c2;
+    -fx-border-width: 3px;
+    -fx-padding: 3px;
+    -fx-alignment: center;
+}
+
+.assigned {
+    -fx-background-color: #c8d4e3;
+    -fx-border-color: #87aee0;
+    -fx-border-width: 3px;
+    -fx-padding: 3px;
+    -fx-alignment: center;
+}

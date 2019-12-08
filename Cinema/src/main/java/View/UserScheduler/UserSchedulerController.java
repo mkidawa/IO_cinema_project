@@ -3,25 +3,18 @@ package View.UserScheduler;
 import Controller.UserScheduler.ScheduleManager;
 import Controller.UserScheduler.TaskManager;
 import Controller.UserScheduler.UserManager;
-import Model.Task;
+import Model.Schedule;
 import Model.User;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
-import javafx.util.StringConverter;
 
 import java.sql.Timestamp;
 import java.time.LocalDate;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
 public class UserSchedulerController {
 
@@ -31,110 +24,94 @@ public class UserSchedulerController {
     @FXML
     private GridPane scheduleTable;
 
-    @FXML
-    private ChoiceBox<User> userChoice;
-
-    @FXML
-    private ChoiceBox<Task> taskChoice;
-
-    private Map<Button, Timestamp> buttonTimestampMap = new LinkedHashMap<>();
-
-    private ScheduleManager scheduleManager = new ScheduleManager();
-
     private UserManager userManager = new UserManager();
-
+    private ScheduleManager scheduleManager = new ScheduleManager();
     private TaskManager taskManager = new TaskManager();
+    private List<Schedule> scheduleList;
 
     @FXML
     public void initialize() {
 
-        List<User> users = userManager.getAllUsers();
-        List<Task> tasks = taskManager.getAllTasks();
-
         // Set datePicker to today
         LocalDate today = LocalDate.now();
-        Timestamp todayTime = Timestamp.valueOf(today.atStartOfDay());
         datePicker.setValue(today);
 
+        fillSchedule();
+
+    }
+
+    public void fillSchedule() {
+
+        List<User> users = userManager.getAllUsers();
+        Timestamp todayTime = Timestamp.valueOf(datePicker.getValue().atStartOfDay());
+        scheduleList = scheduleManager.getSchedulesForDay(datePicker.getValue());
+
         // Clear layout
+        scheduleTable.getChildren().clear();
         scheduleTable.getColumnConstraints().clear();
         scheduleTable.getRowConstraints().clear();
 
         // Recreate layout
-        for (int x = 0; x < 24; x++) {
+        for (int x = 0; x < 25; x++) {
             scheduleTable.getRowConstraints().add(new RowConstraints());
         }
-        for (int y = 0; y < 10; y++) {
+        for (int y = 0; y < users.size(); y++) {
             scheduleTable.getColumnConstraints().add(new ColumnConstraints());
         }
 
-        // Setup User choice box
-        userChoice.setConverter(new UserStringConverter());
-        userChoice.getItems().addAll(users);
-
-        // Setup Task choice box
-        taskChoice.setConverter(new TaskStringConverter());
-        taskChoice.getItems().addAll(tasks);
-
         // Fill layout
-        for (int y = 0; y < 10; y++) {
-            for (int x = 0; x < 24; x++) {
-                Timestamp time = new Timestamp(todayTime.getTime() + (60*60*1000*x));
-                if (y == 0) {
-                    Label label = new Label(time.toString());
-                    scheduleTable.add(label, y, x);
-                } else {
-                    Button btn = new Button();
-                    buttonTimestampMap.put(btn, time);
-                    btn.setOnAction(new ScheduleButtonClickHandler());
-                    btn.setText("Add task");
-                    scheduleTable.add(btn, y, x);
+        for (int y = 1; y <= users.size(); y++) {
+            User user = users.get(y - 1);
+            Label label = new Label(user.getFirstName() + " " + user.getLastName() + " (" + user.getLogin() + ")");
+            scheduleTable.add(label, y, 0);
+        }
+        for (int x = 1; x <= 24; x++) {
+            Timestamp time = new Timestamp(todayTime.getTime() + (60*60*1000*(x-1)));
+            Label label = new Label(time.toString());
+            scheduleTable.add(label, 0, x);
+        }
+        for (int y = 1; y <= users.size(); y++) {
+            for (int x = 1; x <= 24; x++) {
+                User user = users.get(y - 1);
+                Timestamp time = new Timestamp(todayTime.getTime() + (60*60*1000*(x-1)));
+                TaskBox tb = new TaskBox(this, user, time);
+                scheduleTable.add(tb, y, x);
+                //Find matching schedule
+                for (Schedule sched : scheduleList) {
+//                    System.out.println("Compare: #"
+//                        + sched.getUser().getId() + " "
+//                        + sched.getDateFrom() + " to #"
+//                        + user.getId() + " "
+//                        + time
+//                    );
+                    if (sched.getDateFrom().equals(time) && sched.getUser().getId() == user.getId()) {
+                        tb.setTaskView(sched.getTask());
+                        break;
+                    }
                 }
             }
         }
 
     }
 
+    public void openAssignTaskDialog(User user, Timestamp time) {
+        AssignTaskDialog dialog = new AssignTaskDialog(this, user, time);
+    }
+
     @FXML
     public void updateDate() {
-        System.out.println(datePicker.getValue());
+        fillSchedule();
     }
 
-    private class ScheduleButtonClickHandler implements EventHandler<ActionEvent>
-    {
-        @Override
-        public void handle(ActionEvent event) {
-            Timestamp time = buttonTimestampMap.get(event.getSource());
-            User user = userChoice.getValue();
-            Task task = taskChoice.getValue();
-            scheduleManager.scheduleTask(user, task, time);
-        }
+    public UserManager getUserManager() {
+        return userManager;
     }
 
-    private class UserStringConverter extends StringConverter<User>
-    {
-        @Override
-        public String toString(User user) {
-            return user.getFirstName() + " " + user.getLastName() + " (" + user.getLogin() + ")";
-        }
-
-        @Override
-        public User fromString(String string) {
-            return null;
-        }
+    public ScheduleManager getScheduleManager() {
+        return scheduleManager;
     }
 
-    private class TaskStringConverter extends StringConverter<Task>
-    {
-        @Override
-        public String toString(Task task) {
-            return task.getName();
-        }
-
-        @Override
-        public Task fromString(String string) {
-            return null;
-        }
+    public TaskManager getTaskManager() {
+        return taskManager;
     }
-
 }

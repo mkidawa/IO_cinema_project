@@ -1,15 +1,13 @@
 package Controller.UserScheduler;
 
 import DBO.ScheduleDAO;
-import DBO.TaskDAO;
-import DBO.UserDAO;
 import Model.DICT.ScheduleStatus;
 import Model.Schedule;
 import Model.Task;
 import Model.User;
 
 import java.sql.Timestamp;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 public class ScheduleManager {
@@ -35,7 +33,14 @@ public class ScheduleManager {
         return null;
     }
 
-    public void scheduleTask(User user, Task task, Timestamp date) {
+    public List<Schedule> getSchedulesForDay(LocalDate date) {
+        Timestamp from = Timestamp.valueOf(date.atStartOfDay());
+        Timestamp to = Timestamp.valueOf(date.atStartOfDay().plusDays(1));
+        List<Schedule> schedules = ScheduleDAO.getScheduleBetween(from, to);
+        return schedules;
+    }
+
+    public Schedule scheduleTask(User user, Task task, Timestamp date) {
         Schedule schedule = new Schedule();
         schedule.setUser(user);
         schedule.setTask(task);
@@ -43,6 +48,7 @@ public class ScheduleManager {
         schedule.setDateFrom(date);
         schedule.setDateTo(new Timestamp(date.getTime() + (60*60*1000)));
         ScheduleDAO.insertUpdate(schedule);
+        return schedule;
     }
 
 }

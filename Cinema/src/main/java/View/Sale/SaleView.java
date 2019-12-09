@@ -271,7 +271,7 @@ public class SaleView {
         }
     }
 
-    public void AddProductToPack(){
+    public void addProductToPack(){
 
         int selectedProduct = tableOfProducts.getSelectionModel().selectedIndexProperty().get();
         int selectedPack = tableOfPack.getSelectionModel().selectedIndexProperty().get();

@@ -87,7 +87,7 @@
             </Label>
             <Button fx:id="addNewProduct" layoutX="471.0" layoutY="584.0" mnemonicParsing="false" onMouseClicked="#addNewProduct" text="Dodaj produkt" />
             <Button layoutX="1089.0" layoutY="584.0" mnemonicParsing="false" text="Usuń produkt z zestawu" />
-            <Button fx:id="AddProductToPack" layoutX="868.0" layoutY="584.0" mnemonicParsing="false" onMouseClicked="#AddProductToPack" text="Dodaj produkt do zestawu" />
+            <Button fx:id="addProductToPack" layoutX="868.0" layoutY="584.0" mnemonicParsing="false" onMouseClicked="#addProductToPack" text="Dodaj produkt do zestawu" />
          </children>
       </AnchorPane>
    </children>

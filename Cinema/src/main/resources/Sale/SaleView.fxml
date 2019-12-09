@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -33,9 +34,14 @@
                   <Font size="24.0" />
                </font>
             </Label>
-            <TableView fx:id="tableOfPack" layoutX="74.0" layoutY="65.0" prefHeight="505.0" prefWidth="364.0">
+            <TableView fx:id="tableOfPack" onMouseClicked="#showPackContent" layoutX="480.0" layoutY="65.0" prefHeight="505.0" prefWidth="364.0">
               <columns>
-                <TableColumn  fx:id="PackName" prefWidth="300.0" text="Nazwa">
+
+                <TableColumn fx:id="PackId" prefWidth="75.0" text="ID">
+                    <cellValueFactory><PropertyValueFactory property="id" /></cellValueFactory>
+                </TableColumn>
+
+                <TableColumn fx:id="PackName" prefWidth="222.0" text="Nazwa">
                     <cellValueFactory><PropertyValueFactory property="name" /></cellValueFactory>
                 </TableColumn>
 
@@ -44,11 +50,42 @@
                 </TableColumn>
               </columns>
             </TableView>
-            <Label layoutX="74.0" layoutY="14.0" text="Zestawy">
+            <Label layoutX="480.0" layoutY="14.0" text="Zestawy">
                <font>
                   <Font size="24.0" />
                </font>
             </Label>
+            <TableView fx:id="tableOfPackContent" layoutX="868.0" layoutY="65.0" prefHeight="505.0" prefWidth="364.0">
+               <columns>
+                  <TableColumn fx:id="PackPOId" prefWidth="75.0" text="ID">
+                     <cellValueFactory>
+                        <PropertyValueFactory property="id" />
+                     </cellValueFactory>
+                  </TableColumn>
+                  <TableColumn fx:id="PackPOProductID" prefWidth="102.0" text="ID Produktu">
+                     <cellValueFactory>
+                        <PropertyValueFactory property="productId" />
+                     </cellValueFactory>
+                  </TableColumn>
+                  <TableColumn fx:id="PackPOAmount" prefWidth="89.0" text="Ilość">
+                     <cellValueFactory>
+                        <PropertyValueFactory property="amount" />
+                     </cellValueFactory>
+                  </TableColumn>
+                  <TableColumn fx:id="PackPOPrice" prefWidth="97.0" text="Cena">
+                     <cellValueFactory>
+                        <PropertyValueFactory property="price" />
+                     </cellValueFactory>
+                  </TableColumn>
+               </columns>
+            </TableView>
+            <Label layoutX="868.0" layoutY="14.0" text="Zawartość Zestawu">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Button fx:id="button1" layoutX="74.0" layoutY="584.0" onMouseClicked="#onClick" mnemonicParsing="false" text="Dodaj produkt do zestawu" />
+            <Button layoutX="868.0" layoutY="577.0" mnemonicParsing="false" text="Usuń produkt z zestawu" />
          </children>
       </AnchorPane>
    </children>

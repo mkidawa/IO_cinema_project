@@ -239,6 +239,35 @@ public class SaleView {
             PackDAO.insert(new Pack(result.get(), new BigDecimal(0)));
             packs = getListOfPack();
             tableOfPack.setItems(packs);
+        }
+    }
+
+    public void addNewProduct(){
+        TextInputDialog d1 = new TextInputDialog();
+        d1.setTitle("New product creator");
+        d1.setContentText("Enter product name");
+        Optional<String> result = d1.showAndWait();
+        if (result.isPresent()) {
+            String name = result.get();
+            TextInputDialog d2 = new TextInputDialog();
+            d2.setTitle("New product creator");
+            d2.setContentText("Enter price of product");
+            Optional<String> result2 = d2.showAndWait();
+            if(result2.isPresent()){
+                BigDecimal price = new BigDecimal(result2.get());
+                TextInputDialog d3 = new TextInputDialog();
+                d3.setTitle("New product creator");
+                d3.setContentText("Enter amount of product in magazine");
+                Optional<String> result3 = d3.showAndWait();
+                if(result3.isPresent()){
+                    int amount = Integer.valueOf(result3.get());
+                    ProductDAO.insert(new Product(name, price, amount));
+                    products = getListOfProduct();
+                    tableOfProducts.setItems(products);
+                }
             }
+            packs = getListOfPack();
+            tableOfPack.setItems(packs);
+        }
     }
 }

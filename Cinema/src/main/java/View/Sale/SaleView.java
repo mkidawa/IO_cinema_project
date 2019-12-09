@@ -1,8 +1,10 @@
 package View.Sale;
 
 import DBO.PackDAO;
+import DBO.PackPoDAO;
 import DBO.ProductDAO;
 import Model.Pack;
+import Model.PackPO;
 import Model.Product;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -13,7 +15,10 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TablePosition;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.Pane;
 import lombok.Getter;
 import lombok.Setter;
@@ -22,6 +27,7 @@ import lombok.var;
 import java.awt.*;
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 public class SaleView {
     @Getter
@@ -49,7 +55,7 @@ public class SaleView {
 
         packs = getListofPack();
         products = getListOfProduct();
-        packContentList = getContentOfPack(1);
+//        packContentList = getContentOfPack(1);
 
         tableOfPack.setItems(packs);
         tableOfProducts.setItems(products);
@@ -160,7 +166,16 @@ public class SaleView {
         tableOfPack.setEditable(true);
         tableOfPack.getSelectionModel().setCellSelectionEnabled(true);
         tableOfPack.setOnMouseClicked(click -> {
+
+            int index = tableOfPack.getSelectionModel().selectedIndexProperty().get();
+            packContentList.clear();
+            packContentList = getContentOfPack((int) packs.get(index).getId());
+
+            tableOfPackContent.setItems(packContentList);
+            tableOfPackContent.refresh();
+
             if (click.getClickCount() == 2) {
+
                 @SuppressWarnings("rawtypes")
                 TablePosition pos = tableOfPack.getSelectionModel().getSelectedCells().get(0);
                 int row = pos.getRow();
@@ -168,7 +183,7 @@ public class SaleView {
                 @SuppressWarnings("rawtypes")
                 TableColumn column = pos.getTableColumn();
                 String val = column.getCellData(row).toString();
-                if (col == 0) {
+                if (col == 1) {
                     TextInputDialog dialog = new TextInputDialog(val);
                     dialog.setTitle("Pack name changer");
                     dialog.setHeaderText(val);
@@ -180,7 +195,7 @@ public class SaleView {
                             tableOfPack.refresh();
                         }
                     }
-                } else if (col == 1) {
+                } else if (col == 2) {
                     TextInputDialog dialog = new TextInputDialog(val);
                     dialog.setTitle("Pack price changer");
                     dialog.setHeaderText(val);
@@ -208,20 +223,16 @@ public class SaleView {
                 }
             }
         });
-
-
         return list;
     }
+
+
     public void onClick(){
         products.get(0).setPrice(new SimpleDoubleProperty(1000));
         tableOfProducts.refresh();
     }
-    public void showPackContent(){
-        int index = tableOfPack.getSelectionModel().selectedIndexProperty().get();
-        packContentList.clear();
-        packContentList = getContentOfPack(++index);
 
-        tableOfPackContent.setItems(packContentList);
-        tableOfPackContent.refresh();
+    public void showPackContent(){
+
     }
 }

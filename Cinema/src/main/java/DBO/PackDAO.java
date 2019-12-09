@@ -26,6 +26,15 @@ public class PackDAO {
         so.close();
     }
 
+    public static List getAllByID(long Id){
+        var so = BaseDB.openConnection();
+        so.beginTransaction();
+        List result = so.createQuery("from Pack where Id = " + String.valueOf(Id)).list();
+        so.getTransaction().commit();
+        so.close();
+        return result;
+    }
+
     public static boolean changeName(long id, String newName){
 
         var so = BaseDB.openConnection();

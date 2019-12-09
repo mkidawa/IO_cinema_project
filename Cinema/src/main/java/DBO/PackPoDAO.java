@@ -5,6 +5,7 @@ import Model.PackPO;
 import Tools.BaseDB;
 import lombok.var;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public class PackPoDAO {
@@ -33,5 +34,9 @@ public class PackPoDAO {
         so.getTransaction().commit();
         so.close();
         return result;
+    }
+
+    public static void instertInto(long Hid, long productId, BigDecimal amount){
+        var so = BaseDB.openConnection();
     }
 }

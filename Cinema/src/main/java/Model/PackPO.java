@@ -44,7 +44,8 @@ public class PackPO {
     public PackPO() {
     }
 
-    public PackPO(Product product, BigDecimal amount) {
+    public PackPO(Pack pack, Product product, BigDecimal amount) {
+        this.pack = pack;
         this.product = product;
         this.amount = amount;
         this.price = product.getPrice().multiply(this.amount).setScale(2, RoundingMode.HALF_UP);

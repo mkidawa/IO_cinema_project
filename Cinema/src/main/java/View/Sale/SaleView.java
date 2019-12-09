@@ -241,4 +241,22 @@ public class SaleView {
             tableOfPack.setItems(packs);
             }
     }
+
+    public void addProductToPack(){
+        
+        int amount  = 0;
+            int selectedProduct = tableOfProducts.getSelectionModel().selectedIndexProperty().get();
+            int selectedPack = tableOfPack.getSelectionModel().selectedIndexProperty().get();
+
+            long productId = products.get(selectedProduct).getId();
+            long packId = packs.get(selectedPack).getId();
+
+            var x = PackDAO.getAllByID(packId).get(0);
+            var y = ProductDAO.getAllByID(productId).get(0);
+            PackPoDAO.insert(new PackPO((Pack) x,(Product) y, new BigDecimal(amount)));
+
+            packContentList = getContentOfPack((int) packId);
+            tableOfPackContent.setItems(packContentList);
+            tableOfPackContent.refresh();
+    }
 }

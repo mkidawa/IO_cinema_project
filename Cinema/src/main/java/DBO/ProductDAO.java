@@ -33,4 +33,13 @@ public class ProductDAO {
         so.close();
         return result.get(0).toString();
     }
+
+    public static List getAllByID(long Id){
+        var so = BaseDB.openConnection();
+        so.beginTransaction();
+        List result = so.createQuery("from Product where Id = " + String.valueOf(Id)).list();
+        so.getTransaction().commit();
+        so.close();
+        return result;
+    }
 }

@@ -54,7 +54,7 @@ public class SaleView {
         Pane pane = fxmlLoader.load();
         scene = new Scene(pane, screenSize.getWidth(), screenSize.getHeight());
 
-        packs = getListofPack();
+        packs = getListOfPack();
         products = getListOfProduct();
 //        packContentList = getContentOfPack(1);
 
@@ -156,7 +156,7 @@ public class SaleView {
         return list;
     }
 
-    public ObservableList<SimplePack> getListofPack() {
+    public ObservableList<SimplePack> getListOfPack() {
 
         ObservableList<SimplePack> list = FXCollections.observableArrayList();
         List<Pack> products = PackDAO.getAll();
@@ -237,8 +237,8 @@ public class SaleView {
         Optional<String> result = dialog.showAndWait();
         if (result.isPresent()) {
             PackDAO.insert(new Pack(result.get(), new BigDecimal(0)));
-            packs = getListofPack();
-            tableOfPack.refresh();
+            packs = getListOfPack();
+            tableOfPack.setItems(packs);
             }
     }
 }

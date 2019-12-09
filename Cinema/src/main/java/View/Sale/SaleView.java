@@ -271,21 +271,29 @@ public class SaleView {
         }
     }
 
-    public void addProductToPack(){
+    public void AddProductToPack(){
 
-        int amount  = 0;
-            int selectedProduct = tableOfProducts.getSelectionModel().selectedIndexProperty().get();
-            int selectedPack = tableOfPack.getSelectionModel().selectedIndexProperty().get();
+        int selectedProduct = tableOfProducts.getSelectionModel().selectedIndexProperty().get();
+        int selectedPack = tableOfPack.getSelectionModel().selectedIndexProperty().get();
 
-            long productId = products.get(selectedProduct).getId();
-            long packId = packs.get(selectedPack).getId();
+        long productId = products.get(selectedProduct).getId();
+        long packId = packs.get(selectedPack).getId();
 
-            var x = PackDAO.getAllByID(packId).get(0);
-            var y = ProductDAO.getAllByID(productId).get(0);
+        var x = PackDAO.getAllByID(packId).get(0);
+        var y = ProductDAO.getAllByID(productId).get(0);
+
+        TextInputDialog d1 = new TextInputDialog();
+        d1.setTitle("Set amount of product in pack");
+        d1.setContentText("Enter amount");
+        Optional<String> result = d1.showAndWait();
+        if (result.isPresent()) {
+            String amount = result.get();
             PackPoDAO.insert(new PackPO((Pack) x,(Product) y, new BigDecimal(amount)));
 
             packContentList = getContentOfPack((int) packId);
             tableOfPackContent.setItems(packContentList);
             tableOfPackContent.refresh();
+        }
+
     }
 }

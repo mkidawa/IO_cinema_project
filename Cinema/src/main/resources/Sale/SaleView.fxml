@@ -8,11 +8,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox fillWidth="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<VBox fillWidth="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <AnchorPane prefHeight="803.0" prefWidth="1282.0">
          <children>
-            <TableView fx:id="tableOfProducts" layoutX="74.0" layoutY="65.0" prefHeight="512.0" prefWidth="364.0">
+            <TableView fx:id="tableOfProducts" layoutX="531.0" layoutY="65.0" prefHeight="505.0" prefWidth="364.0">
               <columns>
                   <TableColumn fx:id="ProductId" prefWidth="75.0" text="ID">
                       <cellValueFactory><PropertyValueFactory property="id" /></cellValueFactory>
@@ -28,28 +28,23 @@
                   </TableColumn>
               </columns>
             </TableView>
-            <Label layoutX="74.0" layoutY="14.0" text="Produkty">
+            <Label layoutX="531.0" layoutY="14.0" text="Produkty">
                <font>
                   <Font size="24.0" />
                </font>
             </Label>
-            <TableView fx:id="tableOfPack" layoutX="531.0" layoutY="69.0" prefHeight="505.0" prefWidth="364.0">
+            <TableView fx:id="tableOfPack" layoutX="74.0" layoutY="65.0" prefHeight="505.0" prefWidth="364.0">
               <columns>
-
-                <TableColumn fx:id="PackId" prefWidth="75.0" text="ID">
-                    <cellValueFactory><PropertyValueFactory property="id" /></cellValueFactory>
-                </TableColumn>
-
-                <TableColumn  fx:id="PackName" prefWidth="222.0" text="Nazwa">
+                <TableColumn  fx:id="PackName" prefWidth="300.0" text="Nazwa">
                     <cellValueFactory><PropertyValueFactory property="name" /></cellValueFactory>
                 </TableColumn>
 
-                <TableColumn fx:id="PackPrice" prefWidth="66.0" text="Cena">
+                <TableColumn fx:id="PackPrice" prefWidth="64.0" text="Cena">
                     <cellValueFactory><PropertyValueFactory property="price" /></cellValueFactory>
                 </TableColumn>
               </columns>
             </TableView>
-            <Label layoutX="531.0" layoutY="14.0" text="Zestawy">
+            <Label layoutX="74.0" layoutY="14.0" text="Zestawy">
                <font>
                   <Font size="24.0" />
                </font>

@@ -3,6 +3,7 @@ package DBO;
 import Model.Pack;
 import Tools.BaseDB;
 import lombok.var;
+import org.hibernate.query.Query;
 
 import java.util.List;
 
@@ -23,5 +24,29 @@ public class PackDAO {
         so.getTransaction()
                 .commit();
         so.close();
+    }
+
+    public static boolean changeName(long id, String newName){
+
+        var so = BaseDB.openConnection();
+        so.beginTransaction();
+        Query query = so.createQuery("UPDATE Pack SET Name = '" + newName + "' WHERE id = " + id);
+        int res = query.executeUpdate();
+        so.getTransaction()
+                .commit();
+        so.close();
+        return res == 1;
+    }
+
+    public static boolean changePrice(long id, String newPrice){
+
+        var so = BaseDB.openConnection();
+        so.beginTransaction();
+        Query query = so.createQuery("UPDATE Pack SET _Price = '" + newPrice + "' WHERE id = " + id);
+        int res = query.executeUpdate();
+        so.getTransaction()
+                .commit();
+        so.close();
+        return res == 1;
     }
 }

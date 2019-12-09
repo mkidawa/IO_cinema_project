@@ -2,34 +2,30 @@ package View.Sale;
 
 import DBO.PackDAO;
 import DBO.ProductDAO;
-import DBO.SaleDAO;
 import Model.Pack;
 import Model.Product;
-import Model.Sale;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleLongProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.collections.ObservableList;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TablePosition;
 import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.var;
 
-
 import java.awt.*;
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.util.List;
+import java.util.Optional;
 
 public class SaleView {
     @Getter
@@ -109,11 +105,66 @@ public class SaleView {
     }
 
     public ObservableList<SimplePack> getListofPack() {
+
         ObservableList<SimplePack> list = FXCollections.observableArrayList();
         List<Pack> products = PackDAO.getAll();
         for (int i=0; i<products.size(); i++) {
             list.add(new SimplePack(products.get(i).getId(), products.get(i).getName(), products.get(i).getPrice().doubleValue()));
         }
+
+        tableOfPack.setEditable(true);
+        tableOfPack.getSelectionModel().setCellSelectionEnabled(true);
+        tableOfPack.setOnMouseClicked(click -> {
+            if (click.getClickCount() == 2) {
+                @SuppressWarnings("rawtypes")
+                TablePosition pos = tableOfPack.getSelectionModel().getSelectedCells().get(0);
+                int row = pos.getRow();
+                int col = pos.getColumn();
+                @SuppressWarnings("rawtypes")
+                TableColumn column = pos.getTableColumn();
+                String val = column.getCellData(row).toString();
+                if (col == 0) {
+                    TextInputDialog dialog = new TextInputDialog(val);
+                    dialog.setTitle("Pack name changer");
+                    dialog.setHeaderText(val);
+                    dialog.setContentText("Enter new name for a pack");
+                    Optional<String> result = dialog.showAndWait();
+                    if (result.isPresent()) {
+                        if (PackDAO.changeName(list.get(row).id.longValue(), result.get())) {
+                            list.get(row).name.set(result.get());
+                            tableOfPack.refresh();
+                        }
+                    }
+                } else if (col == 1) {
+                    TextInputDialog dialog = new TextInputDialog(val);
+                    dialog.setTitle("Pack price changer");
+                    dialog.setHeaderText(val);
+                    dialog.setContentText("Enter new price for a pack");
+
+                    Optional<String> result = dialog.showAndWait();
+                    if (result.isPresent()) {
+
+                        String res = String.valueOf(result);
+                        res = res.substring(9, res.length()-1);
+                        double dres = 0;
+                        try {
+                            dres = Double.parseDouble(res);
+                        } catch (NumberFormatException e) {
+                            e.printStackTrace();
+                        }
+                        if (dres > 0) {
+                            if (PackDAO.changePrice(list.get(row).id.longValue(), res)) {
+                                list.get(row).price.set(dres);
+                                tableOfPack.refresh();
+                            }
+                        }
+
+                    }
+                }
+            }
+        });
+
+
         return list;
     }
 }

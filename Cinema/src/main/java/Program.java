@@ -19,7 +19,7 @@ public class Program extends Application {
         Scene scene = new Scene(myPane);
         primaryStage.setScene(scene);
         primaryStage.show();
-        //primaryStage.setFullScreen(true);
+        primaryStage.setFullScreen(true);
     }
 
     public static void main(String[] args) {

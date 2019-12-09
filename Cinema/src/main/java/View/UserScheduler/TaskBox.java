@@ -47,7 +47,17 @@ public class TaskBox extends VBox implements Initializable {
         this.getChildren().clear();
         this.getChildren().addAll(name, description);
         this.getStyleClass().clear();
-        this.getStyleClass().add("assigned");
+        switch ((int)schedule.getScheduleStatus().getId()) {
+            case 1:
+                this.getStyleClass().add("assigned");
+                break;
+            case 2:
+                this.getStyleClass().add("closed");
+                break;
+            case 3:
+                this.getStyleClass().add("annuled");
+                break;
+        }
         this.setOnMouseClicked((MouseEvent event) -> {
             parent.openModifyTaskDialog(schedule);
         });

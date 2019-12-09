@@ -14,6 +14,7 @@ import javafx.scene.layout.RowConstraints;
 
 import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class UserSchedulerController {
@@ -67,7 +68,10 @@ public class UserSchedulerController {
         }
         for (int x = 1; x <= 24; x++) {
             Timestamp time = new Timestamp(todayTime.getTime() + (60*60*1000*(x-1)));
-            Label label = new Label(time.toString());
+            LocalDateTime dateTime = time.toLocalDateTime();
+            String hour = ((dateTime.getHour() < 10) ? "0" : "") + dateTime.getHour();
+            String minutes = ((dateTime.getMinute() < 10) ? "0" : "") + dateTime.getMinute();
+            Label label = new Label(hour + ":" + minutes);
             scheduleTable.add(label, 0, x);
         }
         for (int y = 1; y <= users.size(); y++) {

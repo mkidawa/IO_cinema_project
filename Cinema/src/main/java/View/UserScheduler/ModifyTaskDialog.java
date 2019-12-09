@@ -1,5 +1,6 @@
 package View.UserScheduler;
 
+import Model.DICT.ScheduleStatus;
 import Model.Schedule;
 import Model.Task;
 import javafx.application.Platform;
@@ -20,6 +21,9 @@ public class ModifyTaskDialog implements Initializable {
 
     @FXML
     private ChoiceBox<Task> taskChoice;
+
+    @FXML
+    private ChoiceBox<ScheduleStatus> statusChoice;
 
     private UserSchedulerController parent;
     private Schedule schedule;
@@ -44,6 +48,7 @@ public class ModifyTaskDialog implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        // Task choice box
         this.taskChoice.setConverter(new TaskStringConverter());
         List<Task> allTasks = parent.getTaskManager().getAllTasks();
         this.taskChoice.getItems().addAll(allTasks);
@@ -52,12 +57,22 @@ public class ModifyTaskDialog implements Initializable {
                 taskChoice.setValue(task);
             }
         }
+        // Status choice box
+        this.statusChoice.setConverter(new ScheduleStatusStringConverter());
+        List<ScheduleStatus> statuses = parent.getScheduleManager().getStatuses();
+        this.statusChoice.getItems().addAll(statuses);
+        for (ScheduleStatus status : statuses) {
+            if (status.getId() == schedule.getScheduleStatus().getId()) {
+                statusChoice.setValue(status);
+            }
+        }
     }
 
     @FXML
     private void accept() {
         Platform.runLater(() -> {
             schedule.setTask(taskChoice.getValue());
+            schedule.setScheduleStatus(statusChoice.getValue());
             parent.getScheduleManager().updateSchedule(schedule);
             parent.fillSchedule();
         });
@@ -82,6 +97,19 @@ public class ModifyTaskDialog implements Initializable {
 
         @Override
         public Task fromString(String string) {
+            return null;
+        }
+    }
+
+    private class ScheduleStatusStringConverter extends StringConverter<ScheduleStatus>
+    {
+        @Override
+        public String toString(ScheduleStatus status) {
+            return status.getName();
+        }
+
+        @Override
+        public ScheduleStatus fromString(String string) {
             return null;
         }
     }

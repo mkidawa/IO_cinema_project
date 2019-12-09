@@ -12,3 +12,19 @@
     -fx-padding: 3px;
     -fx-alignment: center;
 }
+
+.closed {
+    -fx-background-color: #aadba7;
+    -fx-border-color: #6bc965;
+    -fx-border-width: 3px;
+    -fx-padding: 3px;
+    -fx-alignment: center;
+}
+
+.annuled {
+    -fx-background-color: #dbb6a7;
+    -fx-border-color: #f56d47;
+    -fx-border-width: 3px;
+    -fx-padding: 3px;
+    -fx-alignment: center;
+}

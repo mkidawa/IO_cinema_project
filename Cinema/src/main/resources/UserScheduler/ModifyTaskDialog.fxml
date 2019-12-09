@@ -9,8 +9,10 @@
 
 <VBox alignment="CENTER" prefHeight="170.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8.0.202-ea" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label text="Edytuj zadanie" />
+      <Label text="Zadanie" />
       <ChoiceBox fx:id="taskChoice" prefWidth="150.0" />
+      <Label text="Status" />
+      <ChoiceBox fx:id="statusChoice" prefWidth="150.0" />
       <HBox alignment="CENTER">
          <children>
             <Button mnemonicParsing="false" onAction="#accept" text="Zapisz">

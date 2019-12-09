@@ -243,7 +243,7 @@ public class SaleView {
     }
 
     public void addProductToPack(){
-        
+
         int amount  = 0;
             int selectedProduct = tableOfProducts.getSelectionModel().selectedIndexProperty().get();
             int selectedPack = tableOfPack.getSelectionModel().selectedIndexProperty().get();

@@ -50,6 +50,7 @@
                 </TableColumn>
               </columns>
             </TableView>
+            <Button fx:id="AddNewPack" layoutX="74.0" layoutY="584.0" mnemonicParsing="false" onMouseClicked="#addNewPack" text="Dodaj nowy zestaw" />
             <Label layoutX="74.0" layoutY="14.0" text="Zestawy">
                <font>
                   <Font size="24.0" />
@@ -84,7 +85,7 @@
                   <Font size="24.0" />
                </font>
             </Label>
-            <Button fx:id="button1" layoutX="74.0" layoutY="584.0" mnemonicParsing="false" onMouseClicked="#onClick" text="Dodaj produkt do zestawu" />
+            <Button fx:id="button1" layoutX="471.0" layoutY="584.0" mnemonicParsing="false" onMouseClicked="#onClick" text="Dodaj produkt do zestawu" />
             <Button layoutX="868.0" layoutY="584.0" mnemonicParsing="false" text="Usuń produkt z zestawu" />
          </children>
       </AnchorPane>

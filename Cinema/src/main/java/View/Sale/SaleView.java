@@ -26,6 +26,7 @@ import lombok.var;
 
 import java.awt.*;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -61,9 +62,9 @@ public class SaleView {
         tableOfProducts.setItems(products);
         tableOfPackContent.setItems(packContentList);
 
+
+
     }
-
-
 
     public class SimpleProduct {
         private final SimpleLongProperty id;
@@ -203,7 +204,6 @@ public class SaleView {
 
                     Optional<String> result = dialog.showAndWait();
                     if (result.isPresent()) {
-
                         String res = String.valueOf(result);
                         res = res.substring(9, res.length()-1);
                         double dres = 0;
@@ -217,15 +217,10 @@ public class SaleView {
                                 list.get(row).price.set(dres);
                                 tableOfPack.refresh();
                             }
-                        }
-
-                    }
-                }
-            }
+                }}}}
         });
         return list;
     }
-
 
     public void onClick(){
         products.get(0).setPrice(new SimpleDoubleProperty(1000));
@@ -233,6 +228,17 @@ public class SaleView {
     }
 
     public void showPackContent(){
+    }
 
+    public void addNewPack(){
+        TextInputDialog dialog = new TextInputDialog();
+        dialog.setTitle("New pack creator");
+        dialog.setContentText("Enter pack name");
+        Optional<String> result = dialog.showAndWait();
+        if (result.isPresent()) {
+            PackDAO.insert(new Pack(result.get(), new BigDecimal(0)));
+            packs = getListofPack();
+            tableOfPack.refresh();
+            }
     }
 }

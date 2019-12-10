@@ -1,6 +1,7 @@
 package View.Login;
 
 import Controller.LPermissionController;
+import Tools.PermissionChecker;
 import View.Components.ButtonWithImage;
 import View.Components.NumericKeyboard;
 import javafx.fxml.FXML;
@@ -60,5 +61,9 @@ public class MA {
         System.out.println(passwordField.getText());
         System.out.println(logInTextField.getText());
         LPermissionController.getInstance().login(logInTextField.getText(),passwordField.getText());
+    }
+    public void printPermission() throws IOException {
+        PermissionChecker pc = new PermissionChecker();
+        System.out.println(pc.getPermissionsList());
     }
 }

@@ -35,7 +35,8 @@ public class Program extends Application {
 
     public static void main(String[] args) {
         //TODO Main program file. System starts here
-        launch(args);
+//        launch(args);
+        Application.launch(args);
 //        BaseDB.openConnection();
 
 

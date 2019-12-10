@@ -37,6 +37,7 @@ public class Program extends Application {
         //TODO Main program file. System starts here
         BaseDB.setUp();
         launch(args);
+
 //        BaseDB.openConnection();
 
 

@@ -4,6 +4,7 @@ package DBO;
 import Model.PackPO;
 import Tools.BaseDB;
 import lombok.var;
+import org.hibernate.query.Query;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -38,5 +39,15 @@ public class PackPoDAO {
 
     public static void instertInto(long Hid, long productId, BigDecimal amount){
         var so = BaseDB.openConnection();
+    }
+
+    public static void removeById(long Id) {
+        var so = BaseDB.openConnection();
+        so.beginTransaction();
+        Query query = so.createQuery("Delete from PackPO where Id = " + Id);
+        query.executeUpdate();
+        so.getTransaction()
+                .commit();
+        so.close();
     }
 }

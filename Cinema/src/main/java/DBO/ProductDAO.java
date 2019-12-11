@@ -3,6 +3,7 @@ package DBO;
 import Model.Product;
 import Tools.BaseDB;
 import lombok.var;
+import org.hibernate.query.Query;
 
 import java.util.List;
 
@@ -32,6 +33,19 @@ public class ProductDAO {
         so.getTransaction().commit();
         so.close();
         return result.get(0).toString();
+    }
+
+
+    public static void removeById(long Id) {
+        var so = BaseDB.openConnection();
+        so.beginTransaction();
+        Query query = so.createQuery("Delete from Product where Id = " + Id);
+        query.executeUpdate();
+        Query query1= so.createQuery("Delete from PackPO where ProductId = " + Id);
+        query1.executeUpdate();
+        so.getTransaction()
+                .commit();
+        so.close();
     }
 
     public static List getAllByID(long Id){

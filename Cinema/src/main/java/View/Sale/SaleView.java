@@ -294,6 +294,52 @@ public class SaleView {
             tableOfPackContent.setItems(packContentList);
             tableOfPackContent.refresh();
         }
-
     }
+
+    public void removeProductFromPack(){
+        int selectedProduct = tableOfPackContent.getSelectionModel().selectedIndexProperty().get();
+        long productId = packContentList.get(selectedProduct).getId();
+
+        int selectedPack = tableOfPack.getSelectionModel().selectedIndexProperty().get();
+        long packId = packs.get(selectedPack).getId();
+
+        PackPoDAO.removeById(productId);
+
+        packContentList = getContentOfPack((int) packId);
+        tableOfPackContent.setItems(packContentList);
+        tableOfPackContent.refresh();
+    }
+
+    public void removeProduct(){
+        int selectedProduct = tableOfProducts.getSelectionModel().selectedIndexProperty().get();
+        long productId = products.get(selectedProduct).getId();
+
+        int selectedPack = tableOfPack.getSelectionModel().selectedIndexProperty().get();
+        long packId = packs.get(selectedPack).getId();
+
+        ProductDAO.removeById(productId);
+
+        packContentList = getContentOfPack((int) packId);
+        tableOfPackContent.setItems(packContentList);
+        tableOfPackContent.refresh();
+        products = getListOfProduct();
+        tableOfProducts.setItems(products);
+        tableOfProducts.refresh();
+    }
+
+
+    public void removePack(){
+        int selectedPack = tableOfPack.getSelectionModel().selectedIndexProperty().get();
+        long packId = packs.get(selectedPack).getId();
+
+        PackDAO.removeById(packId);
+
+        packContentList = getContentOfPack((int) packId);
+        tableOfPackContent.setItems(packContentList);
+        tableOfPackContent.refresh();
+        packs = getListOfPack();
+        tableOfPack.setItems(packs);
+        tableOfPack.refresh();
+    }
+
 }

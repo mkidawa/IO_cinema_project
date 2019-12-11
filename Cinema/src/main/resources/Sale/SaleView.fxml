@@ -56,6 +56,7 @@
                   <Font size="24.0" />
                </font>
             </Label>
+            <Button fx:id="removePack" layoutX="356.0" layoutY="584.0" mnemonicParsing="false" onMouseClicked="#removePack" text="Usuń zestaw" />
             <TableView fx:id="tableOfPackContent" layoutX="868.0" layoutY="65.0" prefHeight="505.0" prefWidth="364.0">
                <columns>
                   <TableColumn fx:id="PackPOId" prefWidth="75.0" text="ID">
@@ -86,8 +87,9 @@
                </font>
             </Label>
             <Button fx:id="addNewProduct" layoutX="471.0" layoutY="584.0" mnemonicParsing="false" onMouseClicked="#addNewProduct" text="Dodaj produkt" />
-            <Button layoutX="1089.0" layoutY="584.0" mnemonicParsing="false" text="Usuń produkt z zestawu" />
+            <Button fx:id="removeProductFromPack" layoutX="1089.0" layoutY="584.0" mnemonicParsing="false" onMouseClicked="#removeProductFromPack" text="Usuń produkt z zestawu" />
             <Button fx:id="addProductToPack" layoutX="868.0" layoutY="584.0" mnemonicParsing="false" onMouseClicked="#addProductToPack" text="Dodaj produkt do zestawu" />
+            <Button fx:id="removeProduct" layoutX="746.0" layoutY="584.0" mnemonicParsing="false" onMouseClicked="#removeProduct" text="Usuń produkt" />
          </children>
       </AnchorPane>
    </children>

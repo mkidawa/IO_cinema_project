@@ -35,6 +35,18 @@ public class PackDAO {
         return result;
     }
 
+    public static void removeById(long Id) {
+        var so = BaseDB.openConnection();
+        so.beginTransaction();
+        Query query = so.createQuery("Delete from Pack where Id = " + Id);
+        query.executeUpdate();
+        Query query1= so.createQuery("Delete from PackPO where PackHId = " + Id);
+        query1.executeUpdate();
+        so.getTransaction()
+                .commit();
+        so.close();
+    }
+
     public static boolean changeName(long id, String newName){
 
         var so = BaseDB.openConnection();

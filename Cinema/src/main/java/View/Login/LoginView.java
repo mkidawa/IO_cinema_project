@@ -35,11 +35,7 @@ public class LoginView {
         scene = new Scene(pane, screenSize.getWidth(), screenSize.getHeight());
         scene.setFill(null);
         closeBtn.setText("Zamknij aplikację");
-        closeBtn.setOnMousePressed(event -> {
-            if (event.getClickCount() == 1 && event.getButton() == MouseButton.PRIMARY) {
-                closeApplication();
-            }
-        });
+
 
     }
 

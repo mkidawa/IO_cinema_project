@@ -27,6 +27,7 @@ public class NumericKeyboard extends GridPane implements Initializable {
             fxmlLoader.setController(this);
             Node n = fxmlLoader.load();
             this.getChildren().add(n);
+            this.setPickOnBounds(false);
         } catch (IOException exception) {
             throw new RuntimeException(exception);
         }

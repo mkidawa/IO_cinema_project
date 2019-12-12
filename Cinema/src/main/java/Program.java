@@ -2,41 +2,28 @@ import Controller.LPermissionController;
 import Tools.BaseDB;
 import Tools.PermissionChecker;
 import View.Login.LoginView;
-import View.Login.MA;
+import View.MainMenu.MainMenu;
 import javafx.application.Application;
-import javafx.scene.layout.Pane;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import static java.lang.System.exit;
 
 public class Program extends Application {
     @Override
-    public void init() throws Exception {
-        super.init();
-    }
-
-    @Override
     public void start(Stage primaryStage) throws Exception {
-        primaryStage.setTitle("Cinema Management System");
-//        var myLoader = new FXMLLoader(getClass().getResource("login/LoginView.fxml"));
-//        Pane myPane = myLoader.load();
-
-        //var myScene = new Scene();
-        primaryStage.setScene(new MA().getScene());
+        Parent root = FXMLLoader.load(getClass().getResource("MainMenu/Login.fxml"));
+        primaryStage.setTitle("Cinema Management");
+        primaryStage.setScene(new Scene(root, 800 , 600));
         primaryStage.show();
-        //primaryStage.setFullScreen(true);
 
-    }
-
-    @Override
-    public void stop() throws Exception {
-        super.stop();
     }
 
     public static void main(String[] args) {
         //TODO Main program file. System starts here
-//        launch(args);
-        Application.launch(args);
+        launch(args);
 //        BaseDB.openConnection();
 
 

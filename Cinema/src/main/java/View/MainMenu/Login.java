@@ -1,14 +1,19 @@
 package View.MainMenu;
 
 import Controller.LPermissionController;
+<<<<<<< HEAD
 import Tools.LoginException;
 import Tools.PermissionChecker;
 import View.Program;
 import javafx.event.ActionEvent;
+=======
+import Tools.PermissionChecker;
+>>>>>>> Added panel for mainMenu
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+<<<<<<< HEAD
 
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -20,11 +25,21 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.io.IOException;
+=======
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
+
+import java.io.IOException;
+
+>>>>>>> Added panel for mainMenu
 public class Login {
     @FXML
     private PasswordField passwordField;
     @FXML
     private TextField logInTextField;
+<<<<<<< HEAD
     @Getter
     @Setter
     private Stage stage;
@@ -54,11 +69,26 @@ public class Login {
             Program.getPrimaryStage().setScene(scene);
 
 
+=======
+    public void logIn() throws IOException {
+        System.out.println(passwordField.getText());
+        System.out.println(logInTextField.getText());
+        if(LPermissionController.getInstance().login(logInTextField.getText(), passwordField.getText())) {
+            Parent fxmlLoader = FXMLLoader.load(getClass().getResource("/MainMenu/MainMenu.fxml"));
+            Stage stage = new Stage();
+            Scene scene = new Scene(fxmlLoader);
+            stage.setScene(scene);
+            stage.setTitle("Main Menu");
+            stage.setResizable(false);
+            stage.show();
+        }
+>>>>>>> Added panel for mainMenu
 
     }
     public void printPermission() throws IOException {
         PermissionChecker pc = new PermissionChecker();
         System.out.println(pc.getPermissionsList());
+<<<<<<< HEAD
 
     }
 
@@ -127,5 +157,7 @@ public class Login {
 
     public void btn9_Click(ActionEvent actionEvent) {
         ClickButton(9);
+=======
+>>>>>>> Added panel for mainMenu
     }
 }

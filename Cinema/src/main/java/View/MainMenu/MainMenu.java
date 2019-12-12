@@ -5,9 +5,12 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+<<<<<<< HEAD
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+=======
+>>>>>>> Added panel for mainMenu
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -21,6 +24,7 @@ import java.io.IOException;
 
 public class MainMenu  {
 
+<<<<<<< HEAD
     public Button movieModuleButton;
     public Button employeeModuleButton;
     public Button raportModuleButton;
@@ -31,6 +35,10 @@ public class MainMenu  {
     public Button salesModuleButton;
     public Button timetableModuleButton;
 
+=======
+    public void openMM(MouseEvent mouseEvent) {
+    }
+>>>>>>> Added panel for mainMenu
 
     public void logIn(MouseEvent mouseEvent) {
     }
@@ -39,6 +47,7 @@ public class MainMenu  {
         PermissionChecker pc = new PermissionChecker();
         System.out.println(pc.getPermissionsList());
     }
+<<<<<<< HEAD
 
     public void openTimetableModule(MouseEvent mouseEvent) {
     }
@@ -62,4 +71,6 @@ public class MainMenu  {
         stage.setResizable(false);
         stage.show();
     }
+=======
+>>>>>>> Added panel for mainMenu
 }

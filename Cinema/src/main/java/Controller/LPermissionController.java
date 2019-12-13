@@ -172,6 +172,7 @@ public class LPermissionController {
         if(checkLoginCode(code)){
             if(checkCode(code)){
                 currentUser.setPasswordHash("");
+                failCounter=0;
                 return true;
             }
         }

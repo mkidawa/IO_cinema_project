@@ -2,10 +2,14 @@ package Tools;
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 public class LoginException extends RuntimeException {
 =======
 public class LoginException extends Exception {
 >>>>>>> implemented LoginException
+=======
+public class LoginException extends RuntimeException {
+>>>>>>> Changed Errors for LoginException
     public LoginException() {
     }
 

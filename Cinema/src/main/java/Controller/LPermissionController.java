@@ -6,6 +6,7 @@ import Model.User;
 import Tools.Filter;
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 import Tools.LoginException;
 import View.MainMenu.Login;
 =======
@@ -13,6 +14,10 @@ import com.sun.javaws.exceptions.UnsignedAccessViolationException;
 >>>>>>> Impl FailCounter
 =======
 >>>>>>> Zalozono limit na ilosc logowan
+=======
+import Tools.LoginException;
+import View.MainMenu.Login;
+>>>>>>> Changed Errors for LoginException
 
 import java.util.Collections;
 import java.util.List;
@@ -81,8 +86,12 @@ public class LPermissionController {
 =======
 =======
             failCounter++;
+<<<<<<< HEAD
 >>>>>>> Impl FailCounter
             throw new Error("Brak uzytkownika w bazie");
+=======
+            throw new LoginException("Brak uzytkownika w bazie");
+>>>>>>> Changed Errors for LoginException
 //            return false;
 >>>>>>> throws instead of return false
         } else if (result.size() == 1 && result.get(0).toString().equals(login)) {
@@ -108,6 +117,7 @@ public class LPermissionController {
         System.err.println("Haslo nie prawidlowe");
         failCounter++;
 <<<<<<< HEAD
+<<<<<<< HEAD
         throw new LoginException("Haslo nie prawidlowe");
 //        return false;
     }
@@ -116,6 +126,9 @@ public class LPermissionController {
 >>>>>>> Added nicer login/menu
 =======
         throw new Error("Haslo nie prawidlowe");
+=======
+        throw new LoginException("Haslo nie prawidlowe");
+>>>>>>> Changed Errors for LoginException
 //        return false;
     }
 
@@ -136,10 +149,14 @@ public class LPermissionController {
             }
         }
 <<<<<<< HEAD
+<<<<<<< HEAD
         throw new LoginException("Logowanie nie powiodło się");
 =======
         throw new Error("Logowanie nie powiodło się");
 >>>>>>> throws instead of return false
+=======
+        throw new LoginException("Logowanie nie powiodło się");
+>>>>>>> Changed Errors for LoginException
 //        return false;
     }
     private boolean checkLoginCode(String code) {
@@ -152,7 +169,7 @@ public class LPermissionController {
         if (result.size() == 0) {
             System.err.println("Bledny Kod");
             failCounter++;
-            throw new Error("Bledny kod");
+            throw new LoginException("Bledny kod");
 //            return false;
         } else if (result.size() == 1) {
             System.out.println(result.toString());
@@ -171,7 +188,7 @@ public class LPermissionController {
         }
         System.err.println("Kod nie jest prawidlowy");
         failCounter++;
-        throw new Error("Kod nie jest prawidlowy");
+        throw new LoginException("Kod nie jest prawidlowy");
 
     }
 
@@ -183,7 +200,7 @@ public class LPermissionController {
                 return true;
             }
         }
-        throw new Error("Logowanie nie powiodło się");
+        throw new LoginException("Logowanie nie powiodło się");
 //        return false;
 
     }

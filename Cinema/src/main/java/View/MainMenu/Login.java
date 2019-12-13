@@ -92,7 +92,7 @@ public class Login {
     public void logIn() throws IOException {
         System.out.println(passwordField.getText());
         System.out.println(logInTextField.getText());
-
+//        if()
         try {
             LPermissionController.getInstance().login(logInTextField.getText(), passwordField.getText());
             showMainMenu();

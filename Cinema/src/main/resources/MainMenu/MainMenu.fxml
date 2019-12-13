@@ -50,7 +50,7 @@
         </MenuBar>
         <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
             <children>
-                <Button fx:id="movieModuleButton" layoutX="66.0" layoutY="56.0" mnemonicParsing="false" onMouseClicked="#openMM" text="MovieModule" />
+                <Button fx:id="movieModuleButton" layoutX="66.0" layoutY="56.0" mnemonicParsing="false" onMouseClicked="#openMovieModule" text="MovieModule" />
                 <Button fx:id="employeeModuleButton" layoutX="66.0" layoutY="110.0" mnemonicParsing="false" onMouseClicked="#openEmployeeModule" text="EmployeeModule" />
                 <Button fx:id="raportModuleButton" layoutX="242.0" layoutY="56.0" mnemonicParsing="false" onMouseClicked="#openRaportModule" text="RaportModule" />
                 <PasswordField fx:id="passwordField" layoutX="66.0" layoutY="400.0" promptText="Password" />

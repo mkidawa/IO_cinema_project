@@ -51,6 +51,7 @@ public class LPermissionController {
         return false;
     }
 
+
     /**
      * Autoryzacja uzytkownika w systemie
      * @param login Login uzytkownika
@@ -65,6 +66,45 @@ public class LPermissionController {
             }
         }
         return false;
+    }
+    private boolean checkLoginCode(String code) {
+//
+        String sql = "SELECT U.login from User U WHERE U.codeHash='" + code +
+                "'";
+        List result = UserDAO.execSQL(sql);
+        if (result.size() == 0) {
+            System.out.println("Bledny Kod");
+            return false;
+        } else if (result.size() == 1) {
+            System.out.println(result.toString());
+            System.out.println("Znalazlem login: " + result.get(0));
+            return true;
+        }
+        return false;
+    }
+    private boolean checkCode(String code){
+        String sql = "from User U WHERE U.codeHash='" + code + "'";
+        User result = (User) UserDAO.execSQL(sql).get(0);
+        if (result.getCodeHash().equals(code)) {
+            currentUser = result;
+            System.out.println("Prawidlowe Kod");
+            return true;
+        }
+        System.out.println("Kod nie jest prawidlowy");
+        return false;
+
+    }
+
+        public boolean login(String code){
+        if(checkLoginCode(code)){
+            if(checkCode(code)){
+                currentUser.setPasswordHash("");
+                return true;
+            }
+
+        }
+        return false;
+
     }
 
     private boolean checkPassword(String login, String password) {

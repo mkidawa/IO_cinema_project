@@ -60,10 +60,14 @@
             <children>
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
                 <Button fx:id="movieModuleButton" layoutX="66.0" layoutY="56.0" mnemonicParsing="false" onMouseClicked="#openMovieModule" text="MovieModule" />
 =======
                 <Button fx:id="movieModuleButton" layoutX="66.0" layoutY="56.0" mnemonicParsing="false" onMouseClicked="#openMM" text="MovieModule" />
 >>>>>>> Created buttons and methods
+=======
+                <Button fx:id="movieModuleButton" layoutX="66.0" layoutY="56.0" mnemonicParsing="false" onMouseClicked="#openMovieModule" text="MovieModule" />
+>>>>>>> implemented openMovieModule
                 <Button fx:id="employeeModuleButton" layoutX="66.0" layoutY="110.0" mnemonicParsing="false" onMouseClicked="#openEmployeeModule" text="EmployeeModule" />
                 <Button fx:id="raportModuleButton" layoutX="242.0" layoutY="56.0" mnemonicParsing="false" onMouseClicked="#openRaportModule" text="RaportModule" />
                 <PasswordField fx:id="passwordField" layoutX="66.0" layoutY="400.0" promptText="Password" />

@@ -46,6 +46,7 @@ public class MainMenu  {
     public Button timetableModuleButton;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     public void openMM(MouseEvent mouseEvent) {
 =======
@@ -63,6 +64,8 @@ public class MainMenu  {
 >>>>>>> Added nicer login/menu
     }
 >>>>>>> Added panel for mainMenu
+=======
+>>>>>>> implemented openMovieModule
 
     public void logIn(MouseEvent mouseEvent) {
     }
@@ -88,6 +91,9 @@ public class MainMenu  {
     public void openEmployeeModule(MouseEvent mouseEvent) {
     }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> implemented openMovieModule
 
     public void openMovieModule(MouseEvent mouseEvent) throws IOException {
         Parent fxmlLoader = FXMLLoader.load(getClass().getResource("/MovieModule/MoviePanel/mainMovie.fxml"));
@@ -99,8 +105,11 @@ public class MainMenu  {
         stage.setResizable(false);
         stage.show();
     }
+<<<<<<< HEAD
 =======
 >>>>>>> Added panel for mainMenu
 =======
 >>>>>>> Created buttons and methods
+=======
+>>>>>>> implemented openMovieModule
 }

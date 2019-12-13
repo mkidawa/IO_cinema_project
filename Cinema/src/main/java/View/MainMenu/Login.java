@@ -96,7 +96,7 @@ public class Login {
         System.out.println(passwordField.getText());
         System.out.println(logInTextField.getText());
         try {
-            checkFailCounter();
+            LPermissionController.getInstance().checkFailCounter();
             LPermissionController.getInstance().login(logInTextField.getText(), passwordField.getText());
             showMainMenu();
         }
@@ -168,7 +168,7 @@ public class Login {
 
 >>>>>>> Zalozono limit na ilosc logowan
         try{
-            checkFailCounter();
+            LPermissionController.getInstance().checkFailCounter();
             LPermissionController.getInstance().login(codeField.getText());
 >>>>>>> Changed return false for throwing error
             showMainMenu();
@@ -181,6 +181,7 @@ public class Login {
     }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> Added nicer login/menu
 =======
     public void checkFailCounter() throws Exception {
@@ -190,6 +191,9 @@ public class Login {
         }
     }
 >>>>>>> Zalozono limit na ilosc logowan
+=======
+
+>>>>>>> Implemented 5 seconds timer for failCounter
     public void btnCancel_Click(ActionEvent actionEvent) {
         System.out.println("Cancel");
         codeField.setText("");

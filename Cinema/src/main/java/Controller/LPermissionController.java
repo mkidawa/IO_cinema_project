@@ -108,8 +108,9 @@ public class LPermissionController {
                 "'";
         List result = UserDAO.execSQL(sql);
         if (result.size() == 0) {
-            System.out.println("Bledny Kod");
-            return false;
+            System.err.println("Bledny Kod");
+            throw new Error("Bledny kod");
+//            return false;
         } else if (result.size() == 1) {
             System.out.println(result.toString());
             System.out.println("Znalazlem login: " + result.get(0));
@@ -125,8 +126,8 @@ public class LPermissionController {
             System.out.println("Prawidlowe Kod");
             return true;
         }
-        System.out.println("Kod nie jest prawidlowy");
-        return false;
+        System.err.println("Kod nie jest prawidlowy");
+        throw new Error("Kod nie jest prawidlowy");
 
     }
 

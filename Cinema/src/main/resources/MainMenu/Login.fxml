@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 <?import javafx.geometry.*?>
 <?import javafx.scene.image.*?>
 =======
 >>>>>>> Added panel for mainMenu
+=======
+<?import javafx.geometry.*?>
+<?import javafx.scene.image.*?>
+>>>>>>> Added nicer login/menu
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
@@ -12,6 +17,9 @@
 <?import javafx.scene.layout.*?>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> Added nicer login/menu
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.MainMenu.Login">
    <children>
    
@@ -75,6 +83,7 @@
           </padding>
       </GridPane>
    </children>
+<<<<<<< HEAD
 =======
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
@@ -90,4 +99,6 @@
         </children>
     </AnchorPane>
 >>>>>>> Added panel for mainMenu
+=======
+>>>>>>> Added nicer login/menu
 </AnchorPane>

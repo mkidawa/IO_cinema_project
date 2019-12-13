@@ -6,18 +6,25 @@ import Tools.LoginException;
 import Tools.PermissionChecker;
 import View.Program;
 import javafx.event.ActionEvent;
+<<<<<<< HEAD
 =======
 import Tools.PermissionChecker;
 >>>>>>> Added panel for mainMenu
+=======
+>>>>>>> Added nicer login/menu
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> Added nicer login/menu
 
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
+<<<<<<< HEAD
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -26,20 +33,29 @@ import lombok.Setter;
 
 import java.io.IOException;
 =======
+=======
+>>>>>>> Added nicer login/menu
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.io.IOException;
+<<<<<<< HEAD
 
 >>>>>>> Added panel for mainMenu
+=======
+>>>>>>> Added nicer login/menu
 public class Login {
     @FXML
     private PasswordField passwordField;
     @FXML
     private TextField logInTextField;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> Added nicer login/menu
     @Getter
     @Setter
     private Stage stage;
@@ -47,6 +63,7 @@ public class Login {
     private PasswordField codeField;
 
 
+<<<<<<< HEAD
     public void logIn() throws IOException {
         System.out.println(passwordField.getText());
         System.out.println(logInTextField.getText());
@@ -70,25 +87,47 @@ public class Login {
 
 
 =======
+=======
+>>>>>>> Added nicer login/menu
     public void logIn() throws IOException {
         System.out.println(passwordField.getText());
         System.out.println(logInTextField.getText());
-        if(LPermissionController.getInstance().login(logInTextField.getText(), passwordField.getText())) {
+
+        if(LPermissionController.getInstance().login(logInTextField.getText(), passwordField.getText()))
+        {
+            showMainMenu();
+        }
+    }
+    public void showMainMenu() throws IOException {
+
             Parent fxmlLoader = FXMLLoader.load(getClass().getResource("/MainMenu/MainMenu.fxml"));
             Stage stage = new Stage();
             Scene scene = new Scene(fxmlLoader);
+<<<<<<< HEAD
             stage.setScene(scene);
             stage.setTitle("Main Menu");
             stage.setResizable(false);
             stage.show();
         }
 >>>>>>> Added panel for mainMenu
+=======
+//            stage.setScene(scene);
+
+            Program.getPrimaryStage().setScene(scene);
+//            stage.setTitle("Main Menu");
+//            stage.setResizable(false);
+//            stage.show();
+
+>>>>>>> Added nicer login/menu
 
     }
     public void printPermission() throws IOException {
         PermissionChecker pc = new PermissionChecker();
         System.out.println(pc.getPermissionsList());
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> Added nicer login/menu
 
     }
 
@@ -96,6 +135,7 @@ public class Login {
     public void btnConfirm_Click(ActionEvent actionEvent) throws IOException {
         System.out.println("Confirm");
 
+<<<<<<< HEAD
         try{
             LPermissionController.getInstance().checkFailCounter();
             LPermissionController.getInstance().login(codeField.getText());
@@ -109,6 +149,21 @@ public class Login {
     }
 
 
+=======
+        if(LPermissionController.getInstance().login(codeField.getText()))
+        {
+            showMainMenu();
+        }
+        else {
+            Alert alert = new Alert(AlertType.WARNING, "Bledny Kod ", ButtonType.YES);
+//            alert.setHeaderText();
+            alert.showAndWait();
+
+
+        }
+    }
+
+>>>>>>> Added nicer login/menu
     public void btnCancel_Click(ActionEvent actionEvent) {
         System.out.println("Cancel");
         codeField.setText("");
@@ -157,7 +212,10 @@ public class Login {
 
     public void btn9_Click(ActionEvent actionEvent) {
         ClickButton(9);
+<<<<<<< HEAD
 =======
 >>>>>>> Added panel for mainMenu
+=======
+>>>>>>> Added nicer login/menu
     }
 }

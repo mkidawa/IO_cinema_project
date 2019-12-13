@@ -1,6 +1,9 @@
 package View;
 
+<<<<<<< HEAD
 import Tools.BaseDB;
+=======
+>>>>>>> Added nicer login/menu
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -32,10 +35,19 @@ public class Program extends Application {
 
     public static void main(String[] args) {
         //TODO Main program file. System starts here
+<<<<<<< HEAD
         BaseDB.setUp();
         launch(args);
 
 
+=======
+        launch(args);
+//        BaseDB.openConnection();
+
+
+//        System.out.println(LPermissionController.getInstance().getPermissionsList());
+        //exit(0);
+>>>>>>> Added nicer login/menu
     }
 
 }

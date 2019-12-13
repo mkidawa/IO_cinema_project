@@ -35,9 +35,14 @@ public class Login {
         System.out.println(passwordField.getText());
         System.out.println(logInTextField.getText());
 
-        if(LPermissionController.getInstance().login(logInTextField.getText(), passwordField.getText()))
-        {
+        try {
+            LPermissionController.getInstance().login(logInTextField.getText(), passwordField.getText());
             showMainMenu();
+        }
+        catch (Error e)
+        {
+            Alert alert = new Alert(AlertType.WARNING, e.getMessage(), ButtonType.YES);
+            alert.showAndWait();
         }
     }
     public void showMainMenu() throws IOException {
@@ -63,17 +68,14 @@ public class Login {
 
     public void btnConfirm_Click(ActionEvent actionEvent) throws IOException {
         System.out.println("Confirm");
-
-        if(LPermissionController.getInstance().login(codeField.getText()))
-        {
+        try{
+            LPermissionController.getInstance().login(codeField.getText());
             showMainMenu();
         }
-        else {
-            Alert alert = new Alert(AlertType.WARNING, "Bledny Kod ", ButtonType.YES);
-//            alert.setHeaderText();
+        catch (Error e)
+        {
+            Alert alert = new Alert(AlertType.WARNING, e.getMessage(), ButtonType.YES);
             alert.showAndWait();
-
-
         }
     }
 

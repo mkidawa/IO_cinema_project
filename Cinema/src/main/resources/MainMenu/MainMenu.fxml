@@ -8,10 +8,14 @@
 <?import javafx.scene.text.Font?>
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 <VBox prefHeight="738.0" prefWidth="1136.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.MainMenu.MainMenu">
 =======
 <VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.MainMenu.MainMenu">
 >>>>>>> Added panel for mainMenu
+=======
+<VBox prefHeight="738.0" prefWidth="1136.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.MainMenu.MainMenu">
+>>>>>>> Created buttons and methods
     <children>
         <MenuBar VBox.vgrow="NEVER">
             <menus>
@@ -55,7 +59,11 @@
         <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
             <children>
 <<<<<<< HEAD
+<<<<<<< HEAD
                 <Button fx:id="movieModuleButton" layoutX="66.0" layoutY="56.0" mnemonicParsing="false" onMouseClicked="#openMovieModule" text="MovieModule" />
+=======
+                <Button fx:id="movieModuleButton" layoutX="66.0" layoutY="56.0" mnemonicParsing="false" onMouseClicked="#openMM" text="MovieModule" />
+>>>>>>> Created buttons and methods
                 <Button fx:id="employeeModuleButton" layoutX="66.0" layoutY="110.0" mnemonicParsing="false" onMouseClicked="#openEmployeeModule" text="EmployeeModule" />
                 <Button fx:id="raportModuleButton" layoutX="242.0" layoutY="56.0" mnemonicParsing="false" onMouseClicked="#openRaportModule" text="RaportModule" />
                 <PasswordField fx:id="passwordField" layoutX="66.0" layoutY="400.0" promptText="Password" />
@@ -64,6 +72,7 @@
                 <Button fx:id="pPermission" layoutX="178.0" layoutY="439.0" mnemonicParsing="false" onMouseClicked="#printPermission" text="Print Permission" />
             <Button fx:id="salesModuleButton" layoutX="242.0" layoutY="110.0" mnemonicParsing="false" onMouseClicked="#openSalesModule" text="SalesModule" />
             <Button fx:id="timetableModuleButton" layoutX="395.0" layoutY="56.0" mnemonicParsing="false" onMouseClicked="#openTimetableModule" text="TimeTableModule" />
+<<<<<<< HEAD
 
 =======
                 <Button fx:id="MovieModuleButton" layoutX="66.0" layoutY="56.0" mnemonicParsing="false" onMouseClicked="#openMM" text="MovieModule" />
@@ -76,6 +85,8 @@
 <<<<<<< HEAD
 >>>>>>> Added panel for mainMenu
 =======
+=======
+>>>>>>> Created buttons and methods
 
 >>>>>>> Added nicer login/menu
             </children>

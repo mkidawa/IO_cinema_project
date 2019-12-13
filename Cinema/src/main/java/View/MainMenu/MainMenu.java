@@ -6,11 +6,17 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 <<<<<<< HEAD
+<<<<<<< HEAD
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 =======
 >>>>>>> Added panel for mainMenu
+=======
+import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
+>>>>>>> Created buttons and methods
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -26,6 +32,9 @@ public class MainMenu  {
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> Created buttons and methods
     public Button movieModuleButton;
     public Button employeeModuleButton;
     public Button raportModuleButton;
@@ -36,9 +45,12 @@ public class MainMenu  {
     public Button salesModuleButton;
     public Button timetableModuleButton;
 
+<<<<<<< HEAD
 =======
     public void openMM(MouseEvent mouseEvent) {
 =======
+=======
+>>>>>>> Created buttons and methods
     public void openMM(MouseEvent mouseEvent) throws IOException {
         Parent fxmlLoader = FXMLLoader.load(getClass().getResource("/MovieModule/MoviePanel/mainMovie.fxml"));
         Stage stage = new Stage();
@@ -60,6 +72,9 @@ public class MainMenu  {
         System.out.println(pc.getPermissionsList());
     }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> Created buttons and methods
 
     public void openTimetableModule(MouseEvent mouseEvent) {
     }
@@ -72,6 +87,7 @@ public class MainMenu  {
 
     public void openEmployeeModule(MouseEvent mouseEvent) {
     }
+<<<<<<< HEAD
 
     public void openMovieModule(MouseEvent mouseEvent) throws IOException {
         Parent fxmlLoader = FXMLLoader.load(getClass().getResource("/MovieModule/MoviePanel/mainMovie.fxml"));
@@ -85,4 +101,6 @@ public class MainMenu  {
     }
 =======
 >>>>>>> Added panel for mainMenu
+=======
+>>>>>>> Created buttons and methods
 }

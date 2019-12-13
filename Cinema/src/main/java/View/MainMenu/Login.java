@@ -92,12 +92,19 @@ public class Login {
     public void logIn() throws IOException {
         System.out.println(passwordField.getText());
         System.out.println(logInTextField.getText());
-//        if()
+//        if(LPermissionController.getInstance().getFailCounter()>=5)
+//        {
+//            Alert alert = new Alert(AlertType.WARNING, "Przekroczony limit 5 prób logowania", ButtonType.YES);
+//            alert.showAndWait();
+//            return;
+//        }
+
         try {
+            checkFailCounter();
             LPermissionController.getInstance().login(logInTextField.getText(), passwordField.getText());
             showMainMenu();
         }
-        catch (Error e)
+        catch (Error | Exception e)
         {
             Alert alert = new Alert(AlertType.WARNING, e.getMessage(), ButtonType.YES);
             alert.showAndWait();
@@ -140,6 +147,7 @@ public class Login {
     public void btnConfirm_Click(ActionEvent actionEvent) throws IOException {
         System.out.println("Confirm");
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 <<<<<<< HEAD
         try{
@@ -159,19 +167,32 @@ public class Login {
         if(LPermissionController.getInstance().login(codeField.getText()))
         {
 =======
+=======
+
+>>>>>>> Zalozono limit na ilosc logowan
         try{
+            checkFailCounter();
             LPermissionController.getInstance().login(codeField.getText());
 >>>>>>> Changed return false for throwing error
             showMainMenu();
         }
-        catch (Error e)
+        catch (Error | Exception e)
         {
             Alert alert = new Alert(AlertType.WARNING, e.getMessage(), ButtonType.YES);
             alert.showAndWait();
         }
     }
 
+<<<<<<< HEAD
 >>>>>>> Added nicer login/menu
+=======
+    public void checkFailCounter() throws Exception {
+        if(LPermissionController.getInstance().getFailCounter()>=4)
+        {
+            throw new Exception("Przekroczony limit 5 prob logowania");
+        }
+    }
+>>>>>>> Zalozono limit na ilosc logowan
     public void btnCancel_Click(ActionEvent actionEvent) {
         System.out.println("Cancel");
         codeField.setText("");

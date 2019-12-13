@@ -5,11 +5,14 @@ import Model.DICT.Permissions;
 import Model.User;
 import Tools.Filter;
 <<<<<<< HEAD
+<<<<<<< HEAD
 import Tools.LoginException;
 import View.MainMenu.Login;
 =======
 import com.sun.javaws.exceptions.UnsignedAccessViolationException;
 >>>>>>> Impl FailCounter
+=======
+>>>>>>> Zalozono limit na ilosc logowan
 
 import java.util.Collections;
 import java.util.List;
@@ -37,10 +40,14 @@ public class LPermissionController {
     }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     private Integer failCounter = 0;
 =======
     private Integer failCounter;
 >>>>>>> Impl FailCounter
+=======
+    private Integer failCounter = 0;
+>>>>>>> Zalozono limit na ilosc logowan
 
     public static LPermissionController getInstance() {
         if (ourInstance == null) {

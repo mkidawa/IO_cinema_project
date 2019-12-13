@@ -55,12 +55,17 @@ public class LPermissionController {
         if (result.size() == 0) {
             System.err.println("Brak uzytkownika w bazie");
 <<<<<<< HEAD
+<<<<<<< HEAD
             failCounter++;
             throw new LoginException("Brak uzytkownika w bazie");
 //            return false;
 =======
             return false;
 >>>>>>> Error sout returns serr
+=======
+            throw new Error("Brak uzytkownika w bazie");
+//            return false;
+>>>>>>> throws instead of return false
         } else if (result.size() == 1 && result.get(0).toString().equals(login)) {
             System.out.println("Znalazlem login: " + login);
             return true;
@@ -101,7 +106,11 @@ public class LPermissionController {
                 return true;
             }
         }
+<<<<<<< HEAD
         throw new LoginException("Logowanie nie powiodło się");
+=======
+        throw new Error("Logowanie nie powiodło się");
+>>>>>>> throws instead of return false
 //        return false;
     }
     private boolean checkLoginCode(String code) {
@@ -141,9 +150,9 @@ public class LPermissionController {
                 currentUser.setPasswordHash("");
                 return true;
             }
-
         }
-        return false;
+        throw new Error("Logowanie nie powiodło się");
+//        return false;
 
     }
 
@@ -179,8 +188,13 @@ public class LPermissionController {
 
 =======
         System.err.println("Haslo nie prawidlowe");
+<<<<<<< HEAD
         return false;
 >>>>>>> Error sout returns serr
+=======
+        throw new Error("Haslo nie prawidlowe");
+//        return false;
+>>>>>>> throws instead of return false
     }
 
         public boolean login(String code){

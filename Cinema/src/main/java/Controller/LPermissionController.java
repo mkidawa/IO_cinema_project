@@ -42,7 +42,7 @@ public class LPermissionController {
                 "'";
         List result = UserDAO.execSQL(sql);
         if (result.size() == 0) {
-            System.out.println("Brak uzytkownika w bazie");
+            System.err.println("Brak uzytkownika w bazie");
             return false;
         } else if (result.size() == 1 && result.get(0).toString().equals(login)) {
             System.out.println("Znalazlem login: " + login);
@@ -117,7 +117,7 @@ public class LPermissionController {
             System.out.println("Prawidlowe Haslo");
             return true;
         }
-        System.out.println("Haslo nie prawidlowe");
+        System.err.println("Haslo nie prawidlowe");
         return false;
     }
 

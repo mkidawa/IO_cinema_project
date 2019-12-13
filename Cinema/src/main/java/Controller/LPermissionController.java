@@ -43,7 +43,8 @@ public class LPermissionController {
         List result = UserDAO.execSQL(sql);
         if (result.size() == 0) {
             System.err.println("Brak uzytkownika w bazie");
-            return false;
+            throw new Error("Brak uzytkownika w bazie");
+//            return false;
         } else if (result.size() == 1 && result.get(0).toString().equals(login)) {
             System.out.println("Znalazlem login: " + login);
             return true;
@@ -65,7 +66,8 @@ public class LPermissionController {
                 return true;
             }
         }
-        return false;
+        throw new Error("Logowanie nie powiodło się");
+//        return false;
     }
     private boolean checkLoginCode(String code) {
 //
@@ -102,9 +104,9 @@ public class LPermissionController {
                 currentUser.setPasswordHash("");
                 return true;
             }
-
         }
-        return false;
+        throw new Error("Logowanie nie powiodło się");
+//        return false;
 
     }
 
@@ -118,7 +120,8 @@ public class LPermissionController {
             return true;
         }
         System.err.println("Haslo nie prawidlowe");
-        return false;
+        throw new Error("Haslo nie prawidlowe");
+//        return false;
     }
 
     /**

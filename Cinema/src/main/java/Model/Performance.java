@@ -1,17 +1,19 @@
 package Model;
 
+import java.sql.Timestamp;
+import java.time.Duration;
+
+import javax.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
-import javax.persistence.*;
-import java.sql.Time;
-
 @Entity
 @Table(name = "Performance")
 public class Performance {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Getter
@@ -24,24 +26,35 @@ public class Performance {
     @Setter
     private Movie movie;
 
+    @Column(name = "MovieType")
+    @Getter
+    @Setter
+    private String movieType;
+
     @ManyToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "HallId")
     @Getter
     @Setter
     private Hall hall;
 
-    @Column(name = "AddTime")
+    @Column(name = "StartTime")
     @Getter
     @Setter
-    private Time addTime;
+    private Timestamp startTime;
 
-    public Performance() {
-    }
+    @Column(name = "Duration")
+    @Getter
+    @Setter
+    private Duration duration;
 
-    public Performance(Movie movie, Hall hall, Time addTime) {
+    public Performance() {}
+
+    public Performance(Movie movie, String movieType, Hall hall, Timestamp startTime, Duration duration) {
         this.movie = movie;
+        this.movieType = movieType;
         this.hall = hall;
-        this.addTime = addTime;
+        this.startTime = startTime;
+        this.duration = duration;
     }
 
     @Override
@@ -59,8 +72,10 @@ public class Performance {
         return new EqualsBuilder()
                 .append(Id, that.Id)
                 .append(movie, that.movie)
+                .append(movieType, that.movieType)
                 .append(hall, that.hall)
-                .append(addTime, that.addTime)
+                .append(startTime, that.startTime)
+                .append(duration, that.duration)
                 .isEquals();
     }
 
@@ -69,8 +84,10 @@ public class Performance {
         return new HashCodeBuilder(17, 37)
                 .append(Id)
                 .append(movie)
+                .append(movieType)
                 .append(hall)
-                .append(addTime)
+                .append(startTime)
+                .append(duration)
                 .toHashCode();
     }
 
@@ -79,8 +96,10 @@ public class Performance {
         return new ToStringBuilder(this)
                 .append("Id", Id)
                 .append("movie", movie)
+                .append("movieType", movieType)
                 .append("hall", hall)
-                .append("addTime", addTime)
+                .append("startTime", startTime)
+                .append("duration", duration)
                 .toString();
     }
 }

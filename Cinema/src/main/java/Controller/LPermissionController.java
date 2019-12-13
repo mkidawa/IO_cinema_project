@@ -54,9 +54,13 @@ public class LPermissionController {
         List result = UserDAO.execSQL(sql);
         if (result.size() == 0) {
             System.err.println("Brak uzytkownika w bazie");
+<<<<<<< HEAD
             failCounter++;
             throw new LoginException("Brak uzytkownika w bazie");
 //            return false;
+=======
+            return false;
+>>>>>>> Error sout returns serr
         } else if (result.size() == 1 && result.get(0).toString().equals(login)) {
             System.out.println("Znalazlem login: " + login);
             return true;
@@ -168,10 +172,15 @@ public class LPermissionController {
             System.out.println("Prawidlowe Kod");
             return true;
         }
+<<<<<<< HEAD
         System.err.println("Kod nie jest prawidlowy");
         failCounter++;
         throw new LoginException("Kod nie jest prawidlowy");
 
+=======
+        System.err.println("Haslo nie prawidlowe");
+        return false;
+>>>>>>> Error sout returns serr
     }
 
         public boolean login(String code){

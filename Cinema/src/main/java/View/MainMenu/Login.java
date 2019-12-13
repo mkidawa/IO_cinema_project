@@ -92,13 +92,6 @@ public class Login {
     public void logIn() throws IOException {
         System.out.println(passwordField.getText());
         System.out.println(logInTextField.getText());
-//        if(LPermissionController.getInstance().getFailCounter()>=5)
-//        {
-//            Alert alert = new Alert(AlertType.WARNING, "Przekroczony limit 5 prób logowania", ButtonType.YES);
-//            alert.showAndWait();
-//            return;
-//        }
-
         try {
             checkFailCounter();
             LPermissionController.getInstance().login(logInTextField.getText(), passwordField.getText());
@@ -116,6 +109,7 @@ public class Login {
             Stage stage = new Stage();
             Scene scene = new Scene(fxmlLoader);
 <<<<<<< HEAD
+<<<<<<< HEAD
             stage.setScene(scene);
             stage.setTitle("Main Menu");
             stage.setResizable(false);
@@ -125,10 +119,10 @@ public class Login {
 =======
 //            stage.setScene(scene);
 
+=======
+>>>>>>> Created loginException
             Program.getPrimaryStage().setScene(scene);
-//            stage.setTitle("Main Menu");
-//            stage.setResizable(false);
-//            stage.show();
+
 
 >>>>>>> Added nicer login/menu
 

@@ -1,5 +1,6 @@
 package Tools;
 
+<<<<<<< HEAD
 public class LoginException extends RuntimeException {
     public LoginException() {
     }
@@ -19,4 +20,7 @@ public class LoginException extends RuntimeException {
     public LoginException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
         super(message, cause, enableSuppression, writableStackTrace);
     }
+=======
+public class LoginException {
+>>>>>>> Created loginException
 }

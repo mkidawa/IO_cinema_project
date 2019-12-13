@@ -4,7 +4,6 @@ import DBO.UserDAO;
 import Model.DICT.Permissions;
 import Model.User;
 import Tools.Filter;
-import com.sun.javaws.exceptions.UnsignedAccessViolationException;
 
 import java.util.Collections;
 import java.util.List;
@@ -28,7 +27,7 @@ public class LPermissionController {
         return failCounter;
     }
 
-    private Integer failCounter;
+    private Integer failCounter = 0;
 
     public static LPermissionController getInstance() {
         if (ourInstance == null) {

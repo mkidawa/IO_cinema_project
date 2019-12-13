@@ -36,7 +36,7 @@ public class Login {
         System.out.println(passwordField.getText());
         System.out.println(logInTextField.getText());
         try {
-            checkFailCounter();
+            LPermissionController.getInstance().checkFailCounter();
             LPermissionController.getInstance().login(logInTextField.getText(), passwordField.getText());
             showMainMenu();
         }
@@ -67,7 +67,7 @@ public class Login {
         System.out.println("Confirm");
 
         try{
-            checkFailCounter();
+            LPermissionController.getInstance().checkFailCounter();
             LPermissionController.getInstance().login(codeField.getText());
             showMainMenu();
         }
@@ -78,12 +78,7 @@ public class Login {
         }
     }
 
-    public void checkFailCounter() throws Exception {
-        if(LPermissionController.getInstance().getFailCounter()>=4)
-        {
-            throw new Exception("Przekroczony limit 5 prob logowania");
-        }
-    }
+
     public void btnCancel_Click(ActionEvent actionEvent) {
         System.out.println("Cancel");
         codeField.setText("");

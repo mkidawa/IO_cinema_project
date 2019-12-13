@@ -1,6 +1,7 @@
 package View.MainMenu;
 
 import Controller.LPermissionController;
+import Tools.LoginException;
 import Tools.PermissionChecker;
 import View.Program;
 import javafx.event.ActionEvent;
@@ -39,7 +40,7 @@ public class Login {
             LPermissionController.getInstance().login(logInTextField.getText(), passwordField.getText());
             showMainMenu();
         }
-        catch (Error | Exception e)
+        catch (Exception e)
         {
             Alert alert = new Alert(AlertType.WARNING, e.getMessage(), ButtonType.YES);
             alert.showAndWait();

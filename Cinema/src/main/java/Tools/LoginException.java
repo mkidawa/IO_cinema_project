@@ -1,6 +1,6 @@
 package Tools;
 
-public class LoginException extends Exception {
+public class LoginException extends RuntimeException {
     public LoginException() {
     }
 

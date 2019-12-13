@@ -34,13 +34,6 @@ public class Login {
     public void logIn() throws IOException {
         System.out.println(passwordField.getText());
         System.out.println(logInTextField.getText());
-//        if(LPermissionController.getInstance().getFailCounter()>=5)
-//        {
-//            Alert alert = new Alert(AlertType.WARNING, "Przekroczony limit 5 prób logowania", ButtonType.YES);
-//            alert.showAndWait();
-//            return;
-//        }
-
         try {
             checkFailCounter();
             LPermissionController.getInstance().login(logInTextField.getText(), passwordField.getText());
@@ -57,12 +50,8 @@ public class Login {
             Parent fxmlLoader = FXMLLoader.load(getClass().getResource("/MainMenu/MainMenu.fxml"));
             Stage stage = new Stage();
             Scene scene = new Scene(fxmlLoader);
-//            stage.setScene(scene);
-
             Program.getPrimaryStage().setScene(scene);
-//            stage.setTitle("Main Menu");
-//            stage.setResizable(false);
-//            stage.show();
+
 
 
     }

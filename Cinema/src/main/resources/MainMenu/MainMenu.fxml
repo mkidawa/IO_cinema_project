@@ -57,6 +57,7 @@
                 <TextField fx:id="logInTextField" layoutX="66.0" layoutY="238.0" promptText="Login" />
                 <Button fx:id="logInButton" layoutX="66.0" layoutY="311.0" mnemonicParsing="false" onMouseClicked="#logIn" text="Log In" />
                 <Button fx:id="pPermission" layoutX="130.0" layoutY="311.0" mnemonicParsing="false" onMouseClicked="#printPermission" text="Print Permission" />
+
             </children>
         </AnchorPane>
     </children>

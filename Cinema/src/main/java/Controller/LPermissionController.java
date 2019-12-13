@@ -4,6 +4,7 @@ import DBO.UserDAO;
 import Model.DICT.Permissions;
 import Model.User;
 import Tools.Filter;
+import com.sun.javaws.exceptions.UnsignedAccessViolationException;
 
 import java.util.Collections;
 import java.util.List;
@@ -22,6 +23,12 @@ TODO GUI
 public class LPermissionController {
     private User currentUser;
     private static LPermissionController ourInstance;
+
+    public Integer getFailCounter() {
+        return failCounter;
+    }
+
+    private Integer failCounter;
 
     public static LPermissionController getInstance() {
         if (ourInstance == null) {
@@ -43,6 +50,7 @@ public class LPermissionController {
         List result = UserDAO.execSQL(sql);
         if (result.size() == 0) {
             System.err.println("Brak uzytkownika w bazie");
+            failCounter++;
             throw new Error("Brak uzytkownika w bazie");
 //            return false;
         } else if (result.size() == 1 && result.get(0).toString().equals(login)) {
@@ -50,6 +58,21 @@ public class LPermissionController {
             return true;
         }
         return false;
+    }
+
+    private boolean checkPassword(String login, String password) {
+        String sql = "from User U WHERE U.login='" + login +
+                "'";
+        User result = (User) UserDAO.execSQL(sql).get(0);
+        if (result.getPasswordHash().equals(password)) {
+            currentUser = result;
+            System.out.println("Prawidlowe Haslo");
+            return true;
+        }
+        System.err.println("Haslo nie prawidlowe");
+        failCounter++;
+        throw new Error("Haslo nie prawidlowe");
+//        return false;
     }
 
 
@@ -76,6 +99,7 @@ public class LPermissionController {
         List result = UserDAO.execSQL(sql);
         if (result.size() == 0) {
             System.err.println("Bledny Kod");
+            failCounter++;
             throw new Error("Bledny kod");
 //            return false;
         } else if (result.size() == 1) {
@@ -94,6 +118,7 @@ public class LPermissionController {
             return true;
         }
         System.err.println("Kod nie jest prawidlowy");
+        failCounter++;
         throw new Error("Kod nie jest prawidlowy");
 
     }
@@ -110,19 +135,7 @@ public class LPermissionController {
 
     }
 
-    private boolean checkPassword(String login, String password) {
-        String sql = "from User U WHERE U.login='" + login +
-                "'";
-        User result = (User) UserDAO.execSQL(sql).get(0);
-        if (result.getPasswordHash().equals(password)) {
-            currentUser = result;
-            System.out.println("Prawidlowe Haslo");
-            return true;
-        }
-        System.err.println("Haslo nie prawidlowe");
-        throw new Error("Haslo nie prawidlowe");
-//        return false;
-    }
+
 
     /**
      * Lista permitow dla aktualnego uzytkownika

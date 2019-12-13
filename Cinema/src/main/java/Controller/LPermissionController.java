@@ -86,6 +86,7 @@ public class LPermissionController {
         if (checkLogin(login)) {
             if (checkPassword(login, password)) {
                 currentUser.setPasswordHash("");
+                failCounter=0;
                 return true;
             }
         }
@@ -127,6 +128,7 @@ public class LPermissionController {
         if(checkLoginCode(code)){
             if(checkCode(code)){
                 currentUser.setPasswordHash("");
+                failCounter=0;
                 return true;
             }
         }

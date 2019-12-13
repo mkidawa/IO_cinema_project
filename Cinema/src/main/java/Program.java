@@ -23,6 +23,7 @@ public class Program extends Application {
 
     public static void main(String[] args) {
         //TODO Main program file. System starts here
+        BaseDB.setUp();
         launch(args);
 //        BaseDB.openConnection();
 

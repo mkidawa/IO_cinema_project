@@ -5,6 +5,9 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -17,6 +20,16 @@ import java.awt.*;
 import java.io.IOException;
 
 public class MainMenu  {
+
+    public Button movieModuleButton;
+    public Button employeeModuleButton;
+    public Button raportModuleButton;
+    public PasswordField passwordField;
+    public TextField logInTextField;
+    public Button logInButton;
+    public Button pPermission;
+    public Button salesModuleButton;
+    public Button timetableModuleButton;
 
     public void openMM(MouseEvent mouseEvent) throws IOException {
         Parent fxmlLoader = FXMLLoader.load(getClass().getResource("/MovieModule/MoviePanel/mainMovie.fxml"));
@@ -35,5 +48,17 @@ public class MainMenu  {
     public void printPermission(MouseEvent mouseEvent) {
         PermissionChecker pc = new PermissionChecker();
         System.out.println(pc.getPermissionsList());
+    }
+
+    public void openTimetableModule(MouseEvent mouseEvent) {
+    }
+
+    public void openSalesModule(MouseEvent mouseEvent) {
+    }
+
+    public void openRaportModule(MouseEvent mouseEvent) {
+    }
+
+    public void openEmployeeModule(MouseEvent mouseEvent) {
     }
 }

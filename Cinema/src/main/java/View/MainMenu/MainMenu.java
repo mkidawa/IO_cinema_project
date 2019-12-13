@@ -18,7 +18,15 @@ import java.io.IOException;
 
 public class MainMenu  {
 
-    public void openMM(MouseEvent mouseEvent) {
+    public void openMM(MouseEvent mouseEvent) throws IOException {
+        Parent fxmlLoader = FXMLLoader.load(getClass().getResource("/MovieModule/MoviePanel/mainMovie.fxml"));
+        Stage stage = new Stage();
+        Scene scene = new Scene(fxmlLoader);
+        scene.getStylesheets().add(getClass().getResource("/MovieModule/MoviePanel/mainMovie.css").toExternalForm());
+        stage.setScene(scene);
+        stage.setTitle("Movie panel");
+        stage.setResizable(false);
+        stage.show();
     }
 
     public void logIn(MouseEvent mouseEvent) {

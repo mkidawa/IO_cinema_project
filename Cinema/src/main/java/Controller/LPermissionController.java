@@ -9,7 +9,8 @@ import View.MainMenu.Login;
 
 import java.util.Collections;
 import java.util.List;
-
+import java.util.Timer;
+import java.util.TimerTask;
 
 /*
 TODO Szyfrowanie hasel ?
@@ -22,6 +23,8 @@ TODO GUI
  * @see Tools.PermissionChecker
  */
 public class LPermissionController {
+    Timer timer;
+    boolean timerSet;
     private User currentUser;
     private static LPermissionController ourInstance;
 
@@ -190,6 +193,26 @@ public class LPermissionController {
 
     private boolean checkIfLogged() {
         return currentUser.getLogin() == null;
+    }
+    public void checkFailCounter() throws Exception {
+        class RemindTask extends TimerTask {
+            public void run() {
+                failCounter=0;
+                timerSet=false;
+                System.out.println("Wyzerowalem licznik prob");
+                timer.cancel(); //Terminate the timer thread
+            }
+        }
+        if(getFailCounter()>=4)
+        {
+            if(!timerSet) {
+                timer = new Timer();
+                int seconds = 5;
+                timer.schedule(new RemindTask(), seconds * 1000);
+                timerSet=true;
+            }
+            throw new Exception("Przekroczony limit 5 prob logowania");
+        }
     }
 
 

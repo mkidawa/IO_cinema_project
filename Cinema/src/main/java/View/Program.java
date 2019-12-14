@@ -1,6 +1,9 @@
 package View;
 
+<<<<<<< HEAD
 import Tools.BaseDB;
+=======
+>>>>>>> 97bccca41a8cf3c70df6e092b40d2d485c3efc1d
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -34,6 +37,7 @@ public class Program extends Application {
         //TODO Main program file. System starts here
         BaseDB.setUp();
         launch(args);
+
 
 
     }

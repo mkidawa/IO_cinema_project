@@ -3,11 +3,18 @@ package View.MainMenu;
 import Controller.LPermissionController;
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> Changed Errors for LoginException
 import Tools.LoginException;
+=======
+import Controller.LoginController;
+>>>>>>> Changes: Add support for custom events in keyboard
 import Tools.PermissionChecker;
+import View.Components.ButtonWithImage;
+import View.Components.NumericKeyboard;
 import View.Program;
+<<<<<<< HEAD
 import javafx.event.ActionEvent;
 <<<<<<< HEAD
 =======
@@ -15,6 +22,8 @@ import Tools.PermissionChecker;
 >>>>>>> Added panel for mainMenu
 =======
 >>>>>>> Added nicer login/menu
+=======
+>>>>>>> Changes: Add support for custom events in keyboard
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -30,6 +39,7 @@ import javafx.scene.control.ButtonType;
 <<<<<<< HEAD
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import lombok.Getter;
 import lombok.Setter;
@@ -62,8 +72,12 @@ public class Login {
     @Getter
     @Setter
     private Stage stage;
+
     @FXML
-    private PasswordField codeField;
+    private ButtonWithImage btnClose;
+
+    @FXML
+    private NumericKeyboard keyboard;
 
 
 <<<<<<< HEAD
@@ -88,6 +102,7 @@ public class Login {
             Scene scene = new Scene(fxmlLoader);
             Program.getPrimaryStage().setScene(scene);
 
+<<<<<<< HEAD
 
 =======
 =======
@@ -129,6 +144,8 @@ public class Login {
 
 >>>>>>> Added nicer login/menu
 
+=======
+>>>>>>> Changes: Add support for custom events in keyboard
     }
     public void printPermission() throws IOException {
         PermissionChecker pc = new PermissionChecker();
@@ -140,16 +157,18 @@ public class Login {
 
     }
 
-
-    public void btnConfirm_Click(ActionEvent actionEvent) throws IOException {
+    public void onConfirm(MouseEvent actionEvent) {
         System.out.println("Confirm");
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 <<<<<<< HEAD
+=======
+>>>>>>> Changes: Add support for custom events in keyboard
         try{
             LPermissionController.getInstance().checkFailCounter();
-            LPermissionController.getInstance().login(codeField.getText());
+            LPermissionController.getInstance().login(keyboard.getCodeField().getText());
             showMainMenu();
         }
         catch (Error | Exception e)
@@ -159,6 +178,7 @@ public class Login {
         }
     }
 
+<<<<<<< HEAD
 
 =======
         if(LPermissionController.getInstance().login(codeField.getText()))
@@ -247,5 +267,9 @@ public class Login {
 >>>>>>> Added panel for mainMenu
 =======
 >>>>>>> Added nicer login/menu
+=======
+    public void closeApplication(MouseEvent mouseEvent){
+        LoginController.closeApplication();
+>>>>>>> Changes: Add support for custom events in keyboard
     }
 }

@@ -18,11 +18,22 @@
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> Added nicer login/menu
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.MainMenu.Login">
+=======
+<?import View.Components.*?>
+<StackPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.MainMenu.Login">
+>>>>>>> Changes: Add support for custom events in keyboard
    <children>
-   
+
+       <HBox>
+           <VBox alignment="BOTTOM_LEFT" styleClass="loginButtons" >
+               <ButtonWithImage fx:id="closeBtn" onCustomClick="#closeApplication"/>
+           </VBox>
+       </HBox>
+
        <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
            <children>
                <PasswordField fx:id="passwordField" layoutX="66.0" layoutY="272.0" promptText="Password" />
@@ -31,58 +42,9 @@
                <Button fx:id="pPermission" layoutX="130.0" layoutY="311.0" mnemonicParsing="false" onMouseClicked="#printPermission" text="Print Permission" />
            </children>
        </AnchorPane>
-      <GridPane id="numericKeyboard" hgap="2" layoutX="321.0" prefHeight="448.0" prefWidth="279.0" styleClass="keyboardBody" stylesheets="@NumericKeyboardStyle.css" vgap="2">
-          <columnConstraints>
-              <ColumnConstraints />
-              <ColumnConstraints />
-              <ColumnConstraints />
-          </columnConstraints>
-          <rowConstraints>
-              <RowConstraints />
-              <RowConstraints />
-              <RowConstraints />
-              <RowConstraints />
-              <RowConstraints />
-              <RowConstraints />
-          </rowConstraints>
-          <children>
-              <Button fx:id="btn7" mnemonicParsing="false" onAction="#btn7_Click" prefHeight="90.0" prefWidth="90.0" styleClass="keyboardButton" text="7" GridPane.rowIndex="2" />
-              <Button fx:id="btn8" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#btn8_Click" prefHeight="90.0" prefWidth="90.0" styleClass="keyboardButton" text="8" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-              <Button fx:id="btn9" layoutX="102.0" layoutY="10.0" mnemonicParsing="false" onAction="#btn9_Click" prefHeight="90.0" prefWidth="90.0" styleClass="keyboardButton" text="9" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-              <Button fx:id="btn4" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#btn4_Click" prefHeight="90.0" prefWidth="90.0" styleClass="keyboardButton" text="4" GridPane.rowIndex="3" />
-              <Button fx:id="btn5" layoutX="102.0" layoutY="10.0" mnemonicParsing="false" onAction="#btn5_Click" prefHeight="90.0" prefWidth="90.0" styleClass="keyboardButton" text="5" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-              <Button fx:id="btn6" layoutX="194.0" layoutY="10.0" mnemonicParsing="false" onAction="#btn6_Click" prefHeight="90.0" prefWidth="90.0" styleClass="keyboardButton" text="6" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-              <Button fx:id="btn1" layoutX="10.0" layoutY="101.0" mnemonicParsing="false" onAction="#btn1_Click" prefHeight="90.0" prefWidth="90.0" styleClass="keyboardButton" text="1" GridPane.rowIndex="4" />
-              <Button fx:id="btn2" layoutX="102.0" layoutY="101.0" mnemonicParsing="false" onAction="#btn2_Click" prefHeight="90.0" prefWidth="90.0" styleClass="keyboardButton" text="2" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-              <Button fx:id="btn3" layoutX="194.0" layoutY="101.0" mnemonicParsing="false" onAction="#btn3_Click" prefHeight="90.0" prefWidth="90.0" styleClass="keyboardButton" text="3" GridPane.columnIndex="2" GridPane.rowIndex="4" />
-              <Button fx:id="btnClear" layoutX="194.0" layoutY="192.0" mnemonicParsing="false" onAction="#btn0_Click" prefHeight="90.0" prefWidth="90.0" styleClass="keyboardButton" text="0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="5" />
-              <Button fx:id="btnCancel" layoutX="194.0" layoutY="284.0" mnemonicParsing="false" onAction="#btnCancel_Click" prefHeight="90.0" prefWidth="90.0" styleClass="keyboardButton" GridPane.rowIndex="5">
-                  <graphic>
-                      <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                          <image>
-                              <Image url="@../Images/cancel-button.png" />
-                          </image>
-                      </ImageView>
-                  </graphic>
-              </Button>
-              <Button fx:id="btnConfirm" layoutX="10.0" layoutY="283.0" mnemonicParsing="false" onAction="#btnConfirm_Click" prefHeight="90.0" prefWidth="90.0" styleClass="keyboardButton" GridPane.columnIndex="2" GridPane.rowIndex="5">
-                  <graphic>
-                      <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                          <image>
-                              <Image url="@../Images/check-mark.png" />
-                          </image>
-                      </ImageView>
-                  </graphic>
-              </Button>
-              <PasswordField fx:id="codeField" prefHeight="73.0" prefWidth="274.0" styleClass="keyboardText" GridPane.columnSpan="3" />
-      
-      
-          </children>
-          <padding>
-              <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
-          </padding>
-      </GridPane>
+      <NumericKeyboard  fx:id="keyboard" alignment="BOTTOM_RIGHT" onConfirm="#onConfirm"/>
    </children>
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 <AnchorPane xmlns="http://javafx.com/javafx"
@@ -102,3 +64,6 @@
 =======
 >>>>>>> Added nicer login/menu
 </AnchorPane>
+=======
+</StackPane>
+>>>>>>> Changes: Add support for custom events in keyboard

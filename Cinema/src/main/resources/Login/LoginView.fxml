@@ -10,8 +10,7 @@
            prefWidth="1024.0" prefHeight="786.0" stylesheets="@../Style.css" styleClass="bodyClass">
     <children>
         <HBox>
-            <VBox alignment="BOTTOM_LEFT" styleClass="loginButtons" onMouseClicked="#closeApplication"
-                  onTouchPressed="#closeApplication">
+            <VBox alignment="BOTTOM_LEFT" styleClass="loginButtons" onMouseClicked="#closeApplication">
                 <ButtonWithImage fx:id="closeBtn"/>
             </VBox>
         </HBox>

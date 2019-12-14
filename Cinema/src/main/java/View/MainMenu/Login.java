@@ -1,10 +1,11 @@
 package View.MainMenu;
 
 import Controller.LPermissionController;
-import Tools.LoginException;
+import Controller.LoginController;
 import Tools.PermissionChecker;
+import View.Components.ButtonWithImage;
+import View.Components.NumericKeyboard;
 import View.Program;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -15,6 +16,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import lombok.Getter;
 import lombok.Setter;
@@ -28,8 +30,12 @@ public class Login {
     @Getter
     @Setter
     private Stage stage;
+
     @FXML
-    private PasswordField codeField;
+    private ButtonWithImage btnClose;
+
+    @FXML
+    private NumericKeyboard keyboard;
 
 
     public void logIn() throws IOException {
@@ -53,8 +59,6 @@ public class Login {
             Scene scene = new Scene(fxmlLoader);
             Program.getPrimaryStage().setScene(scene);
 
-
-
     }
     public void printPermission() throws IOException {
         PermissionChecker pc = new PermissionChecker();
@@ -62,13 +66,11 @@ public class Login {
 
     }
 
-
-    public void btnConfirm_Click(ActionEvent actionEvent) throws IOException {
+    public void onConfirm(MouseEvent actionEvent) {
         System.out.println("Confirm");
-
         try{
             LPermissionController.getInstance().checkFailCounter();
-            LPermissionController.getInstance().login(codeField.getText());
+            LPermissionController.getInstance().login(keyboard.getCodeField().getText());
             showMainMenu();
         }
         catch (Error | Exception e)
@@ -78,54 +80,7 @@ public class Login {
         }
     }
 
-
-    public void btnCancel_Click(ActionEvent actionEvent) {
-        System.out.println("Cancel");
-        codeField.setText("");
-    }
-    private void ClickButton(int num) {
-        //System.out.println(num);
-        codeField.setText(codeField.getText() + String.valueOf(num));
-
-    }
-
-    public void btn0_Click(ActionEvent actionEvent) {
-        ClickButton(0);
-    }
-
-    public void btn1_Click(ActionEvent actionEvent) {
-        ClickButton(1);
-    }
-
-    public void btn2_Click(ActionEvent actionEvent) {
-        ClickButton(2);
-    }
-
-    public void btn3_Click(ActionEvent actionEvent) {
-        ClickButton(3);
-    }
-
-    public void btn4_Click(ActionEvent actionEvent) {
-        ClickButton(4);
-    }
-
-    public void btn5_Click(ActionEvent actionEvent) {
-        ClickButton(5);
-    }
-
-    public void btn6_Click(ActionEvent actionEvent) {
-        ClickButton(6);
-    }
-
-    public void btn7_Click(ActionEvent actionEvent) {
-        ClickButton(7);
-    }
-
-    public void btn8_Click(ActionEvent actionEvent) {
-        ClickButton(8);
-    }
-
-    public void btn9_Click(ActionEvent actionEvent) {
-        ClickButton(9);
+    public void closeApplication(MouseEvent mouseEvent){
+        LoginController.closeApplication();
     }
 }

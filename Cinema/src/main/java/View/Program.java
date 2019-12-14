@@ -1,9 +1,12 @@
 package View;
 
-<<<<<<< HEAD
 import Tools.BaseDB;
+<<<<<<< HEAD
 =======
 >>>>>>> Added nicer login/menu
+=======
+
+>>>>>>> fixed head
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

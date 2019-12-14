@@ -1,9 +1,7 @@
 package View;
 
-<<<<<<< HEAD
 import Tools.BaseDB;
-=======
->>>>>>> 97bccca41a8cf3c70df6e092b40d2d485c3efc1d
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

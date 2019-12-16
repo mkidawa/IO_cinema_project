@@ -22,25 +22,21 @@ public class SaleMenu {
     public SaleMenu(Stage primary) throws IOException {
 
         primaryStage = primary;
-
         var fxmlLoader = new FXMLLoader(getClass().getResource("/Sale/SaleMenu.fxml"));
         fxmlLoader.setController(this);
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         Pane pane = fxmlLoader.load();
         scene = new Scene(pane, screenSize.getWidth(), screenSize.getHeight());
 
-
     }
 
     public void cashStart() throws IOException {
-
-        primaryStage.setScene(new SaleCashbox().getScene());
+        primaryStage.setScene(new SaleCashbox(primaryStage).getScene());
         primaryStage.show();
     }
 
     public void manageStart() throws IOException {
-
-        primaryStage.setScene(new SaleView().getScene());
+        primaryStage.setScene(new SaleView(primaryStage).getScene());
         primaryStage.show();
     }
 }

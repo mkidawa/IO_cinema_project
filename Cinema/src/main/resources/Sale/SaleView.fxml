@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox fillWidth="true" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<VBox fillWidth="true" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <AnchorPane prefHeight="803.0" prefWidth="1282.0">
          <children>
@@ -77,6 +77,7 @@
             <Button fx:id="removeProductFromPack" layoutX="1060.0" layoutY="584.0" mnemonicParsing="false" onMouseClicked="#removeProductFromPack" text="Usuń produkt z zestawu" />
             <Button fx:id="addProductToPack" layoutX="868.0" layoutY="584.0" mnemonicParsing="false" onMouseClicked="#addProductToPack" text="Dodaj produkt do zestawu" />
             <Button fx:id="removeProduct" layoutX="730.0" layoutY="584.0" mnemonicParsing="false" onMouseClicked="#removeProduct" text="Usuń produkt" />
+            <Button fx:id="goBack" layoutX="14.0" layoutY="714.0" mnemonicParsing="false" onMouseClicked="#goBack" text="Cofnij" />
          </children>
       </AnchorPane>
    </children>

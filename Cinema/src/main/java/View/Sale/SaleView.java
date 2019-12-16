@@ -20,6 +20,7 @@ import javafx.scene.control.TablePosition;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.var;
@@ -47,7 +48,10 @@ public class SaleView {
     private ObservableList<SimplePack> packs = FXCollections.observableArrayList();
     private ObservableList<SimplePackPO> packContentList = FXCollections.observableArrayList();
 
-    public SaleView() throws IOException {
+    Stage primaryStage;
+
+    public SaleView(Stage primary) throws IOException {
+        primaryStage = primary;
         var fxmlLoader = new FXMLLoader(getClass().getResource("/Sale/SaleView.fxml"));
         fxmlLoader.setController(this);
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -64,6 +68,11 @@ public class SaleView {
 
 
 
+    }
+
+    public void goBack() throws IOException {
+        primaryStage.setScene(new SaleMenu(primaryStage).getScene());
+        primaryStage.show();
     }
 
     public class SimpleProduct {

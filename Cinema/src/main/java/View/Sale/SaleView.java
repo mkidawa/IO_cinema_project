@@ -184,7 +184,7 @@ public class SaleView {
                 @SuppressWarnings("rawtypes")
                 TableColumn column = pos.getTableColumn();
                 String val = column.getCellData(row).toString();
-                if (col == 1) {
+                if (col == 0) {
                     TextInputDialog dialog = new TextInputDialog(val);
                     dialog.setTitle("Pack name changer");
                     dialog.setHeaderText(val);
@@ -196,7 +196,7 @@ public class SaleView {
                             tableOfPack.refresh();
                         }
                     }
-                } else if (col == 2) {
+                } else if (col == 1) {
                     TextInputDialog dialog = new TextInputDialog(val);
                     dialog.setTitle("Pack price changer");
                     dialog.setHeaderText(val);

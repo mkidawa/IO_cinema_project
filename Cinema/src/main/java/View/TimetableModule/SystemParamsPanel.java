@@ -1,8 +1,8 @@
 package View.TimetableModule;
 
-import Model.TimeTable;
-import View.TimetableModule.Exception.Params.AdsDurationOutOfRangeException;
-import View.TimetableModule.Exception.Params.MinTimeIntervalOutOfRangeException;
+import Controller.TimeTableController;
+import Model.TimeTableExceptions.Params.AdsDurationOutOfRangeException;
+import Model.TimeTableExceptions.Params.MinTimeIntervalOutOfRangeException;
 import View.TimetableModule.Util.FxmlStageSetup;
 import View.TimetableModule.Util.FxmlUtilControls;
 import View.TimetableModule.Util.PopOutWindow;
@@ -37,7 +37,6 @@ public class SystemParamsPanel implements Initializable {
     @FXML
     private Button confirmButton;
 
-    private TimeTable timeTable = new TimeTable();
     private PopOutWindow popOutWindow = new PopOutWindow();
     private FxmlUtilControls fxmlUtilControls = new FxmlUtilControls();
 
@@ -52,16 +51,17 @@ public class SystemParamsPanel implements Initializable {
 
     @FXML
     private void onClickConfirmButton(ActionEvent actionEvent) {
+        TimeTableController controller = TimeTableController.getInstance();
         if (fxmlUtilControls.isSpinnersFilled(spinnerAdsDuration, spinnerMinTimeInterval)) {
             try {
-                timeTable.setAdsDuration((Integer) spinnerAdsDuration.getValue());
+                controller.setAdsDuration((Integer) spinnerAdsDuration.getValue());
             } catch (AdsDurationOutOfRangeException e) {
                 popOutWindow.messageBox("Invalid Ads Duration",
                         "Ads duration is not valid", Alert.AlertType.WARNING);
             }
 
             try {
-                timeTable.setMinTimeInterval((Integer) spinnerMinTimeInterval.getValue());
+                controller.setMinTimeInterval((Integer) spinnerMinTimeInterval.getValue());
             } catch (MinTimeIntervalOutOfRangeException e) {
                 popOutWindow.messageBox("Invalid Minimal Time Interval",
                         "Minimal time interval is not valid ", Alert.AlertType.WARNING);

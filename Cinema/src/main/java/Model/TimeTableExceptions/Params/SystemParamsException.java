@@ -1,12 +1,8 @@
-package View.TimetableModule.Exception.Params;
+package Model.TimeTableExceptions.Params;
 
 public abstract class SystemParamsException extends Exception {
 
-    /*------------------------ FIELDS REGION ------------------------*/
-
-    /*------------------------ METHODS REGION ------------------------*/
-    public SystemParamsException() {
-    }
+    public SystemParamsException() {}
 
     public SystemParamsException(String message) {
         super(message);

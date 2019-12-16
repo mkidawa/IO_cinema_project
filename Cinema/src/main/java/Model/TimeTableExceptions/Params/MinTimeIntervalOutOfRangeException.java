@@ -1,12 +1,8 @@
-package View.TimetableModule.Exception.Params;
+package Model.TimeTableExceptions.Params;
 
 public class MinTimeIntervalOutOfRangeException extends SystemParamsException {
 
-    /*------------------------ FIELDS REGION ------------------------*/
-
-    /*------------------------ METHODS REGION ------------------------*/
-    public MinTimeIntervalOutOfRangeException() {
-    }
+    public MinTimeIntervalOutOfRangeException() {}
 
     public MinTimeIntervalOutOfRangeException(String message) {
         super(message);

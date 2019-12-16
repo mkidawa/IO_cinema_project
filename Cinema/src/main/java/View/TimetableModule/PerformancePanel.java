@@ -1,9 +1,9 @@
 package View.TimetableModule;
 
-import Controller.PerformanceManager;
+import Controller.TimeTableController;
 import Model.Movie;
-import Model.Performance;
 import Model.TimeTable;
+import Model.Performance;
 import View.TimetableModule.Util.FxmlStageSetup;
 import View.TimetableModule.Util.FxmlUtilControls;
 import View.TimetableModule.Util.PopOutWindow;
@@ -51,12 +51,12 @@ public class PerformancePanel implements Initializable {
     @FXML
     public Button deleteButton;
 
-    private TimeTable timeTable = new TimeTable();
     private FxmlUtilControls fxmlUtilControls = new FxmlUtilControls();
 
     /*------------------------ METHODS REGION ------------------------*/
     private void prepareDisplayMode() {
-        Movie movie = PerformanceManager.getCurrentPerformance().getMovie();
+        Movie movie = TimeTableController.getInstance().
+                        getCurrentTimeTable().getPerformance().getMovie();
 
         fxmlUtilControls.setCheckBox(movie.getFlg2D(), flg2D);
         fxmlUtilControls.setCheckBox(movie.getFlg3D(), flg3D);
@@ -64,12 +64,13 @@ public class PerformancePanel implements Initializable {
     }
 
     private void prepareBasicInformation() {
-        Performance currentPerformance = PerformanceManager.getCurrentPerformance();
+        TimeTable currentTimeTable = TimeTableController.getInstance()
+                                            .getCurrentTimeTable();
 
-        labelPerformanceId.setText(Long.toString(currentPerformance.getId()));
-        labelMovieId.setText(Long.toString(currentPerformance.getMovie().getId()));
-        labelMovieTitle.setText(currentPerformance.getMovie().getTitle());
-        labelHallId.setText(Long.toString(currentPerformance.getHall().getId()));
+        labelPerformanceId.setText(Long.toString(currentTimeTable.getPerformance().getId()));
+        labelMovieId.setText(Long.toString(currentTimeTable.getPerformance().getMovie().getId()));
+        labelMovieTitle.setText(currentTimeTable.getPerformance().getMovie().getTitle());
+        labelHallId.setText(Long.toString(currentTimeTable.getPerformance().getHall().getId()));
 
         //TODO REMOVE THIS AND INSERT REAL DATA
         labelDate.setText(new Date().toString());
@@ -84,7 +85,7 @@ public class PerformancePanel implements Initializable {
 
     @FXML
     private void onClickEditButton(MouseEvent mouseEvent) {
-        PerformanceManager.setIsEditable(true);
+        TimeTableController.getInstance().setIsEditable(true);
         FxmlStageSetup.closeStage(editButton);
         FxmlStageSetup.loadFxmlStage(PERFORMANCE_CREATOR_PATH,
                 PERFORMANCE_CREATOR_STYLE_PATH, PERFORMANCE_CREATOR);
@@ -97,7 +98,8 @@ public class PerformancePanel implements Initializable {
      */
     @FXML
     private void onClickDeleteButton(MouseEvent mouseEvent) {
-        timeTable.removePerformance(PerformanceManager.getCurrentPerformance());
+        TimeTableController controller = TimeTableController.getInstance();
+        controller.deleteTimeTable(controller.getCurrentTimeTable());
 
         FxmlStageSetup.reloadStage(deleteButton, TIMETABLE_PANEL_PATH,
                 TIMETABLE_PANEL_STYLE_PATH, TIMETABLE_PANEL);

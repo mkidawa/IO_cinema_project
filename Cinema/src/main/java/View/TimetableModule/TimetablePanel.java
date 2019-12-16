@@ -1,6 +1,7 @@
 package View.TimetableModule;
 
-import Controller.PerformanceManager;
+import DBO.TimeTableDAO;
+import Controller.TimeTableController;
 import Model.Performance;
 import Model.TimeTable;
 import View.TimetableModule.Util.FxmlStageSetup;
@@ -55,7 +56,6 @@ public class TimetablePanel implements Initializable {
 
     private ObservableList<SimplePerformance>
             performanceObservableList = FXCollections.observableArrayList();
-    private TimeTable timeTable = new TimeTable();
     private PopOutWindow popOutWindow = new PopOutWindow();
 
     /*------------------------ METHODS REGION ------------------------*/
@@ -69,12 +69,25 @@ public class TimetablePanel implements Initializable {
     private ObservableList<SimplePerformance> prepareSimplePerformanceList() {
         ObservableList<SimplePerformance> list = FXCollections.observableArrayList();
 
-        for (Performance it : timeTable.getPerformanceList()) {
-            list.add(new SimplePerformance(it.getId(), it.getMovie().getId(),
-                    it.getHall().getId(), it.getMovie().getTitle(),
-
-                    //TODO REMOVE THIS AND INSERT REAL DATA
-                    new Date().toString(), new Date().toString()));
+        for (TimeTable timeTable : TimeTableDAO.getAll()) {
+            StringBuilder date = new StringBuilder();
+            date.append(timeTable.getPerformanceDate().getYear());
+            date.append("-");
+            date.append(timeTable.getPerformanceDate().getMonth());
+            date.append("-");
+            date.append(timeTable.getPerformanceDate().getDay());
+            StringBuilder time = new StringBuilder();
+            time.append(timeTable.getPerformanceDate().getHours());
+            time.append(":");
+            time.append(timeTable.getPerformanceDate().getMinutes());
+            list.add(new SimplePerformance(
+                        timeTable.getId(),
+                        timeTable.getPerformance().getMovie().getId(),
+                        timeTable.getPerformance().getHall().getId(),
+                        timeTable.getPerformance().getMovie().getTitle(),
+                        date.toString(),
+                        time.toString()
+                    ));
         }
 
         return list;
@@ -112,7 +125,7 @@ public class TimetablePanel implements Initializable {
                 if (!tableRow.isEmpty()
                         && event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 2) {
                     try {
-                        onClickRow(timeTable.getPerformanceListById(tableRow.getItem().getId()).get(0));
+                        onClickRow(TimeTableDAO.getById(tableRow.getItem().getId()));
                     } catch (IndexOutOfBoundsException e) {
                         popOutWindow.messageBox("Database is empty",
                                 "Database is empty, check if everything works properly",
@@ -132,8 +145,8 @@ public class TimetablePanel implements Initializable {
     }
 
     @FXML
-    private void onClickRow(Performance performance) {
-        PerformanceManager.setCurrentPerformance(performance);
+    private void onClickRow(TimeTable timeTable) {
+        TimeTableController.getInstance().setCurrentTimeTable(timeTable);
         FxmlStageSetup.loadFxmlStage(PERFORMANCE_PANEL_PATH, PERFORMANCE_PANEL_STYLE_PATH,
                 PERFORMANCE_PANEL);
     }

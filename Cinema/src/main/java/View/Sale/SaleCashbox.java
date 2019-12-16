@@ -2,7 +2,8 @@ package View.Sale;
 
 import View.Sale.Simple.SimplePack;
 import View.Sale.Simple.SimplePackPO;
-import javafx.collections.FXCollections;
+import View.Sale.Simple.SimpleSale;
+
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,6 +18,8 @@ import lombok.var;
 import java.awt.*;
 import java.io.IOException;
 
+import static javafx.collections.FXCollections.observableArrayList;
+
 public class SaleCashbox {
 
     @Getter
@@ -24,14 +27,18 @@ public class SaleCashbox {
     private Scene scene;
 
     @FXML
-    private TableView<SimplePack> tableOfPack = new TableView<SimplePack>();
+    private TableView<SimplePack> tableOfPack = new TableView<>();
 
     @FXML
-    private TableView<SimplePackPO> tableOfPackContent = new TableView<SimplePackPO>();
+    private TableView<SimplePackPO> tableOfPackContent = new TableView<>();
 
 
-    private ObservableList<SimplePack> packs = FXCollections.observableArrayList();
-    private ObservableList<SimplePackPO> packContentList = FXCollections.observableArrayList();
+    @FXML
+    private TableView<SimpleSale> tableOfOrderContent = new TableView<>();
+
+    private ObservableList<SimplePack> packs;
+    private ObservableList<SimplePackPO> packContentList = observableArrayList();
+    private ObservableList<SimpleSale> orderContent = observableArrayList();
 
     Stage primaryStage;
 
@@ -47,6 +54,7 @@ public class SaleCashbox {
         packs = SimplePack.getListOfPacks();
 
         tableOfPack.setItems(packs);
+        tableOfOrderContent.setItems(orderContent);
         tableOfPackContent.setItems(packContentList);
     }
 

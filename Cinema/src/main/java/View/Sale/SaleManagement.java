@@ -31,7 +31,7 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
-public class SaleView {
+public class SaleManagement {
     @Getter
     @Setter
     private Scene scene;
@@ -50,7 +50,7 @@ public class SaleView {
 
     Stage primaryStage;
 
-    public SaleView(Stage primary) throws IOException {
+    public SaleManagement(Stage primary) throws IOException {
         primaryStage = primary;
         var fxmlLoader = new FXMLLoader(getClass().getResource("/Sale/SaleView.fxml"));
         fxmlLoader.setController(this);

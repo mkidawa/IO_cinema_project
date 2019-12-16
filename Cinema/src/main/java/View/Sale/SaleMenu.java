@@ -36,7 +36,7 @@ public class SaleMenu {
     }
 
     public void manageStart() throws IOException {
-        primaryStage.setScene(new SaleView(primaryStage).getScene());
+        primaryStage.setScene(new SaleManagement(primaryStage).getScene());
         primaryStage.show();
     }
 }

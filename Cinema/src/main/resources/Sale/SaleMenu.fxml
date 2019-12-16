@@ -8,7 +8,7 @@
     <children>
         <AnchorPane prefHeight="803.0" prefWidth="1282.0">
          <children>
-            <Button fx:id="cashStart" layoutX="513.0" layoutY="191.0" mnemonicParsing="false" onMouseClicked="#cashStart" prefHeight="71.0" prefWidth="413.0" text="Nowe zamówienie" />
+             <Button fx:id="cashStart" layoutX="513.0" layoutY="191.0" mnemonicParsing="false" onMouseClicked="#cashStart" prefHeight="71.0" prefWidth="413.0" text="Nowe zamówienie" />
             <Button fx:id="manageStart" layoutX="513.0" layoutY="329.0" mnemonicParsing="false" onMouseClicked="#manageStart" prefHeight="71.0" prefWidth="413.0" text="Zarządzanie produktami" />
          </children>
         </AnchorPane>

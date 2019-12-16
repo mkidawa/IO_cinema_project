@@ -15,13 +15,13 @@
          <children>
             <TableView fx:id="tableOfProducts" layoutX="471.0" layoutY="65.0" prefHeight="505.0" prefWidth="364.0">
               <columns>
-                <TableColumn fx:id="ProductName" prefWidth="209.0" text="Nazwa">
+                <TableColumn fx:id="ProductName" prefWidth="215.0" text="Nazwa">
                     <cellValueFactory><PropertyValueFactory property="name" /></cellValueFactory>
                 </TableColumn>
-                <TableColumn fx:id="ProductPrice" prefWidth="74.0" text="Cena">
+                <TableColumn fx:id="ProductPrice" prefWidth="90.0" text="Cena">
                     <cellValueFactory><PropertyValueFactory property="price" /></cellValueFactory>
                 </TableColumn>
-                  <TableColumn fx:id="ProductAmount" text="Ilość">
+                  <TableColumn fx:id="ProductAmount" prefWidth="58.0" text="Ilość">
                       <cellValueFactory><PropertyValueFactory property="amount" /></cellValueFactory>
                   </TableColumn>
               </columns>
@@ -31,7 +31,7 @@
                   <Font size="24.0" />
                </font>
             </Label>
-             <TableView fx:id="tableOfPack" layoutX="74.0" layoutY="65.0" onMouseClicked="#showPackContent" prefHeight="505.0" prefWidth="364.0">
+             <TableView fx:id="tableOfPack" layoutX="74.0" layoutY="65.0" prefHeight="505.0" prefWidth="364.0">
               <columns>
                 <TableColumn fx:id="PackName" prefWidth="267.0" text="Nazwa">
                     <cellValueFactory><PropertyValueFactory property="name" /></cellValueFactory>

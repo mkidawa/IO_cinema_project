@@ -6,10 +6,9 @@ import DBO.ProductDAO;
 import Model.Pack;
 import Model.PackPO;
 import Model.Product;
-import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleLongProperty;
-import javafx.beans.property.SimpleStringProperty;
+import View.Sale.Simple.SimplePack;
+import View.Sale.Simple.SimplePackPO;
+import View.Sale.Simple.SimpleProduct;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -59,8 +58,7 @@ public class SaleManagement {
         scene = new Scene(pane, screenSize.getWidth(), screenSize.getHeight());
 
         packs = getListOfPack();
-        products = getListOfProduct();
-//        packContentList = getContentOfPack(1);
+        products = SimpleProduct.getListOfProduct();
 
         tableOfPack.setItems(packs);
         tableOfProducts.setItems(products);
@@ -75,95 +73,6 @@ public class SaleManagement {
         primaryStage.show();
     }
 
-    public class SimpleProduct {
-        private final SimpleLongProperty id;
-        private final SimpleStringProperty name;
-        private  SimpleDoubleProperty price;
-        private final SimpleIntegerProperty amount;
-
-        public SimpleProduct(long id, String name, Double price, int amount) {
-            this.id = new SimpleLongProperty(id);
-            this.name = new SimpleStringProperty(name);
-            this.price = new SimpleDoubleProperty(price);
-            this.amount = new SimpleIntegerProperty(amount);
-        }
-
-        public long getId() {
-            return id.get();
-        }
-        public String getName() { return name.get(); }
-        public double getPrice() { return price.get(); }
-        public int getAmount() { return amount.get(); }
-
-        public void setPrice(SimpleDoubleProperty a) {price = a;}
-    }
-
-
-    public class SimplePack {
-        private final SimpleLongProperty id;
-        private final SimpleStringProperty name;
-        private  SimpleDoubleProperty price;
-
-        public SimplePack(long id, String name, Double price) {
-            this.id = new SimpleLongProperty(id);
-            this.name = new SimpleStringProperty(name);
-            this.price = new SimpleDoubleProperty(price);
-        }
-
-        public long getId() {
-            return id.get();
-        }
-        public String getName() { return name.get(); }
-        public double getPrice() { return price.get(); }
-    }
-
-    public class SimplePackPO {
-        private final SimpleLongProperty id;
-        private final SimpleStringProperty product;
-        private final SimpleIntegerProperty amount;
-        private  SimpleDoubleProperty price;
-
-        public SimplePackPO(long id, String product, int amount, Double price) {
-            this.id = new SimpleLongProperty(id);
-            this.product = new SimpleStringProperty(product);
-            this.amount = new SimpleIntegerProperty(amount);
-            this.price = new SimpleDoubleProperty(price);
-        }
-
-        public long getId() {
-            return id.get();
-        }
-        public String getProductId() { return product.get(); }
-        public int getAmount() { return amount.get(); }
-        public double getPrice() { return price.get(); }
-    }
-
-    public ObservableList<SimplePackPO> getContentOfPack(int id){
-        ObservableList<SimplePackPO> list = FXCollections.observableArrayList();
-        List<PackPO> packs = PackPoDAO.getAllById(id);
-        for (int i=0; i<packs.size(); i++) {
-            list.add(new SimplePackPO(
-                    packs.get(i).getId(),
-                    ProductDAO.getNameById(packs.get(i).getProduct().getId()),
-                    packs.get(i).getAmount().intValue(),
-                    packs.get(i).getPrice().doubleValue()));
-        }
-        return list;
-    }
-
-
-    public ObservableList<SimpleProduct> getListOfProduct() {
-        ObservableList<SimpleProduct> list = FXCollections.observableArrayList();
-        List<Product> products = ProductDAO.getAll();
-        for (int i=0; i<products.size(); i++) {
-            list.add(new SimpleProduct(
-                    products.get(i).getId(),
-                    products.get(i).getName(),
-                    products.get(i).getPrice().doubleValue(),
-                    products.get(i).getAmount()));
-        }
-        return list;
-    }
 
     public ObservableList<SimplePack> getListOfPack() {
 
@@ -179,7 +88,7 @@ public class SaleManagement {
 
             int index = tableOfPack.getSelectionModel().selectedIndexProperty().get();
             packContentList.clear();
-            packContentList = getContentOfPack((int) packs.get(index).getId());
+            packContentList = SimplePackPO.getContentOfPack((int) packs.get(index).getId());
 
             tableOfPackContent.setItems(packContentList);
             tableOfPackContent.refresh();
@@ -231,14 +140,6 @@ public class SaleManagement {
         return list;
     }
 
-    public void onClick(){
-        products.get(0).setPrice(new SimpleDoubleProperty(1000));
-        tableOfProducts.refresh();
-    }
-
-    public void showPackContent(){
-    }
-
     public void addNewPack(){
         TextInputDialog dialog = new TextInputDialog();
         dialog.setTitle("New pack creator");
@@ -271,7 +172,7 @@ public class SaleManagement {
                 if(result3.isPresent()){
                     int amount = Integer.valueOf(result3.get());
                     ProductDAO.insert(new Product(name, price, amount));
-                    products = getListOfProduct();
+                    products = SimpleProduct.getListOfProduct();
                     tableOfProducts.setItems(products);
                 }
             }
@@ -299,7 +200,7 @@ public class SaleManagement {
             String amount = result.get();
             PackPoDAO.insert(new PackPO((Pack) x,(Product) y, new BigDecimal(amount)));
 
-            packContentList = getContentOfPack((int) packId);
+            packContentList = SimplePackPO.getContentOfPack((int) packId);
             tableOfPackContent.setItems(packContentList);
             tableOfPackContent.refresh();
         }
@@ -314,7 +215,7 @@ public class SaleManagement {
 
         PackPoDAO.removeById(productId);
 
-        packContentList = getContentOfPack((int) packId);
+        packContentList = SimplePackPO.getContentOfPack((int) packId);
         tableOfPackContent.setItems(packContentList);
         tableOfPackContent.refresh();
     }
@@ -328,10 +229,10 @@ public class SaleManagement {
 
         ProductDAO.removeById(productId);
 
-        packContentList = getContentOfPack((int) packId);
+        packContentList = SimplePackPO.getContentOfPack((int) packId);
         tableOfPackContent.setItems(packContentList);
         tableOfPackContent.refresh();
-        products = getListOfProduct();
+        products = SimpleProduct.getListOfProduct();
         tableOfProducts.setItems(products);
         tableOfProducts.refresh();
     }
@@ -343,7 +244,7 @@ public class SaleManagement {
 
         PackDAO.removeById(packId);
 
-        packContentList = getContentOfPack((int) packId);
+        packContentList = SimplePackPO.getContentOfPack((int) packId);
         tableOfPackContent.setItems(packContentList);
         tableOfPackContent.refresh();
         packs = getListOfPack();

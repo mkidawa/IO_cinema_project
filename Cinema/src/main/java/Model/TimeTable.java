@@ -1,9 +1,5 @@
 package Model;
 
-import java.sql.Timestamp;
-import java.time.Duration;
-import java.util.List;
-
 import DBO.PerformanceDAO;
 import Tools.Filter;
 import View.TimetableModule.Exception.Params.AdsDurationOutOfRangeException;
@@ -11,25 +7,47 @@ import View.TimetableModule.Exception.Params.MinTimeIntervalOutOfRangeException;
 import View.TimetableModule.Exception.Performance.HallNotAvailableException;
 import View.TimetableModule.Exception.Performance.MovieNotAvailableException;
 import View.TimetableModule.Exception.Performance.WrongHallTypeException;
+import lombok.Getter;
+import lombok.Setter;
 
-import static View.TimetableModule.Util.Constants.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import java.sql.Timestamp;
+import java.util.List;
 
+import static View.TimetableModule.Util.Constants.MAX_ADS_VALUE;
+import static View.TimetableModule.Util.Constants.MAX_PERFORMANCE_GAP_VALUE;
+import static View.TimetableModule.Util.Constants.MIN_ADS_VALUE;
+import static View.TimetableModule.Util.Constants.MIN_PERFORMANCE_GAP_VALUE;
+
+@Entity
+@Table(name = "TimeTable")
 public class TimeTable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Getter
+    @Setter
+    private long Id;
 
+    @ManyToOne(cascade = {CascadeType.ALL})
+    @JoinColumn(name = "PerformanceId")
+    @Getter
+    @Setter
+    private Performance performance;
 
-    /** Create and add new performance to the timetable
-     *
-     * @param movie related movie
-     * @param movieType type of performance, available values ("2D", "3D", "VR"),
-     *                  has to be available for selected movie
-     * @param hall where performance will take place
-     * @param startTime date and time of the performance's beginning
-     * @param duration duration of performance (with advertisments)
-     */
-    public void addPerformance(Movie movie, String movieType, Hall hall,
-                                Timestamp startTime, Duration duration){
-        Performance performance = new Performance(movie, movieType,
-                                        hall, startTime, duration);
+    @Column(name = "PerformanceDate")
+    @Getter
+    @Setter
+    private Timestamp performanceDate;
+
+    public TimeTable() {
     }
 
     /**
@@ -39,12 +57,12 @@ public class TimeTable {
      * @return
      */
     private boolean isFreeHall(Performance performance) {
-//        for (Performance it : PerformanceDAO.getAll()) {
-//            if (it.getHall().getId() == performance.getHall().getId()) {
-//                return false;
-//            }
-//        }
-//
+        for (Performance it : PerformanceDAO.getAll()) {
+            if (it.getHall().getId() == performance.getHall().getId()) {
+                return false;
+            }
+        }
+
         return true;
     }
 
@@ -55,12 +73,12 @@ public class TimeTable {
      * @return
      */
     private boolean isCorrectHour(Performance performance) {
-//        for (Performance it : PerformanceDAO.getAll()) {
-////            TODO NOT SURE IF addTime means start date of performance
-//            if (it.getAddTime().equals(performance.getAddTime())) {
-//                return false;
-//            }
-//        }
+        for (Performance it : PerformanceDAO.getAll()) {
+//            TODO NOT SURE IF addTime means start date of performance
+            if (it.getAddTime().equals(performance.getAddTime())) {
+                return false;
+            }
+        }
 
         return true;
     }
@@ -86,11 +104,11 @@ public class TimeTable {
      * @return
      */
     private boolean isCorrectHallType(Performance performance) {
-//        if (performance.getHall().getFlg2D() == performance.getMovie().getFlg2D()
-//                && performance.getHall().getFlg2D() == performance.getMovie().getFlg2D()
-//                && performance.getHall().getFlg2D() == performance.getMovie().getFlg2D()) {
-//            return true;
-//        }
+        if (performance.getHall().getFlg2D() == performance.getMovie().getFlg2D()
+                && performance.getHall().getFlg2D() == performance.getMovie().getFlg2D()
+                && performance.getHall().getFlg2D() == performance.getMovie().getFlg2D()) {
+            return true;
+        }
 
         return false;
     }
@@ -106,15 +124,15 @@ public class TimeTable {
      */
     public void addPerformance(Performance performance)
             throws HallNotAvailableException, MovieNotAvailableException, WrongHallTypeException {
-//        if (!(isFreeHall(performance) && isCorrectHour(performance))) {
-//            throw new HallNotAvailableException();
-//        } else if (!isMovieAvailable(performance)) {
-//            throw new MovieNotAvailableException();
-//        } else if (!isCorrectHallType(performance)) {
-//            throw new WrongHallTypeException();
-//        } else {
-//            PerformanceDAO.insertUpdate(performance);
-//        }
+        if (!(isFreeHall(performance) && isCorrectHour(performance))) {
+            throw new HallNotAvailableException();
+        } else if (!isMovieAvailable(performance)) {
+            throw new MovieNotAvailableException();
+        } else if (!isCorrectHallType(performance)) {
+            throw new WrongHallTypeException();
+        } else {
+            PerformanceDAO.insertUpdate(performance);
+        }
     }
 
     public void removePerformance(Performance performance) {

@@ -1,35 +1,34 @@
-import Controller.StageManager;
-import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
+import Controller.LPermissionController;
 import Tools.BaseDB;
+import Tools.PermissionChecker;
+import View.Login.LoginView;
+import javafx.application.Application;
+import javafx.stage.Stage;
 
-import static View.TimetableModule.Util.Constants.TIMETABLE_PANEL_PATH;
-import static View.TimetableModule.Util.Constants.TIMETABLE_PANEL_STYLE_PATH;
+import static java.lang.System.exit;
 
 public class Program extends Application {
-
-    private Stage primaryStage;
-
-    public static void main(String[] args) {
-        launch(args);
-    }
-
-    String movie = "MovieModule/MoviePanel/mainMovie.fxml";
-    String timetable = TIMETABLE_PANEL_PATH;
-
     @Override
     public void start(Stage primaryStage) throws Exception {
-        BaseDB.setUp();
-        StageManager.mainStage = primaryStage;
-        Scene scene = new Scene(FXMLLoader.load(getClass().getResource(timetable)));
+        primaryStage.setTitle("Cinema Management System");
+//        var myLoader = new FXMLLoader(getClass().getResource("login/LoginView.fxml"));
+        //Pane myPane = myLoader.load();
 
-        scene.getStylesheets().add(getClass().getResource(TIMETABLE_PANEL_STYLE_PATH).toExternalForm());
-
-        primaryStage.setTitle("Main Movie Panel");
-        primaryStage.setScene(scene);
+        //var myScene = new Scene();
+        primaryStage.setScene(new LoginView().getScene());
         primaryStage.show();
-        primaryStage.setResizable(false);
+        //primaryStage.setFullScreen(true);
+
     }
+
+    public static void main(String[] args) {
+        //TODO Main program file. System starts here
+//        launch(args);
+//        BaseDB.openConnection();
+
+
+//        System.out.println(LPermissionController.getInstance().getPermissionsList());
+        exit(0);
+    }
+
 }

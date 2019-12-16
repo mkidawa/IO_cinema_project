@@ -31,10 +31,10 @@ public class Reservation {
     private ReservationStatus reservationStatus;
 
     @ManyToOne(cascade = {CascadeType.ALL})
-    @JoinColumn(name = "PerformanceId")
+    @JoinColumn(name = "TimeTableId")
     @Getter
     @Setter
-    private Performance performance;
+    private TimeTable timeTable;
 
     @Column(name = "ReservationDate")
     @Getter
@@ -45,11 +45,11 @@ public class Reservation {
     public Reservation() {
     }
 
-    public Reservation(int flgPosX, int flgPoxY, ReservationStatus reservationStatus, Performance performance, Timestamp reservationDate) {
+    public Reservation(int flgPosX, int flgPoxY, ReservationStatus reservationStatus, TimeTable timeTable, Timestamp reservationDate) {
         this.flgPosX = flgPosX;
         this.flgPoxY = flgPoxY;
         this.reservationStatus = reservationStatus;
-        this.performance = performance;
+        this.timeTable = timeTable;
         this.reservationDate = reservationDate;
     }
 }

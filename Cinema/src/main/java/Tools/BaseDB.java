@@ -13,7 +13,7 @@ public class BaseDB {
 
     private static SessionFactory sessionFactory;
 
-    public static void setUp() {
+    private static void setUp() {
         // A SessionFactory is set up once for an application!
         final StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
                 .configure("hibernate.cfg.xml") // configures settings from hibernate.cfg.xml
@@ -29,6 +29,7 @@ public class BaseDB {
     }
 
     public static Session openConnection() {
+        setUp();
         return sessionFactory.openSession();
     }
 }

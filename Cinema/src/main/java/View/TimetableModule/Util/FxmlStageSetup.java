@@ -15,6 +15,8 @@ public class FxmlStageSetup {
     private static PopOutWindow popOutWindow = new PopOutWindow();
 
     /*------------------------ METHODS REGION ------------------------*/
+    private FxmlStageSetup() {
+    }
 
     /**
      * LOAD SELECTED STAGE AND ITS CSS STYLING

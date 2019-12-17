@@ -2,11 +2,10 @@ package View.TimetableModule;
 
 import Controller.TimeTableController;
 import Model.Movie;
-import Model.TimeTable;
 import Model.Performance;
+import Model.TimeTable;
 import View.TimetableModule.Util.FxmlStageSetup;
 import View.TimetableModule.Util.FxmlUtilControls;
-import View.TimetableModule.Util.PopOutWindow;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -15,7 +14,7 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 
 import java.net.URL;
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.ResourceBundle;
 
 import static View.TimetableModule.Util.Constants.PERFORMANCE_CREATOR;
@@ -55,8 +54,8 @@ public class PerformancePanel implements Initializable {
 
     /*------------------------ METHODS REGION ------------------------*/
     private void prepareDisplayMode() {
-        Movie movie = TimeTableController.getInstance().
-                        getCurrentTimeTable().getPerformance().getMovie();
+        Movie movie = TimeTableController.getInstance()
+                .getCurrentTimeTable().getPerformance().getMovie();
 
         fxmlUtilControls.setCheckBox(movie.getFlg2D(), flg2D);
         fxmlUtilControls.setCheckBox(movie.getFlg3D(), flg3D);
@@ -64,17 +63,19 @@ public class PerformancePanel implements Initializable {
     }
 
     private void prepareBasicInformation() {
-        TimeTable currentTimeTable = TimeTableController.getInstance()
-                                            .getCurrentTimeTable();
+        TimeTable currentTimeTable = TimeTableController.getInstance().getCurrentTimeTable();
+        Performance currentPerformance = currentTimeTable.getPerformance();
+        LocalDateTime currentPerformanceLocalDateTime = currentTimeTable
+                .getPerformanceDate().toLocalDateTime();
 
-        labelPerformanceId.setText(Long.toString(currentTimeTable.getPerformance().getId()));
-        labelMovieId.setText(Long.toString(currentTimeTable.getPerformance().getMovie().getId()));
-        labelMovieTitle.setText(currentTimeTable.getPerformance().getMovie().getTitle());
-        labelHallId.setText(Long.toString(currentTimeTable.getPerformance().getHall().getId()));
+        labelPerformanceId.setText(Long.toString(currentPerformance.getId()));
+        labelMovieId.setText(Long.toString(currentPerformance.getMovie().getId()));
+        labelMovieTitle.setText(currentPerformance.getMovie().getTitle());
+        labelHallId.setText(Long.toString(currentPerformance.getHall().getId()));
 
-        //TODO REMOVE THIS AND INSERT REAL DATA
-        labelDate.setText(new Date().toString());
-        labelHour.setText(new Date().toString());
+        labelDate.setText(currentPerformanceLocalDateTime.toLocalDate().toString());
+        labelHour.setText(currentPerformanceLocalDateTime.getHour() + ":"
+                + currentPerformanceLocalDateTime.getMinute());
     }
 
     @Override

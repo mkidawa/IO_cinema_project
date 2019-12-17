@@ -47,5 +47,6 @@ public class Constants {
             = "/TimetableModule/TimetablePanel/TimetablePanel.css";
 
     /*------------------------ METHODS REGION ------------------------*/
-
+    private Constants() {
+    }
 }

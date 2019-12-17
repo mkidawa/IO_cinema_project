@@ -57,7 +57,7 @@ public class PackPoDAO {
         var so = BaseDB.openConnection();
         so.beginTransaction();
 
-        List result = so.createQuery("from PackPO WHERE PackHId = " + Id).list();
+        List result = so.createQuery("from PackPO WHERE Id = " + Id).list();
         int am, magAmount;
         long idProd;
 

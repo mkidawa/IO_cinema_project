@@ -8,6 +8,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -18,6 +19,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 >>>>>>> Created buttons and methods
+=======
+import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
+>>>>>>> master
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -34,8 +40,11 @@ public class MainMenu  {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> Created buttons and methods
+=======
+>>>>>>> master
     public Button movieModuleButton;
     public Button employeeModuleButton;
     public Button raportModuleButton;
@@ -47,6 +56,7 @@ public class MainMenu  {
     public Button timetableModuleButton;
     public Button pCurrentUser;
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 =======
@@ -68,6 +78,8 @@ public class MainMenu  {
 >>>>>>> Added panel for mainMenu
 =======
 >>>>>>> implemented openMovieModule
+=======
+>>>>>>> master
 
     public void logIn(MouseEvent mouseEvent) {
     }
@@ -78,8 +90,11 @@ public class MainMenu  {
     }
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> Created buttons and methods
+=======
+>>>>>>> master
 
     public void openTimetableModule(MouseEvent mouseEvent) {
     }
@@ -94,8 +109,11 @@ public class MainMenu  {
     }
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> implemented openMovieModule
+=======
+>>>>>>> master
 
     public void openMovieModule(MouseEvent mouseEvent) throws IOException {
         Parent fxmlLoader = FXMLLoader.load(getClass().getResource("/MovieModule/MoviePanel/mainMovie.fxml"));
@@ -109,6 +127,7 @@ public class MainMenu  {
     }
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> Added panel for mainMenu
 =======
@@ -116,11 +135,16 @@ public class MainMenu  {
 =======
 >>>>>>> implemented openMovieModule
 =======
+=======
+>>>>>>> master
 
     public void printCurrentUser(MouseEvent mouseEvent) {
         PermissionChecker pc = new PermissionChecker();
         System.out.println(pc.getPermissionsList());
         System.out.println(pc.getCurrentUser().toString());
     }
+<<<<<<< HEAD
 >>>>>>> Fixed printing current User
+=======
+>>>>>>> master
 }

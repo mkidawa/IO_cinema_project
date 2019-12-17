@@ -2,6 +2,7 @@
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 <?import javafx.geometry.*?>
 <?import javafx.scene.image.*?>
 =======
@@ -10,12 +11,17 @@
 <?import javafx.geometry.*?>
 <?import javafx.scene.image.*?>
 >>>>>>> Added nicer login/menu
+=======
+<?import javafx.geometry.*?>
+<?import javafx.scene.image.*?>
+>>>>>>> master
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -26,6 +32,10 @@
 <?import View.Components.*?>
 <StackPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.MainMenu.Login">
 >>>>>>> Changes: Add support for custom events in keyboard
+=======
+<?import View.Components.*?>
+<StackPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.MainMenu.Login">
+>>>>>>> master
    <children>
 
        <HBox>
@@ -44,6 +54,7 @@
        </AnchorPane>
       <NumericKeyboard  fx:id="keyboard" alignment="BOTTOM_RIGHT" onConfirm="#onConfirm"/>
    </children>
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 =======
@@ -67,3 +78,6 @@
 =======
 </StackPane>
 >>>>>>> Changes: Add support for custom events in keyboard
+=======
+</StackPane>
+>>>>>>> master

@@ -7,6 +7,7 @@ import Tools.Filter;
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 import Tools.LoginException;
 import View.MainMenu.Login;
 =======
@@ -18,6 +19,10 @@ import com.sun.javaws.exceptions.UnsignedAccessViolationException;
 import Tools.LoginException;
 import View.MainMenu.Login;
 >>>>>>> Changed Errors for LoginException
+=======
+import Tools.LoginException;
+import View.MainMenu.Login;
+>>>>>>> master
 
 import java.util.Collections;
 import java.util.List;
@@ -46,6 +51,7 @@ public class LPermissionController {
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     private Integer failCounter = 0;
 =======
     private Integer failCounter;
@@ -53,6 +59,9 @@ public class LPermissionController {
 =======
     private Integer failCounter = 0;
 >>>>>>> Zalozono limit na ilosc logowan
+=======
+    private Integer failCounter = 0;
+>>>>>>> master
 
     public static LPermissionController getInstance() {
         if (ourInstance == null) {
@@ -77,6 +86,7 @@ public class LPermissionController {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
             failCounter++;
             throw new LoginException("Brak uzytkownika w bazie");
 //            return false;
@@ -94,6 +104,11 @@ public class LPermissionController {
 >>>>>>> Changed Errors for LoginException
 //            return false;
 >>>>>>> throws instead of return false
+=======
+            failCounter++;
+            throw new LoginException("Brak uzytkownika w bazie");
+//            return false;
+>>>>>>> master
         } else if (result.size() == 1 && result.get(0).toString().equals(login)) {
             System.out.println("Znalazlem login: " + login);
             return true;
@@ -103,8 +118,11 @@ public class LPermissionController {
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> Impl FailCounter
+=======
+>>>>>>> master
     private boolean checkPassword(String login, String password) {
         String sql = "from User U WHERE U.login='" + login +
                 "'";
@@ -118,10 +136,14 @@ public class LPermissionController {
         failCounter++;
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> master
         throw new LoginException("Haslo nie prawidlowe");
 //        return false;
     }
 
+<<<<<<< HEAD
 =======
 >>>>>>> Added nicer login/menu
 =======
@@ -133,6 +155,8 @@ public class LPermissionController {
     }
 
 >>>>>>> Impl FailCounter
+=======
+>>>>>>> master
 
     /**
      * Autoryzacja uzytkownika w systemie
@@ -148,6 +172,7 @@ public class LPermissionController {
                 return true;
             }
         }
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
         throw new LoginException("Logowanie nie powiodło się");
@@ -209,6 +234,14 @@ public class LPermissionController {
     private boolean checkPassword(String login, String password) {
         String sql = "from User U WHERE U.login='" + login +
 >>>>>>> Added nicer login/menu
+=======
+        throw new LoginException("Logowanie nie powiodło się");
+//        return false;
+    }
+    private boolean checkLoginCode(String code) {
+//
+        String sql = "SELECT U.login from User U WHERE U.codeHash='" + code +
+>>>>>>> master
                 "'";
         List result = UserDAO.execSQL(sql);
         if (result.size() == 0) {
@@ -232,10 +265,14 @@ public class LPermissionController {
             return true;
         }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> master
         System.err.println("Kod nie jest prawidlowy");
         failCounter++;
         throw new LoginException("Kod nie jest prawidlowy");
 
+<<<<<<< HEAD
 =======
         System.err.println("Haslo nie prawidlowe");
 <<<<<<< HEAD
@@ -245,6 +282,8 @@ public class LPermissionController {
         throw new Error("Haslo nie prawidlowe");
 //        return false;
 >>>>>>> throws instead of return false
+=======
+>>>>>>> master
     }
 
         public boolean login(String code){
@@ -259,9 +298,12 @@ public class LPermissionController {
 //        return false;
 
     }
+<<<<<<< HEAD
 =======
 
 >>>>>>> Impl FailCounter
+=======
+>>>>>>> master
 
 
 

@@ -4,16 +4,21 @@ import Controller.LPermissionController;
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> Changed Errors for LoginException
 import Tools.LoginException;
 =======
 import Controller.LoginController;
 >>>>>>> Changes: Add support for custom events in keyboard
+=======
+import Controller.LoginController;
+>>>>>>> master
 import Tools.PermissionChecker;
 import View.Components.ButtonWithImage;
 import View.Components.NumericKeyboard;
 import View.Program;
+<<<<<<< HEAD
 <<<<<<< HEAD
 import javafx.event.ActionEvent;
 <<<<<<< HEAD
@@ -24,19 +29,27 @@ import Tools.PermissionChecker;
 >>>>>>> Added nicer login/menu
 =======
 >>>>>>> Changes: Add support for custom events in keyboard
+=======
+>>>>>>> master
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> Added nicer login/menu
+=======
+>>>>>>> master
 
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> master
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
@@ -45,6 +58,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.io.IOException;
+<<<<<<< HEAD
 =======
 =======
 >>>>>>> Added nicer login/menu
@@ -60,6 +74,8 @@ import java.io.IOException;
 >>>>>>> Added panel for mainMenu
 =======
 >>>>>>> Added nicer login/menu
+=======
+>>>>>>> master
 public class Login {
     @FXML
     private PasswordField passwordField;
@@ -67,8 +83,11 @@ public class Login {
     private TextField logInTextField;
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> Added nicer login/menu
+=======
+>>>>>>> master
     @Getter
     @Setter
     private Stage stage;
@@ -80,6 +99,7 @@ public class Login {
     private NumericKeyboard keyboard;
 
 
+<<<<<<< HEAD
 <<<<<<< HEAD
     public void logIn() throws IOException {
         System.out.println(passwordField.getText());
@@ -107,6 +127,8 @@ public class Login {
 =======
 =======
 >>>>>>> Added nicer login/menu
+=======
+>>>>>>> master
     public void logIn() throws IOException {
         System.out.println(passwordField.getText());
         System.out.println(logInTextField.getText());
@@ -126,6 +148,7 @@ public class Login {
             Parent fxmlLoader = FXMLLoader.load(getClass().getResource("/MainMenu/MainMenu.fxml"));
             Stage stage = new Stage();
             Scene scene = new Scene(fxmlLoader);
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
             stage.setScene(scene);
@@ -146,14 +169,21 @@ public class Login {
 
 =======
 >>>>>>> Changes: Add support for custom events in keyboard
+=======
+            Program.getPrimaryStage().setScene(scene);
+
+>>>>>>> master
     }
     public void printPermission() throws IOException {
         PermissionChecker pc = new PermissionChecker();
         System.out.println(pc.getPermissionsList());
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> Added nicer login/menu
+=======
+>>>>>>> master
 
     }
 
@@ -162,10 +192,13 @@ public class Login {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 <<<<<<< HEAD
 =======
 >>>>>>> Changes: Add support for custom events in keyboard
+=======
+>>>>>>> master
         try{
             LPermissionController.getInstance().checkFailCounter();
             LPermissionController.getInstance().login(keyboard.getCodeField().getText());
@@ -178,6 +211,7 @@ public class Login {
         }
     }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 =======
@@ -271,5 +305,9 @@ public class Login {
     public void closeApplication(MouseEvent mouseEvent){
         LoginController.closeApplication();
 >>>>>>> Changes: Add support for custom events in keyboard
+=======
+    public void closeApplication(MouseEvent mouseEvent){
+        LoginController.closeApplication();
+>>>>>>> master
     }
 }

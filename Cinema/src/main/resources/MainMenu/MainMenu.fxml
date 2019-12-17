@@ -9,6 +9,7 @@
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 <VBox prefHeight="738.0" prefWidth="1136.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.MainMenu.MainMenu">
 =======
 <VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.MainMenu.MainMenu">
@@ -16,6 +17,9 @@
 =======
 <VBox prefHeight="738.0" prefWidth="1136.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.MainMenu.MainMenu">
 >>>>>>> Created buttons and methods
+=======
+<VBox prefHeight="738.0" prefWidth="1136.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.MainMenu.MainMenu">
+>>>>>>> master
     <children>
         <MenuBar VBox.vgrow="NEVER">
             <menus>
@@ -61,6 +65,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
                 <Button fx:id="movieModuleButton" layoutX="66.0" layoutY="56.0" mnemonicParsing="false" onMouseClicked="#openMovieModule" text="MovieModule" />
 =======
                 <Button fx:id="movieModuleButton" layoutX="66.0" layoutY="56.0" mnemonicParsing="false" onMouseClicked="#openMM" text="MovieModule" />
@@ -68,6 +73,9 @@
 =======
                 <Button fx:id="movieModuleButton" layoutX="66.0" layoutY="56.0" mnemonicParsing="false" onMouseClicked="#openMovieModule" text="MovieModule" />
 >>>>>>> implemented openMovieModule
+=======
+                <Button fx:id="movieModuleButton" layoutX="66.0" layoutY="56.0" mnemonicParsing="false" onMouseClicked="#openMovieModule" text="MovieModule" />
+>>>>>>> master
                 <Button fx:id="employeeModuleButton" layoutX="66.0" layoutY="110.0" mnemonicParsing="false" onMouseClicked="#openEmployeeModule" text="EmployeeModule" />
                 <Button fx:id="raportModuleButton" layoutX="242.0" layoutY="56.0" mnemonicParsing="false" onMouseClicked="#openRaportModule" text="RaportModule" />
                 <PasswordField fx:id="passwordField" layoutX="66.0" layoutY="400.0" promptText="Password" />
@@ -76,6 +84,7 @@
                 <Button fx:id="pCurrentUser" layoutX="178.0" layoutY="439.0" mnemonicParsing="false" onMouseClicked="#printCurrentUser" text="Print currentUser" />
             <Button fx:id="salesModuleButton" layoutX="242.0" layoutY="110.0" mnemonicParsing="false" onMouseClicked="#openSalesModule" text="SalesModule" />
             <Button fx:id="timetableModuleButton" layoutX="395.0" layoutY="56.0" mnemonicParsing="false" onMouseClicked="#openTimetableModule" text="TimeTableModule" />
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 =======
@@ -93,6 +102,9 @@
 >>>>>>> Created buttons and methods
 
 >>>>>>> Added nicer login/menu
+=======
+
+>>>>>>> master
             </children>
         </AnchorPane>
     </children>

@@ -71,7 +71,7 @@ public class TimetablePanel implements Initializable {
 
         for (TimeTable timeTable : TimeTableDAO.getAll()) {
             StringBuilder date = new StringBuilder();
-            date.append(timeTable.getPerformanceDate().getYear());
+            date.append(timeTable.getPerformanceDate().getYear() + 1900);
             date.append("-");
             date.append(timeTable.getPerformanceDate().getMonth());
             date.append("-");

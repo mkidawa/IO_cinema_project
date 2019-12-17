@@ -1,6 +1,7 @@
 package View.MainMenu;
 
 import Controller.LPermissionController;
+import Controller.StageManager;
 import Tools.PermissionChecker;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -66,6 +67,7 @@ public class MainMenu  {
         stage.setTitle("Movie panel");
         stage.setResizable(false);
         stage.show();
+        StageManager.mainStage=stage;
     }
 
 

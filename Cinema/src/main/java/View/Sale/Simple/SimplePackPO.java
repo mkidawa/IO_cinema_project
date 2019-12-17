@@ -17,6 +17,7 @@ public class SimplePackPO {
     private final SimpleStringProperty product;
     private final SimpleIntegerProperty amount;
     private SimpleDoubleProperty price;
+    private SimpleLongProperty productID;
 
     public SimplePackPO(long id, String product, int amount, Double price) {
         this.id = new SimpleLongProperty(id);
@@ -28,9 +29,10 @@ public class SimplePackPO {
     public long getId() {
         return id.get();
     }
-    public String getProductId() { return product.get(); }
+    public String getProductName() { return product.get(); }
     public int getAmount() { return amount.get(); }
     public double getPrice() { return price.get(); }
+    public long getProductID() {return productID.get();}
 
     public static ObservableList<SimplePackPO> getContentOfPack(int id){
         ObservableList<SimplePackPO> list = FXCollections.observableArrayList();
@@ -41,6 +43,7 @@ public class SimplePackPO {
                     ProductDAO.getNameById(packs.get(i).getProduct().getId()),
                     packs.get(i).getAmount().intValue(),
                     packs.get(i).getPrice().doubleValue()));
+                    packs.get(i).getProduct();
         }
         return list;
     }

@@ -1,5 +1,6 @@
 package View.MainMenu;
 
+import Controller.LPermissionController;
 import Tools.PermissionChecker;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -44,6 +45,7 @@ public class MainMenu  {
     public Button pPermission;
     public Button salesModuleButton;
     public Button timetableModuleButton;
+    public Button pCurrentUser;
 
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -106,10 +108,19 @@ public class MainMenu  {
         stage.show();
     }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> Added panel for mainMenu
 =======
 >>>>>>> Created buttons and methods
 =======
 >>>>>>> implemented openMovieModule
+=======
+
+    public void printCurrentUser(MouseEvent mouseEvent) {
+        PermissionChecker pc = new PermissionChecker();
+        System.out.println(pc.getPermissionsList());
+        System.out.println(pc.getCurrentUser().toString());
+    }
+>>>>>>> Fixed printing current User
 }

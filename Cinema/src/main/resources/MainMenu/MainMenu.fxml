@@ -73,7 +73,7 @@
                 <PasswordField fx:id="passwordField" layoutX="66.0" layoutY="400.0" promptText="Password" />
                 <TextField fx:id="logInTextField" layoutX="66.0" layoutY="361.0" promptText="Login" />
                 <Button fx:id="logInButton" layoutX="66.0" layoutY="439.0" mnemonicParsing="false" onMouseClicked="#logIn" text="Log In" />
-                <Button fx:id="pPermission" layoutX="178.0" layoutY="439.0" mnemonicParsing="false" onMouseClicked="#printPermission" text="Print Permission" />
+                <Button fx:id="pCurrentUser" layoutX="178.0" layoutY="439.0" mnemonicParsing="false" onMouseClicked="#printCurrentUser" text="Print currentUser" />
             <Button fx:id="salesModuleButton" layoutX="242.0" layoutY="110.0" mnemonicParsing="false" onMouseClicked="#openSalesModule" text="SalesModule" />
             <Button fx:id="timetableModuleButton" layoutX="395.0" layoutY="56.0" mnemonicParsing="false" onMouseClicked="#openTimetableModule" text="TimeTableModule" />
 <<<<<<< HEAD

@@ -216,4 +216,7 @@ public class LPermissionController {
     }
 
 
+    public User getCurrentUser() {
+        return currentUser;
+    }
 }

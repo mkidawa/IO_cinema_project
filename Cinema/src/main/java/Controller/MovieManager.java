@@ -37,5 +37,15 @@ public class MovieManager {
         return person;
     }
 
+    public static List<Movie> getAllMovies() {
+        return MovieDAO.getAll();
+    }
+
+    public static Movie getMovieById(long id) {
+        List<Movie> movies = MovieDAO.getAllById(id);
+        if(movies.isEmpty()) return null;
+        return movies.get(0);
+    }
+
 
 }

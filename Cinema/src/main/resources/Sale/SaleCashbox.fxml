@@ -12,31 +12,31 @@
     <children>
         <AnchorPane prefHeight="803.0" prefWidth="1282.0">
          <children>
-            <Button fx:id="goBack" layoutX="14.0" layoutY="15.0" mnemonicParsing="false" onMouseClicked="#goBack" prefHeight="27.0" prefWidth="142.0" text="Cofnij" />
+            <Button fx:id="goBack" layoutX="14.0" layoutY="15.0" mnemonicParsing="false" onMouseClicked="#goBack" prefHeight="27.0" prefWidth="142.0" text="Go Back" />
             <TableView fx:id="tableOfPack" layoutX="62.0" layoutY="67.0" onMouseClicked="#showPackContent" prefHeight="456.0" prefWidth="381.0">
                 <columns>
-                    <TableColumn fx:id="PackName" prefWidth="267.0" text="Nazwa">
+                    <TableColumn fx:id="PackName" prefWidth="267.0" text="Name">
                         <cellValueFactory><PropertyValueFactory property="name" /></cellValueFactory>
                     </TableColumn>
 
-                    <TableColumn fx:id="PackPrice" prefWidth="113.0" text="Cena">
+                    <TableColumn fx:id="PackPrice" prefWidth="113.0" text="Price">
                         <cellValueFactory><PropertyValueFactory property="price" /></cellValueFactory>
                     </TableColumn>
                 </columns>
             </TableView>
             <TableView fx:id="tableOfPackContent" layoutX="62.0" layoutY="545.0" prefHeight="226.0" prefWidth="381.0">
                 <columns>
-                    <TableColumn fx:id="PackPOProductID" prefWidth="215.0" text="Nazwa produktu">
+                    <TableColumn fx:id="PackPOProductID" prefWidth="215.0" text="Product Name">
                         <cellValueFactory>
                             <PropertyValueFactory property="productId" />
                         </cellValueFactory>
                     </TableColumn>
-                    <TableColumn fx:id="PackPOAmount" prefWidth="79.0" text="Ilość">
+                    <TableColumn fx:id="PackPOAmount" prefWidth="79.0" text="Amount">
                         <cellValueFactory>
                             <PropertyValueFactory property="amount" />
                         </cellValueFactory>
                     </TableColumn>
-                    <TableColumn fx:id="PackPOPrice" prefWidth="86.0" text="Cena">
+                    <TableColumn fx:id="PackPOPrice" prefWidth="86.0" text="Price">
                         <cellValueFactory>
                             <PropertyValueFactory property="price" />
                         </cellValueFactory>
@@ -45,17 +45,17 @@
             </TableView>
             <TableView fx:id="tableOfOrderContent" layoutX="616.0" layoutY="67.0" prefHeight="619.0" prefWidth="402.0">
                 <columns>
-                    <TableColumn fx:id="OrderName" prefWidth="215.0" text="Nazwa produktu">
+                    <TableColumn fx:id="OrderName" prefWidth="215.0" text="Product Name">
                         <cellValueFactory>
                             <PropertyValueFactory property="packName" />
                         </cellValueFactory>
                     </TableColumn>
-                    <TableColumn fx:id="OrderAmount" prefWidth="79.0" text="Ilość">
+                    <TableColumn fx:id="OrderAmount" prefWidth="79.0" text="Amount">
                         <cellValueFactory>
                             <PropertyValueFactory property="amount" />
                         </cellValueFactory>
                     </TableColumn>
-                    <TableColumn fx:id="OrderPrice" prefWidth="86.0" text="Cena">
+                    <TableColumn fx:id="OrderPrice" prefWidth="86.0" text="Price">
                         <cellValueFactory>
                             <PropertyValueFactory property="price" />
                         </cellValueFactory>
@@ -65,8 +65,8 @@
             <Button fx:id="addPackToOrder" layoutX="472.0" layoutY="238.0" mnemonicParsing="false" onKeyPressed="#addPackToOrder" prefHeight="27.0" prefWidth="116.0" text="----&gt;" />
             <Button fx:id="removePackFromOrder" layoutX="472.0" layoutY="308.0" mnemonicParsing="false" onMouseClicked="#removePackFromOrder" prefHeight="27.0" prefWidth="116.0" text="&lt;----" />
             <Label layoutX="616.0" layoutY="686.0" prefHeight="27.0" prefWidth="402.0" />
-            <Button layoutX="616.0" layoutY="733.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="127.0" text="Usuń zamówienie" />
-            <Button layoutX="891.0" layoutY="733.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="127.0" text="Złóż zamówienie" />
+            <Button layoutX="616.0" layoutY="733.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="127.0" text="Cancel Order" />
+            <Button layoutX="891.0" layoutY="733.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="127.0" text="Confirm Order" />
          </children>
         </AnchorPane>
     </children>

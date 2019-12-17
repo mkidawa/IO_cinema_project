@@ -15,7 +15,7 @@ ENV ACCEPT_EULA=Y
 EXPOSE 1433
 
 # run initial scripts
-RUN ( /opt/mssql/bin/sqlservr --accept-eula & ) | grep -q "Service Broker manager has started" \
+RUN ( /opt/mssql/bin/sqlservr -t272 --accept-eula & ) | grep -q "Service Broker manager has started" \
     && /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P 'Admin123' -i /opt/mssql-scripts/setup.sql \
     && /opt/mssql-scripts/launch_inserts.sh \
     && pkill sqlservr 

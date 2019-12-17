@@ -1,16 +1,16 @@
 package DBO;
 
+import Model.User;
 import Tools.BaseDB;
 import Tools.Filter;
 import lombok.var;
-import Model.User;
 import java.util.List;
 
 public class UserDAO {
-    public static List getAll() {
+    public static List<User> getAll() {
         var so = BaseDB.openConnection();
         so.beginTransaction();
-        List result = so.createQuery("from User").list();
+        List<User> result = so.createQuery("from User").list();
         so.getTransaction().commit();
         so.close();
         return result;

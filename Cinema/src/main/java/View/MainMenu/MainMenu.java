@@ -1,5 +1,6 @@
 package View.MainMenu;
 
+import Controller.LPermissionController;
 import Tools.PermissionChecker;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -30,6 +31,7 @@ public class MainMenu  {
     public Button pPermission;
     public Button salesModuleButton;
     public Button timetableModuleButton;
+    public Button pCurrentUser;
 
 
     public void logIn(MouseEvent mouseEvent) {
@@ -61,5 +63,11 @@ public class MainMenu  {
         stage.setTitle("Movie panel");
         stage.setResizable(false);
         stage.show();
+    }
+
+    public void printCurrentUser(MouseEvent mouseEvent) {
+        PermissionChecker pc = new PermissionChecker();
+        System.out.println(pc.getPermissionsList());
+        System.out.println(pc.getCurrentUser().toString());
     }
 }

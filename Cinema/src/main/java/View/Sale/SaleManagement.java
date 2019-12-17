@@ -172,12 +172,19 @@ public class SaleManagement {
                 if(result3.isPresent()){
                     int amount = Integer.valueOf(result3.get());
                     ProductDAO.insert(new Product(name, price, amount));
+                    PackDAO.insert(new Pack(name, price));
+
+                    packs = getListOfPack();
+                    tableOfPack.setItems(packs);
                     products = SimpleProduct.getListOfProduct();
                     tableOfProducts.setItems(products);
+
+                    var x = PackDAO.getAllByID(packs.get(packs.size()-1).getId()).get(0);
+                    var y = ProductDAO.getAllByID(products.get(products.size()-1).getId()).get(0);
+
+                    PackPoDAO.insert(new PackPO((Pack) x,(Product) y, new BigDecimal(1)));
                 }
             }
-            packs = getListOfPack();
-            tableOfPack.setItems(packs);
         }
     }
 

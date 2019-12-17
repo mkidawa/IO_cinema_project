@@ -157,17 +157,63 @@ public class SaleCashbox {
     }
 //
     public void removePackFromOrder(){
-//        int selectedProduct = tableOfPackContent.getSelectionModel().selectedIndexProperty().get();
-//        long productId = packContentList.get(selectedProduct).getId();
-//
-//        int selectedPack = tableOfPack.getSelectionModel().selectedIndexProperty().get();
-//        long packId = packs.get(selectedPack).getId();
-//
-//        PackPoDAO.removeById(productId);
-//
-//        packContentList = SimplePackPO.getContentOfPack((int) packId);
-//        tableOfPackContent.setItems(packContentList);
-//        tableOfPackContent.refresh();
+        int selectedPack = tableOfPack.getSelectionModel().selectedIndexProperty().get();
+        SimplePack simplePack = packs.get(selectedPack);
+
+        TextInputDialog d1 = new TextInputDialog();
+        d1.setTitle("How many packs do you wanna add?");
+        d1.setContentText("Enter amount");
+        Optional<String> result = d1.showAndWait();
+        if (result.isPresent()) {
+            String amount = result.get();
+            int keyIndex = 0;
+            boolean enoughInMagazine = true;
+            boolean keyExists = false;
+
+            for (int i = 0; i < packContentList.size(); i++) {
+                keyExists = false;
+                for (int j = 0; j < amountPairs.size(); j++) {
+                    if (amountPairs.get(j).getKey() == packContentList.get(i).getId()) {
+                        keyIndex = j;
+                        keyExists = true;
+                        break;
+                    }
+                }
+                if (!keyExists) {
+                    if (PackPoDAO.checkAmount(packContentList.get(i).getId(), packContentList.get(i).getAmount() * Integer.valueOf(amount), 0)) {
+
+                        amountPairs.add(new Pair<>(packContentList.get(i).getId(),
+                                packContentList.get(i).getAmount() * Integer.valueOf(amount)));
+                    } else {
+                        Alert alert = new Alert(Alert.AlertType.ERROR, "There is not enough " + simplePack.getName() + " in magazine!", ButtonType.CLOSE);
+                        alert.showAndWait();
+                        enoughInMagazine = false;
+                        break;
+                    }
+                } else {
+                    if (PackPoDAO.checkAmount(packContentList.get(i).getId(), packContentList.get(i).getAmount() * Integer.valueOf(amount), amountPairs.get(keyIndex).getValue())) {
+
+                        int newAmount = amountPairs.get(keyIndex).getValue() +
+                                (Integer.valueOf(amount) * packContentList.get(i).getAmount());
+                        amountPairs.set(keyIndex, new Pair<>(amountPairs.get(keyIndex).getKey(), newAmount));
+
+                    } else {
+                        Alert alert = new Alert(Alert.AlertType.ERROR, "There is not enough " + simplePack.getName() + " in magazine!", ButtonType.CLOSE);
+                        alert.showAndWait();
+                        enoughInMagazine = false;
+                        break;
+                    }
+                }
+            }
+            if(enoughInMagazine) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION, "FUCKIN SUCEEDED", ButtonType.CLOSE);
+                alert.showAndWait();
+
+                orderContent.add(new SimpleSale(simplePack.getName(), Integer.valueOf(amount), simplePack.price.multiply(Integer.valueOf(amount)).doubleValue()));
+                tableOfOrderContent.setItems(orderContent);
+                tableOfOrderContent.refresh();
+            }
+        }
     }
 
 

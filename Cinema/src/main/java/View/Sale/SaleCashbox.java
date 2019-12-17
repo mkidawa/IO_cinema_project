@@ -113,7 +113,9 @@ public class SaleCashbox {
 
             for (int i = 0; i < packContentList.size(); i++) {
                 keyExists = false;
-                amountOfProductsInPack.add(new Pair<>(packContentList.get(i).getId(), packContentList.get(i).getAmount()));
+                amountOfProductsInPack.add(new Pair<>(Long.valueOf(packContentList.get(i).getProductId()),
+                        packContentList.get(i).getAmount()));
+
                 for (int j = 0; j < amountPairs.size(); j++) {
                     if (amountPairs.get(j).getKey() == packContentList.get(i).getId()) {
                         keyIndex = j;

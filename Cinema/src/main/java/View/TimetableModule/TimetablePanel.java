@@ -1,8 +1,7 @@
 package View.TimetableModule;
 
-import DBO.TimeTableDAO;
 import Controller.TimeTableController;
-import Model.Performance;
+import DBO.TimeTableDAO;
 import Model.TimeTable;
 import View.TimetableModule.Util.FxmlStageSetup;
 import View.TimetableModule.Util.PopOutWindow;
@@ -21,7 +20,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 
 import java.net.URL;
-import java.util.Date;
 import java.util.ResourceBundle;
 
 import static View.TimetableModule.Util.Constants.PERFORMANCE_CREATOR;
@@ -71,23 +69,23 @@ public class TimetablePanel implements Initializable {
 
         for (TimeTable timeTable : TimeTableDAO.getAll()) {
             StringBuilder date = new StringBuilder();
-            date.append(timeTable.getPerformanceDate().getYear() + 1900);
+            date.append(timeTable.getPerformanceDate().toLocalDateTime().toLocalDate().getYear());
             date.append("-");
-            date.append(timeTable.getPerformanceDate().getMonth());
+            date.append(timeTable.getPerformanceDate().toLocalDateTime().toLocalDate().getMonthValue());
             date.append("-");
-            date.append(timeTable.getPerformanceDate().getDay());
+            date.append(timeTable.getPerformanceDate().toLocalDateTime().toLocalDate().getDayOfMonth());
             StringBuilder time = new StringBuilder();
             time.append(timeTable.getPerformanceDate().getHours());
             time.append(":");
             time.append(timeTable.getPerformanceDate().getMinutes());
             list.add(new SimplePerformance(
-                        timeTable.getId(),
-                        timeTable.getPerformance().getMovie().getId(),
-                        timeTable.getPerformance().getHall().getId(),
-                        timeTable.getPerformance().getMovie().getTitle(),
-                        date.toString(),
-                        time.toString()
-                    ));
+                    timeTable.getId(),
+                    timeTable.getPerformance().getMovie().getId(),
+                    timeTable.getPerformance().getHall().getId(),
+                    timeTable.getPerformance().getMovie().getTitle(),
+                    date.toString(),
+                    time.toString()
+            ));
         }
 
         return list;

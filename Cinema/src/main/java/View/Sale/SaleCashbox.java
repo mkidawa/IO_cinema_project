@@ -1,5 +1,6 @@
 package View.Sale;
 
+import Model.SalePO;
 import View.Sale.Simple.SimplePack;
 import View.Sale.Simple.SimplePackPO;
 import View.Sale.Simple.SimpleSale;
@@ -39,6 +40,7 @@ public class SaleCashbox {
     private ObservableList<SimplePack> packs;
     private ObservableList<SimplePackPO> packContentList = observableArrayList();
     private ObservableList<SimpleSale> orderContent = observableArrayList();
+
 
     Stage primaryStage;
 

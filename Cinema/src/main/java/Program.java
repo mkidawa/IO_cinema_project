@@ -1,3 +1,4 @@
+import Tools.BaseDB;
 import View.Sale.SaleMenu;
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -18,6 +19,7 @@ public class Program extends Application {
 
     public static void main(String[] args) {
         //TODO Main program file. System starts here
+        BaseDB.setUp();
         launch(args);
 //        BaseDB.openConnection();
 

@@ -26,7 +26,7 @@ public class Sale {
     @Setter
     private long userId;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "SaleHId", referencedColumnName = "Id")
     @Getter
     @Setter
@@ -49,6 +49,12 @@ public class Sale {
         }
         price = temp.setScale(2, RoundingMode.HALF_UP);
         obj.setSale(this);
+    }
+
+    public Sale(long userId, Timestamp saleDate, BigDecimal price) {
+        this.userId = userId;
+        this.saleDate = saleDate;
+        this.price = price;
     }
 
     public Sale() {

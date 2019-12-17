@@ -1,9 +1,7 @@
 package Model;
 
-import com.sun.istack.NotNull;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.NotFound;
 
 import javax.persistence.*;
 import java.math.BigDecimal;

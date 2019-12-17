@@ -1,9 +1,6 @@
 package View.Components;
 
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleObjectProperty;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -12,7 +9,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 
 import java.io.IOException;
@@ -36,12 +32,6 @@ public class ButtonWithImage extends StackPane implements Initializable {
             fxmlLoader.setController(this);
             Node n = fxmlLoader.load();
             this.getChildren().add(n);
-            this.setOnMouseClicked(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent mouseEvent) {
-                    onCustomClickProperty().get().handle(mouseEvent);
-                }
-            });
         } catch (IOException exception) {
             throw new RuntimeException(exception);
         }
@@ -60,20 +50,5 @@ public class ButtonWithImage extends StackPane implements Initializable {
     public void setText(String text) {
         buttonText.setText(text);
     }
-
-    private ObjectProperty<EventHandler<MouseEvent>> propertyOnCustomClick = new SimpleObjectProperty<EventHandler<MouseEvent>>();
-
-    public final ObjectProperty<EventHandler<MouseEvent>> onCustomClickProperty() {
-        return propertyOnCustomClick;
-    }
-
-    public final void setOnCustomClick(EventHandler<MouseEvent> handler) {
-        propertyOnCustomClick.set(handler);
-    }
-
-    public final EventHandler<MouseEvent> getOnCustomClick() {
-        return propertyOnCustomClick.get();
-    }
-
 
 }

@@ -10,11 +10,11 @@
            prefWidth="1024.0" prefHeight="786.0" stylesheets="@../Style.css" styleClass="bodyClass">
     <children>
         <HBox>
-            <VBox alignment="BOTTOM_LEFT" styleClass="loginButtons" onMouseClicked="#closeApplication">
+            <VBox alignment="BOTTOM_LEFT" styleClass="loginButtons">
                 <ButtonWithImage fx:id="closeBtn"/>
             </VBox>
         </HBox>
 
-        <NumericKeyboard fx:id="keyboard" alignment="BOTTOM_RIGHT"/>
+        <NumericKeyboard fx:id="keyboard" alignment="BOTTOM_RIGHT" />
     </children>
 </StackPane>

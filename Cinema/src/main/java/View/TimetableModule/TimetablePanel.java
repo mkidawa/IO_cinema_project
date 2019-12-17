@@ -153,6 +153,7 @@ public class TimetablePanel implements Initializable {
 
     @FXML
     private void onClickAddPerformance(MouseEvent mouseEvent) {
+        TimeTableController.getInstance().setIsEditable(false);
         FxmlStageSetup.loadFxmlStage(PERFORMANCE_CREATOR_PATH,
                 PERFORMANCE_CREATOR_STYLE_PATH, PERFORMANCE_CREATOR);
     }

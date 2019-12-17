@@ -51,7 +51,7 @@ public class TimeTable {
 
     public TimeTable() {}
 
-    public TimeTable(Performance performance, Timestamp performanceDate) throws TimeTableCreationException{
+    public TimeTable(Performance performance, Timestamp performanceDate, long id) throws TimeTableCreationException{
         /* prepare related performance begin and end timestamps */
         Calendar myBegin = Calendar.getInstance();
         myBegin.setTime(performanceDate);
@@ -83,6 +83,14 @@ public class TimeTable {
         }
         this.performance = performance;
         this.performanceDate = performanceDate;
+
+        if(id > 0){
+            this.Id = id;
+        }
+    }
+
+    public TimeTable(Performance performance, Timestamp performanceDate) throws TimeTableCreationException{
+        this(performance, performanceDate, 0);
     }
 
     public static void setAdsDuration(Integer value) throws AdsDurationOutOfRangeException {

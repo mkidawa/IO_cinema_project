@@ -33,7 +33,13 @@ public class TimeTableController {
     public void addPerformanceToTimeTable(String title, long hallId, String performanceType, Timestamp performanceDate) throws TimeTableCreationException{
         Performance performance = new Performance(title, hallId, performanceType);
         TimeTable timetable = new TimeTable(performance, performanceDate);
-        TimeTableDAO.insertUpdate(timetable);
+        TimeTableDAO.add(timetable);
+    }
+
+    public void modifyTimeTable(String title, long hallId, String performanceType, Timestamp performanceDate) throws TimeTableCreationException{
+        Performance performance = new Performance(title, hallId, performanceType, currentTimeTable.getPerformance().getId());
+        TimeTable timetable = new TimeTable(performance, performanceDate, currentTimeTable.getId());
+        TimeTableDAO.merge(timetable);
     }
 
     public void deleteTimeTable(TimeTable timeTable){

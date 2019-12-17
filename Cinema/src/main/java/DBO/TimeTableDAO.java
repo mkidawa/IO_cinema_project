@@ -38,13 +38,23 @@ public class TimeTableDAO {
         s.beginTransaction();
         TimeTable timeTable = s.get(TimeTable.class, id);
         s.getTransaction().commit();
+
         return timeTable;
     }
 
-    public static void insertUpdate(TimeTable object) {
+
+    public static void merge(TimeTable timeTable){
         Session so = BaseDB.openConnection();
         so.beginTransaction();
-        so.saveOrUpdate(object);
+        so.merge(timeTable);
+        so.getTransaction().commit();
+        so.close();
+    }
+
+    public static void add(TimeTable object) {
+        Session so = BaseDB.openConnection();
+        so.beginTransaction();
+        so.save(object);
         so.getTransaction().commit();
         so.close();
     }
@@ -53,6 +63,7 @@ public class TimeTableDAO {
         Session so = BaseDB.openConnection();
         so.beginTransaction();
         so.delete(timeTable);
+        so.getTransaction().commit();
         so.close();
     }
 

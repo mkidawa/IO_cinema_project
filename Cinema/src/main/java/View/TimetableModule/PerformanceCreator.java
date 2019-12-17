@@ -123,14 +123,15 @@ public class PerformanceCreator implements Initializable {
 
             comboBoxTitle.getSelectionModel().select(currentTimeTable.getPerformance().getMovie().getTitle());
             comboBoxHallNumber.getSelectionModel().select(currentTimeTable.getPerformance().getHall().getId());
-            fxmlUtilControls.setRadioButton(currentTimeTable.getPerformance().getMovie().getFlg2D(), flg2D);
-            fxmlUtilControls.setRadioButton(currentTimeTable.getPerformance().getMovie().getFlg3D(), flg3D);
-            fxmlUtilControls.setRadioButton(currentTimeTable.getPerformance().getMovie().getFlgVR(), flgVR);
+            if(currentTimeTable.getPerformance().getPerformanceType().equals("2D"))
+                fxmlUtilControls.setRadioButton((short)1, flg2D);
+            else if(currentTimeTable.getPerformance().getPerformanceType().equals("3D"))
+                fxmlUtilControls.setRadioButton((short)1, flg3D);
+            else
+                fxmlUtilControls.setRadioButton((short)1, flgVR);
             performanceDatePicker.setValue(currentTimeTable.getPerformanceDate().toLocalDateTime().toLocalDate());
             fxmlUtilControls.setSpinnerValue(spinnerHour, currentTimeTable.getPerformanceDate().getHours());
             fxmlUtilControls.setSpinnerValue(spinnerMinute, currentTimeTable.getPerformanceDate().getMinutes());
-
-            controller.setIsEditable(false);
         }
     }
 
@@ -158,12 +159,22 @@ public class PerformanceCreator implements Initializable {
                     performanceType = "3D";
                 else
                     performanceType = "VR";
-                controller.addPerformanceToTimeTable(
-                        titleValue,
-                        hallIdValue,
-                        performanceType,
-                        Timestamp.valueOf(performanceDate)
-                );
+
+                if(controller.getIsEditable()){
+                    controller.modifyTimeTable(
+                            titleValue,
+                            hallIdValue,
+                            performanceType,
+                            Timestamp.valueOf(performanceDate)
+                    );
+                }else{
+                    controller.addPerformanceToTimeTable(
+                            titleValue,
+                            hallIdValue,
+                            performanceType,
+                            Timestamp.valueOf(performanceDate)
+                    );
+                }
 
                 FxmlStageSetup.reloadStage(confirmButton, TIMETABLE_PANEL_PATH,
                         TIMETABLE_PANEL_STYLE_PATH, TIMETABLE_PANEL);

@@ -11,7 +11,7 @@ RUN chmod +x  /opt/mssql-scripts/launch_inserts.sh
 # set environment variables
 ENV MSSQL_SA_PASSWORD=Admin123
 ENV ACCEPT_EULA=Y
-
+# expose port
 EXPOSE 1433
 
 # run initial scripts

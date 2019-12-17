@@ -56,4 +56,15 @@ public class ProductDAO {
         so.close();
         return result;
     }
+
+    public static List getAmountById(long Id){
+        var so = BaseDB.openConnection();
+        so.beginTransaction();
+        List result = so.createSQLQuery("Select amount from Product where Id = " + String.valueOf(Id)).list();
+        so.getTransaction().commit();
+        so.close();
+        return result;
+    }
+
+
 }

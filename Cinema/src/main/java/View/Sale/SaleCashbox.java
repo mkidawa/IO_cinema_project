@@ -1,23 +1,30 @@
 package View.Sale;
 
-import Model.SalePO;
+import DBO.PackPoDAO;
 import View.Sale.Simple.SimplePack;
 import View.Sale.Simple.SimplePackPO;
 import View.Sale.Simple.SimpleSale;
-
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import javafx.util.Pair;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.var;
 
 import java.awt.*;
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 import static javafx.collections.FXCollections.observableArrayList;
 
@@ -33,7 +40,6 @@ public class SaleCashbox {
     @FXML
     private TableView<SimplePackPO> tableOfPackContent = new TableView<>();
 
-
     @FXML
     private TableView<SimpleSale> tableOfOrderContent = new TableView<>();
 
@@ -41,8 +47,23 @@ public class SaleCashbox {
     private ObservableList<SimplePackPO> packContentList = observableArrayList();
     private ObservableList<SimpleSale> orderContent = observableArrayList();
 
+    List<Pair<Long, Integer>> amountPairs = new ArrayList<>();
+
+    public class PackEssential{
+        public long id;
+        public int amount;
+        public BigDecimal price;
+
+        public PackEssential(long id, int amount, BigDecimal price) {
+            this.id = id;
+            this.amount = amount;
+            this.price = price;
+        }
+    }
+
 
     Stage primaryStage;
+    List<PackEssential> listOfOrder = new ArrayList<>();
 
     public SaleCashbox(Stage primary) throws IOException {
 
@@ -74,6 +95,78 @@ public class SaleCashbox {
         primaryStage.setScene(new SaleMenu(primaryStage).getScene());
         primaryStage.show();
     }
+
+    public void addPackToOrder(){
+        int selectedPack = tableOfPack.getSelectionModel().selectedIndexProperty().get();
+        SimplePack simplePack = packs.get(selectedPack);
+
+        TextInputDialog d1 = new TextInputDialog();
+        d1.setTitle("How many packs do you wanna add?");
+        d1.setContentText("Enter amount");
+        Optional<String> result = d1.showAndWait();
+        if (result.isPresent()) {
+            String amount = result.get();
+            boolean flag = true;
+
+            for (int i = 0; i < packContentList.size(); i++) {
+                for (int j = 0; j < amountPairs.size(); j++) {
+                    if (amountPairs.get(j).getKey() != packContentList.get(i).getId()) {
+
+                        if (PackPoDAO.checkAmount(packContentList.get(i).getId(), packContentList.get(i).getAmount() * Integer.valueOf(amount), 0)) {
+
+                            amountPairs.add(new Pair<>(packContentList.get(i).getId(),
+                                    packContentList.get(i).getAmount() * Integer.valueOf(amount)));
+                        } else {
+                            Alert alert = new Alert(Alert.AlertType.ERROR, "There is not enough " + simplePack.getName() + " in magazine!", ButtonType.CLOSE);
+                            alert.showAndWait();
+                            flag = false;
+                            break;
+                        }
+                    } else {
+                        if (PackPoDAO.checkAmount(packContentList.get(i).getId(), packContentList.get(i).getAmount() * Integer.valueOf(amount), amountPairs.get(j).getValue())) {
+
+                            int newAmount = amountPairs.get(j).getValue() +
+                                    (Integer.valueOf(amount) * packContentList.get(i).getAmount());
+                            amountPairs.set(j, new Pair<>(amountPairs.get(j).getKey(), newAmount));
+
+                        } else {
+                            Alert alert = new Alert(Alert.AlertType.ERROR, "There is not enough " + simplePack.getName() + " in magazine!", ButtonType.CLOSE);
+                            alert.showAndWait();
+                            flag = false;
+                            break;
+                        }
+                    }
+                }
+                if(!flag){
+                    break;
+                }
+            }
+            if(flag) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION, "FUCKIN SUCEEDED", ButtonType.CLOSE);
+                alert.showAndWait();
+
+                orderContent.add(new SimpleSale(simplePack.getName(), Integer.valueOf(amount), simplePack.price.multiply(Integer.valueOf(amount)).doubleValue()));
+                tableOfOrderContent.setItems(orderContent);
+                tableOfOrderContent.refresh();
+
+            }
+        }
+    }
+//
+    public void removePackFromOrder(){
+//        int selectedProduct = tableOfPackContent.getSelectionModel().selectedIndexProperty().get();
+//        long productId = packContentList.get(selectedProduct).getId();
+//
+//        int selectedPack = tableOfPack.getSelectionModel().selectedIndexProperty().get();
+//        long packId = packs.get(selectedPack).getId();
+//
+//        PackPoDAO.removeById(productId);
+//
+//        packContentList = SimplePackPO.getContentOfPack((int) packId);
+//        tableOfPackContent.setItems(packContentList);
+//        tableOfPackContent.refresh();
+    }
+
 
 
 }

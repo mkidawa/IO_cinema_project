@@ -4,20 +4,9 @@ import DBO.UserDAO;
 import Model.DICT.Permissions;
 import Model.User;
 import Tools.Filter;
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 import Tools.LoginException;
-import View.MainMenu.Login;
-=======
-import com.sun.javaws.exceptions.UnsignedAccessViolationException;
->>>>>>> Impl FailCounter
-=======
->>>>>>> Zalozono limit na ilosc logowan
-=======
-import Tools.LoginException;
-import View.MainMenu.Login;
->>>>>>> Changed Errors for LoginException
+
 
 import java.util.Collections;
 import java.util.List;
@@ -43,17 +32,7 @@ public class LPermissionController {
     public Integer getFailCounter() {
         return failCounter;
     }
-
-<<<<<<< HEAD
-<<<<<<< HEAD
     private Integer failCounter = 0;
-=======
-    private Integer failCounter;
->>>>>>> Impl FailCounter
-=======
-    private Integer failCounter = 0;
->>>>>>> Zalozono limit na ilosc logowan
-
     public static LPermissionController getInstance() {
         if (ourInstance == null) {
             ourInstance = new LPermissionController();
@@ -74,26 +53,9 @@ public class LPermissionController {
         List result = UserDAO.execSQL(sql);
         if (result.size() == 0) {
             System.err.println("Brak uzytkownika w bazie");
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
             failCounter++;
             throw new LoginException("Brak uzytkownika w bazie");
-//            return false;
-=======
-            return false;
->>>>>>> Error sout returns serr
-=======
-=======
-            failCounter++;
-<<<<<<< HEAD
->>>>>>> Impl FailCounter
-            throw new Error("Brak uzytkownika w bazie");
-=======
-            throw new LoginException("Brak uzytkownika w bazie");
->>>>>>> Changed Errors for LoginException
-//            return false;
->>>>>>> throws instead of return false
+
         } else if (result.size() == 1 && result.get(0).toString().equals(login)) {
             System.out.println("Znalazlem login: " + login);
             return true;
@@ -101,10 +63,6 @@ public class LPermissionController {
         return false;
     }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> Impl FailCounter
     private boolean checkPassword(String login, String password) {
         String sql = "from User U WHERE U.login='" + login +
                 "'";
@@ -114,25 +72,15 @@ public class LPermissionController {
             System.out.println("Prawidlowe Haslo");
             return true;
         }
-        System.err.println("Haslo nie prawidlowe");
-        failCounter++;
-<<<<<<< HEAD
-<<<<<<< HEAD
-        throw new LoginException("Haslo nie prawidlowe");
+        else {
+            System.err.println("Haslo nie prawidlowe");
+            failCounter++;
+            throw new LoginException("Haslo nie prawidlowe");
 //        return false;
+        }
     }
 
-=======
->>>>>>> Added nicer login/menu
-=======
-        throw new Error("Haslo nie prawidlowe");
-=======
-        throw new LoginException("Haslo nie prawidlowe");
->>>>>>> Changed Errors for LoginException
-//        return false;
-    }
 
->>>>>>> Impl FailCounter
 
     /**
      * Autoryzacja uzytkownika w systemie
@@ -148,22 +96,11 @@ public class LPermissionController {
                 return true;
             }
         }
-<<<<<<< HEAD
-<<<<<<< HEAD
         throw new LoginException("Logowanie nie powiodło się");
-=======
-        throw new Error("Logowanie nie powiodło się");
->>>>>>> throws instead of return false
-=======
-        throw new LoginException("Logowanie nie powiodło się");
->>>>>>> Changed Errors for LoginException
-//        return false;
     }
     private boolean checkLoginCode(String code) {
 //
         String sql = "SELECT U.login from User U WHERE U.codeHash='" + code +
-<<<<<<< HEAD
-=======
                 "'";
         List result = UserDAO.execSQL(sql);
         if (result.size() == 0) {
@@ -178,6 +115,7 @@ public class LPermissionController {
         }
         return false;
     }
+
     private boolean checkCode(String code){
         String sql = "from User U WHERE U.codeHash='" + code + "'";
         User result = (User) UserDAO.execSQL(sql).get(0);
@@ -204,65 +142,6 @@ public class LPermissionController {
 //        return false;
 
     }
-
-<<<<<<< HEAD
-    private boolean checkPassword(String login, String password) {
-        String sql = "from User U WHERE U.login='" + login +
->>>>>>> Added nicer login/menu
-                "'";
-        List result = UserDAO.execSQL(sql);
-        if (result.size() == 0) {
-            System.err.println("Bledny Kod");
-            failCounter++;
-            throw new LoginException("Bledny kod");
-//            return false;
-        } else if (result.size() == 1) {
-            System.out.println(result.toString());
-            System.out.println("Znalazlem login: " + result.get(0));
-            return true;
-        }
-        return false;
-    }
-    private boolean checkCode(String code){
-        String sql = "from User U WHERE U.codeHash='" + code + "'";
-        User result = (User) UserDAO.execSQL(sql).get(0);
-        if (result.getCodeHash().equals(code)) {
-            currentUser = result;
-            System.out.println("Prawidlowe Kod");
-            return true;
-        }
-<<<<<<< HEAD
-        System.err.println("Kod nie jest prawidlowy");
-        failCounter++;
-        throw new LoginException("Kod nie jest prawidlowy");
-
-=======
-        System.err.println("Haslo nie prawidlowe");
-<<<<<<< HEAD
-        return false;
->>>>>>> Error sout returns serr
-=======
-        throw new Error("Haslo nie prawidlowe");
-//        return false;
->>>>>>> throws instead of return false
-    }
-
-        public boolean login(String code){
-        if(checkLoginCode(code)){
-            if(checkCode(code)){
-                currentUser.setPasswordHash("");
-                failCounter=0;
-                return true;
-            }
-        }
-        throw new LoginException("Logowanie nie powiodło się");
-//        return false;
-
-    }
-=======
-
->>>>>>> Impl FailCounter
-
 
 
     /**

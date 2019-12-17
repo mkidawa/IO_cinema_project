@@ -1,23 +1,19 @@
 package View.MainMenu;
 
 import Controller.LPermissionController;
+import Controller.StageManager;
 import Tools.PermissionChecker;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-<<<<<<< HEAD
-<<<<<<< HEAD
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-=======
->>>>>>> Added panel for mainMenu
-=======
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
->>>>>>> Created buttons and methods
+
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -31,11 +27,6 @@ import java.io.IOException;
 
 public class MainMenu  {
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> Created buttons and methods
     public Button movieModuleButton;
     public Button employeeModuleButton;
     public Button raportModuleButton;
@@ -47,28 +38,6 @@ public class MainMenu  {
     public Button timetableModuleButton;
     public Button pCurrentUser;
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-    public void openMM(MouseEvent mouseEvent) {
-=======
-=======
->>>>>>> Created buttons and methods
-    public void openMM(MouseEvent mouseEvent) throws IOException {
-        Parent fxmlLoader = FXMLLoader.load(getClass().getResource("/MovieModule/MoviePanel/mainMovie.fxml"));
-        Stage stage = new Stage();
-        Scene scene = new Scene(fxmlLoader);
-        scene.getStylesheets().add(getClass().getResource("/MovieModule/MoviePanel/mainMovie.css").toExternalForm());
-        stage.setScene(scene);
-        stage.setTitle("Movie panel");
-        stage.setResizable(false);
-        stage.show();
->>>>>>> Added nicer login/menu
-    }
->>>>>>> Added panel for mainMenu
-=======
->>>>>>> implemented openMovieModule
-
     public void logIn(MouseEvent mouseEvent) {
     }
 
@@ -76,10 +45,6 @@ public class MainMenu  {
         PermissionChecker pc = new PermissionChecker();
         System.out.println(pc.getPermissionsList());
     }
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> Created buttons and methods
 
     public void openTimetableModule(MouseEvent mouseEvent) {
     }
@@ -92,10 +57,6 @@ public class MainMenu  {
 
     public void openEmployeeModule(MouseEvent mouseEvent) {
     }
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> implemented openMovieModule
 
     public void openMovieModule(MouseEvent mouseEvent) throws IOException {
         Parent fxmlLoader = FXMLLoader.load(getClass().getResource("/MovieModule/MoviePanel/mainMovie.fxml"));
@@ -106,21 +67,13 @@ public class MainMenu  {
         stage.setTitle("Movie panel");
         stage.setResizable(false);
         stage.show();
+        StageManager.mainStage=stage;
     }
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> Added panel for mainMenu
-=======
->>>>>>> Created buttons and methods
-=======
->>>>>>> implemented openMovieModule
-=======
+
 
     public void printCurrentUser(MouseEvent mouseEvent) {
         PermissionChecker pc = new PermissionChecker();
         System.out.println(pc.getPermissionsList());
         System.out.println(pc.getCurrentUser().toString());
     }
->>>>>>> Fixed printing current User
 }

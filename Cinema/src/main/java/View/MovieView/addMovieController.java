@@ -267,7 +267,6 @@ public class addMovieController implements Initializable {
             involved.add(newPerson);
         }
         //creating a new Movie
-<<<<<<< HEAD
         if (!updating) {
             MovieManager.createMovie(flag2d, flag3d, flagVR, selectedGenre, selectedState, Title.getText(), Description.getText(), d, involved);
             closeAllStagesAndLoadNewMainStage();
@@ -297,11 +296,6 @@ public class addMovieController implements Initializable {
             MovieManager.workingPersons.clear();
             MovieManager.currentMovie = null;
         }
-=======
-        MovieManager.createMovie(flag2d, flag3d, flagVR, selectedGenre, selectedState, Title.getText(), Description.getText(), d, involved);
-        closeAllStagesAndLoadNewMainStage();
-        MovieManager.workingPersons.clear();
->>>>>>> adding movie gui fixes
     }
 
     public void onClickAddPerson() throws IOException {

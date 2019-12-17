@@ -63,7 +63,14 @@ public class MainMenu  {
         stage.show();
     }
 
-    public void openEmployeeModule(MouseEvent mouseEvent) {
+    public void openEmployeeModule(MouseEvent mouseEvent) throws IOException {
+        Parent fxmlLoader = FXMLLoader.load(getClass().getResource("/UserScheduler/UserSchedulerView.fxml"));
+        Stage stage = new Stage();
+        Scene scene = new Scene(fxmlLoader);
+        stage.setScene(scene);
+        stage.setTitle("Employee schedule panel");
+        stage.show();
+        StageManager.mainStage = stage;
     }
 
     public void openMovieModule(MouseEvent mouseEvent) throws IOException {

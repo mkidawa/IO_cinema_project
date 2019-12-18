@@ -888,7 +888,8 @@ BEGIN
 	HallId			bigint				not null default 0,
 	MovieId			bigint				not null default 0,
 	-- Fields to be edited
-	AddTime			time(3)				not null default '00:00:00',
+	AdsDuration		bigint  		    not null default '0',
+	PerformanceType varchar(255)        not null default ''
 	-- Other fiels
 	
 	-- Fields to be calculated only by triggers

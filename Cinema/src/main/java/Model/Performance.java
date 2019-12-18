@@ -129,8 +129,8 @@ public class Performance {
 
     public Duration getDuration(){
         Duration movieDuration = Duration.ofSeconds(0);
-        movieDuration.plusHours(movie.getMovieTime().getHours());
-        movieDuration.plusMinutes(movie.getMovieTime().getMinutes());
+        movieDuration = movieDuration.plusHours(movie.getMovieTime().getHours());
+        movieDuration = movieDuration.plusMinutes(movie.getMovieTime().getMinutes());
         return adsDuration.plus(movieDuration);
     }
 

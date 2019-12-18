@@ -61,9 +61,11 @@ public class TimeTable {
 
         List<TimeTable> allTimeTables = TimeTableDAO.getAll();
         boolean conflict = allTimeTables.stream()
-            /* get all in the same hall */
+            /* get all in the same hall (skip myself if I exists) */
             .filter(timeTable -> {
-                return timeTable.getPerformance().getHall().equals(performance.getHall());
+                if(timeTable.getId() == id)
+                    return false;
+                return timeTable.getPerformance().getHall().getId() == performance.getHall().getId();
             })
             /* get all taking place in the same time */
             .filter(timeTable -> {

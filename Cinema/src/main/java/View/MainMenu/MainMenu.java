@@ -25,7 +25,7 @@ import lombok.var;
 import java.awt.*;
 import java.io.IOException;
 
-public class MainMenu  {
+public class MainMenu {
 
     public Button movieModuleButton;
     public Button employeeModuleButton;
@@ -37,6 +37,7 @@ public class MainMenu  {
     public Button salesModuleButton;
     public Button timetableModuleButton;
     public Button pCurrentUser;
+    public Button settingsButton;
 
     public void logIn(MouseEvent mouseEvent) {
     }
@@ -82,7 +83,7 @@ public class MainMenu  {
         stage.setTitle("Movie panel");
         stage.setResizable(false);
         stage.show();
-        StageManager.mainStage=stage;
+        StageManager.mainStage = stage;
     }
 
 
@@ -90,5 +91,19 @@ public class MainMenu  {
         PermissionChecker pc = new PermissionChecker();
         System.out.println(pc.getPermissionsList());
         System.out.println(pc.getCurrentUser().toString());
+    }
+
+    public void openSettings(MouseEvent mouseEvent) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(getClass().getResource("/Settings/SettingsMenu.fxml"));
+            Scene scene = new Scene(fxmlLoader.load(), 800, 600);
+            Stage stage = new Stage();
+            stage.setTitle("Settings Menu");
+            stage.setScene(scene);
+            stage.show();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 }

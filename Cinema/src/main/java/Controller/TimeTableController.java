@@ -5,8 +5,6 @@ import java.sql.Timestamp;
 import DBO.TimeTableDAO;
 import Model.Performance;
 import Model.TimeTable;
-import Model.TimeTableExceptions.Params.AdsDurationOutOfRangeException;
-import Model.TimeTableExceptions.Params.MinTimeIntervalOutOfRangeException;
 import Model.TimeTableExceptions.Performance.TimeTableCreationException;
 
 public class TimeTableController {
@@ -44,14 +42,6 @@ public class TimeTableController {
 
     public void deleteTimeTable(TimeTable timeTable){
         TimeTableDAO.delete(timeTable);
-    }
-
-    public void setAdsDuration(int i) throws AdsDurationOutOfRangeException{
-        TimeTable.setAdsDuration(i);
-    }
-
-    public void setMinTimeInterval(int i) throws MinTimeIntervalOutOfRangeException{
-        TimeTable.setMinTimeInterval(i);
     }
 
     public TimeTable getCurrentTimeTable() {

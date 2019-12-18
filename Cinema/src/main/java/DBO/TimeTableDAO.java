@@ -66,24 +66,4 @@ public class TimeTableDAO {
         so.getTransaction().commit();
         so.close();
     }
-
-    //    TODO ADD REAL IMPLEMENTATION
-    public static Integer getAdsDuration() {
-        return 1;
-    }
-
-    //    TODO ADD REAL IMPLEMENTATION
-    public static void updateAdsDuration(Integer value) {
-
-    }
-
-    //    TODO ADD REAL IMPLEMENTATION
-    public static Integer getMinTimeInterval() {
-        return 2;
-    }
-
-    //    TODO ADD REAL IMPLEMENTATION
-    public static void updateMinTimeInterval(Integer value) {
-
-    }
 }

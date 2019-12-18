@@ -235,19 +235,20 @@ public class SaleCashbox {
 
     public void confirmOrder() throws IOException {
 
-        List<SalePO> positions = new ArrayList<>();
-        for(int i = 0; i < orderContent.size(); i++){
-            positions.add(new SalePO((Pack) PackDAO.getAllByID(orderContent.get(i).getPackHId()).get(0), new BigDecimal(orderContent.get(i).getAmount()) ));
-        }
-
-        SaleDAO.insert(
-                new Sale(
-                        1,
-                        positions,
-                        new Timestamp(System.currentTimeMillis()),
-                        new BigDecimal(calculatePrice())
-                )
+        Sale order = new Sale(
+                1,
+                new Timestamp(System.currentTimeMillis()),
+                new BigDecimal(calculatePrice())
         );
+
+        for(int i = 0; i < orderContent.size(); i++){
+            order.add(new SalePO((Pack) PackDAO.getAllByID(orderContent.get(i).getPackHId()).get(0), new BigDecimal(orderContent.get(i).getAmount()) ));
+        }
+        SaleDAO.insert(order);
+
+        for(int i = 0; i < amountOfProductsInOrder.size(); i++ ){
+            ProductDAO.updateAmount(amountOfProductsInOrder.get(i).getKey(),amountOfProductsInOrder.get(i).getValue());
+        }
 
 
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION,

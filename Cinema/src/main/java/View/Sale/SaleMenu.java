@@ -11,7 +11,6 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.var;
 
-import java.awt.*;
 import java.io.IOException;
 
 public class SaleMenu {
@@ -27,9 +26,8 @@ public class SaleMenu {
         primaryStage = primary;
         var fxmlLoader = new FXMLLoader(getClass().getResource("/Sale/SaleMenu.fxml"));
         fxmlLoader.setController(this);
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         Pane pane = fxmlLoader.load();
-        scene = new Scene(pane, screenSize.getWidth(), screenSize.getHeight());
+        scene = new Scene(pane);
 
     }
 
@@ -50,5 +48,9 @@ public class SaleMenu {
                     ButtonType.OK);
             alert.showAndWait();
         }
+    }
+
+    public void goBack(){
+        primaryStage.close();
     }
 }

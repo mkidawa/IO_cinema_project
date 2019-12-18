@@ -8,11 +8,11 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox fillWidth="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1">
+<VBox fillWidth="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="799.0" prefWidth="1099.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <AnchorPane prefHeight="803.0" prefWidth="1282.0">
+        <AnchorPane prefHeight="730.0" prefWidth="937.0">
          <children>
-            <Button fx:id="goBack" layoutX="14.0" layoutY="15.0" mnemonicParsing="false" onMouseClicked="#goBack" prefHeight="27.0" prefWidth="142.0" text="Go Back" />
+            <Button fx:id="goBack" layoutX="62.0" layoutY="22.0" mnemonicParsing="false" onMouseClicked="#goBack" prefHeight="27.0" prefWidth="142.0" text="Go Back" />
             <TableView fx:id="tableOfPack" layoutX="62.0" layoutY="67.0" onMouseClicked="#showPackContent" prefHeight="456.0" prefWidth="381.0">
                 <columns>
                     <TableColumn fx:id="PackName" prefWidth="267.0" text="Name">
@@ -65,8 +65,8 @@
             <Button fx:id="addPackToOrder" layoutX="472.0" layoutY="238.0" mnemonicParsing="false" onMouseClicked="#addPackToOrder" prefHeight="27.0" prefWidth="116.0" text="----&gt;" />
             <Button fx:id="removePackFromOrder" layoutX="472.0" layoutY="308.0" mnemonicParsing="false" onMouseClicked="#removePackFromOrder" prefHeight="27.0" prefWidth="116.0" text="&lt;----" />
             <Label fx:id="priceOfOrder" layoutX="616.0" layoutY="686.0" prefHeight="27.0" prefWidth="402.0" textAlignment="RIGHT" />
-            <Button layoutX="616.0" layoutY="733.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="127.0" text="Cancel Order" onMouseClicked="#cancelOrder"/>
-            <Button layoutX="891.0" layoutY="733.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="127.0" text="Confirm Order" onMouseClicked="#confirmOrder" />
+            <Button layoutX="616.0" layoutY="733.0" mnemonicParsing="false" onMouseClicked="#cancelOrder" prefHeight="35.0" prefWidth="127.0" text="Cancel Order" />
+            <Button layoutX="891.0" layoutY="733.0" mnemonicParsing="false" onMouseClicked="#confirmOrder" prefHeight="35.0" prefWidth="127.0" text="Confirm Order" />
          </children>
         </AnchorPane>
     </children>

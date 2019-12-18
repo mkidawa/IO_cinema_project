@@ -47,7 +47,16 @@ public class MainMenu {
         System.out.println(pc.getPermissionsList());
     }
 
-    public void openTimetableModule(MouseEvent mouseEvent) {
+    public void openTimetableModule(MouseEvent mouseEvent) throws IOException{
+        Parent fxmlLoader = FXMLLoader.load(getClass().getResource(View.TimetableModule.Util.Constants.TIMETABLE_PANEL_PATH));
+        Stage stage = new Stage();
+        Scene scene = new Scene(fxmlLoader);
+        scene.getStylesheets().add(getClass().getResource(View.TimetableModule.Util.Constants.TIMETABLE_PANEL_STYLE_PATH).toExternalForm());
+        stage.setScene(scene);
+        stage.setTitle("Timetable panel");
+        stage.setResizable(false);
+        stage.show();
+        StageManager.mainStage = stage;
     }
 
     public void openSalesModule(MouseEvent mouseEvent) {

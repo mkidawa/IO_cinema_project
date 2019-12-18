@@ -13,9 +13,11 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import DBO.HallDAO;
 import DBO.MovieDAO;
 import DBO.TimeTableDAO;
+import DBO.SettingsDAO;
 import Model.TimeTableExceptions.Performance.HallNotAvailableException;
 import Model.TimeTableExceptions.Performance.MovieNotAvailableException;
 import Model.TimeTableExceptions.Performance.TimeTableCreationException;
+import Model.SETTINGS;
 import Tools.Filter;
 import javax.persistence.*;
 
@@ -115,7 +117,11 @@ public class Performance {
 
         this.movie = movie;
         this.hall = hall;
-        this.adsDuration = Duration.ofMinutes(TimeTableDAO.getAdsDuration());
+        SETTINGS adsDuration = SettingsDAO.getByKey("ads_duration");
+        if(adsDuration != null)
+            this.adsDuration = Duration.ofMinutes(Integer.parseInt(adsDuration.getValue()));
+        else
+            this.adsDuration = Duration.ofSeconds(0);
         this.performanceType = performanceType;
 
         if(id > 0){

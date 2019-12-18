@@ -1,6 +1,7 @@
 package Tools;
 
 import Controller.LPermissionController;
+import Model.User;
 
 import java.util.List;
 
@@ -51,5 +52,9 @@ public class PermissionChecker {
      */
     public List getPermissionsList() {
         return lm.getPermissionsList();
+    }
+
+    public User getCurrentUser() {
+        return lm.getCurrentUser();
     }
 }

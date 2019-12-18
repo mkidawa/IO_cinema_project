@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox prefHeight="738.0" prefWidth="1136.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.MainMenu.MainMenu">
+    <!--<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.MainMenu.MainMenu">-->
+    <!--<VBox prefHeight="738.0" prefWidth="1136.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.MainMenu.MainMenu">-->
+    <children>
+        <MenuBar VBox.vgrow="NEVER">
+            <menus>
+                <Menu mnemonicParsing="false" text="File">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="New" />
+                        <MenuItem mnemonicParsing="false" text="Open…" />
+                        <Menu mnemonicParsing="false" text="Open Recent" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <MenuItem mnemonicParsing="false" text="Close" />
+                        <MenuItem mnemonicParsing="false" text="Save" />
+                        <MenuItem mnemonicParsing="false" text="Save As…" />
+                        <MenuItem mnemonicParsing="false" text="Revert" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <MenuItem mnemonicParsing="false" text="Preferences…" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <MenuItem mnemonicParsing="false" text="Quit" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Edit">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="Undo" />
+                        <MenuItem mnemonicParsing="false" text="Redo" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <MenuItem mnemonicParsing="false" text="Cut" />
+                        <MenuItem mnemonicParsing="false" text="Copy" />
+                        <MenuItem mnemonicParsing="false" text="Paste" />
+                        <MenuItem mnemonicParsing="false" text="Delete" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <MenuItem mnemonicParsing="false" text="Select All" />
+                        <MenuItem mnemonicParsing="false" text="Unselect All" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Help">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="About MyHelloApp" />
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+        <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+            <children>
+                <Button fx:id="movieModuleButton" layoutX="66.0" layoutY="56.0" mnemonicParsing="false" onMouseClicked="#openMovieModule" text="MovieModule" />
+                <Button fx:id="employeeModuleButton" layoutX="66.0" layoutY="110.0" mnemonicParsing="false" onMouseClicked="#openEmployeeModule" text="EmployeeModule" />
+                <Button fx:id="raportModuleButton" layoutX="242.0" layoutY="56.0" mnemonicParsing="false" onMouseClicked="#openRaportModule" text="RaportModule" />
+                <PasswordField fx:id="passwordField" layoutX="66.0" layoutY="400.0" promptText="Password" />
+                <TextField fx:id="logInTextField" layoutX="66.0" layoutY="361.0" promptText="Login" />
+                <Button fx:id="logInButton" layoutX="66.0" layoutY="439.0" mnemonicParsing="false" onMouseClicked="#logIn" text="Log In" />
+                <Button fx:id="pCurrentUser" layoutX="178.0" layoutY="439.0" mnemonicParsing="false" onMouseClicked="#printCurrentUser" text="Print currentUser" />
+                <Button fx:id="salesModuleButton" layoutX="242.0" layoutY="110.0" mnemonicParsing="false" onMouseClicked="#openSalesModule" text="SalesModule" />
+                <Button fx:id="timetableModuleButton" layoutX="395.0" layoutY="56.0" mnemonicParsing="false" onMouseClicked="#openTimetableModule" text="TimeTableModule" />
+                <Button fx:id="settingsButton" layoutX="395.0" layoutY="110.0" mnemonicParsing="false" onMouseClicked="#openSettings" prefHeight="28.0" prefWidth="128.0" text="SETTINGS" />
+            </children>
+        </AnchorPane>
+    </children>
+</VBox>

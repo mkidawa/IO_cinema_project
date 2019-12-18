@@ -11,13 +11,11 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import java.net.URL;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -27,6 +25,10 @@ public class addPersonToMovieController implements Initializable {
     @FXML private TableColumn<SimplePerson, Long> ID;
     @FXML private TableColumn<SimplePerson, String> Name;
     @FXML private TableColumn<SimplePerson, String> Lastname;
+    @FXML private TextField TextName;
+    @FXML private TextField TextLastname;
+    @FXML private TextField BirthDate;
+
     @FXML private ComboBox Role;
     @FXML private Button addPersonButton;
     private ObservableList<SimplePerson> list = FXCollections.observableArrayList();
@@ -67,6 +69,29 @@ public class addPersonToMovieController implements Initializable {
         this.controller = c;
     }
 
+    public void createNewPerson() {
+        String name = TextName.getText();
+        String lastname = TextLastname.getText();
+        String born = BirthDate.getText();
+
+        StringBuilder sb = new StringBuilder();
+        sb.append(born);
+        sb.append(" 00:00:00");
+        Timestamp t = Timestamp.valueOf(String.valueOf(sb));
+
+        Person p = MovieManager.createPerson(name, lastname, t);
+        Long typeID;
+        for(int i=0; i<personTypes.size();i++){
+            if (personTypes.get(i).getType().equals((String) Role.getValue())) {
+                typeID = personTypes.get(i).getID();
+                List<PersonType> PT = PersonTypeDAO.getAllById(typeID);
+                selectedPersonType = PT.get(0);
+            }
+        }
+        PersonJob temp = new PersonJob(p, selectedPersonType);
+        MovieManager.workingPersons.add(temp);
+    }
+
     public void createPersonJob(){
         SimplePerson p = table.getSelectionModel().getSelectedItem(); //person
         List<Person> persons = PersonDAO.getAllById(p.getID());
@@ -82,14 +107,81 @@ public class addPersonToMovieController implements Initializable {
         PersonJob temp = new PersonJob(persons.get(0), selectedPersonType);
         MovieManager.workingPersons.add(temp);
     }
+
     public void onClickAddPerson() {
+        if(!checkAllFieldsSelectedPerson()) {
+            return;
+        }
         createPersonJob();
         controller.updateList();
         closeCurrent();
     }
+
+    public void onClickAddNewPerson() {
+        if(!checkAllFieldsNewPerson()) {
+            return;
+        }
+        createNewPerson();
+        controller.updateList();
+        closeCurrent();
+    }
+
     public void closeCurrent() {
         Stage stage = (Stage) addPersonButton.getScene().getWindow();
         stage.close();
+    }
+
+    public boolean checkAllFieldsNewPerson() {
+
+        if (TextName.getText().length() < 1) {
+            alertPopUp("First name cannot be empty!");
+            return false;
+        }
+
+        if (Lastname.getText().length() < 1) {
+            alertPopUp("Last name cannot be empty!");
+            return false;
+        }
+
+        StringBuilder sb = new StringBuilder();
+        sb.append(BirthDate.getText());
+        sb.append(" 00:00:00");
+        try {
+            Timestamp t = Timestamp.valueOf(String.valueOf(sb));
+        } catch (Exception ex) {
+            alertPopUp("Incorrect birth date format");
+            return false;
+        }
+
+        if (Role.getSelectionModel().isEmpty()) {
+            alertPopUp("Role must be selected!");
+            return false;
+        }
+
+        return true;
+    }
+
+    public boolean checkAllFieldsSelectedPerson() {
+
+        if (table.getSelectionModel().getSelectedItem() == null) {
+            alertPopUp("You have to select a person from the table above - just click on person you are interested in.");
+            return false;
+        }
+
+        if (Role.getSelectionModel().isEmpty()) {
+            alertPopUp("Role must be selected!");
+            return false;
+        }
+
+        return true;
+    }
+
+    public void alertPopUp(String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error message");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 
     public static class SimplePerson {

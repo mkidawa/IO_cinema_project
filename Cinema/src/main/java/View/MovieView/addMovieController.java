@@ -1,13 +1,16 @@
 package View.MovieView;
 import Controller.MovieManager;
 import Controller.StageManager;
+import DBO.MovieDAO;
 import DBO.MovieStateDAO;
 import DBO.MovieTypeDAO;
 import Model.DICT.MovieState;
 import Model.DICT.MovieType;
 import Model.DICT.PersonType;
+import Model.Movie;
 import Model.Person;
 import Model.PersonJob;
+import Tools.Filter;
 import javafx.beans.property.SimpleLongProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -21,12 +24,15 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import sun.security.krb5.internal.crypto.Des;
+
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+
 //todo exceptions for empty fields, adding person from text input
 public class addMovieController implements Initializable {
     @FXML
@@ -60,6 +66,7 @@ public class addMovieController implements Initializable {
     private MovieState selectedState = new MovieState();
     private Time d;
     private int dur;
+    private boolean updating;
     ObservableList<SimpleMovieGenre> movieTypes = FXCollections.observableArrayList();
     ObservableList<SimpleMovieState> movieStates = FXCollections.observableArrayList();
 
@@ -93,6 +100,17 @@ public class addMovieController implements Initializable {
 
         SpinnerValueFactory minutes = new SpinnerValueFactory.IntegerSpinnerValueFactory(60, 200, 90, 2);
         Duration.setValueFactory(minutes);
+
+        MovieManager.workingPersons.clear();
+        updating = false;
+
+        if(MovieManager.isEdit) {
+            fillAllForms();
+            updateList();
+            MovieManager.isEdit = false;
+            addMovieButton.setText("Update Movie");
+            updating = true;
+        }
     }
 
     public static ObservableList<SimplePersonwType> getList() {
@@ -106,11 +124,21 @@ public class addMovieController implements Initializable {
     }
 
     public void updateList (){
-        System.out.println("funkcja Update List");
         if(!(MovieManager.workingPersons.isEmpty())) {
             peopleInvolved.setItems(getList());
         }
+        if (MovieManager.isEdit) {
+            ObservableList<SimplePersonwType> list = FXCollections.observableArrayList();
+            for (int i = 0; i < MovieManager.currentMovie.getPeoples().size(); i++) {
+                Person person = MovieManager.currentMovie.getPeoples().get(i).getPerson();
+                PersonType type = MovieManager.currentMovie.getPeoples().get(i).getPersonType();
+                list.add(new SimplePersonwType(person.getId(), person.getFirstName(), person.getLastName(), type.getName()));
+            }
+            peopleInvolved.setItems(list);
+            MovieManager.workingPersons = new ArrayList<PersonJob>(MovieManager.currentMovie.getPeoples());
+        }
     }
+
     public class SimpleMovieGenre {
         private final SimpleLongProperty ID;
         private final SimpleStringProperty genre;
@@ -138,7 +166,50 @@ public class addMovieController implements Initializable {
         public Long getID() { return ID.get(); }
     }
 
+    public boolean checkAllFilled() {
+
+        if (Title.getText().length() < 1) {
+            alertPopUp("Title cannot be empty");
+            return false;
+        }
+
+        if (Description.getText().length() < 1) {
+            alertPopUp("Description cannot be empty!");
+            return false;
+        }
+
+        if(Genre.getSelectionModel().isEmpty()) {
+            alertPopUp("Genre must be selected!");
+            return false;
+        }
+
+        if(MovieState.getSelectionModel().isEmpty()) {
+            alertPopUp("State must be selected!");
+            return false;
+        }
+
+        if(!flg2D.isSelected() && !flg3D.isSelected() && !flgVR.isSelected()) {
+            alertPopUp("At least one mode must be selected");
+            return false;
+        }
+
+        return true;
+    }
+
+    public void alertPopUp(String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error message");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
     public void onClickAddMovie() {
+        //checking if everything is filled
+        if(!checkAllFilled()) {
+            return;
+        }
+
         //getting genre and state from selection
         Long genreID;
         for(int i=0; i<movieTypes.size();i++){
@@ -196,9 +267,37 @@ public class addMovieController implements Initializable {
             involved.add(newPerson);
         }
         //creating a new Movie
-        MovieManager.createMovie(flag2d, flag3d, flagVR, selectedGenre, selectedState, Title.getText(), Description.getText(), d, involved);
-        closeAllStagesAndLoadNewMainStage();
+        if (!updating) {
+            MovieManager.createMovie(flag2d, flag3d, flagVR, selectedGenre, selectedState, Title.getText(), Description.getText(), d, involved);
+            closeAllStagesAndLoadNewMainStage();
+            MovieManager.workingPersons.clear();
+        }
+        //updating a movie
+        else {
+            Movie movie = MovieManager.currentMovie;
+
+            movie.setTitle(Title.getText());
+            movie.setDescription(Description.getText());
+            movie.setMovieState(selectedState);
+            movie.setMovieType(selectedGenre);
+            movie.setFlg2D(flag2d);
+            movie.setFlg3D(flag3d);
+            movie.setFlgVR(flagVR);
+            movie.setMovieTime(d);
+            int size = movie.getPeoples().size();
+            System.out.println("trap");
+            if(movie.getPeoples().size() < involved.size()) {
+                for (int i = movie.getPeoples().size(); i < involved.size(); i++) {
+                    movie.addPerson(involved.get(i));
+                }
+            }
+            MovieDAO.insertUpdate(movie);
+            closeAllStagesAndLoadNewMainStage();
+            MovieManager.workingPersons.clear();
+            MovieManager.currentMovie = null;
+        }
     }
+
     public void onClickAddPerson() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/MovieModule/addPersonToMoviePanel/addPersonToMoviePanel.fxml"));
         Parent root = (Parent) loader.load();
@@ -233,6 +332,48 @@ public class addMovieController implements Initializable {
             e.printStackTrace();
         }
     }
+
+    public void fillAllForms() {
+        Movie movie = MovieManager.currentMovie;
+
+        Title.setText(movie.getTitle());
+        Description.setText(movie.getDescription());
+
+        Filter filter = new Filter();
+        filter.addField("Name", movie.getMovieType().getName());
+        List<MovieType> types = MovieTypeDAO.getAllByFilter(filter);
+        Genre.getSelectionModel().select(types.get(0).getName());
+
+        Filter filterState = new Filter();
+        filterState.addField("Name", movie.getMovieState().getName());
+        List<MovieState> states = MovieStateDAO.getAllByFilter(filterState);
+        MovieState.getSelectionModel().select(states.get(0).getName());
+
+        int minutes = toMins(movie.getMovieTime().toString());
+
+        SpinnerValueFactory mins = new SpinnerValueFactory.IntegerSpinnerValueFactory(60, 200, minutes, 2);
+        Duration.setValueFactory(mins);
+
+        if(movie.getFlg2D() > 0){
+            flg2D.setSelected(true);
+        }
+        if(movie.getFlg3D() > 0){
+            flg3D.setSelected(true);
+        }
+        if(movie.getFlgVR() > 0){
+            flgVR.setSelected(true);
+        }
+
+    }
+
+    private static int toMins(String s) {
+        String[] hourMin = s.split(":");
+        int hour = Integer.parseInt(hourMin[0]);
+        int mins = Integer.parseInt(hourMin[1]);
+        int hoursInMins = hour * 60;
+        return hoursInMins + mins;
+    }
+
     public static class SimplePersonwType {
         private final SimpleLongProperty ID;
         private final SimpleStringProperty Name;

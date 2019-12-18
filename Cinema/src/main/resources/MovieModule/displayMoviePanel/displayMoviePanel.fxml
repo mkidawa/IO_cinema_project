@@ -63,7 +63,7 @@
         <Label id="description" alignment="CENTER" font="$x3" layoutX="12.0" layoutY="52.0" prefHeight="20.0" prefWidth="106.0" text="Name" textAlignment="CENTER" textOverrun="WORD_ELLIPSIS" wrapText="true" />
       </children>
     </AnchorPane>
-    <Button id="edit" font="$x2" layoutX="28.0" layoutY="506.0" mnemonicParsing="false" prefHeight="68.0" prefWidth="360.0" text="Edit" />
+    <Button id="edit" font="$x2" layoutX="28.0" layoutY="506.0" mnemonicParsing="false" prefHeight="68.0" prefWidth="360.0" text="Edit" onMouseClicked="#onClickEdit" />
     <Button id="delete" fx:id="delete" font="$x2" layoutX="413.0" layoutY="506.0" mnemonicParsing="false" onMouseClicked="#onClickDelete" prefHeight="68.0" prefWidth="360.0" text="Delete" />
   </children>
 </AnchorPane>

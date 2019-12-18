@@ -62,7 +62,7 @@
                     </TableColumn>
                 </columns>
             </TableView>
-            <Button fx:id="addPackToOrder" layoutX="472.0" layoutY="238.0" mnemonicParsing="false" onKeyPressed="#addPackToOrder" prefHeight="27.0" prefWidth="116.0" text="----&gt;" />
+            <Button fx:id="addPackToOrder" layoutX="472.0" layoutY="238.0" mnemonicParsing="false" onMouseClicked="#addPackToOrder" prefHeight="27.0" prefWidth="116.0" text="----&gt;" />
             <Button fx:id="removePackFromOrder" layoutX="472.0" layoutY="308.0" mnemonicParsing="false" onMouseClicked="#removePackFromOrder" prefHeight="27.0" prefWidth="116.0" text="&lt;----" />
             <Label fx:id="priceOfOrder" layoutX="616.0" layoutY="686.0" prefHeight="27.0" prefWidth="402.0" textAlignment="RIGHT" />
             <Button layoutX="616.0" layoutY="733.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="127.0" text="Cancel Order" onMouseClicked="#cancelOrder"/>

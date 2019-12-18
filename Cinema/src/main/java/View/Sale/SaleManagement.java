@@ -14,10 +14,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TablePosition;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextInputDialog;
+import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import lombok.Getter;
@@ -199,17 +196,33 @@ public class SaleManagement {
         var x = PackDAO.getAllByID(packId).get(0);
         var y = ProductDAO.getAllByID(productId).get(0);
 
-        TextInputDialog d1 = new TextInputDialog();
-        d1.setTitle("Set amount of product in pack");
-        d1.setContentText("Enter amount");
-        Optional<String> result = d1.showAndWait();
-        if (result.isPresent()) {
-            String amount = result.get();
-            PackPoDAO.insert(new PackPO((Pack) x,(Product) y, new BigDecimal(amount)));
+        boolean alreadyInPack = false;
 
-            packContentList = SimplePackPO.getContentOfPack((int) packId);
-            tableOfPackContent.setItems(packContentList);
-            tableOfPackContent.refresh();
+        for(int i = 0; i < packContentList.size(); i++){
+            if(packContentList.get(i).getProductId() == productId){
+
+                Alert alert = new Alert(Alert.AlertType.ERROR,
+                        "This product is already in this Pack. Please, change amount instead of adding!",
+                        ButtonType.OK);
+                alert.showAndWait();
+                alreadyInPack = true;
+                break;
+            }
+        }
+
+        if(!alreadyInPack){
+            TextInputDialog d1 = new TextInputDialog();
+            d1.setTitle("Set amount of product in pack");
+            d1.setContentText("Enter amount");
+            Optional<String> result = d1.showAndWait();
+            if (result.isPresent()) {
+                String amount = result.get();
+                PackPoDAO.insert(new PackPO((Pack) x, (Product) y, new BigDecimal(amount)));
+
+                packContentList = SimplePackPO.getContentOfPack((int) packId);
+                tableOfPackContent.setItems(packContentList);
+                tableOfPackContent.refresh();
+            }
         }
     }
 

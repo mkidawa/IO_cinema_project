@@ -6,6 +6,7 @@ import DBO.SaleDAO;
 import Model.Pack;
 import Model.Sale;
 import Model.SalePO;
+import Tools.PermissionChecker;
 import View.Sale.Simple.SimplePack;
 import View.Sale.Simple.SimplePackPO;
 import View.Sale.Simple.SimpleSale;
@@ -235,8 +236,9 @@ public class SaleCashbox {
 
     public void confirmOrder() throws IOException {
 
+        PermissionChecker pc = new PermissionChecker();
         Sale order = new Sale(
-                1,
+                pc.getCurrentUser().getId(),
                 new Timestamp(System.currentTimeMillis()),
                 new BigDecimal(calculatePrice())
         );

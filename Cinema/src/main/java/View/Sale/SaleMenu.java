@@ -1,7 +1,10 @@
 package View.Sale;
 
+import Tools.PermissionChecker;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import lombok.Getter;
@@ -36,7 +39,15 @@ public class SaleMenu {
     }
 
     public void manageStart() throws IOException {
-        primaryStage.setScene(new SaleManagement(primaryStage).getScene());
-        primaryStage.show();
+        PermissionChecker pc = new PermissionChecker();
+        if(pc.checkPermission(7)) {
+            primaryStage.setScene(new SaleManagement(primaryStage).getScene());
+            primaryStage.show();
+        }else
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR,
+                    "You have no manager right's",
+                    ButtonType.OK);
+        }
     }
 }

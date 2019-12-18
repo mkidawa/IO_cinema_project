@@ -48,6 +48,7 @@ public class SaleMenu {
             Alert alert = new Alert(Alert.AlertType.ERROR,
                     "You have no manager right's",
                     ButtonType.OK);
+            alert.showAndWait();
         }
     }
 }

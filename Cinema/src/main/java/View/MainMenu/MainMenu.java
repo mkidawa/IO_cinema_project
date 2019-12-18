@@ -2,6 +2,7 @@ package View.MainMenu;
 
 import Controller.StageManager;
 import Tools.PermissionChecker;
+import View.Sale.SaleMenu;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -35,10 +36,21 @@ public class MainMenu {
         System.out.println(pc.getPermissionsList());
     }
 
-    public void openTimetableModule(MouseEvent mouseEvent) {
+    public void openTimetableModule(MouseEvent mouseEvent) throws IOException {
+        Parent fxmlLoader = FXMLLoader.load(getClass().getResource("/TimetableModule/TimetablePanel/TimetablePanel.fxml"));
+        Stage stage = new Stage();
+        Scene scene = new Scene(fxmlLoader);
+//        scene.getStylesheets().add(getClass().getResource("/MovieModule/MoviePanel/mainMovie.css").toExternalForm());
+        stage.setScene(scene);
+        stage.setTitle("Timetable panel");
+        stage.setResizable(false);
+        stage.show();
     }
 
-    public void openSalesModule(MouseEvent mouseEvent) {
+    public void openSalesModule(MouseEvent mouseEvent) throws IOException {
+        Stage stage = new Stage();
+        stage.setScene(new SaleMenu(stage).getScene());
+        stage.show();
     }
 
     public void openRaportModule(MouseEvent mouseEvent) throws IOException {
@@ -47,7 +59,7 @@ public class MainMenu {
         Scene scene = new Scene(fxmlLoader);
 //        scene.getStylesheets().add(getClass().getResource("/MovieModule/MoviePanel/mainMovie.css").toExternalForm());
         stage.setScene(scene);
-        stage.setTitle("Movie panel");
+        stage.setTitle("Raport panel");
         stage.setResizable(false);
         stage.show();
     }

@@ -9,10 +9,10 @@
 -- select *from MoviePersonPersonType;
 
 --------------------------------------------------- dictonary inserts ------------------------------------------------------
-use IO
+use IO;
 -- 1) Movie Type inserts --
 
-insert into DICTMovieType values ('Action'),
+insert into DICTMovieType values ('Action')
 , ('Animation')
 , ('Comedy')
 , ('Crime')
@@ -25,24 +25,25 @@ insert into DICTMovieType values ('Action'),
 , ('Thriller')
 , ('Western')
 , ('Other')
-
+PRINT 'Inserted DICTMovieType'
 -- 2) Movie State inserts
 
 insert into DICTMovieState values ('Upcoming'), ('Current'),('Expired')
-
+PRINT 'Inserted DICTMovieState'
 --3) Person Type inserts
 
-insert into DICTPersonType values ('Director'),
+insert into DICTPersonType values ('Director')
 , ('Actor')
 , ('Screenwriter')
 , ('Editor')
 , ('Camera Operator')
+PRINT 'Inserted DICTPersonType'
 
 --------------------------------------------------- main inserts ------------------------------------------------------
 
 -- 1) Movie inserts --
 
-insert into Movie values (1, 0, 1, 5, 2, 'Titanic', 'Di Caprio first success', '3:20:00'),
+insert into Movie values (1, 0, 1, 5, 2, 'Titanic', 'Di Caprio first success', '3:20:00')
 , (1, 1, 0, 1, 1, 'Fast and furious', 'Too fast to catch', '2:15:00')
 , (1, 0, 0, 10, 3, 'Black panther', 'Marvel popular hit', '1:56:00')
 , (1, 1, 0, 2, 2, 'Smolin the king', 'About the whitest of ppl', '1:30:00')
@@ -64,6 +65,7 @@ insert into Movie values (1, 0, 1, 5, 2, 'Titanic', 'Di Caprio first success', '
 , (1, 1, 0, 2, 1, 'Slowly but surely', 'Kamil Winer walk', '2:04:00')
 , (1, 1, 0, 10, 3, 'Its never too late', 'Trying too start doing anything for studies', '2:13:00')
 , (0, 1, 0, 13, 2, 'Blind in elevator', 'Is that 3rd floor?', '1:44:00')
+PRINT 'Inserted Movie'
 -- 2) Person inserts --
 
 insert into Person (FirstName, LastName, DateBorn) values ('Mateusz', 'Walczak', '1982-07-30')
@@ -76,10 +78,11 @@ insert into Person (FirstName, LastName, DateBorn) values ('Mateusz', 'Walczak',
 , ('Leonardo', 'Di Caprio', '1990-03-23')
 , ('Piotr', 'Adamczyk', '1982-06-13')
 , ('Katarzyna', 'Kowalska', '1949-01-03')
+PRINT 'Inserted Person'
 
 -- 3) MoviePersonPerosnType inserts 
 
-insert into MoviePersonPersonType (MovieId, PersonTypeId, PersonId) values (1, 1, 3),
+insert into MoviePersonPersonType (MovieId, PersonTypeId, PersonId) values (1, 1, 3)
 ,(1, 2, 4)
 ,(1, 2, 7)
 ,(1, 3, 6)
@@ -186,3 +189,4 @@ insert into MoviePersonPersonType (MovieId, PersonTypeId, PersonId) values (1, 1
 ,(22, 2, 7)
 ,(22, 3, 1)
 ,(22, 4, 2)
+PRINT 'Inserted MoviePersonPersonType'

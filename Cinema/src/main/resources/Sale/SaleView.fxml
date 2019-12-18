@@ -9,29 +9,29 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox fillWidth="true" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<VBox fillWidth="true" prefHeight="684.0" prefWidth="1205.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <AnchorPane prefHeight="803.0" prefWidth="1282.0">
+      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="684.0" prefWidth="1291.0">
          <children>
-            <TableView fx:id="tableOfProducts" layoutX="471.0" layoutY="65.0" prefHeight="505.0" prefWidth="364.0">
+            <TableView fx:id="tableOfProducts" layoutX="471.0" layoutY="92.0" prefHeight="505.0" prefWidth="364.0">
               <columns>
-                <TableColumn fx:id="ProductName" prefWidth="215.0" text="Name">
-                    <cellValueFactory><PropertyValueFactory property="name" /></cellValueFactory>
-                </TableColumn>
                 <TableColumn fx:id="ProductPrice" prefWidth="74.0" text="Price">
                     <cellValueFactory><PropertyValueFactory property="price" /></cellValueFactory>
                 </TableColumn>
                   <TableColumn fx:id="ProductAmount" prefWidth="74.0" text="Amount">
                       <cellValueFactory><PropertyValueFactory property="amount" /></cellValueFactory>
                   </TableColumn>
+                <TableColumn fx:id="ProductName" prefWidth="215.0" text="Name">
+                    <cellValueFactory><PropertyValueFactory property="name" /></cellValueFactory>
+                </TableColumn>
               </columns>
             </TableView>
-            <Label layoutX="471.0" layoutY="14.0" text="Products">
+            <Label layoutX="471.0" layoutY="48.0" text="Products">
                <font>
                   <Font size="24.0" />
                </font>
             </Label>
-             <TableView fx:id="tableOfPack" layoutX="74.0" layoutY="65.0" prefHeight="505.0" prefWidth="364.0">
+             <TableView fx:id="tableOfPack" layoutX="74.0" layoutY="92.0" prefHeight="505.0" prefWidth="364.0">
               <columns>
                 <TableColumn fx:id="PackName" prefWidth="267.0" text="Name">
                     <cellValueFactory><PropertyValueFactory property="name" /></cellValueFactory>
@@ -42,14 +42,14 @@
                 </TableColumn>
               </columns>
             </TableView>
-            <Button fx:id="AddNewPack" layoutX="74.0" layoutY="584.0" mnemonicParsing="false" onMouseClicked="#addNewPack" text="Add new pack" />
-            <Label layoutX="74.0" layoutY="14.0" text="Packs">
+            <Button fx:id="AddNewPack" layoutX="74.0" layoutY="622.0" mnemonicParsing="false" onMouseClicked="#addNewPack" text="Add new pack" />
+            <Label layoutX="74.0" layoutY="48.0" text="Packs">
                <font>
                   <Font size="24.0" />
                </font>
             </Label>
-            <Button fx:id="removePack" layoutX="336.0" layoutY="584.0" mnemonicParsing="false" onMouseClicked="#removePack" text="Remove pack" />
-            <TableView fx:id="tableOfPackContent" layoutX="868.0" layoutY="65.0" prefHeight="505.0" prefWidth="364.0">
+            <Button fx:id="removePack" layoutX="351.0" layoutY="622.0" mnemonicParsing="false" onMouseClicked="#removePack" text="Remove pack" />
+            <TableView fx:id="tableOfPackContent" layoutX="868.0" layoutY="92.0" prefHeight="505.0" prefWidth="364.0">
                <columns>
                   <TableColumn fx:id="PackPOProductID" prefWidth="215.0" text="Product Name">
                      <cellValueFactory>
@@ -68,16 +68,16 @@
                   </TableColumn>
                </columns>
             </TableView>
-            <Label layoutX="868.0" layoutY="14.0" text="Content of pack">
+            <Label layoutX="868.0" layoutY="48.0" text="Content of pack">
                <font>
                   <Font size="24.0" />
                </font>
             </Label>
-            <Button fx:id="addNewProduct" layoutX="471.0" layoutY="584.0" mnemonicParsing="false" onMouseClicked="#addNewProduct" text="Add product" />
-            <Button fx:id="removeProductFromPack" layoutX="1043.0" layoutY="584.0" mnemonicParsing="false" onMouseClicked="#removeProductFromPack" text="Remove product from pack" />
-            <Button fx:id="addProductToPack" layoutX="868.0" layoutY="584.0" mnemonicParsing="false" onMouseClicked="#addProductToPack" text="Add product to pack" />
-            <Button fx:id="removeProduct" layoutX="714.0" layoutY="584.0" mnemonicParsing="false" onMouseClicked="#removeProduct" text="Remove product" />
-            <Button fx:id="goBack" layoutX="14.0" layoutY="714.0" mnemonicParsing="false" onMouseClicked="#goBack" text="Go Back" />
+            <Button fx:id="addNewProduct" layoutX="471.0" layoutY="622.0" mnemonicParsing="false" onMouseClicked="#addNewProduct" text="Add product" />
+            <Button fx:id="removeProductFromPack" layoutX="1071.0" layoutY="622.0" mnemonicParsing="false" onMouseClicked="#removeProductFromPack" text="Remove product from pack" />
+            <Button fx:id="addProductToPack" layoutX="868.0" layoutY="622.0" mnemonicParsing="false" onMouseClicked="#addProductToPack" text="Add product to pack" />
+            <Button fx:id="removeProduct" layoutX="731.0" layoutY="622.0" mnemonicParsing="false" onMouseClicked="#removeProduct" text="Remove product" />
+            <Button fx:id="goBack" layoutX="74.0" layoutY="19.0" mnemonicParsing="false" onMouseClicked="#goBack" text="Go Back" />
          </children>
       </AnchorPane>
    </children>

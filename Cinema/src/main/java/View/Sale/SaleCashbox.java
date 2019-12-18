@@ -14,7 +14,6 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -23,7 +22,6 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.var;
 
-import java.awt.*;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
@@ -64,9 +62,8 @@ public class SaleCashbox {
         primaryStage = primary;
         var fxmlLoader = new FXMLLoader(getClass().getResource("/Sale/SaleCashbox.fxml"));
         fxmlLoader.setController(this);
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         Pane pane = fxmlLoader.load();
-        scene = new Scene(pane, screenSize.getWidth(), screenSize.getHeight());
+        scene = new Scene(pane);
 
         packs = SimplePack.getListOfPacks();
 

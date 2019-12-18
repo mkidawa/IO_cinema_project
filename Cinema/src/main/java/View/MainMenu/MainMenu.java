@@ -1,28 +1,16 @@
 package View.MainMenu;
 
-import Controller.LPermissionController;
 import Controller.StageManager;
 import Tools.PermissionChecker;
-import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Button;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
-
-import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.var;
 
-import java.awt.*;
 import java.io.IOException;
 
 public class MainMenu {

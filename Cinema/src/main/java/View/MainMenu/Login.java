@@ -77,7 +77,7 @@ public class Login {
         PermissionChecker pc = new PermissionChecker();
         System.out.println(pc.getPermissionsList());
 
-        
+
     }
 
     public void onConfirm(MouseEvent actionEvent) {

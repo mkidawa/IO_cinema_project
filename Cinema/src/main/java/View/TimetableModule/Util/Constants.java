@@ -4,7 +4,6 @@ public class Constants {
 
     /*------------------------ FIELDS REGION ------------------------*/
     public static final String PERFORMANCE_CREATOR = "Performance Creator";
-    public static final String SYSTEM_PARAMS = "System Parameters";
     public static final String TIMETABLE_PANEL = "Timetable Panel";
     public static final String PERFORMANCE_PANEL = "Performance Panel";
 
@@ -35,11 +34,6 @@ public class Constants {
             = "/TimetableModule/PerformancePanel/PerformancePanel.fxml";
     public static final String PERFORMANCE_PANEL_STYLE_PATH
             = "/TimetableModule/PerformancePanel/PerformancePanel.css";
-
-    public static final String SYSTEM_PARAMS_PATH
-            = "/TimetableModule/SystemParamsPanel/SystemParamsPanel.fxml";
-    public static final String SYSTEM_PARAMS_STYLE_PATH
-            = "/TimetableModule/SystemParamsPanel/SystemParamsPanel.css";
 
     public static final String TIMETABLE_PANEL_PATH
             = "/TimetableModule/TimetablePanel/TimetablePanel.fxml";

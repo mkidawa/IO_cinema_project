@@ -28,9 +28,6 @@ import static View.TimetableModule.Util.Constants.PERFORMANCE_CREATOR_STYLE_PATH
 import static View.TimetableModule.Util.Constants.PERFORMANCE_PANEL;
 import static View.TimetableModule.Util.Constants.PERFORMANCE_PANEL_PATH;
 import static View.TimetableModule.Util.Constants.PERFORMANCE_PANEL_STYLE_PATH;
-import static View.TimetableModule.Util.Constants.SYSTEM_PARAMS;
-import static View.TimetableModule.Util.Constants.SYSTEM_PARAMS_PATH;
-import static View.TimetableModule.Util.Constants.SYSTEM_PARAMS_STYLE_PATH;
 
 public class TimetablePanel implements Initializable {
 
@@ -154,10 +151,5 @@ public class TimetablePanel implements Initializable {
         TimeTableController.getInstance().setIsEditable(false);
         FxmlStageSetup.loadFxmlStage(PERFORMANCE_CREATOR_PATH,
                 PERFORMANCE_CREATOR_STYLE_PATH, PERFORMANCE_CREATOR);
-    }
-
-    @FXML
-    private void onClickParameters(MouseEvent mouseEvent) {
-        FxmlStageSetup.loadFxmlStage(SYSTEM_PARAMS_PATH, SYSTEM_PARAMS_STYLE_PATH, SYSTEM_PARAMS);
     }
 }

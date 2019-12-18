@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<!--<?import View.Components.ButtonWithImage?>-->
+<!--<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.MainMenu.Login">-->
+<?import View.Components.*?>
+<StackPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.MainMenu.Login">
+   <children>
+<!--       <HBox>-->
+<!--           <VBox alignment="BOTTOM_LEFT" styleClass="loginButtons" >-->
+<!--               <ButtonWithImage fx:id="closeBtn" onCustomClick="#closeApplication"/>-->
+<!--           </VBox>-->
+<!--       </HBox>-->
+
+       <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+           <children>
+               <PasswordField fx:id="passwordField" layoutX="66.0" layoutY="272.0" promptText="Password" />
+               <TextField fx:id="logInTextField" layoutX="66.0" layoutY="238.0" promptText="Login" />
+               <Button fx:id="logInButton" layoutX="66.0" layoutY="311.0" mnemonicParsing="false" onMouseClicked="#logIn" text="Log In" />
+               <Button fx:id="pPermission" layoutX="130.0" layoutY="311.0" mnemonicParsing="false" onMouseClicked="#printPermission" text="Print Permission" />
+           </children>
+       </AnchorPane>
+      <NumericKeyboard  fx:id="keyboard" alignment="BOTTOM_RIGHT" onConfirm="#onConfirm"/>
+   </children>
+</StackPane>
+

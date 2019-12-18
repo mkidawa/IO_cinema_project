@@ -16,9 +16,12 @@ repositories {
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
     compile 'org.hibernate:hibernate-core:5.4.8.Final'
+    compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.18'
     compile "com.microsoft.sqlserver:sqljdbc4:4.0"
     compileOnly 'org.projectlombok:lombok:1.18.10'
     annotationProcessor 'org.projectlombok:lombok:1.18.10'
+    compile group: 'com.itextpdf', name: 'itextpdf', version: '5.0.6'
+    compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.9'
 }
 
 application {

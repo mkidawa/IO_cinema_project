@@ -5,7 +5,7 @@ Docker setup for database
 ## How to build
 Run 
 ```bash
-docker build -t mssqlcinema .
+docker build -t mssqlcinema . --no-cache
 ```
 ## How to run
 ```bash

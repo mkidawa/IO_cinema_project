@@ -17,18 +17,19 @@ public class Schedule {
     @Setter
     private long Id;
 
-    @Column(name = "UsersId")
+    @ManyToOne
+    @JoinColumn(name = "UsersId")
     @Getter
     @Setter
-    private String name;
+    private User user;
 
-    @ManyToOne(cascade = {CascadeType.ALL})
+    @ManyToOne
     @JoinColumn(name = "TaskId")
     @Getter
     @Setter
     private Task task;
 
-    @ManyToOne(cascade = {CascadeType.ALL})
+    @ManyToOne
     @JoinColumn(name = "SheduleStatusId")
     @Getter
     @Setter
@@ -50,8 +51,8 @@ public class Schedule {
     public Schedule() {
     }
 
-    public Schedule(String name, Task task, ScheduleStatus scheduleStatus, Timestamp dateFrom, Timestamp dateTo) {
-        this.name = name;
+    public Schedule(User user, Task task, ScheduleStatus scheduleStatus, Timestamp dateFrom, Timestamp dateTo) {
+        this.user = user;
         this.task = task;
         this.scheduleStatus = scheduleStatus;
         this.dateFrom = dateFrom;

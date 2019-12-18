@@ -77,7 +77,7 @@ public class MoviePanel implements Initializable {
     }
 
     public void onClickRow(Movie clickedMovie) throws IOException {
-        MovieManager.workingMovie = clickedMovie;
+        MovieManager.currentMovie = clickedMovie;
         Parent fxmlLoader = FXMLLoader.load(getClass().getResource("/MovieModule/displayMoviePanel/displayMoviePanel.fxml"));
         Stage stage = new Stage();
         Scene scene = new Scene(fxmlLoader);

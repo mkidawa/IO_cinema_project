@@ -1,14 +1,21 @@
 package View.Components;
 
-import Controller.LoginController;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 
 import javafx.event.ActionEvent;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.io.IOException;
 import java.net.URL;
@@ -16,8 +23,13 @@ import java.util.ResourceBundle;
 
 public class NumericKeyboard extends GridPane implements Initializable {
 
+    @Getter
+    @Setter
     @FXML
     private PasswordField codeField;
+
+    @FXML
+    private Button btnConfirm;
 
     public NumericKeyboard() {
         super();
@@ -27,9 +39,32 @@ public class NumericKeyboard extends GridPane implements Initializable {
             fxmlLoader.setController(this);
             Node n = fxmlLoader.load();
             this.getChildren().add(n);
+            this.setPickOnBounds(false);
+            this.btnConfirm.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    onConfirmProperty().get().handle(mouseEvent);
+                }
+            });
+
         } catch (IOException exception) {
             throw new RuntimeException(exception);
         }
+    }
+
+
+    private ObjectProperty<EventHandler<MouseEvent>> propertyOnConfirm = new SimpleObjectProperty<EventHandler<MouseEvent>>();
+
+    public final ObjectProperty<EventHandler<MouseEvent>> onConfirmProperty() {
+        return propertyOnConfirm;
+    }
+
+    public final void setOnConfirm(EventHandler<MouseEvent> handler) {
+        propertyOnConfirm.set(handler);
+    }
+
+    public final EventHandler<MouseEvent> getOnConfirm() {
+        return propertyOnConfirm.get();
     }
 
     @Override
@@ -81,11 +116,6 @@ public class NumericKeyboard extends GridPane implements Initializable {
 
     public void btn9_Click(ActionEvent actionEvent) {
         ClickButton(9);
-    }
-
-    public void btnConfirm_Click(ActionEvent actionEvent) {
-        System.out.println("Confirm");
-        LoginController.login(codeField.getText());
     }
 
     public void btnCancel_Click(ActionEvent actionEvent) {

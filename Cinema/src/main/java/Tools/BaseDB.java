@@ -29,7 +29,6 @@ public class BaseDB {
     }
 
     public static Session openConnection() {
-        //setUp();
         return sessionFactory.openSession();
     }
 }

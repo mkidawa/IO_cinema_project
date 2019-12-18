@@ -51,7 +51,7 @@
         <Button fx:id="btn3" layoutX="194.0" layoutY="101.0" mnemonicParsing="false" onAction="#btn3_Click"
                 prefHeight="90.0" prefWidth="90.0" styleClass="keyboardButton" text="3" GridPane.columnIndex="2"
                 GridPane.rowIndex="4"/>
-        <Button fx:id="btnClear" layoutX="194.0" layoutY="192.0" mnemonicParsing="false" onAction="#btn0_Click"
+        <Button fx:id="btn0" layoutX="194.0" layoutY="192.0" mnemonicParsing="false" onAction="#btn0_Click"
                 prefHeight="90.0" prefWidth="90.0" styleClass="keyboardButton" text="0" GridPane.columnIndex="1"
                 GridPane.columnSpan="2" GridPane.rowIndex="5"/>
         <Button fx:id="btnCancel" layoutX="194.0" layoutY="284.0" mnemonicParsing="false" onAction="#btnCancel_Click"
@@ -64,7 +64,7 @@
                 </ImageView>
             </graphic>
         </Button>
-        <Button fx:id="btnConfirm" layoutX="10.0" layoutY="283.0" mnemonicParsing="false" onAction="#btnConfirm_Click"
+        <Button fx:id="btnConfirm" layoutX="10.0" layoutY="283.0" mnemonicParsing="false"
                 prefHeight="90.0" prefWidth="90.0" styleClass="keyboardButton" GridPane.columnIndex="2"
                 GridPane.rowIndex="5">
             <graphic>

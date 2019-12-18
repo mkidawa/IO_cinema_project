@@ -25,5 +25,5 @@ dependencies {
 }
 
 application {
-    mainClassName = 'Program'
+    mainClassName = 'View.Program'
 }

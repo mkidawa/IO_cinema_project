@@ -19,15 +19,9 @@ import lombok.Setter;
 
 import DBO.TimeTableDAO;
 import Tools.Filter;
-import Model.TimeTableExceptions.Params.AdsDurationOutOfRangeException;
-import Model.TimeTableExceptions.Params.MinTimeIntervalOutOfRangeException;
 import Model.TimeTableExceptions.Performance.TimeTableCreationException;
 import Model.TimeTableExceptions.Performance.HallNotAvailableException;
 import Model.TimeTableExceptions.Performance.MovieNotAvailableException;
-import static View.TimetableModule.Util.Constants.MAX_ADS_VALUE;
-import static View.TimetableModule.Util.Constants.MAX_PERFORMANCE_GAP_VALUE;
-import static View.TimetableModule.Util.Constants.MIN_ADS_VALUE;
-import static View.TimetableModule.Util.Constants.MIN_PERFORMANCE_GAP_VALUE;
 
 @Entity
 @Table(name = "TimeTable")
@@ -61,9 +55,11 @@ public class TimeTable {
 
         List<TimeTable> allTimeTables = TimeTableDAO.getAll();
         boolean conflict = allTimeTables.stream()
-            /* get all in the same hall */
+            /* get all in the same hall (skip myself if I exists) */
             .filter(timeTable -> {
-                return timeTable.getPerformance().getHall().equals(performance.getHall());
+                if(timeTable.getId() == id)
+                    return false;
+                return timeTable.getPerformance().getHall().getId() == performance.getHall().getId();
             })
             /* get all taking place in the same time */
             .filter(timeTable -> {
@@ -91,21 +87,5 @@ public class TimeTable {
 
     public TimeTable(Performance performance, Timestamp performanceDate) throws TimeTableCreationException{
         this(performance, performanceDate, 0);
-    }
-
-    public static void setAdsDuration(Integer value) throws AdsDurationOutOfRangeException {
-        if (value >= MIN_ADS_VALUE && value <= MAX_ADS_VALUE) {
-            TimeTableDAO.updateAdsDuration(value);
-        } else {
-            throw new AdsDurationOutOfRangeException();
-        }
-    }
-
-    public static void setMinTimeInterval(Integer value) throws MinTimeIntervalOutOfRangeException {
-        if (value >= MIN_PERFORMANCE_GAP_VALUE && value <= MAX_PERFORMANCE_GAP_VALUE) {
-            TimeTableDAO.updateMinTimeInterval(value);
-        } else {
-            throw new MinTimeIntervalOutOfRangeException();
-        }
     }
 }

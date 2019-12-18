@@ -2,6 +2,7 @@ package Model;
 
 import java.time.Duration;
 import java.util.List;
+import java.util.Optional;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -11,13 +12,15 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import DBO.HallDAO;
-import DBO.MovieDAO;
 import DBO.TimeTableDAO;
+import DBO.SettingsDAO;
 import Model.TimeTableExceptions.Performance.HallNotAvailableException;
 import Model.TimeTableExceptions.Performance.MovieNotAvailableException;
 import Model.TimeTableExceptions.Performance.TimeTableCreationException;
-import Tools.Filter;
+import Model.SETTINGS;
 import javax.persistence.*;
+
+import Controller.MovieManager;
 
 @Entity
 @Table(name = "Performance")
@@ -53,15 +56,17 @@ public class Performance {
     public Performance() {}
 
     private Movie findProperMovie(String movieTitle) throws MovieNotAvailableException{
-        Filter filter = new Filter();
-        filter.addField("title", movieTitle);
-        List<Movie> movies = MovieDAO.getAllByFilter(filter);
-        if(movies.size() == 0){
+        Optional<Movie> movieOptional = MovieManager.getAllMovies().stream()
+            .filter(movie -> {
+                return movie.getTitle().equals(movieTitle);
+            })
+            .findFirst();
+        if(!movieOptional.isPresent()){
             throw new MovieNotAvailableException("Can not find movie with title: " + movieTitle);
-        }else if(!movies.get(0).getMovieState().getName().equals("Current")){
+        }else if(!movieOptional.get().getMovieState().getName().equals("Current")){
             throw new MovieNotAvailableException("Selected movie is not available (not in 'Current' state)!");
         }
-        return movies.get(0);
+        return movieOptional.get();
     }
 
     private Hall findProperHall(long hallId) throws HallNotAvailableException{
@@ -115,7 +120,11 @@ public class Performance {
 
         this.movie = movie;
         this.hall = hall;
-        this.adsDuration = Duration.ofMinutes(TimeTableDAO.getAdsDuration());
+        SETTINGS adsDuration = SettingsDAO.getByKey("ads_duration");
+        if(adsDuration != null)
+            this.adsDuration = Duration.ofMinutes(Integer.parseInt(adsDuration.getValue()));
+        else
+            this.adsDuration = Duration.ofSeconds(0);
         this.performanceType = performanceType;
 
         if(id > 0){
@@ -129,8 +138,8 @@ public class Performance {
 
     public Duration getDuration(){
         Duration movieDuration = Duration.ofSeconds(0);
-        movieDuration.plusHours(movie.getMovieTime().getHours());
-        movieDuration.plusMinutes(movie.getMovieTime().getMinutes());
+        movieDuration = movieDuration.plusHours(movie.getMovieTime().getHours());
+        movieDuration = movieDuration.plusMinutes(movie.getMovieTime().getMinutes());
         return adsDuration.plus(movieDuration);
     }
 

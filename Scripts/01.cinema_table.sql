@@ -48,7 +48,6 @@ go
 --- CREATED BY: PZajac
 --- drop table Product
 --------------------------------------------------------------------------------------------
-
 IF db_name()<>'master' and
    not exists (	select * from INFORMATION_SCHEMA.TABLES
 		where table_name='Product' and table_type='BASE TABLE')
@@ -64,6 +63,7 @@ BEGIN
 	-- Fields to be edited
 	Name			nvarchar(100)		collate Polish_CS_AS	not null default '',
 	Price			decimal(9,2)		not null default 0,
+	Amount 			int 				not null default 0 ,
 
 	-- Other fiels
 	

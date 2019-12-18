@@ -49,9 +49,10 @@ public class Pack {
         this.positions = new LinkedList<>();
     }
 
-    public Pack(String name) {
+    public Pack(String name, BigDecimal price) {
         this.positions = new LinkedList<>();
         this.name = name;
+        this.price = price;
     }
 
     public Pack(List<PackPO> positions, String name) {

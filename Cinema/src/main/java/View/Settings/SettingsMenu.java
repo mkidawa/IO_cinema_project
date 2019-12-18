@@ -19,8 +19,9 @@ public class SettingsMenu implements Initializable {
     @FXML
     private TextField someSettings;
 
-    @FXML
-    private TextField ticketPrice;
+    @FXML private TextField ticketPrice2D;
+    @FXML private TextField ticketPrice3D;
+    @FXML private TextField ticketPriceVR;
 
     @FXML
     private Button btnClose;
@@ -28,12 +29,16 @@ public class SettingsMenu implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         addTime.setText(SettingsTool.getSetting("AddTime"));
-        ticketPrice.setText(SettingsTool.getSetting("TicketPrice"));
+        ticketPrice2D.setText(SettingsTool.getSetting("TicketPrice2D"));
+        ticketPrice3D.setText(SettingsTool.getSetting("TicketPrice3D"));
+        ticketPriceVR.setText(SettingsTool.getSetting("TicketPriceVR"));
     }
 
     public void save(MouseEvent mouseEvent){
         SettingsTool.setSettings("AddTime", addTime.getText());
-        SettingsTool.setSettings("TicketPrice", ticketPrice.getText());
+        SettingsTool.setSettings("TicketPrice2D", ticketPrice2D.getText());
+        SettingsTool.setSettings("TicketPrice3D", ticketPrice3D.getText());
+        SettingsTool.setSettings("TicketPriceVR", ticketPriceVR.getText());
         SettingsTool.saveSettings();
         ((Stage)(((Button)mouseEvent.getSource()).getScene().getWindow())).close();
     }

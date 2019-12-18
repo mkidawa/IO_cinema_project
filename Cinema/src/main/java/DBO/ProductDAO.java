@@ -69,7 +69,7 @@ public class ProductDAO {
     public static boolean updateAmount(long Id, int amount) {
         var so = BaseDB.openConnection();
         so.beginTransaction();
-        Query query = so.createQuery("UPDATE Product SET Amount = '" + amount + "' WHERE Id = " + Id);
+        Query query = so.createQuery("UPDATE Product SET Amount = Amount -'" + amount + "' WHERE Id = " + Id);
         int res = query.executeUpdate();
         so.getTransaction()
                 .commit();

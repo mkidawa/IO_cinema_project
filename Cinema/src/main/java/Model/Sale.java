@@ -55,6 +55,7 @@ public class Sale {
         this.userId = userId;
         this.saleDate = saleDate;
         this.price = price;
+        this.positions = new LinkedList<>();
     }
 
     public Sale() {

@@ -3,7 +3,6 @@ package View.Sale;
 import DBO.PackDAO;
 import DBO.ProductDAO;
 import DBO.SaleDAO;
-import DBO.SalePoDAO;
 import Model.Pack;
 import Model.Sale;
 import Model.SalePO;
@@ -94,90 +93,106 @@ public class SaleCashbox {
         int selectedPack = tableOfPack.getSelectionModel().selectedIndexProperty().get();
         SimplePack simplePack = packs.get(selectedPack);
 
-        TextInputDialog d1 = new TextInputDialog();
-        d1.setTitle("How many packs do you wanna add?");
-        d1.setContentText("Enter amount");
-        Optional<String> result = d1.showAndWait();
-        if (result.isPresent()) {
-            String amount = result.get();
-            int keyIndex = 0;
-            boolean enoughInMagazine = true;
-            boolean keyExists;
-            List<Pair<Long, Integer>> amountOfProductsInPack = new ArrayList<>();
-            List<Integer> checkerI = new ArrayList<>();
-            List<Integer> checkerAmount = new ArrayList<>();
-            List<Integer> checkerKey = new ArrayList<>();
+        boolean alreadyInPack = false;
 
-            for (int i = 0; i < packContentList.size(); i++) {
-                keyExists = false;
-                amountOfProductsInPack.add(new Pair<>(
-                        packContentList.get(i).getProductId(),
-                        packContentList.get(i).getAmount())
-                );
+        for(int i = 0; i < orderContent.size(); i++){
+            if(orderContent.get(i).getPackHId() == simplePack.getId()){
 
-                for (int j = 0; j < amountOfProductsInOrder.size(); j++) {
-                    if (amountOfProductsInOrder.get(j).getKey() == packContentList.get(i).getId()) {
-                        keyIndex = j;
-                        keyExists = true;
-                        break;
-                    }
-                }
-                int newAmountInOrder;
-
-                if (!keyExists) {
-                    newAmountInOrder = packContentList.get(i).getAmount() * Integer.valueOf(amount);
-                    if( newAmountInOrder <= ((Integer) ProductDAO.getAmountById(packContentList.get(i).getProductId()).get(0))){
-                        checkerI.add(i);
-                        checkerAmount.add(newAmountInOrder);
-                        checkerKey.add(-1);
-                    } else {
-                        Alert alert = new Alert(Alert.AlertType.ERROR, "There is not enough " + simplePack.getName() + " in magazine!", ButtonType.CLOSE);
-                        alert.showAndWait();
-                        enoughInMagazine = false;
-                        break;
-                    }
-                } else {
-                    newAmountInOrder = amountOfProductsInOrder.get(keyIndex).getValue() + (Integer.valueOf(amount) * packContentList.get(i).getAmount());
-                    if(newAmountInOrder <= ((Integer) ProductDAO.getAmountById(packContentList.get(i).getProductId()).get(0))){
-                        checkerI.add(i);
-                        checkerAmount.add(newAmountInOrder);
-                        checkerKey.add(keyIndex);
-                    } else {
-                        Alert alert = new Alert(Alert.AlertType.ERROR, "There is not enough " + simplePack.getName() + " in magazine!", ButtonType.CLOSE);
-                        alert.showAndWait();
-                        enoughInMagazine = false;
-                        break;
-                    }
-                }
-            }
-            if(enoughInMagazine) {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION, "SUCEEDED", ButtonType.CLOSE);
+                Alert alert = new Alert(Alert.AlertType.ERROR,
+                        "This product is already in this Pack. Please, change amount instead of adding!",
+                        ButtonType.OK);
                 alert.showAndWait();
+                alreadyInPack = true;
+                break;
+            }
+        }
 
-                orderContent.add(
-                        new SimpleSale(
-                                simplePack.getName(),
-                                Integer.valueOf(amount),
-                                simplePack.price.multiply(Integer.valueOf(amount)).doubleValue(),
-                                amountOfProductsInPack,
-                                simplePack.getId()
-                                )
-                );
+        if(!alreadyInPack) {
+            TextInputDialog d1 = new TextInputDialog();
+            d1.setTitle("How many packs do you wanna add?");
+            d1.setContentText("Enter amount");
+            Optional<String> result = d1.showAndWait();
 
-                for(int i = 0; i < checkerI.size(); i++){
-                    if(checkerKey.get(i) != -1){
-                        amountOfProductsInOrder.set(checkerKey.get(checkerI.get(i)),
-                                new Pair<>(amountOfProductsInOrder.get(checkerKey.get(checkerI.get(i))).getKey(),
-                                        checkerAmount.get(checkerI.get(i))));
+            if (result.isPresent()) {
+                String amount = result.get();
+                int keyIndex = 0;
+                boolean enoughInMagazine = true;
+                boolean keyExists;
+                List<Pair<Long, Integer>> amountOfProductsInPack = new ArrayList<>();
+                List<Integer> checkerI = new ArrayList<>();
+                List<Integer> checkerAmount = new ArrayList<>();
+                List<Integer> checkerKey = new ArrayList<>();
+
+                for (int i = 0; i < packContentList.size(); i++) {
+                    keyExists = false;
+                    amountOfProductsInPack.add(new Pair<>(
+                            packContentList.get(i).getProductId(),
+                            packContentList.get(i).getAmount())
+                    );
+
+                    for (int j = 0; j < amountOfProductsInOrder.size(); j++) {
+                        if (amountOfProductsInOrder.get(j).getKey() == packContentList.get(i).getId()) {
+                            keyIndex = j;
+                            keyExists = true;
+                            break;
+                        }
+                    }
+                    int newAmountInOrder;
+
+                    if (!keyExists) {
+                        newAmountInOrder = packContentList.get(i).getAmount() * Integer.valueOf(amount);
+                        if (newAmountInOrder <= ((Integer) ProductDAO.getAmountById(packContentList.get(i).getProductId()).get(0))) {
+                            checkerI.add(i);
+                            checkerAmount.add(newAmountInOrder);
+                            checkerKey.add(-1);
+                        } else {
+                            Alert alert = new Alert(Alert.AlertType.ERROR, "There is not enough " + simplePack.getName() + " in magazine!", ButtonType.CLOSE);
+                            alert.showAndWait();
+                            enoughInMagazine = false;
+                            break;
+                        }
                     } else {
-                        amountOfProductsInOrder.add(new Pair<>(packContentList.get(checkerI.get(i)).getProductId(),
-                                checkerAmount.get(checkerI.get(i))));
+                        newAmountInOrder = amountOfProductsInOrder.get(keyIndex).getValue() + (Integer.valueOf(amount) * packContentList.get(i).getAmount());
+                        if (newAmountInOrder <= ((Integer) ProductDAO.getAmountById(packContentList.get(i).getProductId()).get(0))) {
+                            checkerI.add(i);
+                            checkerAmount.add(newAmountInOrder);
+                            checkerKey.add(keyIndex);
+                        } else {
+                            Alert alert = new Alert(Alert.AlertType.ERROR, "There is not enough " + simplePack.getName() + " in magazine!", ButtonType.CLOSE);
+                            alert.showAndWait();
+                            enoughInMagazine = false;
+                            break;
+                        }
                     }
                 }
+                if (enoughInMagazine) {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION, "SUCEEDED", ButtonType.CLOSE);
+                    alert.showAndWait();
 
-                tableOfOrderContent.setItems(orderContent);
-                tableOfOrderContent.refresh();
-                calculatePrice();
+                    orderContent.add(
+                            new SimpleSale(
+                                    simplePack.getName(),
+                                    Integer.valueOf(amount),
+                                    simplePack.price.multiply(Integer.valueOf(amount)).doubleValue(),
+                                    amountOfProductsInPack,
+                                    simplePack.getId()
+                            )
+                    );
+                    for (int i = 0; i < checkerI.size(); i++) {
+                        if (checkerKey.get(i) != -1) {
+                            amountOfProductsInOrder.set(checkerKey.get(checkerI.get(i)),
+                                    new Pair<>(amountOfProductsInOrder.get(checkerKey.get(checkerI.get(i))).getKey(),
+                                            checkerAmount.get(checkerI.get(i))));
+                        } else {
+                            amountOfProductsInOrder.add(new Pair<>(packContentList.get(checkerI.get(i)).getProductId(),
+                                    checkerAmount.get(checkerI.get(i))));
+                        }
+                    }
+
+                    tableOfOrderContent.setItems(orderContent);
+                    tableOfOrderContent.refresh();
+                    calculatePrice();
+                }
             }
         }
     }
@@ -218,7 +233,7 @@ public class SaleCashbox {
     }
 
 
-    public void confirmOrder(){
+    public void confirmOrder() throws IOException {
 
         Sale order = new Sale(
                 1,
@@ -234,10 +249,31 @@ public class SaleCashbox {
         for(int i = 0; i < amountOfProductsInOrder.size(); i++ ){
             ProductDAO.updateAmount(amountOfProductsInOrder.get(i).getKey(),amountOfProductsInOrder.get(i).getValue());
         }
+
+
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
+                "Your order has been made. We'd print you a receipt but we really don't want to." +
+                        " Do you want to make new order?",
+                ButtonType.YES, ButtonType.NO);
+        alert.showAndWait();
+
+        if (alert.getResult() == ButtonType.YES) {
+            orderContent.clear();
+            tableOfOrderContent.refresh();
+            amountOfProductsInOrder.clear();
+        } else {
+            goBack();
+        }
+
     }
 
-    public void cancelOrder(){
+    public void cancelOrder() throws IOException {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Do you want to cancel making this order?", ButtonType.YES, ButtonType.NO);
+        alert.showAndWait();
 
+        if (alert.getResult() == ButtonType.YES) {
+            goBack();
+        }
     }
 
 }

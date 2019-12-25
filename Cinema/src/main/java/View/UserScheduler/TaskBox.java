@@ -40,6 +40,11 @@ public class TaskBox extends VBox implements Initializable {
 
     public void setTaskView(Schedule schedule) {
         Task task = schedule.getTask();
+        // If task was deleted
+        if (task == null) {
+            task = new Task("<Zadanie usunięte>", "");
+            task.setId(-1);
+        }
         Label name = new Label(task.getName());
         Label description = new Label(task.getDescription());
         name.setPickOnBounds(false);
@@ -48,6 +53,9 @@ public class TaskBox extends VBox implements Initializable {
         this.getChildren().addAll(name, description);
         this.getStyleClass().clear();
         switch ((int)schedule.getScheduleStatus().getId()) {
+            case -1:
+                this.getStyleClass().add("undefined");
+                break;
             case 1:
                 this.getStyleClass().add("assigned");
                 break;

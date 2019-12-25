@@ -6,11 +6,14 @@ import Controller.UserScheduler.UserManager;
 import Model.Schedule;
 import Model.User;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
+import javafx.scene.layout.VBox;
 
 import java.sql.Timestamp;
 import java.time.LocalDate;
@@ -23,7 +26,22 @@ public class UserSchedulerController {
     private DatePicker datePicker;
 
     @FXML
+    private TextField newTaskName;
+
+    @FXML
+    private TextField newTaskDesc;
+
+    @FXML
+    private Button addTaskButton;
+
+    @FXML
+    private VBox tasksListBox;
+
+    @FXML
     private GridPane scheduleTable;
+
+    @FXML
+    private TaskManagerPanel taskManagerPanel;
 
     private UserManager userManager = new UserManager();
     private ScheduleManager scheduleManager = new ScheduleManager();
@@ -36,6 +54,9 @@ public class UserSchedulerController {
         // Set datePicker to today
         LocalDate today = LocalDate.now();
         datePicker.setValue(today);
+
+        // Setup controllers for components
+        taskManagerPanel.setParent(this);
 
         fillSchedule();
 

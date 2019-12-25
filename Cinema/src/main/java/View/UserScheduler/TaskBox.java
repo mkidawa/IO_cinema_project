@@ -43,7 +43,7 @@ public class TaskBox extends VBox implements Initializable {
         // If task was deleted
         if (task == null) {
             task = new Task("<Zadanie usunięte>", "");
-            task.setId(-1);
+            schedule.getScheduleStatus().setId(-1);
         }
         Label name = new Label(task.getName());
         Label description = new Label(task.getDescription());

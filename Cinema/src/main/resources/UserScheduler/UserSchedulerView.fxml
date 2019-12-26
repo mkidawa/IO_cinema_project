@@ -29,13 +29,9 @@
             <Insets bottom="20.0" />
          </VBox.margin>
       </HBox>
-      <HBox fx:id="taskManagerComponent" alignment="TOP_CENTER">
+      <HBox fx:id="scheduleContainer" alignment="TOP_CENTER">
          <children>
-            <TaskManagerPanel fx:id="taskManagerPanel">
-               <HBox.margin>
-                  <Insets right="20.0" />
-               </HBox.margin>
-            </TaskManagerPanel>
+            <TaskManagerPanel fx:id="taskManagerPanel" />
             <ScrollPane fitToHeight="true" fitToWidth="true" focusTraversable="false" style="-fx-background-color: transparent; -fx-border-style: none;">
                <content>
                   <GridPane fx:id="scheduleTable" alignment="CENTER" hgap="6.0" vgap="6.0">
@@ -50,6 +46,9 @@
                     </rowConstraints>
                   </GridPane>
                </content>
+               <HBox.margin>
+                  <Insets left="20.0" />
+               </HBox.margin>
             </ScrollPane>
          </children>
          <padding>

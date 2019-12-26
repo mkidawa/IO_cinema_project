@@ -17,8 +17,8 @@ public class Program extends Application {
     public static Stage pStage;
     @Override
     public void start(Stage primaryStage) throws Exception {
-        // Parent root = FXMLLoader.load(getClass().getResource("/MainMenu/Login.fxml"));
-        Parent root = FXMLLoader.load(getClass().getResource("/UserScheduler/UserSchedulerView.fxml"));
+         Parent root = FXMLLoader.load(getClass().getResource("/MainMenu/Login.fxml"));
+//        Parent root = FXMLLoader.load(getClass().getResource("/UserScheduler/UserSchedulerView.fxml"));
         primaryStage.setTitle("Cinema Management");
         primaryStage.setScene(new Scene(root, 800 , 600));
         primaryStage.show();

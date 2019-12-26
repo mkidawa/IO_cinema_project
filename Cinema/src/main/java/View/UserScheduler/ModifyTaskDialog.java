@@ -3,12 +3,15 @@ package View.UserScheduler;
 import Model.DICT.ScheduleStatus;
 import Model.Schedule;
 import Model.Task;
+import Tools.PermissionChecker;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
 
@@ -18,6 +21,9 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class ModifyTaskDialog implements Initializable {
+
+    @FXML
+    private Button deleteButton;
 
     @FXML
     private ChoiceBox<Task> taskChoice;
@@ -40,6 +46,11 @@ public class ModifyTaskDialog implements Initializable {
             stage.setWidth(300);
             stage.setHeight(170);
             stage.setResizable(false);
+            PermissionChecker permissions = new PermissionChecker();
+            if (!permissions.checkPermission("Zarzadzanie zadaniami")) {
+                taskChoice.setDisable(true);
+                deleteButton.setDisable(true);
+            }
             stage.show();
         } catch (IOException e) {
             // Bob, do something

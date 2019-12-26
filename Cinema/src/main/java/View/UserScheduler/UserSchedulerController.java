@@ -5,6 +5,7 @@ import Controller.UserScheduler.TaskManager;
 import Controller.UserScheduler.UserManager;
 import Model.Schedule;
 import Model.User;
+import Tools.PermissionChecker;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
@@ -12,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.VBox;
 
@@ -26,19 +28,10 @@ public class UserSchedulerController {
     private DatePicker datePicker;
 
     @FXML
-    private TextField newTaskName;
-
-    @FXML
-    private TextField newTaskDesc;
-
-    @FXML
-    private Button addTaskButton;
-
-    @FXML
-    private VBox tasksListBox;
-
-    @FXML
     private GridPane scheduleTable;
+
+    @FXML
+    private HBox scheduleContainer;
 
     @FXML
     private TaskManagerPanel taskManagerPanel;
@@ -57,6 +50,12 @@ public class UserSchedulerController {
 
         // Setup controllers for components
         taskManagerPanel.setParent(this);
+
+        // Modify view based on permissions
+        PermissionChecker permissions = new PermissionChecker();
+        if (!permissions.checkPermission("Zarzadzanie zadaniami")) {
+            scheduleContainer.getChildren().remove(taskManagerPanel);
+        }
 
         fillSchedule();
 

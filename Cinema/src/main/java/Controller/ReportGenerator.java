@@ -3,7 +3,9 @@ package Controller;
 import DBO.MovieDAO;
 import Model.Movie;
 import com.itextpdf.text.*;
+import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
+import org.hibernate.mapping.Table;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -24,6 +26,8 @@ public class ReportGenerator {
             Path path = Paths.get(ClassLoader.getSystemResource("Images/logo.png").toURI());
 
             Document document = new Document();
+//            document.setMargins(1,1, 1,1);
+
             PdfWriter.getInstance(document, new FileOutputStream("AllMoviesReport.pdf"));
 
             document.open();
@@ -66,10 +70,26 @@ public class ReportGenerator {
 
             Paragraph content = new Paragraph();
 
+
+
             List<Movie> movies = MovieDAO.getAll();
+
+            PdfPTable table = new PdfPTable(4);
+
+            table.addCell("Title");
+            table.addCell("Description");
+            table.addCell("Duration");
+            table.addCell("State");
+
             for(Movie movie : movies) {
-                content.add(new Chunk(movie.toString(), fontContent));
+                table.addCell(movie.getTitle());
+                table.addCell(movie.getDescription());
+                table.addCell(movie.getMovieTime().toString());
+                table.addCell(movie.getMovieState().getName());
+//                content.add(new Chunk(movie.toString(), fontContent));
             }
+
+            content.add(table);
 
             document.add(preface);
             document.add(content);

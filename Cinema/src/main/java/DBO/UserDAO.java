@@ -41,6 +41,23 @@ public class UserDAO {
         }
         return execSQL(sql.toString());
     }
+    public static void insertUpdate(User object) {
+        var so = BaseDB.openConnection();
+        so.beginTransaction();
+        so.saveOrUpdate(object);
+        so.getTransaction()
+                .commit();
+        so.close();
+    }
+
+    public static void delete(User object) {
+        var so = BaseDB.openConnection();
+        so.beginTransaction();
+        so.delete(object);
+        so.getTransaction()
+                .commit();
+        so.close();
+    }
 
     public static List execSQL(String sql) {
         var so = BaseDB.openConnection();
@@ -50,4 +67,5 @@ public class UserDAO {
         so.close();
         return result;
     }
+
 }

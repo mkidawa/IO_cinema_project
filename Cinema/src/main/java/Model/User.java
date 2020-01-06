@@ -65,6 +65,16 @@ public class User {
     public User() {
     }
 
+    public User(String firstName, String lastName, String login, String passwordHash, String codeHash, BigDecimal baseSalary, BigDecimal hourlyRate) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.login = login;
+        this.passwordHash = passwordHash;
+        this.codeHash = codeHash;
+        this.baseSalary = baseSalary;
+        this.hourlyRate = hourlyRate;
+    }
+
     @Override
     public String toString() {
         return "User{" +

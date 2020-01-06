@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<HBox alignment="CENTER" prefWidth="500.0" xmlns="http://javafx.com/javafx/8.0.202-ea" xmlns:fx="http://javafx.com/fxml/1">
+<children>
+    <VBox alignment="TOP_LEFT">
+        <children>
+            <ListView fx:id="userList" onMouseClicked="#handleListView">
+                <VBox.margin>
+                    <Insets right="5.0" />
+                </VBox.margin>
+            </ListView>
+        </children>
+    </VBox>
+    <VBox alignment="TOP_RIGHT" spacing="10">
+        <children>
+            <VBox>
+                <VBox.margin>
+                    <Insets right="5.0" />
+                </VBox.margin>
+                <children>
+                    <VBox>
+                        <children>
+                            <Label text="First Name" />
+                            <TextField fx:id="name" prefWidth="150.0" />
+                        </children>
+                    </VBox>
+                    <VBox>
+                        <children>
+                            <Label text="Surname" />
+                            <TextField fx:id="lastName" prefWidth="150.0" />
+                        </children>
+                    </VBox>
+                    <VBox>
+                        <children>
+                            <Label text="Login" />
+                            <TextField fx:id="login" prefWidth="150.0" />
+                        </children>
+                    </VBox>
+                    <VBox>
+                        <children>
+                            <Label text="New Password" />
+                            <PasswordField fx:id="password" prefWidth="150.0" />
+                        </children>
+                    </VBox>
+                    <VBox>
+                        <children>
+                            <Label text="New Code" />
+                            <PasswordField fx:id="code" prefWidth="150.0" />
+                        </children>
+                    </VBox>
+                </children>
+            </VBox>
+            <HBox alignment="BOTTOM_CENTER">
+                <children>
+                    <Button fx:id="updateButton" mnemonicParsing="false" onAction="#update" text="Update">
+                        <VBox.margin>
+                            <Insets right="10.0" />
+                        </VBox.margin>
+                    </Button>
+                    <Button fx:id="deleteButton" mnemonicParsing="false" onAction="#delete" text="Delete" />
+                    <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#cancel" text="Cancel" />
+                </children>
+            </HBox>
+        </children>
+        <VBox.margin>
+            <Insets top="15.0" />
+        </VBox.margin>
+    </VBox>
+</children>
+<padding>
+    <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+</padding>
+</HBox>

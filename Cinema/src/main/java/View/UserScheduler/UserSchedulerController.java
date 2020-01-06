@@ -5,12 +5,18 @@ import Controller.UserScheduler.TaskManager;
 import Controller.UserScheduler.UserManager;
 import Model.Schedule;
 import Model.User;
+import Tools.PermissionChecker;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.RowConstraints;
+import javafx.scene.layout.VBox;
 
 import java.sql.Timestamp;
 import java.time.LocalDate;
@@ -25,6 +31,18 @@ public class UserSchedulerController {
     @FXML
     private GridPane scheduleTable;
 
+    @FXML
+    private HBox scheduleContainer;
+
+    @FXML
+    private Button createUser;
+
+    @FXML
+    private Button modifyUsers;
+
+    @FXML
+    private TaskManagerPanel taskManagerPanel;
+
     private UserManager userManager = new UserManager();
     private ScheduleManager scheduleManager = new ScheduleManager();
     private TaskManager taskManager = new TaskManager();
@@ -36,6 +54,19 @@ public class UserSchedulerController {
         // Set datePicker to today
         LocalDate today = LocalDate.now();
         datePicker.setValue(today);
+
+        // Setup controllers for components
+        taskManagerPanel.setParent(this);
+
+        // Modify view based on permissions
+        PermissionChecker permissions = new PermissionChecker();
+        if (!permissions.checkPermission("Zarzadzanie zadaniami")) {
+            scheduleContainer.getChildren().remove(taskManagerPanel);
+        }
+        if (!permissions.checkPermission("Tworzenie nowych uzytkownikow")) {
+            createUser.setDisable(true);
+            modifyUsers.setDisable(true);
+        }
 
         fillSchedule();
 
@@ -89,7 +120,6 @@ public class UserSchedulerController {
                 }
             }
         }
-
     }
 
     public void openAssignTaskDialog(User user, Timestamp time) {
@@ -116,4 +146,14 @@ public class UserSchedulerController {
     public TaskManager getTaskManager() {
         return taskManager;
     }
+
+    
+    public void handleCreateUserButtonAction() {
+        CreateNewUserDialog dialog = new CreateNewUserDialog(this);
+    }
+
+    public void handleModifyUsersButtonAction() {
+        ModifyUsersDialog dialog = new ModifyUsersDialog(this);
+    }
+
 }

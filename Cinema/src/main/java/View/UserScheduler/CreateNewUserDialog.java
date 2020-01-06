@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -51,6 +52,7 @@ public class CreateNewUserDialog implements Initializable {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/UserScheduler/CreateNewUserDialog.fxml"));
             fxmlLoader.setController(this);
             Scene scene = new Scene(fxmlLoader.load(), 600, 400);
+            stage.setTitle("Create New User");
             stage.setScene(scene);
             stage.setWidth(750);
             stage.setHeight(500);
@@ -95,7 +97,15 @@ public class CreateNewUserDialog implements Initializable {
 
     @FXML
     private void create() {
-        if(!checkAllFields()) return;
+        if(!checkAllFields()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error message");
+            alert.setHeaderText(null);
+            alert.setContentText("Input data is invalid");
+            alert.showAndWait();
+
+            return;
+        }
         String firstName = this.firstName.getText();
         String surname = this.surname.getText();
         String login = this.login.getText();
@@ -103,7 +113,6 @@ public class CreateNewUserDialog implements Initializable {
         String code = this.code.getText();
         BigDecimal baseSalary = new BigDecimal(this.baseSalary.getText());
         BigDecimal hourlyRate = new BigDecimal(this.hourlyRate.getText());
-
 
         User user = new User(firstName, surname, login, password, code, baseSalary, hourlyRate);
         Platform.runLater(() -> {

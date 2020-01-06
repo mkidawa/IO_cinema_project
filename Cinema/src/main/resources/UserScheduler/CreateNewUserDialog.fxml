@@ -12,7 +12,7 @@
         <VBox>
             <children>
                 <Label text="First Name" />
-                <TextField fx:id="firstName" prefWidth="150.0" />
+                <TextField fx:id="firstName"  prefWidth="150.0" />
             </children>
         </VBox>
         <VBox>
@@ -47,7 +47,7 @@
         </VBox>
         <VBox>
             <children>
-                <Label text="HourlyRate" />
+                <Label text="Hourly Rate" />
                 <TextField fx:id="hourlyRate" prefWidth="150.0" />
             </children>
         </VBox>

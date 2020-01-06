@@ -11,12 +11,18 @@
     <VBox alignment="TOP_LEFT">
         <children>
             <ListView fx:id="userList" onMouseClicked="#handleListView">
+                <VBox.margin>
+                    <Insets right="5.0" />
+                </VBox.margin>
             </ListView>
         </children>
     </VBox>
     <VBox alignment="TOP_RIGHT" spacing="10">
         <children>
             <VBox>
+                <VBox.margin>
+                    <Insets right="5.0" />
+                </VBox.margin>
                 <children>
                     <VBox>
                         <children>

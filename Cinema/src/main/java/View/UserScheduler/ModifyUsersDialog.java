@@ -10,10 +10,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -58,6 +55,7 @@ public class ModifyUsersDialog implements Initializable {
             fxmlLoader.setController(this);
             Scene scene = new Scene(fxmlLoader.load());
             stage.setScene(scene);
+            stage.setTitle("Modyfying exisitng users");
           //  stage.setWidth(750);
           //  stage.setHeight(500);
             stage.setResizable(true);
@@ -99,7 +97,15 @@ public class ModifyUsersDialog implements Initializable {
 
     @FXML
     private void update() {
-        if(!checkAllFields()) return;
+        if(!checkAllFields()){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error message");
+            alert.setHeaderText(null);
+            alert.setContentText("Input data is invalid");
+            alert.showAndWait();
+
+            return;
+        }
         User user = userManager.getAllUsers().get(index);
         if(this.name.getText().length() > 1 ) user.setFirstName(this.name.getText());
         if(this.lastName.getText().length() > 1 ) user.setLastName(this.lastName.getText());

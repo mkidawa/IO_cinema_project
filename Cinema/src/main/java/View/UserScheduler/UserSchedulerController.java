@@ -63,6 +63,10 @@ public class UserSchedulerController {
         if (!permissions.checkPermission("Zarzadzanie zadaniami")) {
             scheduleContainer.getChildren().remove(taskManagerPanel);
         }
+        if (!permissions.checkPermission("Tworzenie nowych uzytkownikow")) {
+            createUser.setDisable(true);
+            modifyUsers.setDisable(true);
+        }
 
         fillSchedule();
 

@@ -62,10 +62,9 @@ public class ModifyUsersDialog implements Initializable {
           //  stage.setHeight(500);
             stage.setResizable(true);
             PermissionChecker permissions = new PermissionChecker();
-//            if (!permissions.checkPermission("Tworzenie nowych uzytkownikow")) {
-//                //taskChoice.setDisable(true);
-//                //deleteButton.setDisable(true);
-//            }
+            if (!permissions.checkPermission("Usuwanie uzytkownikow")) {
+                deleteButton.setDisable(true);
+            }
             stage.show();
         } catch (IOException e) {
 
@@ -144,11 +143,6 @@ public class ModifyUsersDialog implements Initializable {
         this.name.setText(users.get(index).getFirstName());
         this.lastName.setText(users.get(index).getLastName());
         this.login.setText(users.get(index).getLogin());
-//        this.password
-//        this.code;
-
-
-
     }
 
 

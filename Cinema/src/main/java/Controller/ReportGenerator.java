@@ -1,10 +1,10 @@
 package Controller;
 
 import DBO.MovieDAO;
+import DBO.ReservationDAO;
+import DBO.SaleDAO;
 import DBO.UserDAO;
-import Model.Movie;
-import Model.TnAData;
-import Model.User;
+import Model.*;
 import Tools.BaseDB;
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.PdfPTable;
@@ -14,6 +14,7 @@ import org.hibernate.mapping.Table;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.net.URISyntaxException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -179,6 +180,91 @@ public class ReportGenerator {
                 table.addCell(String.valueOf(data.getDateDay()));
                 table.addCell(String.valueOf(data.getTimeFrom()));
                 table.addCell(String.valueOf(data.getTimeTo()));
+            }
+
+            content.add(table);
+
+            document.add(preface);
+            document.add(content);
+
+            document.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void generateIncomesReport() throws IOException {
+
+        try {
+
+            Path path = Paths.get(ClassLoader.getSystemResource("Images/logo.png").toURI());
+
+            Document document = new Document();
+//            document.setMargins(1,1, 1,1);
+
+            PdfWriter.getInstance(document, new FileOutputStream("IncomesReport.pdf"));
+
+            document.open();
+            Font fontTitle = FontFactory.getFont(FontFactory.COURIER, 32, BaseColor.BLACK);
+            Font fontReportTitle = FontFactory.getFont(FontFactory.COURIER, 28, BaseColor.BLACK);
+            Font fontContent = FontFactory.getFont(FontFactory.COURIER, 14, BaseColor.BLACK);
+
+            Image img = Image.getInstance(path.toAbsolutePath().toString());
+
+            img.scaleToFit(PageSize.A4.getWidth()/5, PageSize.A4.getHeight()/5);
+            float x = (float) ((PageSize.A4.getWidth() - img.getScaledWidth()) * 0.5);
+            float y = (float) (PageSize.A4.getHeight() - img.getScaledHeight() * 1.1);
+            img.setAbsolutePosition(x, y);
+
+            Chunk title = new Chunk("Cinema management system", fontTitle);
+            Chunk reportTitle = new Chunk("Incomes report", fontReportTitle);
+
+            Paragraph preface = new Paragraph();
+            preface.setAlignment(Element.ALIGN_CENTER);
+
+            preface.add(img);
+            preface.add( Chunk.NEWLINE );
+            preface.add( Chunk.NEWLINE );
+            preface.add( Chunk.NEWLINE );
+            preface.add( Chunk.NEWLINE );
+            preface.add( Chunk.NEWLINE );
+            preface.add( Chunk.NEWLINE );
+            preface.add( Chunk.NEWLINE );
+            preface.add( Chunk.NEWLINE );
+            preface.add(title);
+            preface.add( Chunk.NEWLINE );
+            preface.add( Chunk.NEWLINE );
+            preface.add( Chunk.NEWLINE );
+            preface.add(reportTitle);
+            preface.add( Chunk.NEWLINE );
+            preface.add( Chunk.NEWLINE );
+
+            Paragraph content = new Paragraph();
+
+            List<Reservation> reservations = ReservationDAO.getAll();
+            List<Sale> sales = SaleDAO.getAll();
+
+            PdfPTable table = new PdfPTable(4);
+
+            table.addCell("Income Type");
+            table.addCell("Description");
+            table.addCell("Date");
+            table.addCell("Value");
+
+            for(Reservation res : reservations) {
+                if (res.getReservationPrice() == 0) continue;
+                table.addCell("Reservation");
+                table.addCell("Timetable: " + String.valueOf(res.getTimeTable().getId()));
+                table.addCell(res.getReservationDate().toString());
+                table.addCell(String.valueOf(res.getReservationPrice()));
+            }
+
+            for(Sale s : sales) {
+                if (s.getPrice().equals(BigDecimal.ZERO)) continue;
+                table.addCell("Food Sale");
+                table.addCell(String.valueOf(s.getId()));
+                table.addCell(s.getSaleDate().toString());
+                table.addCell(String.valueOf(s.getPrice()));
             }
 
             content.add(table);

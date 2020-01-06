@@ -26,7 +26,8 @@ public class ReportPanel implements Initializable {
 
         list = FXCollections.observableArrayList(
                 "All Movies Report",
-               "Work time report"
+               "Work time report",
+                "Incomes Report"
         );
 
         reportList.getItems().addAll(list);
@@ -50,6 +51,9 @@ public class ReportPanel implements Initializable {
             }
             case "Work time report": {
                 Controller.ReportGenerator.generateWorkTimeReport();
+            }
+            case "Incomes Report": {
+                Controller.ReportGenerator.generateIncomesReport();
             }
 
             default: {

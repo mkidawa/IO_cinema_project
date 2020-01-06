@@ -79,12 +79,17 @@ public class CreateNewUserDialog implements Initializable {
                 || login.getText().length() < 2
                 || password.getText().length() < 2
                 || code.getText().length() < 2
-                || hourlyRate.getText().length() < 3
+                || baseSalary.getText().length() == 0
+                || hourlyRate.getText().length() == 0
         ) {
-
             return false;
         }
-        return true;
+        if( baseSalary.getText().matches("\\d{0,7}([\\.]\\d{0,4})?")
+        && hourlyRate.getText().matches("\\d{0,7}([\\.]\\d{0,4})?")
+        ) {
+            return true;
+        }else return false;
+
     }
 
 

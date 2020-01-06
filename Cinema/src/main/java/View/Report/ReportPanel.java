@@ -38,6 +38,7 @@ public class ReportPanel implements Initializable {
                 "All Movies Report",
                "Work time report",
                 "Individual Work time report",
+                "Salary report",
                 "Incomes Report",
                 "Food Sale Report"
         );
@@ -85,6 +86,9 @@ public class ReportPanel implements Initializable {
             }
             case "Individual Work time report": {
                 Controller.ReportGenerator.generateIndividualWorkTimeReport(fromDate.getValue(), toDate.getValue(), Long.parseLong(userCombo.getValue()));
+            }
+            case "Salary report": {
+                Controller.ReportGenerator.generateSalaryReport(fromDate.getValue(), toDate.getValue());
             }
             case "Incomes Report": {
                 Controller.ReportGenerator.generateIncomesReport();

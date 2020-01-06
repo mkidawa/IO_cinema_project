@@ -21,7 +21,9 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ReportGenerator {
     static Paragraph prepareFile(String reportName) {
@@ -220,7 +222,69 @@ public class ReportGenerator {
         }
     }
 
+    public static void generateSalaryReport(LocalDate dateFrom, LocalDate dateTo) throws IOException {
 
+        try {
+            Document document = new Document();
+
+            PdfWriter.getInstance(document, new FileOutputStream("SalaryReport.pdf"));
+
+            document.open();
+
+            Paragraph preface = prepareFile("Salary report");
+            Paragraph content = new Paragraph();
+
+            var so = BaseDB.openConnection();
+            so.beginTransaction();
+            List<TnAData> tnadata = null;
+            if(dateFrom != null && dateTo != null) {
+                tnadata = so.createQuery("from TnAData where DateDay >= '" + String.valueOf(dateFrom) + "' AND DateDay <= '" + String.valueOf(dateTo) + "'").list();
+            } else {
+                tnadata = so.createQuery("from TnAData").list();
+            }
+            so.getTransaction().commit();
+            so.close();
+
+
+            PdfPTable table = new PdfPTable(4);
+
+            table.addCell("User");
+            table.addCell("Hours");
+            table.addCell("Hourly rate");
+            table.addCell("Salary");
+
+            HashMap<Long, Integer> usersUniqe = new HashMap<>();
+
+            for(TnAData data: tnadata) {
+                usersUniqe.putIfAbsent(data.getUserId(), 0);
+            }
+
+            int hours = 0;
+            for(TnAData data: tnadata) {
+                hours = usersUniqe.get(data.getUserId());
+                hours += data.getTimeTo().getHours() - data.getTimeFrom().getHours();
+                usersUniqe.replace(data.getUserId(), hours);
+            }
+
+            List<User> currentUser = null;
+            for(Map.Entry<Long, Integer> entry : usersUniqe.entrySet()) {
+                currentUser = UserDAO.getAllById(entry.getKey());
+                table.addCell(String.join(" ", currentUser.get(0).getFirstName(), currentUser.get(0).getLastName()));
+                table.addCell(String.valueOf(entry.getValue()));
+                table.addCell(String.valueOf(currentUser.get(0).getHourlyRate()));
+                table.addCell(String.valueOf(currentUser.get(0).getHourlyRate().multiply(BigDecimal.valueOf(entry.getValue()))));
+            }
+
+            content.add(table);
+
+            document.add(preface);
+            document.add(content);
+
+            document.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     public static void generateIncomesReport() throws IOException {
 

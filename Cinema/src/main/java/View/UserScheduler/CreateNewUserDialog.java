@@ -54,7 +54,7 @@ public class CreateNewUserDialog implements Initializable {
             stage.setScene(scene);
             stage.setWidth(750);
             stage.setHeight(500);
-            stage.setResizable(false);
+            stage.setResizable(true);
             PermissionChecker permissions = new PermissionChecker();
             if (!permissions.checkPermission("Tworzenie nowych uzytkownikow")) {
                 //taskChoice.setDisable(true);

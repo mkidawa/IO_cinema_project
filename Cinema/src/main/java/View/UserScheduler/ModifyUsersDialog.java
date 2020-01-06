@@ -12,6 +12,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -28,6 +30,20 @@ public class ModifyUsersDialog implements Initializable {
     private Button deleteButton;
     @FXML
     private Button updateButton;
+
+    @FXML
+    private TextField name;
+    @FXML
+    private TextField lastName;
+    @FXML
+    private TextField login;
+    @FXML
+    private PasswordField password;
+    @FXML
+    private TextField code;
+    @FXML
+    private TextField hourlyRate;
+
     private UserManager userManager = new UserManager();
 
     private UserSchedulerController parent;
@@ -54,8 +70,6 @@ public class ModifyUsersDialog implements Initializable {
         }
     }
 
-
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         ObservableList<String> data = FXCollections.observableArrayList();
@@ -65,6 +79,9 @@ public class ModifyUsersDialog implements Initializable {
            data.add((users.get(y).getFirstName()+" "+users.get(y).getLastName()).toString());
         }
         this.userList.setItems(data);  // = new ListView<String>(data);
+        this.hourlyRate.setText("1.0");
+        this.login.setDisable(true);
+
 
     }
 
@@ -88,8 +105,34 @@ public class ModifyUsersDialog implements Initializable {
     @FXML
     private void cancel() {
         Platform.runLater(() -> {
-
+            System.out.println(userList.getSelectionModel().getSelectedIndex());
         });
         stage.close();
     }
+
+
+    public void handleListView(){
+        ObservableList<String> data = userList.getItems();
+        int index = 0;
+        List<User> users = userManager.getAllUsers();
+        for(int i = 0; i != data.size(); i++)
+            if(userList.getSelectionModel().getSelectedItem().compareTo(data.get(i))==0){
+                index = i;
+                System.out.println(index);
+                System.out.println();
+                break;
+            }
+
+        this.name.setText(users.get(index).getFirstName());
+        this.lastName.setText(users.get(index).getLastName());
+        this.login.setText(users.get(index).getLogin());
+//        this.password
+//        this.code;
+
+
+
+    }
+
+
 }
+

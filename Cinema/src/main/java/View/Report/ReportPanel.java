@@ -100,11 +100,11 @@ public class ReportPanel implements Initializable {
                 break;
             }
             case "Incomes Report": {
-                Controller.ReportGenerator.generateIncomesReport();
+                Controller.ReportGenerator.generateIncomesReport(fromDate.getValue(), toDate.getValue());
                 break;
             }
             case "Food Sale Report": {
-                Controller.ReportGenerator.generateFoodSaleReport();
+                Controller.ReportGenerator.generateFoodSaleReport(fromDate.getValue(), toDate.getValue());
                 break;
             }
 

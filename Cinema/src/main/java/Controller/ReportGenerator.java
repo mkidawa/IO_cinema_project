@@ -351,7 +351,7 @@ public class ReportGenerator {
         }
     }
 
-    public static void generateIncomesReport() throws IOException {
+    public static void generateIncomesReport(LocalDate fDate, LocalDate tDate) throws IOException {
 
         try {
 
@@ -379,22 +379,32 @@ public class ReportGenerator {
 
             for(Reservation res : reservations) {
                 if (res.getReservationPrice() == 0) continue;
-                table.addCell("Reservation");
-                table.addCell("Timetable: " + String.valueOf(res.getTimeTable().getId()));
-                table.addCell(res.getReservationDate().toString());
-                table.addCell(String.valueOf(res.getReservationPrice()));
-                fSum += res.getReservationPrice();
+                if ((fDate.compareTo(res.getReservationDate().toLocalDateTime().toLocalDate()) < 0
+                        &&  tDate.compareTo(res.getReservationDate().toLocalDateTime().toLocalDate()) > 0) ||
+                        (fDate.compareTo(res.getReservationDate().toLocalDateTime().toLocalDate()) == 0
+                                && tDate.compareTo(res.getReservationDate().toLocalDateTime().toLocalDate()) == 0)) {
+                    table.addCell("Reservation");
+                    table.addCell("Timetable: " + String.valueOf(res.getTimeTable().getId()));
+                    table.addCell(res.getReservationDate().toString());
+                    table.addCell(String.valueOf(res.getReservationPrice()));
+                    fSum += res.getReservationPrice();
+                }
             }
 
             BigDecimal sum = new BigDecimal(fSum);
 
             for(Sale s : sales) {
                 if (s.getPrice().equals(BigDecimal.ZERO)) continue;
-                table.addCell("Food Sale");
-                table.addCell(String.valueOf(s.getId()));
-                table.addCell(s.getSaleDate().toString());
-                table.addCell(String.valueOf(s.getPrice()));
-                sum = sum.add(s.getPrice());
+                if ((fDate.compareTo(s.getSaleDate().toLocalDateTime().toLocalDate()) < 0
+                        &&  tDate.compareTo(s.getSaleDate().toLocalDateTime().toLocalDate()) > 0) ||
+                        (fDate.compareTo(s.getSaleDate().toLocalDateTime().toLocalDate()) == 0
+                                && tDate.compareTo(s.getSaleDate().toLocalDateTime().toLocalDate()) == 0)) {
+                    table.addCell("Food Sale");
+                    table.addCell(String.valueOf(s.getId()));
+                    table.addCell(s.getSaleDate().toString());
+                    table.addCell(String.valueOf(s.getPrice()));
+                    sum = sum.add(s.getPrice());
+                }
             }
 
             tableSum.addCell("Sum:");
@@ -415,7 +425,7 @@ public class ReportGenerator {
         }
     }
 
-    public static void generateFoodSaleReport() throws IOException {
+    public static void generateFoodSaleReport(LocalDate fDate, LocalDate tDate) throws IOException {
 
         try {
 
@@ -447,11 +457,16 @@ public class ReportGenerator {
 
             for(SalePO pos : positions) {
                 List<Sale> s = SaleDAO.getAllById(pos.getSale().getId());
-                table.addCell(String.valueOf(pos.getPack().getName()));
-                table.addCell(String.valueOf(pos.getAmount().intValue()));
-                table.addCell(s.get(0).getSaleDate().toString());
-                table.addCell(String.valueOf(pos.getPrice()));
-                sum = sum.add(pos.getPrice());
+                if ((fDate.compareTo(s.get(0).getSaleDate().toLocalDateTime().toLocalDate()) < 0
+                        &&  tDate.compareTo(s.get(0).getSaleDate().toLocalDateTime().toLocalDate()) > 0) ||
+                        (fDate.compareTo(s.get(0).getSaleDate().toLocalDateTime().toLocalDate()) == 0
+                                && tDate.compareTo(s.get(0).getSaleDate().toLocalDateTime().toLocalDate()) == 0)) {
+                    table.addCell(String.valueOf(pos.getPack().getName()));
+                    table.addCell(String.valueOf(pos.getAmount().intValue()));
+                    table.addCell(s.get(0).getSaleDate().toString());
+                    table.addCell(String.valueOf(pos.getPrice()));
+                    sum = sum.add(pos.getPrice());
+                }
             }
 
             tableSum.addCell("Sum:");

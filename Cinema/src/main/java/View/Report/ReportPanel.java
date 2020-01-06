@@ -81,10 +81,10 @@ public class ReportPanel implements Initializable {
                 Controller.ReportGenerator.generateAllMoviesReport();
             }
             case "Work time report": {
-                Controller.ReportGenerator.generateWorkTimeReport();
+                Controller.ReportGenerator.generateWorkTimeReport(fromDate.getValue(), toDate.getValue());
             }
             case "Individual Work time report": {
-                Controller.ReportGenerator.generateIndividualWorkTimeReport(Long.parseLong(userCombo.getValue()));
+                Controller.ReportGenerator.generateIndividualWorkTimeReport(fromDate.getValue(), toDate.getValue(), Long.parseLong(userCombo.getValue()));
             }
             case "Incomes Report": {
                 Controller.ReportGenerator.generateIncomesReport();

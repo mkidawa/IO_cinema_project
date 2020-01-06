@@ -19,6 +19,7 @@ import java.math.BigDecimal;
 import java.net.URISyntaxException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -114,7 +115,7 @@ public class ReportGenerator {
         }
     }
 
-    public static void generateWorkTimeReport() throws IOException {
+    public static void generateWorkTimeReport(LocalDate dateFrom, LocalDate dateTo) throws IOException {
 
         try {
             Document document = new Document();
@@ -128,7 +129,12 @@ public class ReportGenerator {
 
             var so = BaseDB.openConnection();
             so.beginTransaction();
-            List<TnAData> tnadata = so.createQuery("from TnAData").list();
+            List<TnAData> tnadata = null;
+            if(dateFrom != null && dateTo != null) {
+                tnadata = so.createQuery("from TnAData where DateDay >= '" + String.valueOf(dateFrom) + "' AND DateDay <= '" + String.valueOf(dateTo) + "'").list();
+            } else {
+                tnadata = so.createQuery("from TnAData").list();
+            }
             so.getTransaction().commit();
             so.close();
 
@@ -161,7 +167,7 @@ public class ReportGenerator {
         }
     }
 
-    public static void generateIndividualWorkTimeReport(long userId) throws IOException {
+    public static void generateIndividualWorkTimeReport(LocalDate dateFrom, LocalDate dateTo, long userId) throws IOException {
 
         try {
 
@@ -176,8 +182,12 @@ public class ReportGenerator {
 
             var so = BaseDB.openConnection();
             so.beginTransaction();
-            List<TnAData> tnadata = so.createQuery("from TnAData where Id = " + String.valueOf(userId)).list();
-            so.getTransaction().commit();
+            List<TnAData> tnadata = null;
+            if(dateFrom != null && dateTo != null) {
+                tnadata = so.createQuery("from TnAData where  UsersId = " + String.valueOf(userId)+ " AND DateDay >= '" + String.valueOf(dateFrom) + "' AND DateDay <= '" + String.valueOf(dateTo) + "'").list();
+            } else {
+                tnadata = so.createQuery("from TnAData where UsersId = " + String.valueOf(userId)).list();
+            }            so.getTransaction().commit();
             so.close();
 
 
@@ -209,6 +219,7 @@ public class ReportGenerator {
             e.printStackTrace();
         }
     }
+
 
 
     public static void generateIncomesReport() throws IOException {

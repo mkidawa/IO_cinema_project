@@ -38,7 +38,8 @@ public class ReportPanel implements Initializable {
                 "All Movies Report",
                "Work time report",
                 "Individual Work time report",
-                "Incomes Report"
+                "Incomes Report",
+                "Food Sale Report"
         );
 
 
@@ -87,6 +88,9 @@ public class ReportPanel implements Initializable {
             }
             case "Incomes Report": {
                 Controller.ReportGenerator.generateIncomesReport();
+            }
+            case "Food Sale Report": {
+                Controller.ReportGenerator.generateFoodSaleReport();
             }
 
             default: {

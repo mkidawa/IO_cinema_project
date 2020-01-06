@@ -16,6 +16,15 @@ public class SaleDAO {
         return result;
     }
 
+    public static List getAllById(long Id) {
+        var so = BaseDB.openConnection();
+        so.beginTransaction();
+        List result = so.createQuery("from Sale where Id = " + String.valueOf(Id)).list();
+        so.getTransaction().commit();
+        so.close();
+        return result;
+    }
+
     public static void insert(Sale object) {
         var so = BaseDB.openConnection();
         so.beginTransaction();
@@ -23,5 +32,14 @@ public class SaleDAO {
         so.getTransaction()
                 .commit();
         so.close();
+    }
+
+    public static List getOrderContent(long Id){
+        var so = BaseDB.openConnection();
+        so.beginTransaction();
+        List result = so.createQuery("from SalePO where SaleHId = " + String.valueOf(Id)).list();
+        so.getTransaction().commit();
+        so.close();
+        return result;
     }
 }

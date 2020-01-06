@@ -19,6 +19,7 @@ import java.math.BigDecimal;
 import java.net.URISyntaxException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ReportGenerator {
@@ -356,6 +357,88 @@ public class ReportGenerator {
                 table.addCell(s.getSaleDate().toString());
                 table.addCell(String.valueOf(s.getPrice()));
             }
+
+            content.add(table);
+
+            document.add(preface);
+            document.add(content);
+
+            document.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void generateFoodSaleReport() throws IOException {
+
+        try {
+
+            Path path = Paths.get(ClassLoader.getSystemResource("Images/logo.png").toURI());
+
+            Document document = new Document();
+
+            PdfWriter.getInstance(document, new FileOutputStream("FoodSaleReport.pdf"));
+
+            document.open();
+            Font fontTitle = FontFactory.getFont(FontFactory.COURIER, 32, BaseColor.BLACK);
+            Font fontReportTitle = FontFactory.getFont(FontFactory.COURIER, 28, BaseColor.BLACK);
+            Font fontContent = FontFactory.getFont(FontFactory.COURIER, 14, BaseColor.BLACK);
+
+            Image img = Image.getInstance(path.toAbsolutePath().toString());
+
+            img.scaleToFit(PageSize.A4.getWidth()/5, PageSize.A4.getHeight()/5);
+            float x = (float) ((PageSize.A4.getWidth() - img.getScaledWidth()) * 0.5);
+            float y = (float) (PageSize.A4.getHeight() - img.getScaledHeight() * 1.1);
+            img.setAbsolutePosition(x, y);
+
+            Chunk title = new Chunk("Cinema management system", fontTitle);
+            Chunk reportTitle = new Chunk("Food Sale Report", fontReportTitle);
+
+            Paragraph preface = new Paragraph();
+            preface.setAlignment(Element.ALIGN_CENTER);
+
+            preface.add(img);
+            preface.add( Chunk.NEWLINE );
+            preface.add( Chunk.NEWLINE );
+            preface.add( Chunk.NEWLINE );
+            preface.add( Chunk.NEWLINE );
+            preface.add( Chunk.NEWLINE );
+            preface.add( Chunk.NEWLINE );
+            preface.add( Chunk.NEWLINE );
+            preface.add( Chunk.NEWLINE );
+            preface.add(title);
+            preface.add( Chunk.NEWLINE );
+            preface.add( Chunk.NEWLINE );
+            preface.add( Chunk.NEWLINE );
+            preface.add(reportTitle);
+            preface.add( Chunk.NEWLINE );
+            preface.add( Chunk.NEWLINE );
+
+            Paragraph content = new Paragraph();
+
+            List<Sale> sales = SaleDAO.getAll();
+            ArrayList<SalePO> positions = new ArrayList<SalePO>();
+            for(Sale s : sales) {
+                List<SalePO> pos = SaleDAO.getOrderContent(s.getId());
+                positions.addAll(pos);
+            }
+
+            PdfPTable table = new PdfPTable(4);
+
+
+            table.addCell("Pack");
+            table.addCell("Amount");
+            table.addCell("Date");
+            table.addCell("Value");
+
+            for(SalePO pos : positions) {
+                List<Sale> s = SaleDAO.getAllById(pos.getSale().getId());
+                table.addCell(String.valueOf(pos.getPack().getName()));
+                table.addCell(String.valueOf(pos.getAmount().intValue()));
+                table.addCell(s.get(0).getSaleDate().toString());
+                table.addCell(String.valueOf(pos.getPrice()));
+            }
+
 
             content.add(table);
 

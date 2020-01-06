@@ -25,7 +25,8 @@ public class ReportPanel implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
 
         list = FXCollections.observableArrayList(
-                "All Movies Report"
+                "All Movies Report",
+               "Work time report"
         );
 
         reportList.getItems().addAll(list);
@@ -33,7 +34,28 @@ public class ReportPanel implements Initializable {
     }
 
     public void onClickGenerate(MouseEvent mouseEvent) throws IOException {
-        Controller.ReportGenerator.generateAllMoviesReport();
+
+        if(reportList.getSelectionModel().isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Report");
+            alert.setHeaderText(null);
+            alert.setContentText("Report must be selected!");
+            alert.showAndWait();
+            return;
+        }
+
+        switch (reportList.getValue()) {
+            case "All Movies Report": {
+                Controller.ReportGenerator.generateAllMoviesReport();
+            }
+            case "Work time report": {
+                Controller.ReportGenerator.generateWorkTimeReport();
+            }
+
+            default: {
+                System.out.println("default");
+            }
+        }
 
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Report generated");

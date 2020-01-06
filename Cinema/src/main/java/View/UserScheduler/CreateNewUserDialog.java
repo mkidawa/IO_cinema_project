@@ -92,7 +92,6 @@ public class CreateNewUserDialog implements Initializable {
     }
 
 
-
     @FXML
     private void create() {
         if(!checkAllFilled()) return;
@@ -104,9 +103,10 @@ public class CreateNewUserDialog implements Initializable {
         BigDecimal baseSalary = new BigDecimal(this.baseSalary.getText());
         BigDecimal hourlyRate = new BigDecimal(this.hourlyRate.getText());
         User user = new User(firstName, surname, login, password, code, baseSalary, hourlyRate);
-        parent.getUserManager().updateUser(user);
+
         Platform.runLater(() -> {
-           parent.fillSchedule();
+           parent.getUserManager().updateUser(user);
+            parent.fillSchedule();
         });
         stage.close();
     }

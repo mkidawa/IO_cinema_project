@@ -41,6 +41,8 @@ public class ModifyUsersDialog implements Initializable {
     private PasswordField password;
     @FXML
     private PasswordField code;
+    //current User's index
+    private int index;
 
 
     private UserManager userManager;// = new UserManager();
@@ -66,7 +68,7 @@ public class ModifyUsersDialog implements Initializable {
 //            }
             stage.show();
         } catch (IOException e) {
-            System.out.println("Something went wrong."+e);
+
         }
     }
 
@@ -84,19 +86,39 @@ public class ModifyUsersDialog implements Initializable {
 
     }
 
+    public boolean checkAllFields() {
+
+        if (name.getText().length() == 0
+                && lastName.getText().length()  == 0
+                && password.getText().length()  == 0
+                && code.getText().length()  == 0
+        ) {
+            return false;
+        }
+        return true;
+    }
 
     @FXML
     private void update() {
+        if(!checkAllFields()) return;
+        User user = userManager.getAllUsers().get(index);
+        if(this.name.getText().length() > 1 ) user.setFirstName(this.name.getText());
+        if(this.lastName.getText().length() > 1 ) user.setLastName(this.lastName.getText());
+        if(this.password.getText().length() > 2 ) user.setPasswordHash(this.password.getText());
+        if(this.code.getText().length() > 0 ) user.setCodeHash(this.code.getText());
         Platform.runLater(() -> {
-
+            parent.getUserManager().updateUser(user);
+            parent.fillSchedule();
         });
         stage.close();
     }
 
     @FXML
     private void delete() {
+        User user = userManager.getAllUsers().get(index);
         Platform.runLater(() -> {
-
+            parent.getUserManager().deleteUser(user);
+            parent.fillSchedule();
         });
         stage.close();
     }
@@ -109,11 +131,11 @@ public class ModifyUsersDialog implements Initializable {
 
     public void handleListView(){
         ObservableList<String> data = userList.getItems();
-        int index = 0;
+
         List<User> users = userManager.getAllUsers();
         for(int i = 0; i != data.size(); i++)
             if(userList.getSelectionModel().getSelectedItem().compareTo(data.get(i))==0){
-                index = i;
+                this.index = i;
                 System.out.println(index);
                 System.out.println();
                 break;

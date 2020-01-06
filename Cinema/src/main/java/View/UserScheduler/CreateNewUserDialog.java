@@ -4,7 +4,6 @@ package View.UserScheduler;
 import Model.User;
 import Tools.PermissionChecker;
 import javafx.application.Platform;
-import javafx.beans.value.ChangeListener;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -12,14 +11,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Label;
 import javafx.stage.Stage;
-import javafx.util.StringConverter;
 
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.net.URL;
-import java.util.List;
 import java.util.ResourceBundle;
 
 public class CreateNewUserDialog implements Initializable {
@@ -76,7 +72,7 @@ public class CreateNewUserDialog implements Initializable {
         this.hourlyRate.setText("1.0");
     }
 
-    public boolean checkAllFilled() {
+    public boolean checkAllFields() {
 
         if (firstName.getText().length() < 1
                 || surname.getText().length() < 1
@@ -94,7 +90,7 @@ public class CreateNewUserDialog implements Initializable {
 
     @FXML
     private void create() {
-        if(!checkAllFilled()) return;
+        if(!checkAllFields()) return;
         String firstName = this.firstName.getText();
         String surname = this.surname.getText();
         String login = this.login.getText();
@@ -102,10 +98,11 @@ public class CreateNewUserDialog implements Initializable {
         String code = this.code.getText();
         BigDecimal baseSalary = new BigDecimal(this.baseSalary.getText());
         BigDecimal hourlyRate = new BigDecimal(this.hourlyRate.getText());
-        User user = new User(firstName, surname, login, password, code, baseSalary, hourlyRate);
 
+
+        User user = new User(firstName, surname, login, password, code, baseSalary, hourlyRate);
         Platform.runLater(() -> {
-           parent.getUserManager().updateUser(user);
+            parent.getUserManager().updateUser(user);
             parent.fillSchedule();
         });
         stage.close();

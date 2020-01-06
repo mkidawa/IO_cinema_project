@@ -291,7 +291,6 @@ public class ReportGenerator {
             Path path = Paths.get(ClassLoader.getSystemResource("Images/logo.png").toURI());
 
             Document document = new Document();
-//            document.setMargins(1,1, 1,1);
 
             PdfWriter.getInstance(document, new FileOutputStream("IncomesReport.pdf"));
 
@@ -336,11 +335,14 @@ public class ReportGenerator {
             List<Sale> sales = SaleDAO.getAll();
 
             PdfPTable table = new PdfPTable(4);
+            PdfPTable tableSum = new PdfPTable(2);
 
             table.addCell("Income Type");
             table.addCell("Description");
             table.addCell("Date");
             table.addCell("Value");
+
+            float fSum = 0;
 
             for(Reservation res : reservations) {
                 if (res.getReservationPrice() == 0) continue;
@@ -348,7 +350,10 @@ public class ReportGenerator {
                 table.addCell("Timetable: " + String.valueOf(res.getTimeTable().getId()));
                 table.addCell(res.getReservationDate().toString());
                 table.addCell(String.valueOf(res.getReservationPrice()));
+                fSum += res.getReservationPrice();
             }
+
+            BigDecimal sum = new BigDecimal(fSum);
 
             for(Sale s : sales) {
                 if (s.getPrice().equals(BigDecimal.ZERO)) continue;
@@ -356,9 +361,17 @@ public class ReportGenerator {
                 table.addCell(String.valueOf(s.getId()));
                 table.addCell(s.getSaleDate().toString());
                 table.addCell(String.valueOf(s.getPrice()));
+                sum = sum.add(s.getPrice());
             }
 
+            tableSum.addCell("Sum:");
+            tableSum.addCell(sum.toString());
+            //System.out.println("SUMA " + sum.toString());
+
             content.add(table);
+            content.add(Chunk.NEWLINE);
+            content.add(Chunk.NEWLINE);
+            content.add(tableSum);
 
             document.add(preface);
             document.add(content);
@@ -424,12 +437,14 @@ public class ReportGenerator {
             }
 
             PdfPTable table = new PdfPTable(4);
-
+            PdfPTable tableSum = new PdfPTable(2);
 
             table.addCell("Pack");
             table.addCell("Amount");
             table.addCell("Date");
             table.addCell("Value");
+
+            BigDecimal sum = new BigDecimal("0.0");
 
             for(SalePO pos : positions) {
                 List<Sale> s = SaleDAO.getAllById(pos.getSale().getId());
@@ -437,10 +452,18 @@ public class ReportGenerator {
                 table.addCell(String.valueOf(pos.getAmount().intValue()));
                 table.addCell(s.get(0).getSaleDate().toString());
                 table.addCell(String.valueOf(pos.getPrice()));
+                sum = sum.add(pos.getPrice());
             }
+
+            tableSum.addCell("Sum:");
+            tableSum.addCell(sum.toString());
+            //System.out.println("SUMA " + sum.toString());
 
 
             content.add(table);
+            content.add(Chunk.NEWLINE);
+            content.add(Chunk.NEWLINE);
+            content.add(tableSum);
 
             document.add(preface);
             document.add(content);

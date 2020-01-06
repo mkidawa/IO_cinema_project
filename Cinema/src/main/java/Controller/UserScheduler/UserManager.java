@@ -15,5 +15,12 @@ public class UserManager {
         }
         return users;
     }
+    public void updateUser(User user) {
+        UserDAO.insertUpdate(user);
+    }
+
+    public void deleteUser(User user) {
+        UserDAO.delete(user);
+    }
 
 }

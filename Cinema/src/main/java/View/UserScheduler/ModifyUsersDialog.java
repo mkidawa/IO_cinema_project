@@ -40,11 +40,10 @@ public class ModifyUsersDialog implements Initializable {
     @FXML
     private PasswordField password;
     @FXML
-    private TextField code;
-    @FXML
-    private TextField hourlyRate;
+    private PasswordField code;
 
-    private UserManager userManager = new UserManager();
+
+    private UserManager userManager;// = new UserManager();
 
     private UserSchedulerController parent;
     private Stage stage = new Stage();
@@ -52,12 +51,13 @@ public class ModifyUsersDialog implements Initializable {
     ModifyUsersDialog(UserSchedulerController parent){
         try {
             this.parent = parent;
+            userManager = new UserManager();
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/UserScheduler/ModifyUsersDialog.fxml"));
             fxmlLoader.setController(this);
-            Scene scene = new Scene(fxmlLoader.load(), 600, 400);
+            Scene scene = new Scene(fxmlLoader.load());
             stage.setScene(scene);
-            stage.setWidth(750);
-            stage.setHeight(500);
+          //  stage.setWidth(750);
+          //  stage.setHeight(500);
             stage.setResizable(true);
             PermissionChecker permissions = new PermissionChecker();
 //            if (!permissions.checkPermission("Tworzenie nowych uzytkownikow")) {
@@ -79,7 +79,6 @@ public class ModifyUsersDialog implements Initializable {
            data.add((users.get(y).getFirstName()+" "+users.get(y).getLastName()).toString());
         }
         this.userList.setItems(data);  // = new ListView<String>(data);
-        this.hourlyRate.setText("1.0");
         this.login.setDisable(true);
 
 
@@ -104,9 +103,6 @@ public class ModifyUsersDialog implements Initializable {
 
     @FXML
     private void cancel() {
-        Platform.runLater(() -> {
-            System.out.println(userList.getSelectionModel().getSelectedIndex());
-        });
         stage.close();
     }
 

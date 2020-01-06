@@ -116,7 +116,6 @@ public class UserSchedulerController {
                 }
             }
         }
-
     }
 
     public void openAssignTaskDialog(User user, Timestamp time) {

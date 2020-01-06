@@ -14,7 +14,7 @@
             </ListView>
         </children>
     </VBox>
-    <VBox alignment="TOP_RIGHT">
+    <VBox alignment="TOP_RIGHT" spacing="10">
         <children>
             <VBox>
                 <children>
@@ -38,20 +38,14 @@
                     </VBox>
                     <VBox>
                         <children>
-                            <Label text="Password" />
+                            <Label text="New Password" />
                             <PasswordField fx:id="password" prefWidth="150.0" />
                         </children>
                     </VBox>
                     <VBox>
                         <children>
-                            <Label text="Code" />
-                            <TextField fx:id="code" prefWidth="150.0" />
-                        </children>
-                    </VBox>
-                    <VBox>
-                        <children>
-                            <Label text="HourlyRate" />
-                            <TextField fx:id="hourlyRate" prefWidth="150.0" />
+                            <Label text="New Code" />
+                            <PasswordField fx:id="code" prefWidth="150.0" />
                         </children>
                     </VBox>
                 </children>

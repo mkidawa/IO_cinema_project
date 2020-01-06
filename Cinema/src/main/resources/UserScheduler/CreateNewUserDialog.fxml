@@ -30,13 +30,19 @@
         <VBox>
             <children>
                 <Label text="Password" />
-                <TextField fx:id="password" prefWidth="150.0" />
+                <PasswordField fx:id="password" prefWidth="150.0" />
             </children>
         </VBox>
         <VBox>
             <children>
                 <Label text="Code" />
-                <TextField fx:id="code" prefWidth="150.0" />
+                <PasswordField fx:id="code" prefWidth="150.0" />
+            </children>
+        </VBox>
+        <VBox>
+            <children>
+                <Label text="Base Salary" />
+                <TextField fx:id="baseSalary" prefWidth="150.0" />
             </children>
         </VBox>
         <VBox>
@@ -45,7 +51,6 @@
                 <TextField fx:id="hourlyRate" prefWidth="150.0" />
             </children>
         </VBox>
-
 
         <HBox alignment="CENTER">
             <children>

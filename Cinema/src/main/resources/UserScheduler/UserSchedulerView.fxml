@@ -11,8 +11,27 @@
 <?import javafx.scene.layout.VBox?>
 <?import View.UserScheduler.*?>
 
+
+<?import javafx.scene.control.Button?>
 <VBox xmlns="http://javafx.com/javafx/8.0.202-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.UserScheduler.UserSchedulerController">
    <children>
+      <HBox alignment="CENTER_RIGHT">
+         <children>
+            <Button fx:id="createUser" text="Create New User" onMouseClicked="#handleCreateUserButtonAction">
+               <HBox.margin>
+                  <Insets right="5.0" />
+               </HBox.margin>
+            </Button>
+            <Button fx:id="modifyUsers" text="Modify Users" onMouseClicked="#handleModifyUsersButtonAction">
+               <HBox.margin>
+                  <Insets right="5.0" />
+               </HBox.margin>
+            </Button>
+         </children>
+         <VBox.margin>
+            <Insets bottom="20.0" />
+         </VBox.margin>
+      </HBox>
       <HBox alignment="CENTER_LEFT">
          <children>
             <Label text="Data:">
@@ -23,12 +42,15 @@
             <DatePicker fx:id="datePicker" onAction="#updateDate">
                <HBox.margin>
                   <Insets />
-               </HBox.margin></DatePicker>
+               </HBox.margin>
+            </DatePicker>
+
          </children>
          <VBox.margin>
             <Insets bottom="20.0" />
          </VBox.margin>
       </HBox>
+
       <HBox fx:id="scheduleContainer" alignment="TOP_CENTER">
          <children>
             <TaskManagerPanel fx:id="taskManagerPanel" />

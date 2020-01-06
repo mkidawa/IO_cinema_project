@@ -5,10 +5,63 @@
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="$CONTROLLER_NAME$"
-            prefHeight="400.0" prefWidth="600.0">
+<VBox alignment="CENTER" prefWidth="500.0" xmlns="http://javafx.com/javafx/8.0.202-ea" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <VBox>
+            <children>
+                <Label text="First Name" />
+                <TextField fx:id="firstName" prefWidth="150.0" />
+            </children>
+        </VBox>
+        <VBox>
+            <children>
+                <Label text="Surname" />
+                <TextField fx:id="surname" prefWidth="150.0" />
+            </children>
+        </VBox>
+        <VBox>
+            <children>
+                <Label text="Login" />
+                <TextField fx:id="login" prefWidth="150.0" />
+            </children>
+        </VBox>
+        <VBox>
+            <children>
+                <Label text="Password" />
+                <TextField fx:id="password" prefWidth="150.0" />
+            </children>
+        </VBox>
+        <VBox>
+            <children>
+                <Label text="Code" />
+                <TextField fx:id="code" prefWidth="150.0" />
+            </children>
+        </VBox>
+        <VBox>
+            <children>
+                <Label text="HourlyRate" />
+                <TextField fx:id="hourlyRate" prefWidth="150.0" />
+            </children>
+        </VBox>
 
-</AnchorPane>
+
+        <HBox alignment="CENTER">
+            <children>
+                <Button mnemonicParsing="false" onAction="#create" text="Create User">
+                    <HBox.margin>
+                        <Insets right="10.0" />
+                    </HBox.margin></Button>
+                <Button fx:id="deleteButton" mnemonicParsing="false" onAction="#cancel" text="Cancel" />
+            </children>
+            <VBox.margin>
+                <Insets top="15.0" />
+            </VBox.margin>
+        </HBox>
+    </children>
+    <padding>
+        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+    </padding>
+</VBox>
+

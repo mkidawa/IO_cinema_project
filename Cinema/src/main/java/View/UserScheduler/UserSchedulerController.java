@@ -6,6 +6,7 @@ import Controller.UserScheduler.UserManager;
 import Model.Schedule;
 import Model.User;
 import Tools.PermissionChecker;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
@@ -32,6 +33,12 @@ public class UserSchedulerController {
 
     @FXML
     private HBox scheduleContainer;
+
+    @FXML
+    private Button createUser;
+
+    @FXML
+    private Button modifyUsers;
 
     @FXML
     private TaskManagerPanel taskManagerPanel;
@@ -136,4 +143,14 @@ public class UserSchedulerController {
     public TaskManager getTaskManager() {
         return taskManager;
     }
+
+    
+    public void handleCreateUserButtonAction() {
+        CreateNewUserDialog dialog = new CreateNewUserDialog(this);
+    }
+
+    public void handleModifyUsersButtonAction() {
+        ModifyUsersDialog dialog = new ModifyUsersDialog(this);
+    }
+
 }

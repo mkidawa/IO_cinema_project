@@ -23,22 +23,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ReportGenerator {
-    public static void generateSalariesReport() {
-        System.out.println("generateSalariesReport()");
-    }
+    static Paragraph prepareFile(String reportName) {
 
-    public static void generateAllMoviesReport() throws IOException {
+        Paragraph preface = new Paragraph();
 
         try {
-
             Path path = Paths.get(ClassLoader.getSystemResource("Images/logo.png").toURI());
 
-            Document document = new Document();
-//            document.setMargins(1,1, 1,1);
-
-            PdfWriter.getInstance(document, new FileOutputStream("AllMoviesReport.pdf"));
-
-            document.open();
             Font fontTitle = FontFactory.getFont(FontFactory.COURIER, 32, BaseColor.BLACK);
             Font fontReportTitle = FontFactory.getFont(FontFactory.COURIER, 28, BaseColor.BLACK);
             Font fontContent = FontFactory.getFont(FontFactory.COURIER, 14, BaseColor.BLACK);
@@ -50,12 +41,9 @@ public class ReportGenerator {
             float y = (float) (PageSize.A4.getHeight() - img.getScaledHeight() * 1.1);
             img.setAbsolutePosition(x, y);
 
-
-
             Chunk title = new Chunk("Cinema management system", fontTitle);
-            Chunk reportTitle = new Chunk("All movies report", fontReportTitle);
+            Chunk reportTitle = new Chunk(reportName, fontReportTitle);
 
-            Paragraph preface = new Paragraph();
             preface.setAlignment(Element.ALIGN_CENTER);
 
             preface.add(img);
@@ -75,10 +63,28 @@ public class ReportGenerator {
             preface.add( Chunk.NEWLINE );
             preface.add( Chunk.NEWLINE );
 
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
+        return preface;
+    }
+
+    public static void generateSalariesReport() {
+        System.out.println("generateSalariesReport()");
+    }
+
+    public static void generateAllMoviesReport() throws IOException {
+
+        try {
+            Document document = new Document();
+
+            PdfWriter.getInstance(document, new FileOutputStream("AllMoviesReport.pdf"));
+
+            document.open();
+
+            Paragraph preface = prepareFile("All movies report");
             Paragraph content = new Paragraph();
-
-
 
             List<Movie> movies = MovieDAO.getAll();
 
@@ -109,55 +115,15 @@ public class ReportGenerator {
     }
 
     public static void generateWorkTimeReport() throws IOException {
-        System.out.println();
-
 
         try {
-            Path path = Paths.get(ClassLoader.getSystemResource("Images/logo.png").toURI());
-
             Document document = new Document();
-//            document.setMargins(1,1, 1,1);
 
             PdfWriter.getInstance(document, new FileOutputStream("WorkTimeReport.pdf"));
 
             document.open();
-            Font fontTitle = FontFactory.getFont(FontFactory.COURIER, 32, BaseColor.BLACK);
-            Font fontReportTitle = FontFactory.getFont(FontFactory.COURIER, 28, BaseColor.BLACK);
-            Font fontContent = FontFactory.getFont(FontFactory.COURIER, 14, BaseColor.BLACK);
 
-            Image img = Image.getInstance(path.toAbsolutePath().toString());
-
-            img.scaleToFit(PageSize.A4.getWidth()/5, PageSize.A4.getHeight()/5);
-            float x = (float) ((PageSize.A4.getWidth() - img.getScaledWidth()) * 0.5);
-            float y = (float) (PageSize.A4.getHeight() - img.getScaledHeight() * 1.1);
-            img.setAbsolutePosition(x, y);
-
-
-
-            Chunk title = new Chunk("Cinema management system", fontTitle);
-            Chunk reportTitle = new Chunk("Work Time report", fontReportTitle);
-
-            Paragraph preface = new Paragraph();
-            preface.setAlignment(Element.ALIGN_CENTER);
-
-            preface.add(img);
-            preface.add( Chunk.NEWLINE );
-            preface.add( Chunk.NEWLINE );
-            preface.add( Chunk.NEWLINE );
-            preface.add( Chunk.NEWLINE );
-            preface.add( Chunk.NEWLINE );
-            preface.add( Chunk.NEWLINE );
-            preface.add( Chunk.NEWLINE );
-            preface.add( Chunk.NEWLINE );
-            preface.add(title);
-            preface.add( Chunk.NEWLINE );
-            preface.add( Chunk.NEWLINE );
-            preface.add( Chunk.NEWLINE );
-            preface.add(reportTitle);
-            preface.add( Chunk.NEWLINE );
-            preface.add( Chunk.NEWLINE );
-
-
+            Paragraph preface = prepareFile("Work time report");
             Paragraph content = new Paragraph();
 
             var so = BaseDB.openConnection();
@@ -165,7 +131,6 @@ public class ReportGenerator {
             List<TnAData> tnadata = so.createQuery("from TnAData").list();
             so.getTransaction().commit();
             so.close();
-
 
 
             PdfPTable table = new PdfPTable(4);
@@ -198,53 +163,15 @@ public class ReportGenerator {
 
     public static void generateIndividualWorkTimeReport(long userId) throws IOException {
 
-
         try {
-            Path path = Paths.get(ClassLoader.getSystemResource("Images/logo.png").toURI());
 
             Document document = new Document();
-//            document.setMargins(1,1, 1,1);
 
-            PdfWriter.getInstance(document, new FileOutputStream("WorkTimeReport.pdf"));
+            PdfWriter.getInstance(document, new FileOutputStream("IndividualWorkTimeReport.pdf"));
 
             document.open();
-            Font fontTitle = FontFactory.getFont(FontFactory.COURIER, 32, BaseColor.BLACK);
-            Font fontReportTitle = FontFactory.getFont(FontFactory.COURIER, 28, BaseColor.BLACK);
-            Font fontContent = FontFactory.getFont(FontFactory.COURIER, 14, BaseColor.BLACK);
 
-            Image img = Image.getInstance(path.toAbsolutePath().toString());
-
-            img.scaleToFit(PageSize.A4.getWidth()/5, PageSize.A4.getHeight()/5);
-            float x = (float) ((PageSize.A4.getWidth() - img.getScaledWidth()) * 0.5);
-            float y = (float) (PageSize.A4.getHeight() - img.getScaledHeight() * 1.1);
-            img.setAbsolutePosition(x, y);
-
-
-
-            Chunk title = new Chunk("Cinema management system", fontTitle);
-            Chunk reportTitle = new Chunk("Work Time report", fontReportTitle);
-
-            Paragraph preface = new Paragraph();
-            preface.setAlignment(Element.ALIGN_CENTER);
-
-            preface.add(img);
-            preface.add( Chunk.NEWLINE );
-            preface.add( Chunk.NEWLINE );
-            preface.add( Chunk.NEWLINE );
-            preface.add( Chunk.NEWLINE );
-            preface.add( Chunk.NEWLINE );
-            preface.add( Chunk.NEWLINE );
-            preface.add( Chunk.NEWLINE );
-            preface.add( Chunk.NEWLINE );
-            preface.add(title);
-            preface.add( Chunk.NEWLINE );
-            preface.add( Chunk.NEWLINE );
-            preface.add( Chunk.NEWLINE );
-            preface.add(reportTitle);
-            preface.add( Chunk.NEWLINE );
-            preface.add( Chunk.NEWLINE );
-
-
+            Paragraph preface = prepareFile("Individual Work Time report");
             Paragraph content = new Paragraph();
 
             var so = BaseDB.openConnection();
@@ -288,47 +215,13 @@ public class ReportGenerator {
 
         try {
 
-            Path path = Paths.get(ClassLoader.getSystemResource("Images/logo.png").toURI());
-
             Document document = new Document();
 
             PdfWriter.getInstance(document, new FileOutputStream("IncomesReport.pdf"));
 
             document.open();
-            Font fontTitle = FontFactory.getFont(FontFactory.COURIER, 32, BaseColor.BLACK);
-            Font fontReportTitle = FontFactory.getFont(FontFactory.COURIER, 28, BaseColor.BLACK);
-            Font fontContent = FontFactory.getFont(FontFactory.COURIER, 14, BaseColor.BLACK);
 
-            Image img = Image.getInstance(path.toAbsolutePath().toString());
-
-            img.scaleToFit(PageSize.A4.getWidth()/5, PageSize.A4.getHeight()/5);
-            float x = (float) ((PageSize.A4.getWidth() - img.getScaledWidth()) * 0.5);
-            float y = (float) (PageSize.A4.getHeight() - img.getScaledHeight() * 1.1);
-            img.setAbsolutePosition(x, y);
-
-            Chunk title = new Chunk("Cinema management system", fontTitle);
-            Chunk reportTitle = new Chunk("Incomes report", fontReportTitle);
-
-            Paragraph preface = new Paragraph();
-            preface.setAlignment(Element.ALIGN_CENTER);
-
-            preface.add(img);
-            preface.add( Chunk.NEWLINE );
-            preface.add( Chunk.NEWLINE );
-            preface.add( Chunk.NEWLINE );
-            preface.add( Chunk.NEWLINE );
-            preface.add( Chunk.NEWLINE );
-            preface.add( Chunk.NEWLINE );
-            preface.add( Chunk.NEWLINE );
-            preface.add( Chunk.NEWLINE );
-            preface.add(title);
-            preface.add( Chunk.NEWLINE );
-            preface.add( Chunk.NEWLINE );
-            preface.add( Chunk.NEWLINE );
-            preface.add(reportTitle);
-            preface.add( Chunk.NEWLINE );
-            preface.add( Chunk.NEWLINE );
-
+            Paragraph preface = prepareFile("Incomes Report");
             Paragraph content = new Paragraph();
 
             List<Reservation> reservations = ReservationDAO.getAll();
@@ -386,47 +279,13 @@ public class ReportGenerator {
 
         try {
 
-            Path path = Paths.get(ClassLoader.getSystemResource("Images/logo.png").toURI());
-
             Document document = new Document();
 
             PdfWriter.getInstance(document, new FileOutputStream("FoodSaleReport.pdf"));
 
             document.open();
-            Font fontTitle = FontFactory.getFont(FontFactory.COURIER, 32, BaseColor.BLACK);
-            Font fontReportTitle = FontFactory.getFont(FontFactory.COURIER, 28, BaseColor.BLACK);
-            Font fontContent = FontFactory.getFont(FontFactory.COURIER, 14, BaseColor.BLACK);
 
-            Image img = Image.getInstance(path.toAbsolutePath().toString());
-
-            img.scaleToFit(PageSize.A4.getWidth()/5, PageSize.A4.getHeight()/5);
-            float x = (float) ((PageSize.A4.getWidth() - img.getScaledWidth()) * 0.5);
-            float y = (float) (PageSize.A4.getHeight() - img.getScaledHeight() * 1.1);
-            img.setAbsolutePosition(x, y);
-
-            Chunk title = new Chunk("Cinema management system", fontTitle);
-            Chunk reportTitle = new Chunk("Food Sale Report", fontReportTitle);
-
-            Paragraph preface = new Paragraph();
-            preface.setAlignment(Element.ALIGN_CENTER);
-
-            preface.add(img);
-            preface.add( Chunk.NEWLINE );
-            preface.add( Chunk.NEWLINE );
-            preface.add( Chunk.NEWLINE );
-            preface.add( Chunk.NEWLINE );
-            preface.add( Chunk.NEWLINE );
-            preface.add( Chunk.NEWLINE );
-            preface.add( Chunk.NEWLINE );
-            preface.add( Chunk.NEWLINE );
-            preface.add(title);
-            preface.add( Chunk.NEWLINE );
-            preface.add( Chunk.NEWLINE );
-            preface.add( Chunk.NEWLINE );
-            preface.add(reportTitle);
-            preface.add( Chunk.NEWLINE );
-            preface.add( Chunk.NEWLINE );
-
+            Paragraph preface = prepareFile("Food Sale Report");
             Paragraph content = new Paragraph();
 
             List<Sale> sales = SaleDAO.getAll();

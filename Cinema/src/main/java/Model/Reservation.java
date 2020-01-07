@@ -22,7 +22,7 @@ public class Reservation {
 
     @Getter
     @Setter
-    private int flgPoxY;
+    private int flgPosY;
 
     @ManyToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "StatusId")
@@ -41,15 +41,29 @@ public class Reservation {
     @Setter
     private Timestamp reservationDate;
 
+    @Column(name = "ReservationPrice")
+    @Getter
+    @Setter
+    private float reservationPrice;
+
 
     public Reservation() {
     }
 
-    public Reservation(int flgPosX, int flgPoxY, ReservationStatus reservationStatus, TimeTable timeTable, Timestamp reservationDate) {
+    public Reservation(int flgPosX, int flgPosY, ReservationStatus reservationStatus, TimeTable timeTable, Timestamp reservationDate) {
         this.flgPosX = flgPosX;
-        this.flgPoxY = flgPoxY;
+        this.flgPosY = flgPosY;
         this.reservationStatus = reservationStatus;
         this.timeTable = timeTable;
         this.reservationDate = reservationDate;
+    }
+
+    public Reservation(int flgPosX, int flgPosY, ReservationStatus reservationStatus, TimeTable timeTable, Timestamp reservationDate, float reservationPrice) {
+        this.flgPosX = flgPosX;
+        this.flgPosY = flgPosY;
+        this.reservationStatus = reservationStatus;
+        this.timeTable = timeTable;
+        this.reservationDate = reservationDate;
+        this.reservationPrice = reservationPrice;
     }
 }

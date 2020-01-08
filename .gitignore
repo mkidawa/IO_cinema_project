@@ -80,3 +80,5 @@ hibernate.cfg.xml
 Cinema/gradle/
 Cinema/build/
 
+
+*.pdf

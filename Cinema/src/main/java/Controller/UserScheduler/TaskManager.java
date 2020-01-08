@@ -7,13 +7,21 @@ import java.util.List;
 
 public class TaskManager {
 
-    private static List<Task> tasksList = null;
-
     public List<Task> getAllTasks() {
-        if (tasksList == null) {
-            tasksList = TaskDAO.getAll();
-        }
-        return tasksList;
+        return TaskDAO.getAll();
+    }
+
+    public void addTask(String name, String desc) {
+        Task task = new Task(name, desc);
+        TaskDAO.insertUpdate(task);
+    }
+
+    public void updateTask(Task task) {
+        TaskDAO.insertUpdate(task);
+    }
+
+    public void deleteTask(Task task) {
+        TaskDAO.delete(task);
     }
 
 }

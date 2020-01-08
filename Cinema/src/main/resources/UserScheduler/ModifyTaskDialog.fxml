@@ -9,7 +9,7 @@
 
 <VBox alignment="CENTER" prefHeight="170.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8.0.202-ea" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label text="Zadanie" />
+      <Label fx:id="taskLabel" text="Zadanie" />
       <ChoiceBox fx:id="taskChoice" prefWidth="150.0" />
       <Label text="Status" />
       <ChoiceBox fx:id="statusChoice" prefWidth="150.0" />
@@ -19,7 +19,7 @@
                <HBox.margin>
                   <Insets right="10.0" />
                </HBox.margin></Button>
-            <Button mnemonicParsing="false" onAction="#delete" text="Usuń" />
+            <Button fx:id="deleteButton" mnemonicParsing="false" onAction="#delete" text="Usuń" />
          </children>
          <VBox.margin>
             <Insets top="15.0" />

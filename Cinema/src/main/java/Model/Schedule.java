@@ -3,6 +3,8 @@ package Model;
 import Model.DICT.ScheduleStatus;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -25,6 +27,7 @@ public class Schedule {
 
     @ManyToOne
     @JoinColumn(name = "TaskId")
+    @NotFound(action = NotFoundAction.IGNORE)
     @Getter
     @Setter
     private Task task;

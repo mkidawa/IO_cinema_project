@@ -3,10 +3,12 @@ package View.UserScheduler;
 import Model.Schedule;
 import Model.Task;
 import Model.User;
+import Tools.PermissionChecker;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 
 import java.net.URL;
 import java.sql.Timestamp;
@@ -14,6 +16,7 @@ import java.util.ResourceBundle;
 
 public class TaskBox extends VBox implements Initializable {
 
+    private static PermissionChecker permissions = new PermissionChecker();
     private UserSchedulerController parent;
     private User user;
     private Timestamp time;
@@ -28,18 +31,26 @@ public class TaskBox extends VBox implements Initializable {
     }
 
     private void setAddingView() {
-        Label label = new Label("+");
+        Label label = new Label("Brak");
         this.getChildren().clear();
         this.getChildren().add(label);
         this.getStyleClass().clear();
         this.getStyleClass().add("unassigned");
-        this.setOnMouseClicked((MouseEvent event) -> {
-            parent.openAssignTaskDialog(user, time);
-        });
+        if (permissions.checkPermission("Zarzadzanie zadaniami")) {
+            label.setText("+");
+            this.setOnMouseClicked((MouseEvent event) -> {
+                parent.openAssignTaskDialog(user, time);
+            });
+        }
     }
 
     public void setTaskView(Schedule schedule) {
         Task task = schedule.getTask();
+        // If task was deleted
+        if (task == null) {
+            task = new Task("<Zadanie usunięte>", "");
+            schedule.getScheduleStatus().setId(-1);
+        }
         Label name = new Label(task.getName());
         Label description = new Label(task.getDescription());
         name.setPickOnBounds(false);
@@ -48,6 +59,9 @@ public class TaskBox extends VBox implements Initializable {
         this.getChildren().addAll(name, description);
         this.getStyleClass().clear();
         switch ((int)schedule.getScheduleStatus().getId()) {
+            case -1:
+                this.getStyleClass().add("undefined");
+                break;
             case 1:
                 this.getStyleClass().add("assigned");
                 break;

@@ -1,31 +1,22 @@
 package DBO;
 
-import Model.Sale;
+import Model.Reservation;
 import Tools.BaseDB;
 import lombok.var;
 
 import java.util.List;
 
-public class SaleDAO {
+public class ReservationDAO {
     public static List getAll() {
         var so = BaseDB.openConnection();
         so.beginTransaction();
-        List result = so.createQuery("from Sale").list();
+        List result = so.createQuery("from Reservation").list();
         so.getTransaction().commit();
         so.close();
         return result;
     }
 
-    public static List getAllById(long Id) {
-        var so = BaseDB.openConnection();
-        so.beginTransaction();
-        List result = so.createQuery("from Sale where Id = " + String.valueOf(Id)).list();
-        so.getTransaction().commit();
-        so.close();
-        return result;
-    }
-
-    public static void insert(Sale object) {
+    public static void insert(Reservation object) {
         var so = BaseDB.openConnection();
         so.beginTransaction();
         so.save(object);
@@ -34,10 +25,10 @@ public class SaleDAO {
         so.close();
     }
 
-    public static List getOrderContent(long Id){
+    public static List execSQL(String sql) {
         var so = BaseDB.openConnection();
         so.beginTransaction();
-        List result = so.createQuery("from SalePO where SaleHId = " + String.valueOf(Id)).list();
+        List result = so.createQuery(sql).list();
         so.getTransaction().commit();
         so.close();
         return result;

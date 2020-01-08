@@ -77,6 +77,40 @@ public class ProductDAO {
         return res == 1;
     }
 
+    public static boolean setAmount(long Id, int amount) {
+        var so = BaseDB.openConnection();
+        so.beginTransaction();
+        Query query = so.createQuery("UPDATE Product SET Amount = '" + amount + "' WHERE Id = " + Id);
+        int res = query.executeUpdate();
+        so.getTransaction()
+                .commit();
+        so.close();
+        return res == 1;
+    }
+
+    public static boolean changeName(long id, String newName){
+
+        var so = BaseDB.openConnection();
+        so.beginTransaction();
+        Query query = so.createQuery("UPDATE Product SET Name = '" + newName + "' WHERE id = " + id);
+        int res = query.executeUpdate();
+        so.getTransaction()
+                .commit();
+        so.close();
+        return res == 1;
+    }
+
+    public static boolean changePrice(long id, String newPrice){
+
+        var so = BaseDB.openConnection();
+        so.beginTransaction();
+        Query query = so.createQuery("UPDATE Product SET Price = '" + newPrice + "' WHERE id = " + id);
+        int res = query.executeUpdate();
+        so.getTransaction()
+                .commit();
+        so.close();
+        return res == 1;
+    }
 
 
 }

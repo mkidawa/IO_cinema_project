@@ -9,6 +9,7 @@ import Model.Product;
 import View.Sale.Simple.SimplePack;
 import View.Sale.Simple.SimplePackPO;
 import View.Sale.Simple.SimpleProduct;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -44,6 +45,8 @@ public class SaleManagement {
     private ObservableList<SimplePackPO> packContentList = FXCollections.observableArrayList();
 
     Stage primaryStage;
+    int indexForPacks = 0;
+
 
     public SaleManagement(Stage primary) throws IOException {
         primaryStage = primary;
@@ -60,33 +63,100 @@ public class SaleManagement {
         tableOfPackContent.setItems(packContentList);
 
 
+        tableOfProducts.setEditable(true);
+        tableOfProducts.getSelectionModel().setCellSelectionEnabled(true);
+        tableOfProducts.setOnMouseClicked(click -> {
 
-    }
+            if (click.getClickCount() == 2) {
 
-    public void goBack() throws IOException {
-        primaryStage.setScene(new SaleMenu(primaryStage).getScene());
-        primaryStage.show();
-    }
+                @SuppressWarnings("rawtypes")
+                TablePosition pos = tableOfProducts.getSelectionModel().getSelectedCells().get(0);
+                int row = pos.getRow();
+                int col = pos.getColumn();
+                @SuppressWarnings("rawtypes")
+                TableColumn column = pos.getTableColumn();
+                String val = column.getCellData(row).toString();
+
+                if (col == 0) {
+                    TextInputDialog dialog = new TextInputDialog(val);
+                    dialog.setTitle("Product price changer");
+                    dialog.setHeaderText(val);
+                    dialog.setContentText("Enter new price for a product");
+
+                    Optional<String> result = dialog.showAndWait();
+                    if (result.isPresent()) {
+                        String res = String.valueOf(result);
+                        res = res.substring(9, res.length()-1);
+                        double dres = 0;
+                        try {
+                            dres = Double.parseDouble(res);
+                        } catch (NumberFormatException e) {
+                            e.printStackTrace();
+                        }
+                        if (dres > 0) {
+                            if (ProductDAO.changePrice(products.get(row).getId(), res)) {
+                                products.get(row).setPrice(new SimpleDoubleProperty(dres));
+                                tableOfProducts.refresh();
+                            }
+                        }
+                    }
+                }else if (col == 1){
+
+                    TextInputDialog dialog = new TextInputDialog(val);
+                    dialog.setTitle("Product amount changer");
+                    dialog.setHeaderText(val);
+                    dialog.setContentText("Enter new amount for a product");
+
+                    Optional<String> result = dialog.showAndWait();
+                    if (result.isPresent()) {
+                        String res = String.valueOf(result);
+                        res = res.substring(9, res.length()-1);
+                        int dres = 0;
+                        try {
+                            dres = Integer.parseInt(res);
+                        } catch (NumberFormatException e) {
+                            e.printStackTrace();
+                        }
+                        if (dres > 0) {
+                            if (ProductDAO.setAmount(products.get(row).getId(), dres)) {
+                                products.get(row).setAmount(dres);
+                                tableOfProducts.refresh();
+                            }
+                        }
+                    }
+
+                } else if (col == 2) {
+                    TextInputDialog dialog = new TextInputDialog(val);
+                    dialog.setTitle("Product name changer");
+                    dialog.setHeaderText(val);
+                    dialog.setContentText("Enter new name for a product");
+                    Optional<String> result = dialog.showAndWait();
+                    if (result.isPresent()) {
+                        if (ProductDAO.changeName(products.get(row).getId(), result.get())) {
+                            products.get(row).setName(result.get());
+                            tableOfProducts.refresh();
+                        }
+                    }
+                }
+            }
+        });
 
 
-    public ObservableList<SimplePack> getListOfPack() {
 
-        ObservableList<SimplePack> list = FXCollections.observableArrayList();
-        List<Pack> products = PackDAO.getAll();
-        for (int i=0; i<products.size(); i++) {
-            list.add(new SimplePack(products.get(i).getId(), products.get(i).getName(), products.get(i).getPrice().doubleValue()));
-        }
 
         tableOfPack.setEditable(true);
         tableOfPack.getSelectionModel().setCellSelectionEnabled(true);
         tableOfPack.setOnMouseClicked(click -> {
 
             int index = tableOfPack.getSelectionModel().selectedIndexProperty().get();
-            packContentList.clear();
-            packContentList = SimplePackPO.getContentOfPack((int) packs.get(index).getId());
 
-            tableOfPackContent.setItems(packContentList);
-            tableOfPackContent.refresh();
+            if(indexForPacks != index) {
+                indexForPacks = index;
+                packContentList.clear();
+                packContentList = SimplePackPO.getContentOfPack((int) packs.get(index).getId());
+                tableOfPackContent.setItems(packContentList);
+                tableOfPackContent.refresh();
+            }
 
             if (click.getClickCount() == 2) {
 
@@ -104,8 +174,8 @@ public class SaleManagement {
                     dialog.setContentText("Enter new name for a pack");
                     Optional<String> result = dialog.showAndWait();
                     if (result.isPresent()) {
-                        if (PackDAO.changeName(list.get(row).id.longValue(), result.get())) {
-                            list.get(row).name.set(result.get());
+                        if (PackDAO.changeName(packs.get(row).id.longValue(), result.get())) {
+                            packs.get(row).name.set(result.get());
                             tableOfPack.refresh();
                         }
                     }
@@ -126,12 +196,30 @@ public class SaleManagement {
                             e.printStackTrace();
                         }
                         if (dres > 0) {
-                            if (PackDAO.changePrice(list.get(row).id.longValue(), res)) {
-                                list.get(row).price.set(dres);
+                            if (PackDAO.changePrice(packs.get(row).id.longValue(), res)) {
+                                packs.get(row).price.set(dres);
                                 tableOfPack.refresh();
                             }
-                }}}}
+                        }}}}
         });
+
+
+    }
+
+    public void goBack() throws IOException {
+        primaryStage.setScene(new SaleMenu(primaryStage).getScene());
+        primaryStage.show();
+    }
+
+
+    public ObservableList<SimplePack> getListOfPack() {
+
+        ObservableList<SimplePack> list = FXCollections.observableArrayList();
+        List<Pack> products = PackDAO.getAll();
+        for (int i=0; i<products.size(); i++) {
+            list.add(new SimplePack(products.get(i).getId(), products.get(i).getName(), products.get(i).getPrice().doubleValue()));
+        }
+
         return list;
     }
 

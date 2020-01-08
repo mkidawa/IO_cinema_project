@@ -45,4 +45,12 @@ public class SimpleProduct {
         }
         return list;
     }
+
+    public void setName(String name) {
+        this.name.set(name);
+    }
+
+    public void setAmount(int amount) {
+        this.amount.set(amount);
+    }
 }

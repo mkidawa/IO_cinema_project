@@ -1,9 +1,19 @@
 .loginbutton {
+     -fx-font-size: 32px;
+     -fx-max-width: 9999999999999;
+     -fx-max-height: 9999999999999;
+     -fx-border-width: 5px;
+     -fx-border-color: #038cfc;
+     -fx-background-color: #92cdfc;
+     -fx-text-fill: #0058a1;
+ }
+.exitbutton {
     -fx-font-size: 32px;
     -fx-max-width: 9999999999999;
     -fx-max-height: 9999999999999;
     -fx-border-width: 5px;
-    -fx-border-color: #038cfc;
-    -fx-background-color: #92cdfc;
-    -fx-text-fill: #0058a1;
+    -fx-border-radius: 5px;
+    -fx-border-color: #ff1100;
+    -fx-background-color: #bfaaa8;
+    -fx-text-fill: #0a0100;
 }

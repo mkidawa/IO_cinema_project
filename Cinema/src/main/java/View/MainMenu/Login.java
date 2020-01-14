@@ -112,5 +112,7 @@ public class Login {
     }
 
 
-
+    public void exit(MouseEvent mouseEvent) {
+        System.exit(0);
+    }
 }

@@ -2,6 +2,7 @@ package View.MainMenu;
 
 import Controller.StageManager;
 import Tools.PermissionChecker;
+import View.Program;
 import View.Sale.SaleMenu;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -108,7 +109,15 @@ public class MainMenu {
         }
     }
 
-    public void logOut(MouseEvent mouseEvent) {
-        System.out.println("Log out button");
+    public void logOut(MouseEvent mouseEvent) throws IOException {
+       
+            Parent fxmlLoader = FXMLLoader.load(getClass().getResource("/MainMenu/Login.fxml"));
+            Stage stage = new Stage();
+            Scene scene = new Scene(fxmlLoader,800,600);
+            Program.getPrimaryStage().setScene(scene);
+
+
+
+
     }
 }

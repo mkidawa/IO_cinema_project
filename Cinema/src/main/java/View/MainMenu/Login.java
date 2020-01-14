@@ -63,7 +63,7 @@ public class Login {
         {
             Alert alert = new Alert(AlertType.WARNING,"", ButtonType.YES);
             alert.setHeaderText( e.getMessage());
-            alert.setContentText("You have"+    LPermissionController.getInstance().getFailCounter() + "out of 5 tries");
+            alert.setContentText("Attempt "+    LPermissionController.getInstance().getFailCounter() + "out of 5");
             alert.showAndWait();
         }
     }
@@ -101,7 +101,7 @@ public class Login {
     public void checkFailCounter() throws Exception {
         if(LPermissionController.getInstance().getFailCounter()>=4)
         {
-            throw new Exception("Przekroczony limit 5 prob logowania");
+            throw new Exception("Limit of 5 login attempts exceeded");
         }
     }
 

@@ -1,16 +1,17 @@
 package View.MainMenu;
 
+import Controller.LPermissionController;
 import Controller.StageManager;
 import Tools.PermissionChecker;
+import View.Program;
 import View.Sale.SaleMenu;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+
 
 import java.io.IOException;
 
@@ -27,13 +28,19 @@ public class MainMenu {
     public Button timetableModuleButton;
     public Button pCurrentUser;
     public Button settingsButton;
+    public Button logoutButton;
 
     public void logIn(MouseEvent mouseEvent) {
     }
 
     public void printPermission(MouseEvent mouseEvent) {
         PermissionChecker pc = new PermissionChecker();
-        System.out.println(pc.getPermissionsList());
+//        System.out.println(pc.getPermissionsList());
+        pc.prettyPermissions();
+        Alert alert = new Alert(Alert.AlertType.INFORMATION, pc.prettyPermissions(), ButtonType.YES);
+        alert.setTitle("Information");
+        alert.setHeaderText("Available Permissions");
+        alert.showAndWait();
     }
 
     public void openTimetableModule(MouseEvent mouseEvent) throws IOException {
@@ -105,5 +112,19 @@ public class MainMenu {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+    }
+
+    public void logOut(MouseEvent mouseEvent) throws IOException {
+
+
+            LPermissionController.getInstance().logOut();
+            Parent fxmlLoader = FXMLLoader.load(getClass().getResource("/MainMenu/Login.fxml"));
+            Stage stage = new Stage();
+            Scene scene = new Scene(fxmlLoader,800,600);
+            Program.getPrimaryStage().setScene(scene);
+
+
+
+
     }
 }

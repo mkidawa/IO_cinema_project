@@ -52,12 +52,12 @@ public class LPermissionController {
                 "'";
         List result = UserDAO.execSQL(sql);
         if (result.size() == 0) {
-            System.err.println("Brak uzytkownika w bazie");
+            System.err.println("No user in the database");
             failCounter++;
-            throw new LoginException("Brak uzytkownika w bazie");
+            throw new LoginException("No user in the database");
 
         } else if (result.size() == 1 && result.get(0).toString().equals(login)) {
-            System.out.println("Znalazlem login: " + login);
+            System.out.println("Found login: " + login);
             return true;
         }
         return false;
@@ -69,13 +69,13 @@ public class LPermissionController {
         User result = (User) UserDAO.execSQL(sql).get(0);
         if (result.getPasswordHash().equals(password)) {
             currentUser = result;
-            System.out.println("Prawidlowe Haslo");
+            System.out.println("Correct Password");
             return true;
         }
         else {
-            System.err.println("Haslo nie prawidlowe");
+            System.err.println("Password is not correct");
             failCounter++;
-            throw new LoginException("Haslo nie prawidlowe");
+            throw new LoginException("Password is not correct");
 //        return false;
         }
     }
@@ -104,13 +104,13 @@ public class LPermissionController {
                 "'";
         List result = UserDAO.execSQL(sql);
         if (result.size() == 0) {
-            System.err.println("Bledny Kod");
+            System.err.println("Invalid code");
             failCounter++;
-            throw new LoginException("Bledny kod");
+            throw new LoginException("Invalid code");
 //            return false;
         } else if (result.size() == 1) {
             System.out.println(result.toString());
-            System.out.println("Znalazlem login: " + result.get(0));
+            System.out.println("Found login: " + result.get(0));
             return true;
         }
         return false;
@@ -121,12 +121,12 @@ public class LPermissionController {
         User result = (User) UserDAO.execSQL(sql).get(0);
         if (result.getCodeHash().equals(code)) {
             currentUser = result;
-            System.out.println("Prawidlowe Kod");
+            System.out.println("Correct Code");
             return true;
         }
-        System.err.println("Kod nie jest prawidlowy");
+        System.err.println("The code is not valid");
         failCounter++;
-        throw new LoginException("Kod nie jest prawidlowy");
+        throw new LoginException("The code is not valid");
 
     }
 
@@ -138,7 +138,7 @@ public class LPermissionController {
                 return true;
             }
         }
-        throw new LoginException("Logowanie nie powiodło się");
+        throw new LoginException("Login Failed");
 //        return false;
 
     }
@@ -167,7 +167,7 @@ public class LPermissionController {
         }
         for (Permissions perm : currentUser.getPermissionsList()) {
             if (perm.getCode() == PermissionCode) {
-                System.out.println("Uzytkownik ma dostep do " + perm.getName());
+                System.out.println("The user has access to " + perm.getName());
                 return true;
             }
         }
@@ -185,7 +185,7 @@ public class LPermissionController {
         }
         for (Permissions perm : currentUser.getPermissionsList()) {
             if (perm.getName().equals(PermissionName)) {
-                System.out.println("Uzytkownik ma dostep do " + perm.getName());
+                System.out.println("The user has access to " + perm.getName());
                 return true;
             }
         }
@@ -200,24 +200,31 @@ public class LPermissionController {
             public void run() {
                 failCounter=0;
                 timerSet=false;
-                System.out.println("Wyzerowalem licznik prob");
+                System.out.println("The trial counter has been reset");
                 timer.cancel(); //Terminate the timer thread
             }
         }
         if(getFailCounter()>=4)
         {
+            failCounter=5;
             if(!timerSet) {
                 timer = new Timer();
+//                How many seconds for timeout
                 int seconds = 5;
                 timer.schedule(new RemindTask(), seconds * 1000);
                 timerSet=true;
             }
-            throw new Exception("Przekroczony limit 5 prob logowania");
+            throw new Exception("Limit of 5 login attempts exceeded");
         }
     }
 
 
     public User getCurrentUser() {
         return currentUser;
+    }
+    public void logOut(){
+        System.out.println("LogOut currentUser");
+        currentUser=null;
+        System.out.println(currentUser);
     }
 }

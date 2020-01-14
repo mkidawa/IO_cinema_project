@@ -1,6 +1,7 @@
 package Tools;
 
 import Controller.LPermissionController;
+import Model.DICT.Permissions;
 import Model.User;
 
 import java.util.List;
@@ -56,5 +57,12 @@ public class PermissionChecker {
 
     public User getCurrentUser() {
         return lm.getCurrentUser();
+    }
+    public String prettyPermissions(){
+        StringBuilder t = new StringBuilder("");
+        for (Object p : lm.getPermissionsList()) {
+            t.append(((Permissions) p).getName()).append("\n");
+        }
+        return t.toString();
     }
 }

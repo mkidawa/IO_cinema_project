@@ -25,7 +25,7 @@
             USERNAME (sa)
         </property>
         <property name="hibernate.connection.password">
-            HAS£O
+            HASÂ£O
         </property>
         <property name="show_sql">
             true

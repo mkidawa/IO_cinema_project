@@ -8,9 +8,7 @@ import View.Sale.SaleMenu;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
@@ -37,7 +35,12 @@ public class MainMenu {
 
     public void printPermission(MouseEvent mouseEvent) {
         PermissionChecker pc = new PermissionChecker();
-        System.out.println(pc.getPermissionsList());
+//        System.out.println(pc.getPermissionsList());
+        pc.prettyPermissions();
+        Alert alert = new Alert(Alert.AlertType.INFORMATION, pc.prettyPermissions(), ButtonType.YES);
+        alert.setTitle("Information");
+        alert.setHeaderText("Available Permissions");
+        alert.showAndWait();
     }
 
     public void openTimetableModule(MouseEvent mouseEvent) throws IOException {

@@ -63,6 +63,7 @@ public class Login {
         {
             Alert alert = new Alert(AlertType.WARNING,"", ButtonType.YES);
             alert.setHeaderText( e.getMessage());
+            alert.setContentText("You have"+    LPermissionController.getInstance().getFailCounter() + "out of 5 tries");
             alert.showAndWait();
         }
     }

@@ -206,8 +206,10 @@ public class LPermissionController {
         }
         if(getFailCounter()>=4)
         {
+            failCounter=5;
             if(!timerSet) {
                 timer = new Timer();
+//                How many seconds for timeout
                 int seconds = 5;
                 timer.schedule(new RemindTask(), seconds * 1000);
                 timerSet=true;

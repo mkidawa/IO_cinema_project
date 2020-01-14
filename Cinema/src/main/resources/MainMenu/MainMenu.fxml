@@ -5,16 +5,14 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.SeparatorMenuItem?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox prefHeight="738.0" prefWidth="1136.0" xmlns="http://javafx.com/javafx/8.0.202-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.MainMenu.MainMenu">
+<VBox prefHeight="738.0" prefWidth="1136.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.MainMenu.MainMenu">
     <!--<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.MainMenu.MainMenu">-->
     <!--<VBox prefHeight="738.0" prefWidth="1136.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.MainMenu.MainMenu">-->
     <children>
@@ -102,10 +100,11 @@
                   </Button>
                </children>
             </GridPane>
-                <PasswordField fx:id="passwordField" layoutX="66.0" layoutY="400.0" promptText="Password" />
-                <TextField fx:id="logInTextField" layoutX="66.0" layoutY="361.0" promptText="Login" />
-                <Button fx:id="logInButton" layoutX="66.0" layoutY="439.0" mnemonicParsing="false" onMouseClicked="#logIn" text="Log In" />
-                <Button fx:id="pCurrentUser" layoutX="178.0" layoutY="439.0" mnemonicParsing="false" onMouseClicked="#printCurrentUser" text="Print currentUser" />
+            <Button fx:id="logoutButton" layoutX="52.0" layoutY="442.0" mnemonicParsing="false" onMouseClicked="#logOut" styleClass="logoutbutton" text="Log out" textAlignment="CENTER">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
             </children>
         </AnchorPane>
     </children>

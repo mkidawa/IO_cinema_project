@@ -27,6 +27,7 @@ public class MainMenu {
     public Button timetableModuleButton;
     public Button pCurrentUser;
     public Button settingsButton;
+    public Button logoutButton;
 
     public void logIn(MouseEvent mouseEvent) {
     }
@@ -105,5 +106,9 @@ public class MainMenu {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+    }
+
+    public void logOut(MouseEvent mouseEvent) {
+        System.out.println("Log out button");
     }
 }

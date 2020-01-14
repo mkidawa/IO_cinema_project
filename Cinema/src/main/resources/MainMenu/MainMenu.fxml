@@ -105,6 +105,11 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
+            <Button fx:id="pPermission" layoutX="227.0" layoutY="442.0" mnemonicParsing="false" onMouseClicked="#printPermission" styleClass="mainmenubutton" text="Print Permission" textAlignment="CENTER">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
             </children>
         </AnchorPane>
     </children>

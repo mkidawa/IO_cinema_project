@@ -1,5 +1,6 @@
 package View.MainMenu;
 
+import Controller.LPermissionController;
 import Controller.StageManager;
 import Tools.PermissionChecker;
 import View.Program;
@@ -12,6 +13,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+
 
 import java.io.IOException;
 
@@ -110,7 +112,9 @@ public class MainMenu {
     }
 
     public void logOut(MouseEvent mouseEvent) throws IOException {
-       
+
+
+            LPermissionController.getInstance().logOut();
             Parent fxmlLoader = FXMLLoader.load(getClass().getResource("/MainMenu/Login.fxml"));
             Stage stage = new Stage();
             Scene scene = new Scene(fxmlLoader,800,600);

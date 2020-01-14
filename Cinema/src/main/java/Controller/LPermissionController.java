@@ -220,4 +220,9 @@ public class LPermissionController {
     public User getCurrentUser() {
         return currentUser;
     }
+    public void logOut(){
+        System.out.println("LogOut currentUser");
+        currentUser=null;
+        System.out.println(currentUser);
+    }
 }

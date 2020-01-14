@@ -23,8 +23,8 @@
 
        <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
            <children>
-               <TextField fx:id="logInTextField" layoutX="66.0" layoutY="238.0" promptText="Login" />
-               <PasswordField fx:id="passwordField" layoutX="66.0" layoutY="272.0" promptText="Password" />
+               <TextField fx:id="logInTextField" layoutX="66.0" layoutY="185.0" prefHeight="43.0" prefWidth="256.0" promptText="Login" styleClass="text-field" />
+               <PasswordField fx:id="passwordField" layoutX="66.0" layoutY="254.0" prefHeight="43.0" prefWidth="256.0" promptText="Password" styleClass="text-field" />
                <Button fx:id="logInButton" layoutX="66.0" layoutY="311.0" mnemonicParsing="false" onMouseClicked="#logIn" styleClass="loginbutton" text="Log In" />
                <Button fx:id="exitButton" layoutX="215.0" layoutY="311.0" mnemonicParsing="false" onMouseClicked="#exit" styleClass="exitbutton" text="Exit" />
            </children>

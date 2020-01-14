@@ -61,7 +61,8 @@ public class Login {
         }
         catch (Exception e)
         {
-            Alert alert = new Alert(AlertType.WARNING, e.getMessage(), ButtonType.YES);
+            Alert alert = new Alert(AlertType.WARNING,"", ButtonType.YES);
+            alert.setHeaderText( e.getMessage());
             alert.showAndWait();
         }
     }

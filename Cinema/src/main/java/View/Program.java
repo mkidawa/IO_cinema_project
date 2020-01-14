@@ -8,6 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 public class Program extends Application {
     //https://stackoverflow.com/questions/15805881/how-can-i-obtain-the-primary-stage-in-a-javafx-application
@@ -21,7 +22,15 @@ public class Program extends Application {
 //        Parent root = FXMLLoader.load(getClass().getResource("/UserScheduler/UserSchedulerView.fxml"));
         primaryStage.setTitle("Cinema Management");
         primaryStage.setScene(new Scene(root, 800 , 600));
+        //        Disable all
+        primaryStage.initStyle(StageStyle.UNDECORATED);
         primaryStage.show();
+//        Disable Resize
+//        primaryStage.resizableProperty().setValue(Boolean.FALSE);
+//        Disable minimize/maximize
+//        primaryStage.initStyle(StageStyle.UTILITY);
+
+
         pStage = primaryStage;
     }
 

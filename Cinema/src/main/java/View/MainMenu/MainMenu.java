@@ -120,7 +120,8 @@ public class MainMenu {
             LPermissionController.getInstance().logOut();
             Parent fxmlLoader = FXMLLoader.load(getClass().getResource("/MainMenu/Login.fxml"));
             Stage stage = new Stage();
-            Scene scene = new Scene(fxmlLoader,800,600);
+            Scene scene = new Scene(fxmlLoader,Program.screenBounds.getWidth(),Program.screenBounds
+                    .getHeight());
             Program.getPrimaryStage().setScene(scene);
 
 

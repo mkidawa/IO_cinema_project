@@ -71,7 +71,8 @@ public class Login {
 
         Parent fxmlLoader = FXMLLoader.load(getClass().getResource("/MainMenu/MainMenu.fxml"));
         Stage stage = new Stage();
-        Scene scene = new Scene(fxmlLoader);
+        Scene scene = new Scene(fxmlLoader, Program.screenBounds.getWidth(),Program.screenBounds
+        .getHeight());
         Program.getPrimaryStage().setScene(scene);
 
     }
@@ -111,5 +112,7 @@ public class Login {
     }
 
 
-
+    public void exit(MouseEvent mouseEvent) {
+        System.exit(0);
+    }
 }

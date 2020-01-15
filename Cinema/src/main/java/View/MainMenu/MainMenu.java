@@ -44,14 +44,22 @@ public class MainMenu {
     }
 
     public void openTimetableModule(MouseEvent mouseEvent) throws IOException {
-        Parent fxmlLoader = FXMLLoader.load(getClass().getResource("/TimetableModule/TimetablePanel/TimetablePanel.fxml"));
-        Stage stage = new Stage();
-        Scene scene = new Scene(fxmlLoader);
+        PermissionChecker pc = new PermissionChecker();
+        if (pc.checkPermission(10)) {
+            Parent fxmlLoader = FXMLLoader.load(getClass().getResource("/TimetableModule/TimetablePanel/TimetablePanel.fxml"));
+            Stage stage = new Stage();
+            Scene scene = new Scene(fxmlLoader);
 //        scene.getStylesheets().add(getClass().getResource("/MovieModule/MoviePanel/mainMovie.css").toExternalForm());
-        stage.setScene(scene);
-        stage.setTitle("Timetable panel");
-        stage.setResizable(false);
-        stage.show();
+            stage.setScene(scene);
+            stage.setTitle("Timetable panel");
+            stage.setResizable(false);
+            stage.show();
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "You do not have sufficient permissions to access this ares", ButtonType.OK);
+            alert.setTitle("Error");
+            alert.setHeaderText("Insufficient Permissions");
+            alert.showAndWait();
+        }
     }
 
     public void openSalesModule(MouseEvent mouseEvent) throws IOException {
@@ -117,14 +125,12 @@ public class MainMenu {
     public void logOut(MouseEvent mouseEvent) throws IOException {
 
 
-            LPermissionController.getInstance().logOut();
-            Parent fxmlLoader = FXMLLoader.load(getClass().getResource("/MainMenu/Login.fxml"));
-            Stage stage = new Stage();
-            Scene scene = new Scene(fxmlLoader,Program.screenBounds.getWidth(),Program.screenBounds
-                    .getHeight());
-            Program.getPrimaryStage().setScene(scene);
-
-
+        LPermissionController.getInstance().logOut();
+        Parent fxmlLoader = FXMLLoader.load(getClass().getResource("/MainMenu/Login.fxml"));
+        Stage stage = new Stage();
+        Scene scene = new Scene(fxmlLoader, Program.screenBounds.getWidth(), Program.screenBounds
+                .getHeight());
+        Program.getPrimaryStage().setScene(scene);
 
 
     }
